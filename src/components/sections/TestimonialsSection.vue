@@ -22,7 +22,12 @@
             </div>
             <div class="testimonial-logo-container">
               <div class="testimonial-logo">
-                <img src="../../assets/images/bridgestone-logo.svg" alt="Bridgestone Logo">
+                <LazyImage
+                  src="../../assets/images/bridgestone-logo.svg"
+                  alt="Bridgestone Logo"
+                  width="100%"
+                  height="auto"
+                />
               </div>
             </div>
           </div>
@@ -41,7 +46,12 @@
             </div>
             <div class="testimonial-logo-container">
               <div class="testimonial-logo">
-                <img src="../../assets/images/bridgestone-logo.svg" alt="Bridgestone Logo">
+                <LazyImage
+                  src="../../assets/images/bridgestone-logo.svg"
+                  alt="Bridgestone Logo"
+                  width="100%"
+                  height="auto"
+                />
                 </div>
                 </div>
           </div>
@@ -57,11 +67,13 @@
 
 <script>
 import { HorizontalNavigation } from './../base';
+import { LazyImage } from './../ui';
 
 export default {
   name: 'TestimonialsSection',
   components: {
-    HorizontalNavigation
+    HorizontalNavigation,
+    LazyImage
   },
   data() {
     return {

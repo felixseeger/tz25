@@ -20,19 +20,41 @@
               <!-- First row -->
               <div class="portfolio-row">
 
-                  <img src="../../assets/images/portfolio-item-placeholder.jpg" alt="Portfolio Showcase 1" class="portfolio-image" />
+                  <LazyImage
+                    src="../../assets/images/portfolio-item-placeholder.jpg"
+                    alt="Portfolio Showcase 1"
+                    class="portfolio-image"
+                    aspect-ratio="16/9"
+                    placeholder-color="#444444"
+                  />
 
-
-                  <img src="../../assets/images/portfolio-item-placeholder.jpg" alt="Portfolio Showcase 2" class="portfolio-image" />
+                  <LazyImage
+                    src="../../assets/images/portfolio-item-placeholder.jpg"
+                    alt="Portfolio Showcase 2"
+                    class="portfolio-image"
+                    aspect-ratio="16/9"
+                    placeholder-color="#444444"
+                  />
 
               </div>
               <!-- Second row -->
               <div class="portfolio-row">
 
-                  <img src="../../assets/images/portfolio-item-placeholder.jpg" alt="Portfolio Showcase 3" class="portfolio-image" />
+                  <LazyImage
+                    src="../../assets/images/portfolio-item-placeholder.jpg"
+                    alt="Portfolio Showcase 3"
+                    class="portfolio-image"
+                    aspect-ratio="16/9"
+                    placeholder-color="#444444"
+                  />
 
-
-                  <img src="../../assets/images/portfolio-item-placeholder.jpg" alt="Portfolio Showcase 4" class="portfolio-image" />
+                  <LazyImage
+                    src="../../assets/images/portfolio-item-placeholder.jpg"
+                    alt="Portfolio Showcase 4"
+                    class="portfolio-image"
+                    aspect-ratio="16/9"
+                    placeholder-color="#444444"
+                  />
 
               </div>
             </div>
@@ -62,8 +84,22 @@
         <div class="client-logos" ref="clientLogosTrack">
           <div class="client-logos-track" ref="logoTrack">
             <!-- Original set of logos (will be cloned by JavaScript) -->
-            <div class="client-logo logo-item"><img src="../../assets/images/client-logos/bridgestone-logo.svg" alt="Bridgestone" /></div>
-            <div class="client-logo logo-item"><img src="../../assets/images/client-logos/bridgestone-logo.svg" alt="Bridgestone" /></div>
+            <div class="client-logo logo-item">
+              <LazyImage
+                src="../../assets/images/client-logos/bridgestone-logo.svg"
+                alt="Bridgestone"
+                width="100%"
+                height="100%"
+              />
+            </div>
+            <div class="client-logo logo-item">
+              <LazyImage
+                src="../../assets/images/client-logos/bridgestone-logo.svg"
+                alt="Bridgestone"
+                width="100%"
+                height="100%"
+              />
+            </div>
             <div class="client-logo logo-item"><div class="placeholder-logo">Client 2</div></div>
             <div class="client-logo logo-item"><div class="placeholder-logo">Client 3</div></div>
             <div class="client-logo logo-item"><div class="placeholder-logo">Client 4</div></div>
@@ -78,11 +114,13 @@
 <script>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { HorizontalNavigation } from './../base';
+import { LazyImage } from './../ui';
 
 export default {
   name: 'PortfolioSection',
   components: {
-    HorizontalNavigation
+    HorizontalNavigation,
+    LazyImage
   },
   setup() {
     const clientLogosTrack = ref(null);
@@ -594,7 +632,7 @@ export default {
   background-color: #f2f2f2;
 
   .container {
-  
+
     width: 100%;
     margin: 0 auto;
     padding: 0rem;
@@ -666,7 +704,7 @@ export default {
 }
 
 .portfolio-device {
-  
+
   position: relative;
   height: 600px;
   overflow: hidden;

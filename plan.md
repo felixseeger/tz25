@@ -42,7 +42,7 @@
 - ☐ Implement proper error handling for API calls
 
 ## Performance Optimization
-- ☐ Optimize image loading and implement lazy loading
+- ☑️ Optimize image loading and implement lazy loading
 - ☐ Implement proper caching strategies
 - ☐ Optimize font loading
 - ☐ Implement code splitting for better initial load time

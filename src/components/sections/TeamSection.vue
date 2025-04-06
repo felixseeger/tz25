@@ -20,7 +20,12 @@
             <!-- Left column with team member -->
             <div class="team-carousel__item team-carousel__item--photo">
               <div class="team-members-photo">
-                <img src="../../assets/images/team-tobi.jpg" alt="Team Member" />
+                <LazyImage
+                  src="../../assets/images/team-tobi.jpg"
+                  alt="Team Member"
+                  aspect-ratio="1/1"
+                  placeholder-color="#333333"
+                />
               </div>
             </div>
 
@@ -35,7 +40,12 @@
             <!-- Right column with two team members -->
             <div class="team-carousel__item team-carousel__item--double">
               <div class="team-members-photo">
-                <img src="../../assets/images/team-kirsten.jpg" alt="Team Member" />
+                <LazyImage
+                  src="../../assets/images/team-kirsten.jpg"
+                  alt="Team Member"
+                  aspect-ratio="1/1"
+                  placeholder-color="#333333"
+                />
               </div>
             </div>
           </div>
@@ -45,14 +55,24 @@
             <!-- Left column with team member -->
             <div class="team-carousel__item team-carousel__item--photo">
               <div class="team-members-photo">
-                <img src="../../assets/images/team-jan.jpg" alt="Team Member" />
+                <LazyImage
+                  src="../../assets/images/team-jan.jpg"
+                  alt="Team Member"
+                  aspect-ratio="1/1"
+                  placeholder-color="#333333"
+                />
               </div>
             </div>
 
             <!-- Middle column with team member -->
             <div class="team-carousel__item team-carousel__item--photo">
               <div class="team-members-photo">
-                <img src="../../assets/images/team-melissa.jpg" alt="Team Member" />
+                <LazyImage
+                  src="../../assets/images/team-melissa.jpg"
+                  alt="Team Member"
+                  aspect-ratio="1/1"
+                  placeholder-color="#333333"
+                />
               </div>
             </div>
 
@@ -78,8 +98,20 @@
             <!-- Right column with two team members -->
             <div class="team-carousel__item team-carousel__item--double">
               <div class="team-members-photo team-members-photo--double">
-                <img src="../../assets/images/team-anh.jpg" alt="Team Member" class="left-member" />
-                <img src="../../assets/images/team-rena-omiros.jpg" alt="Team Member" class="right-member" />
+                <LazyImage
+                  src="../../assets/images/team-anh.jpg"
+                  alt="Team Member"
+                  class="left-member"
+                  aspect-ratio="1/1"
+                  placeholder-color="#333333"
+                />
+                <LazyImage
+                  src="../../assets/images/team-rena-omiros.jpg"
+                  alt="Team Member"
+                  class="right-member"
+                  aspect-ratio="1/1"
+                  placeholder-color="#333333"
+                />
               </div>
             </div>
           </div>
@@ -94,11 +126,13 @@
 <script>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { VerticalNavigation } from './../base';
+import { LazyImage } from './../ui';
 
 export default {
   name: 'TeamSection',
   components: {
-    VerticalNavigation
+    VerticalNavigation,
+    LazyImage
   },
   setup() {
     const teamCarousel = ref(null);
