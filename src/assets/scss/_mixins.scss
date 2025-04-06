@@ -1,3 +1,4 @@
+// Media query for max-width (mobile-first approach)
 @mixin respond-to($breakpoint) {
   @if $breakpoint == xs {
     @media (max-width: $breakpoint-xs) { @content; }
@@ -9,7 +10,33 @@
     @media (max-width: $breakpoint-lg) { @content; }
   } @else if $breakpoint == xl {
     @media (max-width: $breakpoint-xl) { @content; }
+  } @else if $breakpoint == xxl {
+    @media (max-width: $breakpoint-xxl) { @content; }
+  } @else if $breakpoint == xxxl {
+    @media (max-width: $breakpoint-xxxl) { @content; }
+  } @else if $breakpoint == 4k {
+    @media (max-width: $breakpoint-4k) { @content; }
   }
+}
+
+// Media query for min-width (desktop-specific styling)
+@mixin desktop-up($breakpoint) {
+  @if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  } @else if $breakpoint == xxl {
+    @media (min-width: $breakpoint-xxl) { @content; }
+  } @else if $breakpoint == xxxl {
+    @media (min-width: $breakpoint-xxxl) { @content; }
+  } @else if $breakpoint == 4k {
+    @media (min-width: $breakpoint-4k) { @content; }
+  }
+}
+
+// Media query for specific range (between two breakpoints)
+@mixin respond-between($min, $max) {
+  @media (min-width: $min) and (max-width: $max) { @content; }
 }
 
 @mixin flex-center {

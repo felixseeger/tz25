@@ -371,6 +371,135 @@
   }
 }
 
+/* Desktop Media Queries */
+@media (min-width: $breakpoint-xl) {
+  .hero {
+    &__container {
+      padding: 0 4rem;
+    }
+
+    &__content {
+      max-width: 1400px;
+      padding: 10rem 0;
+      gap: 6rem;
+    }
+
+    &__text p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+    }
+
+    &__button {
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+@media (min-width: $breakpoint-xxl) {
+  .hero {
+    &__container {
+      padding: 0 6rem;
+    }
+
+    &__content {
+      max-width: 1600px;
+      padding: 12rem 0;
+      gap: 8rem;
+    }
+
+    &__text p {
+      font-size: 1.4rem;
+      line-height: 1.9;
+    }
+
+    &__button {
+      padding: 1.2rem 3rem;
+      font-size: 1.2rem;
+    }
+
+    &__play-icon {
+      width: 80px;
+      height: 80px;
+
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}
+
+@media (min-width: $breakpoint-xxxl) {
+  .hero {
+    &__container {
+      padding: 0 8rem;
+    }
+
+    &__content {
+      max-width: 1800px;
+      padding: 14rem 0;
+    }
+
+    &__text p {
+      font-size: 1.5rem;
+      line-height: 2;
+    }
+  }
+}
+
+@media (min-width: $breakpoint-4k) {
+  .hero {
+    &__container {
+      padding: 0 10rem;
+    }
+
+    &__content {
+      max-width: 2400px;
+      padding: 16rem 0;
+      gap: 10rem;
+    }
+
+    &__text p {
+      font-size: 1.8rem;
+      line-height: 2.2;
+    }
+
+    &__button {
+      padding: 1.5rem 4rem;
+      font-size: 1.5rem;
+    }
+
+    &__play-icon {
+      width: 100px;
+      height: 100px;
+
+      svg {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    &__scroll-indicator {
+      bottom: 4rem;
+
+      &-icon {
+        width: 40px;
+        height: 40px;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      &-text {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
 .hero {
   &__scroll-indicator {
     position: absolute;

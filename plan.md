@@ -38,6 +38,7 @@
 - ☑️ Fix contact form alignment to be left-aligned
 - ☑️ Create comprehensive Playwright tests for all features and functionality
 - ☐ Add TypeScript type definitions for all components
+- ☑️ Add media queries for different desktop screen sizes for all components
 - ☐ Implement proper error handling for API calls
 
 ## Performance Optimization
