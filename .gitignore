@@ -23,6 +23,16 @@ dist-ssr
 *.sln
 *.sw?
 
+# Large media files
+*.mp4
+*.mov
+*.avi
+*.wmv
+*.flv
+*.webm
+*.mkv
+*.m4v
+
 # Playwright
 /test-results/
 /playwright-report/
