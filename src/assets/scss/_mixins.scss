@@ -39,6 +39,45 @@
   @media (min-width: $min) and (max-width: $max) { @content; }
 }
 
+// Font optimization mixins
+
+// Apply font with fallback
+@mixin font-with-fallback($family, $weight: 400, $style: normal) {
+  $fallback: map-get($font-fallbacks, $family);
+  font-family: $family, $fallback;
+  font-weight: $weight;
+  font-style: $style;
+}
+
+// Apply critical font with subset
+@mixin critical-font($family, $weight: 400, $style: normal) {
+  $fallback: map-get($font-fallbacks, $family);
+  font-family: '#{$family} Subset', $family, $fallback;
+  font-weight: $weight;
+  font-style: $style;
+}
+
+// Apply font loading classes
+@mixin font-loading($stage: 'critical') {
+  @if $stage == 'critical' {
+    .fonts-loading & {
+      opacity: 0;
+    }
+    .fonts-critical-loaded & {
+      opacity: 1;
+      transition: opacity 0.2s ease-in-out;
+    }
+  } @else if $stage == 'important' {
+    .fonts-loading & {
+      opacity: 0;
+    }
+    .fonts-important-loaded & {
+      opacity: 1;
+      transition: opacity 0.2s ease-in-out;
+    }
+  }
+}
+
 @mixin flex-center {
   display: flex;
   align-items: center;

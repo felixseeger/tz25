@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="fonts-loading">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -7,6 +7,60 @@
     <title>TAKTZEIT</title>
     <!-- Cache control meta tags -->
     <meta http-equiv="Cache-Control" content="max-age=86400" />
+
+    <!-- Font preloading for critical fonts -->
+    <link rel="preload" href="/assets/fonts/subsets/gotham-narrow-regular-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/subsets/gotham-narrow-bold-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/subsets/greycliff-cf-light-subset.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Font loading optimization styles -->
+    <style>
+      /* Hide text until fonts are loaded to prevent FOUT */
+      .fonts-loading .font-critical {
+        opacity: 0;
+      }
+
+      /* Show text when critical fonts are loaded */
+      .fonts-critical-loaded .font-critical {
+        opacity: 1;
+        transition: opacity 0.2s ease-in-out;
+      }
+
+      /* Font subset definitions */
+      @font-face {
+        font-family: 'Gotham Narrow Subset';
+        src: url('/assets/fonts/subsets/gotham-narrow-regular-subset.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Gotham Narrow Subset';
+        src: url('/assets/fonts/subsets/gotham-narrow-bold-subset.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Greycliff CF Subset';
+        src: url('/assets/fonts/subsets/greycliff-cf-light-subset.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      /* Apply subset fonts to critical elements */
+      .hero-heading {
+        font-family: 'Gotham Narrow Subset', 'Gotham Narrow', Arial, sans-serif;
+      }
+
+      .hero-subheading {
+        font-family: 'Greycliff CF Subset', 'Greycliff CF', Helvetica, sans-serif;
+      }
+    </style>
+
     <!-- Service Worker Registration -->
     <script src="/register-service-worker.js"></script>
   </head>

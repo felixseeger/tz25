@@ -4,7 +4,7 @@
     <div class="hero__container">
       <div class="hero__content">
         <div class="hero__column hero__column--left">
-          <div class="hero__title" ref="heroTitle">
+          <div class="hero__title font-critical" ref="heroTitle">
             <div class="hero__title-overlay">
               <img src="../../assets/images/hero.svg" alt="WEMOVESALES" class="hero__title-image hero__title-image--base" />
               <img src="../../assets/images/wemovesales_in.png" alt="WEMOVESALES IN" class="hero__title-image hero__title-image--overlay" />
@@ -22,7 +22,7 @@
               </div>
             </div>
           </div>
-          <div class="hero__text" ref="heroText">
+          <div class="hero__text font-important" ref="heroText">
             <p>
               Sales Activation – Wir aktivieren Absatz. Seit mehr als 15 Jahren stehen wir unseren Kunden mit Herz und Verstand zur Seite. Wir sind über 20 Expert:innen mit einem tiefgreifenden Know-how im Absatzmarketing und bringen Kundenprojekte mit Gespür und höchstem Engagement zum Erfolg. Aus Düsseldorf – für Deutschland, DACH oder ganz Europa.
             </p>

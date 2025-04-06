@@ -62,6 +62,8 @@
   }
 
   &__title {
+    @include font-loading('critical');
+    @include critical-font('Gotham Narrow', 700);
     margin-bottom: 0;
     width: 100%;
 
@@ -228,6 +230,8 @@
   }
 
   &__text {
+    @include font-loading('important');
+    @include font-with-fallback('Greycliff CF', 400);
     max-width: 100%;
 
     p {
