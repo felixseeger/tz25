@@ -1,0 +1,132 @@
+// Brand Section Styles
+.brand-section {
+
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  padding: 0vw 10vh 10vw 20vh;
+  overflow: hidden;
+  width: 100vw;
+  max-width: 100vw;
+  color: $text-color;
+
+
+  .container {
+   
+
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.brand-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+}
+
+.brand-content {
+  max-width: 100%;
+  position: relative;
+}
+
+.brand-title {
+  font-size: 3.5rem;
+  font-family: $font-headline;
+  font-weight: 700;
+  margin-bottom: 4rem;
+  color: $text-color;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+  }
+}
+
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 100%;
+  padding: 1rem;
+  min-height: 600px; /* Set a minimum height */
+  position: relative;
+  z-index: 4; /* Above the triangle */
+  
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.brand-grid-wrapper {
+  position: relative;
+  width: 100%;
+
+  overflow: hidden;
+
+  
+}
+
+.brand-grid-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.brand-grid-triangle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 63px; /* Match the SVG dimensions */
+  height: 58px;
+  z-index: 3; /* Above the grid but below the content */
+  pointer-events: none; /* Allow clicks to pass through */
+}
+
+.brand-item {
+  
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+width: 25rem;
+padding-bottom: 2rem;
+  position: relative;
+  z-index: 5; /* Above the triangle and grid background */
+
+  &:hover {
+    transform: translateY(-5px);
+    
+  }
+
+  &__title {
+    font-size: 1.8rem;
+    font-family: $font-headline;
+    font-weight: 900;
+    padding-top: 2vh;
+    padding-bottom: 1vh;
+    color: $text-color;
+  }
+
+  &__description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba($text-color, 0.9);
+    
+  
+  }
+}

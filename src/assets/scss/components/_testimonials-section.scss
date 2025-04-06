@@ -1,0 +1,166 @@
+// Testimonials Section Styles
+.testimonials-section {
+  position: relative;
+  padding: 6rem 0;
+  color: $text-color;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  max-width: 100vw;
+  
+  .container {
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.testimonials-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  background-image: url(../images/testimonials_bg.svg);
+  background-size: cover;
+  z-index: 1;
+}
+
+.testimonials-header {
+  margin-bottom: 4rem;
+  max-width: 800px;
+}
+
+.testimonials-title {
+  font-size: 2rem;
+  font-family: $font-headline;
+  font-weight: 300;
+  text-align: left;
+  margin-bottom: 0.5rem;
+  color: $text-color;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.5rem;
+  }
+}
+
+.testimonials-subtitle {
+  font-size: 3rem;
+  font-family: $font-headline;
+  font-weight: 700;
+  margin-bottom: 0;
+  color: $text-color;
+  text-align: left;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: 2rem;
+  }
+}
+
+.testimonials-carousel {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  
+  &__wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+  }
+}
+
+.testimonial-slide {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.testimonial-content {
+  max-width: 800px;
+  align-self: flex-start;
+  margin-bottom: 3rem;
+}
+
+.testimonial-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-style: italic;
+  color: $text-color;
+  text-align: left;
+  white-space: pre-line;
+}
+
+.testimonial-author {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+  color: rgba($text-color, 0.8);
+}
+
+.testimonial-logo-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 2rem;
+}
+
+.testimonial-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  img {
+    max-width: 240px;
+    max-height: 100px;
+    margin-bottom: 1rem;
+  }
+  
+  .testimonial-tagline {
+    font-size: 1rem;
+    font-style: italic;
+    color: $text-color;
+    margin: 0 0 1rem 0;
+  }
+}
+
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  
+  &__prev,
+  &__next {
+    background: transparent;
+    border: 1px solid rgba($text-color, 0.5);
+    color: $text-color;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: rgba($text-color, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+    
+    span {
+      font-size: 1.2rem;
+    }
+  }
+}

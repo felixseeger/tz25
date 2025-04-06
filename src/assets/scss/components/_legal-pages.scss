@@ -1,0 +1,217 @@
+// Legal Pages Styles (Impressum, AGB, Datenschutz)
+
+// Common styles for all legal pages
+.legal-page-content {
+  max-width: 100vw;
+  position: relative;
+  z-index: 2;
+
+  padding: 2.5rem;
+
+
+}
+
+// Impressum page specific styles
+.impressum-content {
+  color: white;
+  max-width: 100vw;
+  margin: 0 auto;
+  padding: 2.5rem;
+  position: relative;
+  z-index: 2;
+
+
+}
+
+.impressum-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem 4rem;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.impressum-section {
+  margin-bottom: 1rem;
+
+  &--copyright {
+    grid-column: 1 / -1;
+    margin-bottom: 2rem;
+
+    .impressum-text {
+      font-size: 1.1rem;
+      color: white;
+    }
+  }
+
+  &--company {
+    .impressum-heading {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.impressum-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+text-align: left;
+  color: white;
+  font-family: $font-headline;
+}
+
+.impressum-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  text-align: left;
+
+  &--bold {
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  a {
+    color: white;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+// AGB and Datenschutz pages styles
+.agb-content,
+.datenschutz-content {
+  @extend .legal-page-content;
+
+  h1, h2, h3, h4, h5, h6, p, address, ul, ol, li {
+    text-align: left;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: white;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: $primary-color;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    
+    color: #333;
+  }
+
+  p, address {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    
+    width: 60vw;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.legal-section {
+  margin-bottom: 2.5rem;
+  margin-left: -1.8vw;
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: $primary-color;
+    text-align: left;
+  }
+
+  &__subtitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: left;
+  }
+
+  &__text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: left;
+
+    a {
+      color: white;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &--date {
+      font-style: italic;
+      color: #666;
+    }
+  }
+}
+
+// Override styles for the legal page type
+.page-layout--legal {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-image: url('../../images/werte.svg');
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: contain;
+    opacity: 0.1;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .page-layout__header {
+    background-color: #4D4D4D;
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-layout__content {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-layout__title,
+  .page-layout__subtitle {
+    text-align: left;
+  }
+}

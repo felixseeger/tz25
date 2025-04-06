@@ -1,0 +1,51 @@
+// Scroll To Top Button Styles
+.scroll-to-top {
+  position: fixed;
+  // right and bottom are bound dynamically from component props
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  transform: translateY(10px);
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px; /* Circular button */
+    height: 70px; /* Circular button */
+    border-radius: 50%; /* Circular button */
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0; /* Remove padding */
+    overflow: hidden; /* Contain the icon */
+    background-color: $primary-color;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+      background-color: darken($primary-color, 10%);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .arrow-up-icon {
+      width: 48px; /* Sized to fit the button */
+      height: 34px; /* Sized to fit the button */
+      filter: brightness(0) invert(1); /* Makes the SVG white */
+      transform: scale(1); /* Double the visual size */
+    }
+  }
+}

@@ -1,0 +1,41 @@
+/* Fixed contact button on the side of the page */
+.contact-button {
+  position: fixed;
+  right: 0;
+  bottom: 50%;
+  z-index: $z-index-contact-button;
+  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.3s ease;
+  width: 42px; /* Fixed width as requested */
+  height: 216px; /* Fixed height as requested */
+  overflow: visible; /* Allow rotated content to be visible */
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transform: translateX(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  }
+
+  &__link {
+    display: block;
+    transition: transform 0.3s ease;
+    position: relative;
+    width: 42px;
+    height: 216px;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  &__image {
+    width: 42px;
+    height: 216px;
+
+    transform-origin: bottom left;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

@@ -1,0 +1,35 @@
+.cookie-button {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: $z-index-contact-button;
+  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.3s ease;
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transform: translateX(-20px);
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  &__icon {
+    width: 100px;
+    height: 100px;
+  }
+}

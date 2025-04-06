@@ -1,0 +1,439 @@
+// Contact Section Styles
+.contact-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 6rem 0 2rem;
+  overflow: hidden;
+  background-color: $primary-color; // Using primary color variable
+  color: $text-color;
+
+  .container {
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+    text-align: left;
+  }
+
+  .contact-heading {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: 5rem 0 2rem;
+
+    .container {
+      padding: 0 1.5rem;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 4rem 0 2rem;
+
+    .container {
+      padding: 0 1rem;
+    }
+  }
+}
+
+.contact-heading {
+  font-size: 10rem;
+  font-family: $font-headline;
+  font-weight: 700;
+  text-align: left; /* Left alignment as requested */
+  margin-bottom: 3.5rem;
+  color: $text-color;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -2px;
+
+  @media (max-width: $breakpoint-lg) {
+    font-size: 6rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 4rem;
+    margin-bottom: 2.5rem;
+    letter-spacing: -1px;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    letter-spacing: -0.5px;
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  text-align: left;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-form {
+  text-align: left;
+  margin: 0;
+  max-width: 800px;
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    text-align: left;
+
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 2rem;
+
+    &.full-width {
+      grid-column: span 2;
+
+      @media (max-width: $breakpoint-sm) {
+        grid-column: span 1;
+      }
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-family: $font-headline;
+      font-weight: 500;
+      font-size: 1rem;
+      text-align: left !important;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem 0;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid $text-color;
+      text-align: left !important;
+      color: $text-color;
+      font-family: $font-primary;
+      font-size: 1.125rem;
+
+      &:focus {
+        outline: none;
+        border-color: darken($text-color, 10%);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+    }
+  }
+
+  .form-submit {
+    margin-top: 2rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Ensure all children align to the left */
+    width: 100%; /* Take full width of container */
+
+    /* Success message styling */
+    .success-message {
+      margin-top: 1rem;
+      color: #4CAF50;
+      font-weight: bold;
+      align-self: flex-start; /* Ensure success message aligns left */
+    }
+  }
+}
+
+.send-btn {
+
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  .icon {
+    margin-left: 1rem;
+    font-size: 1.25rem;
+  }
+
+  /* Hover styles removed as they were empty */
+}
+
+.submit-image-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  /* -o-transition-delay property removed */
+  text-align: left;
+  display: block; /* Ensure it's displayed as a block element */
+  position: relative; /* For positioning the loading overlay */
+  width: 216px; /* Width as requested - 216px */
+  height: 42px; /* Height as requested - 42px */
+  margin-top: 1rem; /* Add some spacing above the button */
+  align-self: flex-start; /* Align to the left */
+  margin-left: 0; /* Ensure no left margin */
+  opacity: 0; /* Start hidden for animation */
+  transform: translateY(50px) scale(2); /* Start position for animation - coming from below */
+
+  @media (max-width: $breakpoint-md) {
+    transform: translateY(50px) scale(1.5); /* Smaller scale for medium screens */
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    transform: translateY(50px) scale(1.2); /* Smaller scale for small screens */
+    width: 180px; /* Slightly smaller width */
+    height: 35px; /* Slightly smaller height */
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    transform: translateY(50px) scale(1); /* No scaling for extra small screens */
+    width: 150px; /* Even smaller width */
+    height: 30px; /* Even smaller height */
+  }
+
+  &button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    text-align: left;
+
+    &:hover {
+      transform: scale(1.05);
+      border: none;
+      opacity: 0;
+    }
+
+    &:focus {
+      opacity: 0;
+      outline: none;
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  &.animate-in:hover {
+    transform: scale(1.05);
+    border: none;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  /* Loading overlay styling */
+  .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  /* Animation for button appearance */
+  &.animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(2);
+
+    @media (max-width: $breakpoint-md) {
+      transform: translateY(0) scale(1.5);
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      transform: translateY(0) scale(1.2);
+    }
+
+    @media (max-width: $breakpoint-xs) {
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+/* Form submit button image - different class to avoid conflicts */
+.form-submit .contact-button__image {
+  max-width: 80%;
+  height: 42px;
+  width: 216px;
+  display: block; /* Ensure it's displayed as a block element */
+  transform: scale(2); /* No rotation for the form button */
+  object-fit: contain; /* Ensure the image maintains its aspect ratio */
+  margin-left: 0; /* Ensure no left margin */
+
+  @media (max-width: $breakpoint-md) {
+    transform: scale(1.5);
+    height: 35px;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    transform: scale(1.2);
+    height: 30px;
+    width: 180px;
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    transform: scale(1);
+    height: 25px;
+    width: 150px;
+  }
+}
+
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contact-info {
+  padding-top: 2rem;
+  text-align: left;
+
+  .company-info {
+    margin-bottom: 2rem;
+
+    h3 {
+      font-size: 1.25rem;
+      font-family: $font-headline;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin: 0.25rem 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+
+  .contact-details {
+    p {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  text-align: left;
+  width: 100%;
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+      display: inline-block;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+
+  .back-to-top {
+    margin-left: auto;
+    text-align: right;
+
+    .top-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: transparent;
+      border: 1px solid rgba($text-color, 0.5);
+      border-radius: 50%;
+      color: $text-color;
+      text-decoration: none;
+      font-size: 1.25rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      margin-top: 1.5rem;
+      align-self: flex-end;
+      margin-left: 0;
+    }
+  }
+}
+
+.contact-background {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  z-index: 1;
+  opacity: 0.1;
+
+  .icon-shopping-cart {
+    width: 300px;
+    height: 300px;
+    background-image: url('../images/cart.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}

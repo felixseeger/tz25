@@ -1,0 +1,69 @@
+/* Typography Styles */
+
+body {
+  font-family: $font-primary;
+  font-weight: 400;
+  font-size: $font-size-base;
+  line-height: 1.5;
+  color: $text-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-headline;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: $font-size-h1;
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+h2 {
+  font-size: $font-size-h2;
+  line-height: 1.2;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+.text-medium {
+  font-weight: 500;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-heavy {
+  font-weight: 900;
+}
+
+.heading-xl {
+  font-family: $font-headline;
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.heading-accent {
+  font-family: $font-headline;
+  position: relative;
+  display: inline-block;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: $primary-color;
+  }
+} 

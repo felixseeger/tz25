@@ -1,0 +1,36 @@
+// App Layout Styles
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+
+  &__header {
+    position: relative;
+    z-index: $z-index-navbar;
+  }
+
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: $z-index-content;
+  }
+
+  &__ui-elements {
+    position: fixed;
+    z-index: $z-index-ui-elements;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* This ensures the UI elements themselves can receive pointer events */
+    > * {
+      pointer-events: auto;
+    }
+  }
+}

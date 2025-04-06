@@ -1,0 +1,31 @@
+// Colors
+$primary-color: #D8292F; // The red background color
+$secondary-color: #444444; // Dark gray for sections
+$text-color: #ffffff; // White text
+$background-color: $primary-color;
+$error-color: #ff9800; // Orange for error messages
+
+// Typography
+$font-primary: 'Gotham Narrow', 'Arial', sans-serif;
+$font-headline: 'Greycliff CF', 'Arial', sans-serif;
+$font-size-base: 16px;
+$font-size-h1: 3rem;
+$font-size-h2: 2.5rem;
+
+// Layout
+$container-width: 1200px;
+$spacing-unit: 20px;
+
+// Breakpoints
+$breakpoint-xs: 375px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Z-indices
+$z-index-navbar: 1000;
+$z-index-contact-button: 900;
+$z-index-cookie-banner: 950;
+$z-index-ui-elements: 800;
+$z-index-content: 1;

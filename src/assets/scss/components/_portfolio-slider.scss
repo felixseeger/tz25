@@ -1,0 +1,302 @@
+// Portfolio Slider Styles
+
+.portfolio-carousel {
+  position: relative;
+  width: 100vw; /* Full viewport width */
+  overflow: hidden;
+  padding: 0;
+  margin: 0 auto;
+  z-index: 10; /* Lower z-index than the client logo filter */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+}
+
+.portfolio-carousel-track {
+  display: flex;
+  width: 100%;
+  max-width: 100%; /* Remove width limitation */
+  margin: 0 auto;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+  justify-content: center; /* Center slides horizontally */
+}
+
+.portfolio-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%; /* Remove width limitation */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem; /* Increased gap between rows */
+  padding-top: 1rem;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  will-change: opacity;
+  align-items: center; /* Center content horizontally */
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.portfolio-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1600px; /* Increased max-width to match container */
+  margin: 0 auto;
+  padding: 0 2rem; /* Add horizontal padding */
+  justify-content: center; /* Center items horizontally */
+
+  @media (max-width: $breakpoint-md) {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+}
+
+.portfolio-device {
+  flex: 1;
+  position: relative;
+  border-radius: 0; /* Removed border-radius */
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+  aspect-ratio: 16 / 9;
+  /* Add these properties to better handle the larger images */
+  transform-origin: center center;
+  will-change: transform; /* Optimize for animations */
+  z-index: 5; /* Lower z-index than the client logo filter */
+
+  @media (max-width: $breakpoint-md) {
+    flex: 0 0 calc(50% - 0.75rem); /* Two items per row on medium screens */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    flex: 0 0 100%; /* One item per row on small screens */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  &.empty {
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: none;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($primary-color, 0); /* Primary color with 0 opacity initially */
+    z-index: 6; /* Above the image but below any potential overlays */
+    transition: background-color 0.4s ease;
+    pointer-events: none; /* Allow clicks to pass through */
+  }
+
+  &:hover {
+    transform: translateY(-10px); /* Increased lift effect */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+
+    &::before {
+      background-color: rgba($primary-color, 0.2); /* Semi-transparent primary color overlay */
+    }
+
+    img {
+      transform: translate(-33.33%, -33.33%) scale(1.15); /* Enhanced zoom effect on hover */
+      filter: saturate(1.2); /* Slightly increase saturation */
+    }
+
+    @media (max-width: $breakpoint-md) {
+      transform: translateY(-5px); /* Reduced lift effect on medium screens */
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      transform: translateY(-3px); /* Minimal lift effect on small screens */
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  img {
+    width: 300%; /* Scaled up by 200% (3x original size) */
+    height: 300%; /* Scaled up by 200% (3x original size) */
+    object-fit: cover;
+    transform: translate(-33.33%, -33.33%); /* Center the scaled image */
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease; /* Smooth transition with easing */
+    will-change: transform, filter; /* Optimize for animations */
+  }
+
+  &.title-card {
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+
+    .title-card-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .title-card-logo {
+      max-width: 120px;
+      max-height: 80px;
+      width: auto; /* Override the 140% width from regular images */
+      height: auto; /* Override the 140% height from regular images */
+      object-fit: contain;
+      margin-bottom: 1.5rem;
+      filter: brightness(0) invert(1); /* Make logo white */
+      transform: none; /* Override the transform from regular images */
+    }
+
+    .title-card-heading {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      margin: 0 0 0.5rem 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .title-card-subheading {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+    }
+  }
+}
+
+.portfolio-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem; /* Increased gap between buttons */
+  margin: 3rem 0; /* More vertical space */
+  z-index: 110; /* Higher z-index than the client logo filter */
+  position: relative; /* Needed for z-index to work */
+  padding: 1rem 2rem; /* Add horizontal padding */
+  width: 100%; /* Full width */
+  text-align: center; /* Center text */
+
+  @media (max-width: $breakpoint-md) {
+    gap: 2rem;
+    margin: 2rem 0;
+    padding: 1rem 1rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    padding: 1rem 0.5rem;
+  }
+}
+
+.nav-button {
+  background-color: #333;
+  border: 2px solid #333;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-md) {
+    width: 50px;
+    height: 50px;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    width: 40px;
+    height: 40px;
+  }
+
+  &:hover {
+    background-color: $primary-color; /* Primary color on hover */
+    border-color: $primary-color;
+    transform: scale(1.1); /* Slight scale effect on hover */
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background-color: #333;
+    border-color: #333;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  .arrow-icon {
+    width: 24px;
+    height: auto;
+    transition: transform 0.3s ease;
+
+    @media (max-width: $breakpoint-md) {
+      width: 20px;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      width: 16px;
+    }
+  }
+
+  &:hover .arrow-icon {
+    transform: scale(1.1);
+  }
+
+  &:active .arrow-icon {
+    transform: scale(0.9);
+  }
+}
+
+.portfolio-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 110; /* Higher z-index than the client logo filter */
+  width: 100%; /* Full width */
+  text-align: center; /* Center text */
+
+  .pagination-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+    &.active {
+      background-color: #333;
+      transform: scale(1.2);
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  }
+}

@@ -1,0 +1,72 @@
+/* Gotham Narrow Font Faces */
+@font-face {
+  font-family: 'Gotham Narrow';
+  src: url('../fonts/gotham-narrow/GothamNarrow-Book.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham Narrow';
+  src: url('../fonts/gotham-narrow/GothamNarrow-Medium.woff2') format('woff2'),
+       url('../fonts/gotham-narrow/GothamNarrow-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham Narrow';
+  src: url('../fonts/gotham-narrow/GothamNarrow-Bold.woff2') format('woff2'),
+       url('../fonts/gotham-narrow/GothamNarrow-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham Narrow';
+  src: url('../fonts/gotham-narrow/GothamNarrow-BookItalic.woff2') format('woff2'),
+       url('../fonts/gotham-narrow/GothamNarrow-BookItalic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Greycliff CF Font Faces */
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('../fonts/greycliff-cf/GreycliffCF-Regular.woff2') format('woff2'),
+       url('../fonts/greycliff-cf/GreycliffCF-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('../fonts/greycliff-cf/GreycliffCF-Medium.woff2') format('woff2'),
+       url('../fonts/greycliff-cf/GreycliffCF-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('../fonts/greycliff-cf/GreycliffCF-Bold.woff2') format('woff2'),
+       url('../fonts/greycliff-cf/GreycliffCF-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('../fonts/greycliff-cf/GreycliffCF-Heavy.woff2') format('woff2'),
+       url('../fonts/greycliff-cf/GreycliffCF-Heavy.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+} 
