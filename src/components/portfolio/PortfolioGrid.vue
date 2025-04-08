@@ -1,42 +1,50 @@
 <template>
-  <div class="portfolio-grid-container">
+  <div class="portfolio-grid-container" role="region" aria-label="Portfolio projects">
     <!-- Filter section -->
-    <div class="portfolio-filters">
+    <div class="portfolio-filters" role="group" aria-label="Portfolio filters">
       <!-- Client filters -->
-      <div class="filter-group client-filters">
-        <button 
-          class="filter-button" 
+      <div class="filter-group client-filters" role="group" aria-label="Client filters">
+        <button
+          class="filter-button"
           :class="{ 'active': !selectedClientId }"
           @click="resetFilter"
+          aria-label="Show all clients"
+          :aria-pressed="!selectedClientId"
         >
           All Clients
         </button>
-        <button 
-          v-for="client in clientsList" 
+        <button
+          v-for="client in clientsList"
           :key="client.id"
           class="filter-button client-filter"
           :class="{ 'active': selectedClientId === client.id }"
           @click="selectClient(client.id)"
+          :aria-label="`Filter by ${client.name}`"
+          :aria-pressed="selectedClientId === client.id"
         >
           {{ client.name }}
         </button>
       </div>
 
       <!-- Category filters -->
-      <div class="filter-group category-filters">
-        <button 
-          class="filter-button" 
+      <div class="filter-group category-filters" role="group" aria-label="Category filters">
+        <button
+          class="filter-button"
           :class="{ 'active': !selectedCategory }"
           @click="resetCategoryFilter"
+          aria-label="Show all categories"
+          :aria-pressed="!selectedCategory"
         >
           All Categories
         </button>
-        <button 
-          v-for="category in categories" 
+        <button
+          v-for="category in categories"
           :key="category.id"
           class="filter-button category-filter"
           :class="{ 'active': selectedCategory === category.id }"
           @click="selectCategory(category.id)"
+          :aria-label="`Filter by ${category.name} category`"
+          :aria-pressed="selectedCategory === category.id"
         >
           {{ category.name }}
         </button>
@@ -44,23 +52,30 @@
     </div>
 
     <!-- Portfolio grid -->
-    <div class="portfolio-grid">
-      <div 
-        v-for="item in filteredItems" 
+    <div class="portfolio-grid" role="list" aria-label="Portfolio projects">
+      <div
+        v-for="item in filteredItems"
         :key="item.id"
         class="portfolio-item"
+        role="listitem"
+        :aria-label="`${item.title} by ${getClientName(item.clientId)}`"
       >
         <div class="portfolio-item-inner">
-          <img :src="item.image" :alt="item.title" class="portfolio-item-image">
+          <img
+            :src="item.image"
+            :alt="`${item.title} - ${item.description}`"
+            class="portfolio-item-image"
+          >
           <div class="portfolio-item-overlay">
             <h3 class="portfolio-item-title">{{ item.title }}</h3>
             <p class="portfolio-item-description">{{ item.description }}</p>
             <div class="portfolio-item-client">
-              <img 
-                v-if="getClientLogo(item.clientId)" 
-                :src="getClientLogo(item.clientId)" 
-                :alt="getClientName(item.clientId)"
+              <img
+                v-if="getClientLogo(item.clientId)"
+                :src="getClientLogo(item.clientId)"
+                :alt="`${getClientName(item.clientId)} logo`"
                 class="portfolio-item-client-logo"
+                aria-hidden="true"
               >
               <span class="portfolio-item-category">{{ getCategoryName(item.category) }}</span>
             </div>
@@ -69,9 +84,15 @@
       </div>
 
       <!-- Empty state when no items match the filters -->
-      <div v-if="filteredItems.length === 0" class="portfolio-empty-state">
+      <div v-if="filteredItems.length === 0" class="portfolio-empty-state" role="alert" aria-live="polite">
         <p>No portfolio items match the selected filters.</p>
-        <button class="filter-button reset-button" @click="resetAllFilters">Reset Filters</button>
+        <button
+          class="filter-button reset-button"
+          @click="resetAllFilters"
+          aria-label="Reset all filters"
+        >
+          Reset Filters
+        </button>
       </div>
     </div>
   </div>
@@ -110,7 +131,7 @@ export default {
     const selectedClientId = ref(null);
     const selectedCategory = ref(null);
     const clientsList = ref([...clients]);
-    
+
     // Computed properties
     const categories = computed(() => {
       // If a client is selected, only show categories that have items for that client
@@ -119,27 +140,27 @@ export default {
         const clientCategories = [...new Set(clientItems.map(item => item.category))];
         return categoriesList.filter(category => clientCategories.includes(category.id));
       }
-      
+
       // Otherwise show all categories
       return categoriesList;
     });
-    
+
     const filteredItems = computed(() => {
       let items = [...portfolioItems];
-      
+
       // Filter by client if selected
       if (selectedClientId.value) {
         items = items.filter(item => item.clientId === selectedClientId.value);
       }
-      
+
       // Filter by category if selected
       if (selectedCategory.value) {
         items = items.filter(item => item.category === selectedCategory.value);
       }
-      
+
       return items;
     });
-    
+
     // Methods
     const selectClient = (clientId) => {
       // If clicking the already selected client, deselect it
@@ -151,7 +172,7 @@ export default {
         selectedCategory.value = null;
       }
     };
-    
+
     const selectCategory = (categoryId) => {
       // If clicking the already selected category, deselect it
       if (selectedCategory.value === categoryId) {
@@ -160,37 +181,37 @@ export default {
         selectedCategory.value = categoryId;
       }
     };
-    
+
     const resetFilter = () => {
       selectedClientId.value = null;
     };
-    
+
     const resetCategoryFilter = () => {
       selectedCategory.value = null;
     };
-    
+
     const resetAllFilters = () => {
       selectedClientId.value = null;
       selectedCategory.value = null;
     };
-    
+
     const getClientLogo = (clientId) => {
       return clientsMap[clientId]?.logo || null;
     };
-    
+
     const getClientName = (clientId) => {
       return clientsMap[clientId]?.name || 'Unknown Client';
     };
-    
+
     const getCategoryName = (categoryId) => {
       return categoriesMap[categoryId]?.name || categoryId;
     };
-    
+
     // Log initial state for debugging
     onMounted(() => {
       console.log('Portfolio Grid mounted with', portfolioItems.length, 'items');
     });
-    
+
     return {
       selectedClientId,
       selectedCategory,
@@ -225,7 +246,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  
+
   @media (max-width: $breakpoint-md) {
     flex-direction: column;
     gap: 1rem;
@@ -237,7 +258,7 @@ export default {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
-  
+
   @media (max-width: $breakpoint-md) {
     overflow-x: auto;
     padding-bottom: 0.5rem;
@@ -258,11 +279,11 @@ export default {
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
-  
+
   &:hover {
     background-color: #e0e0e0;
   }
-  
+
   &.active {
     background-color: $primary-color;
     color: white;
@@ -273,7 +294,7 @@ export default {
   margin-top: 1rem;
   background-color: $primary-color;
   color: white;
-  
+
   &:hover {
     background-color: darken($primary-color, 10%);
   }
@@ -283,12 +304,12 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
-  
+
   @media (max-width: $breakpoint-md) {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1rem;
   }
-  
+
   @media (max-width: $breakpoint-sm) {
     grid-template-columns: 1fr;
   }
@@ -300,11 +321,11 @@ export default {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    
+
     .portfolio-item-overlay {
       opacity: 1;
     }
@@ -342,7 +363,7 @@ export default {
   padding: 1.5rem;
   opacity: 0;
   transition: opacity 0.3s ease;
-  
+
   @media (max-width: $breakpoint-md) {
     opacity: 1;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), transparent);
@@ -360,7 +381,7 @@ export default {
   font-size: 0.9rem;
   margin-bottom: 1rem;
   opacity: 0.9;
-  
+
   @media (max-width: $breakpoint-md) {
     display: none;
   }
@@ -370,7 +391,7 @@ export default {
   display: flex;
   align-items: center;
   margin-top: auto;
-  
+
   .portfolio-item-client-logo {
     height: 30px;
     width: auto;
@@ -381,7 +402,7 @@ export default {
     padding: 0.25rem;
     border-radius: 4px;
   }
-  
+
   .portfolio-item-category {
     font-size: 0.8rem;
     opacity: 0.8;
@@ -397,7 +418,7 @@ export default {
   padding: 3rem;
   background-color: #f9f9f9;
   border-radius: 8px;
-  
+
   p {
     margin-bottom: 1rem;
     font-size: 1.1rem;

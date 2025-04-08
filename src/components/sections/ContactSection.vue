@@ -6,7 +6,8 @@
       </div>
 
       <div class="contact-content">
-        <form class="contact-form" @submit.prevent="submitForm">
+        <form class="contact-form" @submit.prevent="submitForm" aria-labelledby="contact-form-title" novalidate>
+          <h2 id="contact-form-title" class="visually-hidden">Kontaktformular</h2>
           <div class="form-row">
             <div class="form-group" :class="{ 'has-error': formAttempted && errors.name, 'has-value': shouldShowLabel('name') }">
               <label class="address-bold floating-label" for="name">NAME<span class="required">*</span></label>
@@ -18,8 +19,11 @@
                 v-model.trim="formData.name"
                 @focus="handleFocus('name')"
                 @blur="handleBlur('name')"
+                :aria-invalid="formAttempted && errors.name ? 'true' : 'false'"
+                :aria-describedby="formAttempted && errors.name ? 'name-error' : null"
+                aria-required="true"
               >
-              <span class="error-message" v-if="formAttempted && errors.name">{{ errors.name }}</span>
+              <span class="error-message" v-if="formAttempted && errors.name" id="name-error" role="alert">{{ errors.name }}</span>
             </div>
             <div class="form-group" :class="{ 'has-error': formAttempted && errors.email, 'has-value': shouldShowLabel('email') }">
               <label class="address-bold floating-label" for="email">E-MAIL-ADRESSE<span class="required">*</span></label>
@@ -31,8 +35,11 @@
                 v-model.trim="formData.email"
                 @focus="handleFocus('email')"
                 @blur="handleBlur('email')"
+                :aria-invalid="formAttempted && errors.email ? 'true' : 'false'"
+                :aria-describedby="formAttempted && errors.email ? 'email-error' : null"
+                aria-required="true"
               >
-              <span class="error-message" v-if="formAttempted && errors.email">{{ errors.email }}</span>
+              <span class="error-message" v-if="formAttempted && errors.email" id="email-error" role="alert">{{ errors.email }}</span>
             </div>
           </div>
           <div class="form-row">
@@ -46,8 +53,10 @@
                 v-model.trim="formData.firma"
                 @focus="handleFocus('firma')"
                 @blur="handleBlur('firma')"
+                :aria-invalid="formAttempted && errors.firma ? 'true' : 'false'"
+                :aria-describedby="formAttempted && errors.firma ? 'firma-error' : null"
               >
-              <span class="error-message" v-if="formAttempted && errors.firma">{{ errors.firma }}</span>
+              <span class="error-message" v-if="formAttempted && errors.firma" id="firma-error" role="alert">{{ errors.firma }}</span>
             </div>
 
             <div class="form-group" :class="{ 'has-error': formAttempted && errors.anmerkungen, 'has-value': shouldShowLabel('anmerkungen') }">
@@ -60,8 +69,10 @@
                 v-model.trim="formData.anmerkungen"
                 @focus="handleFocus('anmerkungen')"
                 @blur="handleBlur('anmerkungen')"
+                :aria-invalid="formAttempted && errors.anmerkungen ? 'true' : 'false'"
+                :aria-describedby="formAttempted && errors.anmerkungen ? 'anmerkungen-error' : null"
               ></textarea>
-              <span class="error-message" v-if="formAttempted && errors.anmerkungen">{{ errors.anmerkungen }}</span>
+              <span class="error-message" v-if="formAttempted && errors.anmerkungen" id="anmerkungen-error" role="alert">{{ errors.anmerkungen }}</span>
             </div>
           </div>
           <div class="form-row">
@@ -75,16 +86,25 @@
                 v-model.trim="formData.betreff"
                 @focus="handleFocus('betreff')"
                 @blur="handleBlur('betreff')"
+                :aria-invalid="formAttempted && errors.betreff ? 'true' : 'false'"
+                :aria-describedby="formAttempted && errors.betreff ? 'betreff-error' : null"
+                aria-required="true"
               >
-              <span class="error-message" v-if="formAttempted && errors.betreff">{{ errors.betreff }}</span>
+              <span class="error-message" v-if="formAttempted && errors.betreff" id="betreff-error" role="alert">{{ errors.betreff }}</span>
             </div>
 
             <div class="form-submit">
-              <button type="submit" class="submit-image-btn" :disabled="isSubmitting" :class="{ 'animate-in': isVisible }">
-                <img src="../../assets/images/submit.svg" alt="Submit" class="contact-button__image" />
-                <span v-if="isSubmitting" class="loading-overlay">WIRD GESENDET...</span>
+              <button
+                type="submit"
+                class="submit-image-btn"
+                :disabled="isSubmitting"
+                :class="{ 'animate-in': isVisible }"
+                aria-label="Formular absenden"
+              >
+                <img src="../../assets/images/submit.svg" alt="" class="contact-button__image" aria-hidden="true" />
+                <span v-if="isSubmitting" class="loading-overlay" aria-live="polite">WIRD GESENDET...</span>
               </button>
-              <div v-if="formSubmitted" class="success-message">Vielen Dank für Ihre Nachricht!</div>
+              <div v-if="formSubmitted" class="success-message" role="status" aria-live="polite">Vielen Dank für Ihre Nachricht!</div>
             </div>
           </div>
         </form>
