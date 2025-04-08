@@ -7,6 +7,7 @@
   >
     <div class="agb-content">
       <section class="legal-section">
+        <h1 class="legal-section__main-title">ALLGEMEINE GESCHÄFTSBEDINGUNGEN</h1>
         <h2 class="legal-section__title">1. Geltungsbereich</h2>
         <p class="legal-section__text">
           1.1 Diese Allgemeinen Geschäftsbedingungen (nachfolgend "AGB") gelten für alle Verträge zwischen der TAKTZEIT GmbH,

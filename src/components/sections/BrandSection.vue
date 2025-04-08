@@ -2,7 +2,7 @@
   <section id="brand" class="brand-section">
     <div class="brand-content">
       <div class="container">
-      <h1 class="brand-title">MARKE & DESIGN</h1>
+      <h2 class="brand-title">MARKE & DESIGN</h2>
 
       <div class="brand-grid-wrapper">
         <img src="@/assets/images/brand_bg.svg" alt="Background" class="brand-grid-background" />

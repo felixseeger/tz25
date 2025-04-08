@@ -3,7 +3,7 @@
     <div class="container">
       <div class="journey-header" ref="journeyHeader">
         <h2 class="journey-section__title" ref="journeyTitle">IHRE EXPERTEN FÜR DIE GESAMTE</h2>
-        <h1 class="journey-section__subtitle" ref="journeySubtitle">SALES ACTIVATION JOURNEY</h1>
+        <h2 class="journey-section__subtitle" ref="journeySubtitle">SALES ACTIVATION JOURNEY</h2>
         <p class="journey-section__description" ref="journeyDescription">
           Marke, Vertrieb, Handel, Absatz – hier sind wir zuhause: Stationärer oder digitaler POS, Multi- oder
           Omnichannel-Strategie, kurzfristige Aktivierung oder langfristige Bindung, Außendienst, Handel oder

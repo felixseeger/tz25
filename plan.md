@@ -59,7 +59,7 @@
 - ☐ Add alt text to all images
 - ☑️ Implement focus styles for interactive elements
 - ☑️ Remove skip to main content buttons from the interface
-- ☐ Ensure proper heading hierarchy throughout the site
+- ☑️ Ensure proper heading hierarchy throughout the site
 - ☐ Test with screen readers and fix any issues
 - ☐ Implement proper form labels and error messages
 

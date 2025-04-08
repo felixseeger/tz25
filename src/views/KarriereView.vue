@@ -2,8 +2,8 @@
   <div class="karriere-page">
     <div class="karriere-content" style="position: relative; z-index: 10; color: white;">
       <div class="karriere-header">
-        <h1 class="karriere-header__subtitle">KARRIERE BEI TAKTZEIT</h1>
-        <h2 class="karriere-header__title">WIR SUCHEN DICH!</h2>
+        <h1 class="karriere-header__title">KARRIERE BEI TAKTZEIT</h1>
+        <h2 class="karriere-header__subtitle">WIR SUCHEN DICH!</h2>
 
         <p class="karriere-header__text">
           Taktzeit ist ein fest etabliertes Team, das Dir die besten Jobs anbieten kann. Und zwar anspruchsvolle, kreative Arbeitsplätze ohne Wenn & Aber. Du arbeitest in den Bereichen Projektmanagement, Kreativkonzept, oder Web Development sowohl für internationale Markenartikel als auch für mittelständische Unternehmen. Du entwickelst oder betreust vielfältige Projekte von Print-Kampagnen über Packaging bis zu digitalen Medien und Social Media.

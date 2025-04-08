@@ -110,7 +110,7 @@ text-align: left;
   h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    
+
     color: #333;
   }
 
@@ -118,7 +118,7 @@ text-align: left;
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 1rem;
-    
+
     width: 60vw;
   }
 
@@ -139,6 +139,14 @@ text-align: left;
 .legal-section {
   margin-bottom: 2.5rem;
   margin-left: -1.8vw;
+  &__main-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: white;
+    text-align: left;
+  }
+
   &__title {
     font-size: 1.5rem;
     font-weight: 700;

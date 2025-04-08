@@ -4,7 +4,7 @@
     <div class="container">
       <div class="testimonials-header">
         <h2 class="testimonials-title">DAS SAGEN UNSERE</h2>
-        <h1 class="testimonials-subtitle">ÜBERZEUGTEN KUNDEN</h1>
+        <h2 class="testimonials-subtitle">ÜBERZEUGTEN KUNDEN</h2>
       </div>
 
       <div class="testimonials-carousel">
