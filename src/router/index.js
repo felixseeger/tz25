@@ -2,7 +2,17 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('../views/HomeView.vue')
+    component: () => import('../views/HomeView.vue'),
+    // Add a catch for loading errors
+    beforeEnter: (to, from, next) => {
+      try {
+        next();
+      } catch (error) {
+        console.error('Error loading route:', error);
+        // Fallback to a simple redirect
+        window.location.href = to.fullPath;
+      }
+    }
   },
   {
     path: '/karriere',

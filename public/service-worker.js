@@ -6,8 +6,9 @@ const PRECACHE_ASSETS = [
   '/',
   '/index.html',
   '/vite.svg',
-  '/src/main.js',
-  '/src/style.css'
+  '/assets/fonts/subsets/gotham-narrow-regular-subset.woff2',
+  '/assets/fonts/subsets/gotham-narrow-bold-subset.woff2',
+  '/assets/fonts/subsets/greycliff-cf-light-subset.woff2'
 ];
 
 // Install event - precache static assets
@@ -48,76 +49,40 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // For HTML requests - network first, then cache
-  if (event.request.headers.get('accept')?.includes('text/html')) {
-    event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          // Cache the latest version
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
-          });
-          return response;
-        })
-        .catch(() => {
-          // If network fails, try to serve from cache
-          return caches.match(event.request);
-        })
-    );
-    return;
-  }
-
-  // For image requests - cache first, then network
-  if (event.request.destination === 'image') {
-    event.respondWith(
-      caches.match(event.request).then((cachedResponse) => {
-        // Return cached response if available
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-        
-        // Otherwise fetch from network and cache
-        return fetch(event.request).then((response) => {
-          // Don't cache non-successful responses
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response;
-          }
-          
-          // Cache the response
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
-          
-          return response;
-        });
-      })
-    );
-    return;
-  }
-
-  // For CSS, JS, and other assets - stale-while-revalidate strategy
+  // Use a simpler network-first strategy for all requests
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      // Return cached response immediately if available
-      const fetchPromise = fetch(event.request)
-        .then((networkResponse) => {
-          // Update the cache with the new response
-          if (networkResponse && networkResponse.status === 200) {
-            const responseToCache = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseToCache);
+    fetch(event.request)
+      .then(response => {
+        // Don't cache non-successful responses
+        if (!response || response.status !== 200) {
+          return response;
+        }
+
+        // Cache successful responses
+        const responseToCache = response.clone();
+        caches.open(CACHE_NAME)
+          .then(cache => {
+            cache.put(event.request, responseToCache);
+          })
+          .catch(err => {
+            console.error('Cache put error:', err);
+          });
+
+        return response;
+      })
+      .catch(error => {
+        console.log('Fetch failed, trying cache:', error);
+        return caches.match(event.request)
+          .then(cachedResponse => {
+            if (cachedResponse) {
+              return cachedResponse;
+            }
+            // If no cache match, return a basic error response
+            return new Response('Network error happened', {
+              status: 408,
+              headers: { 'Content-Type': 'text/plain' }
             });
-          }
-          return networkResponse;
-        })
-        .catch((error) => {
-          console.error('Fetch failed:', error);
-          // Return nothing - the cached response will be used
-        });
-      
-      return cachedResponse || fetchPromise;
-    })
+          });
+      })
   );
 });

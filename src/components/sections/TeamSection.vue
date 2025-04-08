@@ -20,8 +20,8 @@
             <!-- Left column with team member -->
             <div class="team-carousel__item team-carousel__item--photo">
               <div class="team-members-photo">
-                <LazyImage
-                  src="../../assets/images/team-tobi.jpg"
+                <img
+                  src="../../assets/images/team-members/team-tobi.jpg"
                   alt="Team Member"
                   aspect-ratio="1/1"
                   placeholder-color="#333333"
@@ -40,8 +40,8 @@
             <!-- Right column with two team members -->
             <div class="team-carousel__item team-carousel__item--double">
               <div class="team-members-photo">
-                <LazyImage
-                  src="../../assets/images/team-kirsten.jpg"
+                <img
+                  src="../../assets/images/team-members/team-kirsten.jpg"
                   alt="Team Member"
                   aspect-ratio="1/1"
                   placeholder-color="#333333"
@@ -55,8 +55,8 @@
             <!-- Left column with team member -->
             <div class="team-carousel__item team-carousel__item--photo">
               <div class="team-members-photo">
-                <LazyImage
-                  src="../../assets/images/team-jan.jpg"
+                <img
+                  src="../../assets/images/team-members/team-jan.jpg"
                   alt="Team Member"
                   aspect-ratio="1/1"
                   placeholder-color="#333333"
@@ -67,8 +67,8 @@
             <!-- Middle column with team member -->
             <div class="team-carousel__item team-carousel__item--photo">
               <div class="team-members-photo">
-                <LazyImage
-                  src="../../assets/images/team-melissa.jpg"
+                <img
+                  src="../../assets/images/team-members/team-melissa.jpg"
                   alt="Team Member"
                   aspect-ratio="1/1"
                   placeholder-color="#333333"
@@ -98,15 +98,15 @@
             <!-- Right column with two team members -->
             <div class="team-carousel__item team-carousel__item--double">
               <div class="team-members-photo team-members-photo--double">
-                <LazyImage
-                  src="../../assets/images/team-anh.jpg"
+                <img
+                  src="../../assets/images/team-members/team-anh.jpg"
                   alt="Team Member"
                   class="left-member"
                   aspect-ratio="1/1"
                   placeholder-color="#333333"
                 />
-                <LazyImage
-                  src="../../assets/images/team-rena-omiros.jpg"
+                <img
+                  src="../../assets/images/team-members/team-rena-omiros.jpg"
                   alt="Team Member"
                   class="right-member"
                   aspect-ratio="1/1"

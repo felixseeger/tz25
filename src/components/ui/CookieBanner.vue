@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive, onMounted, onUnmounted } from 'vue';
 
 export default {
   name: 'CookieBanner',
@@ -183,8 +183,22 @@ export default {
       showSettings.value = false;
     };
 
+    // Listen for the open-cookie-settings event
+    const handleOpenCookieSettings = () => {
+      showBanner.value = true;
+      showSettings.value = true;
+    };
+
     onMounted(() => {
       checkCookieConsent();
+
+      // Add event listener for the open-cookie-settings event
+      document.addEventListener('open-cookie-settings', handleOpenCookieSettings);
+    });
+
+    // Clean up event listener when component is unmounted
+    onUnmounted(() => {
+      document.removeEventListener('open-cookie-settings', handleOpenCookieSettings);
     });
 
     return {

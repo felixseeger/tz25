@@ -3,7 +3,7 @@
     <div class="history-background"></div>
     <div class="container">
       <div class="history-content">
-        <div class="history-text-content font-critical">
+        <div class="history-text-content">
           <h2 class="history-title">WIR SIND IHRE NEUE AGENTUR MIT</h2>
           <h1 class="history-headline">LEIDENSCHAFT</h1>
           <p class="history-description">

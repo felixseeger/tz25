@@ -17,7 +17,7 @@
               <li><router-link to="/agb">AGB</router-link></li>
               <li><router-link to="/datenschutz">Datenschutz</router-link></li>
               <li><router-link to="/karriere">Karriere</router-link></li>
-              <li><CookieManager /></li>
+              <li><button class="footer__cookie-button" @click="openCookieSettings">Cookie-Einstellungen</button></li>
             </ul>
           </div>
           <!-- <div class="footer__copyright">
@@ -32,19 +32,25 @@
 
   <script>
   import { useScrollTo } from '../../composables/useScrollTo';
-  import { CookieManager } from '../../components/ui';
 
   export default {
     name: 'FooterSection',
-    components: {
-      CookieManager
-    },
+    components: {},
     setup() {
       const { scrollToTop } = useScrollTo();
 
+      // Function to open cookie settings
+      const openCookieSettings = () => {
+        // Create and dispatch a custom event that the CookieBanner will listen for
+        const event = new CustomEvent('open-cookie-settings');
+        document.dispatchEvent(event);
+        console.log('Cookie settings button clicked from footer');
+      };
+
       return {
         currentYear: new Date().getFullYear(),
-        scrollToTop
+        scrollToTop,
+        openCookieSettings
       };
     }
   }

@@ -97,3 +97,24 @@
   margin: 0 auto;
   padding: 0 $spacing-unit;
 }
+
+// Boxed-centered text container with left-aligned text
+@mixin boxed-centered-text($max-width: 800px) {
+  width: 100%;
+  max-width: $max-width;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  @media (max-width: $breakpoint-md) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

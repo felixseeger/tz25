@@ -25,7 +25,7 @@
     ContactSection,
     FooterSection
   } from '../components/sections';
-  import { PortfolioSectionFiltered } from '../components/portfolio';
+  import { PortfolioGridSection } from '../components/portfolio';
 
   export default {
     name: 'HomeView',
@@ -37,7 +37,7 @@
       TeamSection,
       ServicesSection,
       BrandSection,
-      PortfolioSectionFiltered,
+      PortfolioGridSection,
       ContactSection,
       FooterSection
     }

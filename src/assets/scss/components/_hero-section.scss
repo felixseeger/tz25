@@ -2,6 +2,7 @@
 .hero {
   position: relative;
   min-height: 100vh;
+  height: 100vh; /* Ensure it takes exactly the viewport height */
   width: 100vw;
   max-width: 100vw;
   overflow: hidden;
@@ -33,13 +34,23 @@
   &__content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 8rem 0;
+    padding: 4rem 0; /* Reduced padding for better vertical fit */
     width: 100%;
+    height: calc(100vh - 8rem); /* Adjust height to fit viewport minus padding */
     display: flex;
     flex-wrap: wrap;
     gap: 5rem;
     align-items: center;
     justify-content: space-between;
+
+    /* Adjust content layout in portrait mode */
+    @media (orientation: portrait) {
+      flex-direction: column;
+      gap: 2rem;
+      padding: 2rem 0;
+      height: auto;
+      min-height: calc(100vh - 4rem);
+    }
   }
 
   &__column {
@@ -62,8 +73,8 @@
   }
 
   &__title {
-    @include font-loading('critical');
-    @include critical-font('Gotham Narrow', 700);
+    font-family: 'Gotham Narrow', sans-serif;
+    font-weight: 700;
     margin-bottom: 0;
     width: 100%;
 
@@ -85,6 +96,13 @@
         filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
         position: relative;
         z-index: 1;
+
+        /* Adjust hero.svg on portrait viewport formats */
+        @media (orientation: portrait) {
+          max-width: 70%;
+          margin: 0 auto 2rem;
+          display: block;
+        }
       }
 
       &--overlay {
@@ -116,21 +134,45 @@
   }
 
   &__video {
-    margin-bottom: 2.5rem;
+    margin-top: 20rem;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative;
+    z-index: 50;
+
+    /* Adjust video container in portrait mode */
+    @media (orientation: portrait) {
+      margin-top: 0;
+      margin-bottom: 2rem;
+    }
 
     &-container {
-      background-color: $secondary-color;
-      padding: 2rem;
-      border-radius: 8px;
+      background-color: black;
+      padding: 1.5rem;
+
       max-width: 100%;
       aspect-ratio: 16 / 9;
-      display: flex;
+      height: auto;
+      max-height: 100vh; /* Limit height to 100% of viewport height */
+      display: flex !important;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+
       cursor: pointer; /* Add cursor pointer to indicate it's clickable */
       position: relative; /* For positioning the play icon */
+      vertical-align: middle;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 50;
+
+      @media (max-width: $breakpoint-sm) {
+        max-height: none;
+        aspect-ratio: 16 / 9;
+        width: 100%;
+        margin: 0 auto;
+      }
 
       &:hover {
         transform: translateY(-5px);
@@ -159,7 +201,7 @@
     transform: translate(-50%, -50%);
     width: 60px;
     height: 60px;
-    background-color: rgba($primary-color, 0.8);
+    border: 1px solid white;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -200,64 +242,130 @@
 
     &-content {
       position: relative;
-      width: 80%;
+      width: 90%;
       max-width: 1200px;
-      aspect-ratio: 16 / 9;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
     }
 
     &-close {
       position: absolute;
-      top: -40px;
+      top: -50px;
       right: 0;
-      background: none;
+      background: rgba(0, 0, 0, 0.5);
       border: none;
       color: white;
-      font-size: 2rem;
+      font-size: 2.5rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      z-index: 1002; /* Ensure it's above the video */
 
       &:hover {
         transform: scale(1.1);
+        background-color: rgba(0, 0, 0, 0.8);
       }
     }
 
     &-video {
       width: 100%;
-      height: 100%;
+      height: auto;
+      max-height: 80vh;
       background-color: black;
       object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
   }
 
   &__text {
-    @include font-loading('important');
-    @include font-with-fallback('Greycliff CF', 400);
+    font-family: $font-primary;
+    font-weight: 400;
     max-width: 100%;
+    opacity: 1 !important; /* Ensure text is visible */
+    display: block !important;
+    visibility: visible !important;
+    position: relative;
+    z-index: 100;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 4px;
 
     p {
-      font-size: 1.2rem;
-      line-height: 1.7;
-      color: $text-color;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      font-size: $font-size-base;
+      line-height: 1.6;
+      color: $text-color !important; /* Force white text color */
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
       margin-bottom: 2rem;
       text-align: left;
+      z-index: 10; /* Ensure text is above other elements */
+      position: relative; /* Enable z-index */
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+  }
+
+  &__cart-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 1rem 0 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  &__cart-icon {
+    width: 20%;
+    max-width: 100px;
+    min-width: 60px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+
+    @media (max-width: $breakpoint-md) {
+      width: 18%;
+      min-width: 55px;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      width: 15%;
+      min-width: 50px;
+    }
+
+    @media (max-width: $breakpoint-xs) {
+      width: 20%;
+      min-width: 40px;
     }
   }
 
   &__cta {
-    display: flex;
+    display: flex !important;
     gap: 1rem;
     margin-top: 1rem;
     flex-wrap: wrap;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative;
+    z-index: 100;
   }
 
   &__button {
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
     padding: 0.8rem 2rem;
     background-color: $secondary-color;
-    color: $text-color;
+    color: $text-color !important;
     text-decoration: none;
     font-weight: 600;
     border-radius: 4px;
@@ -265,6 +373,10 @@
     font-size: 1rem;
     letter-spacing: 0.5px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative;
+    z-index: 100;
 
     &:hover {
       transform: translateY(-3px);
@@ -300,10 +412,28 @@
       &--left {
         order: 1;
         justify-content: center;
+
+        /* Adjust left column in portrait mode to display above video */
+        @media (orientation: portrait) {
+          display: flex;
+          order: 1;
+          margin-bottom: 1rem;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+        }
       }
 
       &--right {
         order: 2;
+
+        /* Adjust right column in portrait mode to display below logo */
+        @media (orientation: portrait) {
+          flex: 1 1 100%;
+          width: 100%;
+          max-width: 100%;
+          order: 2;
+        }
       }
     }
 
@@ -323,6 +453,21 @@
           max-width: 90%;
         }
       }
+
+      /* Adjust spacing and centering in portrait mode */
+      @media (orientation: portrait) {
+        margin-bottom: 0;
+        min-height: 0;
+        text-align: center;
+        width: 100%;
+
+        &-overlay {
+          min-height: 0;
+          margin-bottom: 0;
+          justify-content: center;
+          align-items: center;
+        }
+      }
     }
 
     &__video {
@@ -338,8 +483,8 @@
     }
 
     &__text p {
-      font-size: 1.1rem;
-      text-align: center;
+      font-size: $font-size-base;
+      text-align: left;
     }
 
     &__cta {
@@ -356,28 +501,127 @@
 
 @media (max-width: $breakpoint-sm) {
   .hero {
+    min-height: auto;
+    height: auto;
+    padding-bottom: 2rem;
+    transform: translateY(10%); /* Move hero section down by 10% */
+    margin-bottom: 10vh; /* Add margin to prevent overlap with content below */
+
     &__content {
       padding: 6rem 0 4rem;
       gap: 3rem;
+      height: auto;
+      min-height: auto;
+      flex-direction: column;
+    }
+
+    &__column {
+      width: 100%;
+      flex: 1 1 100%;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+
+      &--left {
+        margin-bottom: 2rem;
+        order: 1;
+      }
+
+      &--right {
+        order: 2;
+      }
+    }
+
+    &__video {
+      display: none !important; /* Hide video on mobile */
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0;
+      overflow: hidden;
+    }
+
+    &__text {
+      display: none !important; /* Hide text on mobile */
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0;
+      overflow: hidden;
     }
 
     &__cta {
       flex-direction: column;
       width: 100%;
       max-width: 250px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 1rem auto 0;
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      position: relative;
+      z-index: 100;
+      /* Hide the original CTA in the text section */
+      &:not(.hero__cta--mobile) {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0;
+        overflow: hidden;
+      }
+
+      /* Style the mobile CTA that appears after the hero.svg */
+      &--mobile {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin-top: 2rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
     }
 
     &__button {
       width: 100%;
+      display: inline-flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
   }
 }
 
-/* Desktop Media Queries */
+/* Hide mobile CTA on tablet and desktop */
+@media (min-width: $breakpoint-sm) {
+  .hero {
+    &__cta--mobile {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0;
+      overflow: hidden;
+    }
+  }
+}
+
+/* Tablet Media Queries */
+@media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg) {
+  .hero {
+    transform: translateY(-10%); /* Move hero section up by 20% on tablets */
+    margin-bottom: -10vh; /* Adjust the layout so content below isn't affected */
+  }
+}
+
+/* Large Desktop Media Queries */
+@media (min-width: $breakpoint-lg) and (max-width: ($breakpoint-xl - 1px)) {
+  .hero {
+    transform: translateY(-10%); /* Move hero section up by 30% on large screens */
+
+  }
+}
+
+/* Extra Large Desktop Media Queries */
 @media (min-width: $breakpoint-xl) {
   .hero {
+    transform: translateY(-10%); /* Move hero section up by 40% */
+    margin-bottom: -10vh; /* Adjust the layout so content below isn't affected */
+
     &__container {
       padding: 0 4rem;
     }
@@ -389,8 +633,9 @@
     }
 
     &__text p {
-      font-size: 1.3rem;
-      line-height: 1.8;
+      font-size: $font-size-base;
+      line-height: 1.6;
+      text-align: left;
     }
 
     &__button {
@@ -413,8 +658,9 @@
     }
 
     &__text p {
-      font-size: 1.4rem;
-      line-height: 1.9;
+      font-size: $font-size-base;
+      line-height: 1.6;
+      text-align: left;
     }
 
     &__button {
@@ -446,8 +692,9 @@
     }
 
     &__text p {
-      font-size: 1.5rem;
-      line-height: 2;
+      font-size: $font-size-base;
+      line-height: 1.6;
+      text-align: left;
     }
   }
 }
@@ -465,8 +712,9 @@
     }
 
     &__text p {
-      font-size: 1.8rem;
-      line-height: 2.2;
+      font-size: $font-size-base;
+      line-height: 1.6;
+      text-align: left;
     }
 
     &__button {
@@ -485,7 +733,7 @@
     }
 
     &__scroll-indicator {
-      bottom: 4rem;
+      margin: 1.5rem auto 0;
 
       &-icon {
         width: 40px;
@@ -504,54 +752,6 @@
   }
 }
 
-.hero {
-  &__scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    z-index: 10;
-
-    &-icon {
-      width: 30px;
-      height: 30px;
-      border: 2px solid white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 0.5rem;
-      animation: bounce 2s infinite;
-
-      svg {
-        width: 16px;
-        height: 16px;
-        fill: white;
-      }
-    }
-
-    &-text {
-      color: white;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      opacity: 0.8;
-      transition: opacity 0.3s ease;
-    }
-
-    &:hover {
-      .hero__scroll-indicator-text {
-        opacity: 1;
-      }
-    }
-  }
-}
-
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
@@ -561,5 +761,80 @@
   }
   60% {
     transform: translateY(-5px);
+  }
+}
+
+/* Landscape mode for tablets (iPad) */
+@media (orientation: landscape) and (min-width: 768px) and (max-width: 1199px) {
+  .hero {
+    &__content {
+      padding: 2rem 0;
+      height: calc(100vh - 4rem);
+      gap: 2rem;
+    }
+
+    &__column {
+      &--left {
+        flex: 0 1 48%;
+      }
+
+      &--right {
+        flex: 0 1 48%;
+      }
+    }
+
+    &__video {
+      &-container {
+        padding: 1rem;
+        max-height: 60vh;
+      }
+    }
+
+    &__title {
+      font-size: 2.5rem;
+    }
+
+    &__text p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    &__cta {
+      margin-top: 1.5rem;
+    }
+  }
+}
+
+/* Landscape mode for desktops */
+@media (orientation: landscape) and (min-width: 1200px) {
+  .hero {
+    &__content {
+      height: calc(100vh - 8rem);
+      align-items: center;
+    }
+
+    &__column {
+      &--left {
+        flex: 0 1 45%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+
+      &--right {
+        flex: 0 1 45%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+      }
+    }
+
+    &__video {
+      &-container {
+        max-height: 75vh;
+      }
+    }
   }
 }

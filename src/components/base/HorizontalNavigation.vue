@@ -26,10 +26,15 @@ export default {
   margin-top: 2rem;
   position: relative;
   z-index: 10;
-  
+  width: 100%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+
   &__prev,
   &__next {
-    
+
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -39,25 +44,25 @@ export default {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    
+
     &:hover {
       background-color: rgba(255, 255, 255, 0.5);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
   }
-  
+
   &__arrow {
     width: 20px;
     height: 20px;
     filter: brightness(0) invert(1); /* Make the SVG white */
     transition: transform 0.3s ease;
   }
-  
+
   /* Dark theme variant */
   &.dark {
     .horizontal-nav__prev,
@@ -65,15 +70,15 @@ export default {
       background: transparent;
       border: 1px solid rgba(#333, 0.5);
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      
+
       &:hover {
         background-color: rgba(#333, 0.05);
       }
     }
-    
+
     .horizontal-nav__arrow {
       filter: brightness(0.3); /* Make the SVG dark gray */
-      
+
       &:hover {
         filter: brightness(0); /* Make the SVG black on hover */
       }

@@ -44,6 +44,11 @@
     display: flex;
     gap: 1rem;
 
+    /* Hide social icons on mobile */
+    @media (max-width: $breakpoint-sm) {
+      display: none;
+    }
+
     &-link {
       display: flex;
       align-items: center;
@@ -163,6 +168,34 @@
       margin-top: 1rem;
       padding-top: 1.5rem;
       border-top: 1px solid rgba($text-color, 0.2);
+    }
+
+    &--social {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba($text-color, 0.2);
+    }
+  }
+
+  &__social {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+
+    &-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 

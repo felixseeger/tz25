@@ -7,8 +7,7 @@
         <p class="journey-section__description" ref="journeyDescription">
           Marke, Vertrieb, Handel, Absatz – hier sind wir zuhause: Stationärer oder digitaler POS, Multi- oder
           Omnichannel-Strategie, kurzfristige Aktivierung oder langfristige Bindung, Außendienst, Handel oder
-          Shopper, Packaging Design oder Positionierung – Ihren Herausforderungen im Absatzmarketing be-
-          gegnen wir auf Augenhöhe & begeistern mit innovativen, kreativen und realistischen Lösungen.
+          Shopper, Packaging Design oder Positionierung – Ihren Herausforderungen im Absatzmarketing begegnen wir auf Augenhöhe & begeistern mit innovativen, kreativen und realistischen Lösungen.
         </p>
       </div>
 

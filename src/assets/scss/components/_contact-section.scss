@@ -1,10 +1,10 @@
 // Contact Section Styles
 .contact-section {
   position: relative;
-  min-height: 100vh;
+  max-height: 84vh;
   display: flex;
   align-items: center;
-  padding: 6rem 0 2rem;
+  padding: 3rem 0 2rem;
   overflow: hidden;
   background-color: $primary-color; // Using primary color variable
   color: $text-color;
@@ -13,15 +13,19 @@
     max-width: 1600px;
     width: 100%;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 2rem 2rem;
     position: relative;
     z-index: 2;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .contact-heading {
     text-align: left;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    align-self: flex-start;
   }
 
   @media (max-width: $breakpoint-md) {
@@ -79,69 +83,90 @@
 }
 
 .contact-heading {
-  font-size: 10rem;
-  font-family: $font-headline;
-  font-weight: 700;
   text-align: left; /* Left alignment as requested */
   margin-bottom: 3.5rem;
-  color: $text-color;
-  text-transform: uppercase;
   line-height: 1;
-  letter-spacing: -2px;
+
+  &-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    display: block;
+  }
 
   @media (max-width: $breakpoint-lg) {
-    font-size: 6rem;
     margin-bottom: 3rem;
+
+    &-image {
+      max-width: 500px;
+    }
   }
 
   @media (max-width: $breakpoint-md) {
-    font-size: 4rem;
     margin-bottom: 2.5rem;
-    letter-spacing: -1px;
+
+    &-image {
+      max-width: 400px;
+    }
   }
 
   @media (max-width: $breakpoint-sm) {
-    font-size: 3rem;
     margin-bottom: 2rem;
-    letter-spacing: -0.5px;
+
+    &-image {
+      max-width: 300px;
+    }
   }
 
   @media (max-width: $breakpoint-xs) {
-    font-size: 2.5rem;
     margin-bottom: 1.5rem;
+
+    &-image {
+      max-width: 250px;
+    }
   }
 
   /* Desktop Media Queries */
   @media (min-width: $breakpoint-xl) {
-    font-size: 12rem;
     margin-bottom: 4rem;
-    letter-spacing: -3px;
+
+    &-image {
+      max-width: 700px;
+    }
   }
 
   @media (min-width: $breakpoint-xxl) {
-    font-size: 14rem;
     margin-bottom: 5rem;
-    letter-spacing: -4px;
+
+    &-image {
+      max-width: 1620px; /* 1620px width on 1920px viewport */
+    }
   }
 
   @media (min-width: $breakpoint-xxxl) {
-    font-size: 16rem;
     margin-bottom: 6rem;
+
+    &-image {
+      max-width: 1620px; /* Maintain 1620px width */
+    }
   }
 
   @media (min-width: $breakpoint-4k) {
-    font-size: 20rem;
     margin-bottom: 8rem;
-    letter-spacing: -6px;
+
+    &-image {
+      max-width: 1620px; /* Maintain 1620px width */
+    }
   }
 }
 
 .contact-content {
   display: grid;
   grid-template-columns: 3fr 2fr;
-  gap: 3rem;
+  gap: 4rem;
   margin-bottom: 4rem;
   text-align: left;
+  width: 100%;
 
   @media (max-width: $breakpoint-md) {
     grid-template-columns: 1fr;
@@ -170,9 +195,26 @@
 }
 
 .contact-form {
-  text-align: left;
-  margin: 0;
+  width: 100%;
   max-width: 800px;
+  margin-bottom: 0;
+  padding-top: 2rem; /* Match the padding-top of contact-info to align them */
+  margin-left: 0; /* Align to the left instead of center */
+  margin-right: auto;
+  text-align: left;
+  padding-left: 0; /* Remove left padding to align with contact-heading */
+  padding-right: 2rem;
+
+  @media (max-width: $breakpoint-md) {
+    padding-top: 0; /* Remove padding on mobile to avoid extra space */
+    margin-top: 2rem; /* Add margin instead for better spacing on mobile */
+    padding-left: 0; /* Ensure no left padding on mobile */
+    padding-right: 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding-right: 1rem;
+  }
 
   /* Desktop Media Queries */
   @media (min-width: $breakpoint-xl) {
@@ -221,6 +263,23 @@
 
   .form-group {
     margin-bottom: 2rem;
+    text-align: left;
+    position: relative; /* Required for absolute positioning of floating labels */
+
+    /* When the form group has a value or is focused */
+    &.has-value {
+      .floating-label {
+        opacity: 1;
+        transform: translateY(0); /* No transform needed since we're using absolute positioning */
+      }
+
+      input, textarea {
+        &::placeholder {
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+      }
+    }
 
     &.full-width {
       grid-column: span 2;
@@ -249,44 +308,65 @@
 
     label {
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem; /* Reduced from 0.5rem to bring labels closer to inputs */
       font-family: $font-headline;
-      font-weight: 500;
+      font-weight: 900;
       font-size: 1rem;
       text-align: left !important;
+      letter-spacing: 0.5px;
+
+      &.floating-label {
+        position: absolute;
+        top: -1.5rem; /* Position above the input */
+        left: 0;
+        transform: translateY(0);
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        pointer-events: none;
+        margin-bottom: 0;
+        padding-bottom: 0.25rem;
+        font-size: 0.9rem; /* Slightly smaller font size for the floating label */
+      }
 
       /* Desktop Media Queries */
       @media (min-width: $breakpoint-xl) {
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.375rem; /* Reduced from 0.75rem to bring labels closer to inputs */
         font-size: 1.1rem;
       }
 
       @media (min-width: $breakpoint-xxl) {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem; /* Reduced from 1rem to bring labels closer to inputs */
         font-size: 1.2rem;
       }
 
       @media (min-width: $breakpoint-xxxl) {
-        margin-bottom: 1.25rem;
+        margin-bottom: 0.625rem; /* Reduced from 1.25rem to bring labels closer to inputs */
         font-size: 1.3rem;
       }
 
       @media (min-width: $breakpoint-4k) {
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.75rem; /* Reduced from 1.5rem to bring labels closer to inputs */
         font-size: 1.5rem;
       }
     }
 
     input, textarea {
       width: 100%;
-      padding: 0.75rem 0;
+      padding: 0.5rem 0; /* Reduced top padding to bring inputs closer to labels */
       background: transparent;
       border: none;
-      border-bottom: 1px solid $text-color;
+      border-bottom: 2px solid $text-color;
       text-align: left !important;
       color: $text-color;
       font-family: $font-primary;
       font-size: 1.125rem;
+      font-weight: 900;
+
+      &::placeholder {
+        color: $text-color;
+        opacity: 1;
+        transition: opacity 0.3s;
+      }
 
       &:focus {
         outline: none;
@@ -323,12 +403,18 @@
   }
 
   .form-submit {
-    margin-top: 2rem;
+    margin-top: 3rem;
     text-align: left;
     display: flex;
     flex-direction: column;
     align-items: flex-start; /* Ensure all children align to the left */
     width: 100%; /* Take full width of container */
+    position: relative;
+    top: -50px; /* Move up by 50px */
+
+    @media (max-width: $breakpoint-md) {
+      top: 0; /* Reset on mobile */
+    }
 
     /* Success message styling */
     .success-message {
@@ -398,10 +484,11 @@
   cursor: pointer;
   padding: 0;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  /* -o-transition-delay property removed */
   text-align: left;
   display: block; /* Ensure it's displayed as a block element */
   position: relative; /* For positioning the loading overlay */
+  align-self: flex-start; /* Ensure button aligns left */
+  margin-left: 0;
   width: 216px; /* Width as requested - 216px */
   height: 42px; /* Height as requested - 42px */
   margin-top: 1rem; /* Add some spacing above the button */
@@ -515,54 +602,54 @@
 
 /* Form submit button image - different class to avoid conflicts */
 .form-submit .contact-button__image {
-  max-width: 80%;
-  height: 42px;
-  width: 216px;
+  max-width: 100%;
+  height: 21px; /* 50% of original height */
+  width: 108px; /* 50% of original width */
   display: block; /* Ensure it's displayed as a block element */
-  transform: scale(2); /* No rotation for the form button */
+  transform: scale(1); /* Reduced from scale(2) to scale(1) */
   object-fit: contain; /* Ensure the image maintains its aspect ratio */
   margin-left: 0; /* Ensure no left margin */
 
   @media (max-width: $breakpoint-md) {
-    transform: scale(1.5);
-    height: 35px;
+    transform: scale(0.75); /* 50% of original 1.5 scale */
+    height: 17px; /* 50% of original height */
   }
 
   @media (max-width: $breakpoint-sm) {
-    transform: scale(1.2);
-    height: 30px;
-    width: 180px;
+    transform: scale(0.6); /* 50% of original 1.2 scale */
+    height: 15px; /* 50% of original height */
+    width: 90px; /* 50% of original width */
   }
 
   @media (max-width: $breakpoint-xs) {
-    transform: scale(1);
-    height: 25px;
-    width: 150px;
+    transform: scale(0.5); /* 50% of original scale */
+    height: 12px; /* 50% of original height */
+    width: 75px; /* 50% of original width */
   }
 
   /* Desktop Media Queries */
   @media (min-width: $breakpoint-xl) {
-    transform: scale(2.2);
-    height: 50px;
-    width: 260px;
+    transform: scale(1.1); /* 50% of original 2.2 scale */
+    height: 25px; /* 50% of original height */
+    width: 130px; /* 50% of original width */
   }
 
   @media (min-width: $breakpoint-xxl) {
-    transform: scale(2.5);
-    height: 60px;
-    width: 300px;
+    transform: scale(1.25); /* 50% of original 2.5 scale */
+    height: 30px; /* 50% of original height */
+    width: 150px; /* 50% of original width */
   }
 
   @media (min-width: $breakpoint-xxxl) {
-    transform: scale(3);
-    height: 70px;
-    width: 350px;
+    transform: scale(1.5); /* 50% of original 3 scale */
+    height: 35px; /* 50% of original height */
+    width: 175px; /* 50% of original width */
   }
 
   @media (min-width: $breakpoint-4k) {
-    transform: scale(4);
-    height: 80px;
-    width: 400px;
+    transform: scale(2); /* 50% of original 4 scale */
+    height: 40px; /* 50% of original height */
+    width: 200px; /* 50% of original width */
   }
 }
 
@@ -582,6 +669,12 @@
 .contact-info {
   padding-top: 2rem;
   text-align: left;
+  margin-top: -50px; /* Move up by 50px */
+
+  @media (max-width: $breakpoint-md) {
+    padding-top: 3rem; /* Add more padding on mobile for better separation */
+    margin-top: 0; /* Reset margin on mobile */
+  }
 
   /* Desktop Media Queries */
   @media (min-width: $breakpoint-xl) {
@@ -601,7 +694,8 @@
   }
 
   .company-info {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    text-align: left;
 
     /* Desktop Media Queries */
     @media (min-width: $breakpoint-xl) {
@@ -651,63 +745,72 @@
     p {
       margin: 0.25rem 0;
       font-size: 1rem;
-      line-height: 1.5;
+      line-height: 1.1; /* Reduced to 110% */
+
+      &.address-bold {
+        font-weight: 900; /* Bold font weight */
+      }
 
       /* Desktop Media Queries */
       @media (min-width: $breakpoint-xl) {
         font-size: 1.1rem;
-        line-height: 1.6;
+        line-height: 1.1; /* Reduced to 110% */
         margin: 0.5rem 0;
       }
 
       @media (min-width: $breakpoint-xxl) {
         font-size: 1.2rem;
-        line-height: 1.7;
+        line-height: 1.1; /* Reduced to 110% */
         margin: 0.75rem 0;
       }
 
       @media (min-width: $breakpoint-xxxl) {
         font-size: 1.3rem;
-        line-height: 1.8;
+        line-height: 1.1; /* Reduced to 110% */
         margin: 1rem 0;
       }
 
       @media (min-width: $breakpoint-4k) {
         font-size: 1.5rem;
-        line-height: 2;
+        line-height: 1.1; /* Reduced to 110% */
         margin: 1.25rem 0;
       }
     }
   }
 
   .contact-details {
+    text-align: left;
     p {
       margin: 0.5rem 0;
       font-size: 1rem;
-      line-height: 1.5;
+      line-height: 1.1; /* Reduced to 110% */
+
+      &.address-bold {
+        font-weight: 700; /* Bold font weight */
+      }
 
       /* Desktop Media Queries */
       @media (min-width: $breakpoint-xl) {
         font-size: 1.1rem;
-        line-height: 1.6;
+        line-height: 1.1; /* Reduced to 110% */
         margin: 0.75rem 0;
       }
 
       @media (min-width: $breakpoint-xxl) {
         font-size: 1.2rem;
-        line-height: 1.7;
+        line-height: 1.1; /* Reduced to 110% */
         margin: 1rem 0;
       }
 
       @media (min-width: $breakpoint-xxxl) {
         font-size: 1.3rem;
-        line-height: 1.8;
+        line-height: 1.1; /* Reduced to 110% */
         margin: 1.25rem 0;
       }
 
       @media (min-width: $breakpoint-4k) {
         font-size: 1.5rem;
-        line-height: 2;
+        line-height: 1.1; /* Reduced to 110% */
         margin: 1.5rem 0;
       }
     }

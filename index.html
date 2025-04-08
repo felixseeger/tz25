@@ -9,9 +9,9 @@
     <meta http-equiv="Cache-Control" content="max-age=86400" />
 
     <!-- Font preloading for critical fonts -->
-    <link rel="preload" href="/assets/fonts/subsets/gotham-narrow-regular-subset.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/subsets/gotham-narrow-bold-subset.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/subsets/greycliff-cf-light-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./assets/fonts/subsets/gotham-narrow-regular-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./assets/fonts/subsets/gotham-narrow-bold-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./assets/fonts/subsets/greycliff-cf-light-subset.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Font loading optimization styles -->
     <style>
@@ -29,7 +29,7 @@
       /* Font subset definitions */
       @font-face {
         font-family: 'Gotham Narrow Subset';
-        src: url('/assets/fonts/subsets/gotham-narrow-regular-subset.woff2') format('woff2');
+        src: url('./assets/fonts/subsets/gotham-narrow-regular-subset.woff2') format('woff2');
         font-weight: 400;
         font-style: normal;
         font-display: swap;
@@ -37,7 +37,7 @@
 
       @font-face {
         font-family: 'Gotham Narrow Subset';
-        src: url('/assets/fonts/subsets/gotham-narrow-bold-subset.woff2') format('woff2');
+        src: url('./assets/fonts/subsets/gotham-narrow-bold-subset.woff2') format('woff2');
         font-weight: 700;
         font-style: normal;
         font-display: swap;
@@ -45,7 +45,7 @@
 
       @font-face {
         font-family: 'Greycliff CF Subset';
-        src: url('/assets/fonts/subsets/greycliff-cf-light-subset.woff2') format('woff2');
+        src: url('./assets/fonts/subsets/greycliff-cf-light-subset.woff2') format('woff2');
         font-weight: 400;
         font-style: normal;
         font-display: swap;
@@ -61,8 +61,39 @@
       }
     </style>
 
-    <!-- Service Worker Registration -->
+    <!-- Service Worker Unregistration and Cache Clearing -->
+    <script src="/clear.js"></script>
     <script src="/register-service-worker.js"></script>
+    <script src="/unregister-service-worker.js"></script>
+
+    <!-- Service Worker Status Message -->
+    <script>
+      console.log('%c⚠️ Service Workers Disabled', 'font-size: 14px; font-weight: bold; color: #ff9800;');
+      console.log('Service workers have been disabled due to resource loading issues.');
+      console.log('This improves page loading performance and prevents console errors.');
+
+      // Add a global function to check service worker status
+      window.checkServiceWorkerStatus = function() {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            if (registrations.length === 0) {
+              console.log('%c✅ No service workers active - good!', 'color: green; font-weight: bold;');
+            } else {
+              console.log('%c⚠️ Service workers still active!', 'color: red; font-weight: bold;');
+              console.log('Active service workers:', registrations.length);
+              console.log('Run window.unregisterAllServiceWorkers() to remove them.');
+            }
+          });
+        } else {
+          console.log('Service workers not supported in this browser');
+        }
+      };
+
+      // Run the check after a short delay
+      setTimeout(function() {
+        window.checkServiceWorkerStatus();
+      }, 2000);
+    </script>
   </head>
   <body>
     <div id="app"></div>

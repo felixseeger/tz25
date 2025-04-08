@@ -17,16 +17,16 @@ const FONTS = {
     family: 'Gotham Narrow',
     weight: 400,
     style: 'normal',
-    url: '/assets/fonts/gotham-narrow/gothamnarrow-book-webfont.woff2',
+    url: './assets/fonts/gotham-narrow/gothamnarrow-book-webfont.woff2',
     fallback: 'Arial, sans-serif',
     stage: FONT_STAGES.CRITICAL,
-    subsetUrl: '/assets/fonts/subsets/gotham-narrow-regular-subset.woff2'
+    subsetUrl: './assets/fonts/subsets/gotham-narrow-regular-subset.woff2'
   },
   'gotham-narrow-medium': {
     family: 'Gotham Narrow',
     weight: 500,
     style: 'normal',
-    url: '/assets/fonts/gotham-narrow/gothamnarrow-medium-webfont.woff2',
+    url: './assets/fonts/gotham-narrow/gothamnarrow-medium-webfont.woff2',
     fallback: 'Arial, sans-serif',
     stage: FONT_STAGES.IMPORTANT
   },
@@ -34,16 +34,16 @@ const FONTS = {
     family: 'Gotham Narrow',
     weight: 700,
     style: 'normal',
-    url: '/assets/fonts/gotham-narrow/gothamnarrow-bold-webfont.woff2',
+    url: './assets/fonts/gotham-narrow/gothamnarrow-bold-webfont.woff2',
     fallback: 'Arial, sans-serif',
     stage: FONT_STAGES.CRITICAL,
-    subsetUrl: '/assets/fonts/subsets/gotham-narrow-bold-subset.woff2'
+    subsetUrl: './assets/fonts/subsets/gotham-narrow-bold-subset.woff2'
   },
   'gotham-narrow-italic': {
     family: 'Gotham Narrow',
     weight: 400,
     style: 'italic',
-    url: '/assets/fonts/gotham-narrow/gothamnarrow-bookitalic-webfont.woff2',
+    url: './assets/fonts/gotham-narrow/gothamnarrow-bookitalic-webfont.woff2',
     fallback: 'Arial, sans-serif',
     stage: FONT_STAGES.COMPLETE
   },
@@ -53,16 +53,16 @@ const FONTS = {
     family: 'Greycliff CF',
     weight: 400,
     style: 'normal',
-    url: '/assets/fonts/greycliff-cf/greycliffcf-light-webfont.woff2',
+    url: './assets/fonts/greycliff-cf/greycliffcf-light-webfont.woff2',
     fallback: 'Helvetica, sans-serif',
     stage: FONT_STAGES.CRITICAL,
-    subsetUrl: '/assets/fonts/subsets/greycliff-cf-light-subset.woff2'
+    subsetUrl: './assets/fonts/subsets/greycliff-cf-light-subset.woff2'
   },
   'greycliff-cf-medium': {
     family: 'Greycliff CF',
     weight: 500,
     style: 'normal',
-    url: '/assets/fonts/greycliff-cf/greycliffcf-medium-webfont.woff2',
+    url: './assets/fonts/greycliff-cf/greycliffcf-medium-webfont.woff2',
     fallback: 'Helvetica, sans-serif',
     stage: FONT_STAGES.IMPORTANT
   },
@@ -70,7 +70,7 @@ const FONTS = {
     family: 'Greycliff CF',
     weight: 700,
     style: 'normal',
-    url: '/assets/fonts/greycliff-cf/greycliffcf-bold-webfont.woff2',
+    url: './assets/fonts/greycliff-cf/greycliffcf-bold-webfont.woff2',
     fallback: 'Helvetica, sans-serif',
     stage: FONT_STAGES.IMPORTANT
   },
@@ -78,7 +78,7 @@ const FONTS = {
     family: 'Greycliff CF',
     weight: 900,
     style: 'normal',
-    url: '/assets/fonts/greycliff-cf/greycliffcf-demibold-webfont.woff2',
+    url: './assets/fonts/greycliff-cf/greycliffcf-demibold-webfont.woff2',
     fallback: 'Helvetica, sans-serif',
     stage: FONT_STAGES.COMPLETE
   }

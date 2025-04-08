@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, onBeforeUnmount } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import { applyCookieSettings } from '../../services/cookieService';
 
 export default {
@@ -159,14 +159,8 @@ export default {
 
     onMounted(() => {
       loadCookieSettings();
-
-      // Add event listener for the custom event from CookieButton
-      document.addEventListener('open-cookie-settings', openSettings);
-    });
-
-    onBeforeUnmount(() => {
-      // Clean up event listener
-      document.removeEventListener('open-cookie-settings', openSettings);
+      // We're not listening for 'open-cookie-settings' event here anymore
+      // to avoid conflict with CookieBanner component
     });
 
     return {

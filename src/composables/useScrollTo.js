@@ -41,7 +41,18 @@ export function useScrollTo() {
 
     // Function to attempt scrolling with retry logic
     const attemptScroll = (attemptCount = 0) => {
-      const element = document.getElementById(sectionId)
+      // Try to find the element by ID first, then by query selector if needed
+      let element = document.getElementById(sectionId);
+
+      // If element not found by ID, try finding it by section with data-id attribute
+      if (!element) {
+        element = document.querySelector(`section[data-id="${sectionId}"]`);
+      }
+
+      // If still not found, try finding it by class name
+      if (!element) {
+        element = document.querySelector(`.${sectionId}-section`);
+      }
 
       if (element) {
         isScrolling.value = true
@@ -60,18 +71,11 @@ export function useScrollTo() {
         // Calculate scroll duration based on distance
         const duration = calculateDuration(scrollDistance)
 
-        // If we need an offset, we'll use scrollTo instead of scrollIntoView
-        if (scrollOptions.offset !== 0 || true) { // Always use scrollTo for consistency
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: scrollOptions.behavior
-          })
-        } else {
-          element.scrollIntoView({
-            behavior: scrollOptions.behavior,
-            block: scrollOptions.block
-          })
-        }
+        // Always use scrollTo for consistency
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: scrollOptions.behavior
+        })
 
         // Reset the scrolling state after animation completes
         setTimeout(() => {

@@ -47,10 +47,14 @@ export default defineConfig(({ mode }) => ({
     postcss: './postcss.config.cjs'
   },
   server: {
-    port: 5179, // Match the port your browser is using
-    strictPort: true, // Don't try another port if 5179 is already in use
+    // Don't specify a port to let Vite choose an available one
+    strictPort: false,
     hmr: {
-      clientPort: 5179 // Ensure WebSocket connections use the same port
+      // Disable HMR completely to prevent WebSocket errors
+      protocol: 'ws',
+      host: 'localhost',
+      clientPort: null,
+      overlay: false // Disable the error overlay
     }
   },
 
@@ -99,4 +103,4 @@ export default defineConfig(({ mode }) => ({
       }
     }
   }
-})
+}));

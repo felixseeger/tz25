@@ -71,6 +71,21 @@
               AUTOMOTIVE <span class="new-tag">NEW</span>
             </router-link>
           </div>
+
+          <!-- Social Media Icons for Mobile Menu -->
+          <div class="menu-overlay__section menu-overlay__section--social">
+            <div class="menu-overlay__social">
+              <a href="https://www.facebook.com/taktzeit" target="_blank" rel="noopener" class="menu-overlay__social-link">
+                <img src="@/assets/images/facebook.svg" alt="Facebook" />
+              </a>
+              <a href="https://www.instagram.com/taktzeit" target="_blank" rel="noopener" class="menu-overlay__social-link">
+                <img src="@/assets/images/instagram.svg" alt="Instagram" />
+              </a>
+              <a href="https://www.linkedin.com/company/taktzeit" target="_blank" rel="noopener" class="menu-overlay__social-link">
+                <img src="@/assets/images/linkedin.svg" alt="LinkedIn" />
+              </a>
+            </div>
+          </div>
         </nav>
       </div>
     </div>

@@ -26,9 +26,12 @@ export default {
 
     // Create a method to open the cookie manager
     const openCookieManager = () => {
-      // Create and dispatch a custom event that the CookieManager will listen for
+      // Create and dispatch a custom event that the CookieBanner will listen for
       const event = new CustomEvent('open-cookie-settings');
       document.dispatchEvent(event);
+
+      // Log for debugging
+      console.log('Cookie settings button clicked, event dispatched');
     };
 
     // Handle the custom event from ContactSection

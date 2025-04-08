@@ -17,6 +17,7 @@
       <CookieButton />
       <ScrollToTop />
       <FixedHistoryButton />
+      <SectionScrollIndicator />
     </div>
 
     <!-- Cookie Banner -->
@@ -32,7 +33,8 @@ import {
   CookieButton,
   ScrollToTop,
   CookieBanner,
-  FixedHistoryButton
+  FixedHistoryButton,
+  SectionScrollIndicator
 } from '../ui';
 import { applyCookieSettings } from '../../services/cookieService';
 
@@ -44,7 +46,8 @@ export default defineComponent({
     CookieButton,
     ScrollToTop,
     CookieBanner,
-    FixedHistoryButton
+    FixedHistoryButton,
+    SectionScrollIndicator
   },
   setup() {
     /**

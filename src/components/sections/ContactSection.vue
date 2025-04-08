@@ -1,83 +1,90 @@
 <template>
   <section id="contact" class="contact-section">
     <div class="container">
-      <h1 class="contact-heading">LET'S MOVE!</h1>
+      <div class="contact-heading">
+        <img src="../../assets/images/letsmove.svg" alt="LET'S MOVE!" class="contact-heading-image">
+      </div>
 
       <div class="contact-content">
         <form class="contact-form" @submit.prevent="submitForm">
           <div class="form-row">
-            <div class="form-group" :class="{ 'has-error': errors.name }">
-              <label for="name">NAME<span class="required">*</span></label>
+            <div class="form-group" :class="{ 'has-error': formAttempted && errors.name, 'has-value': shouldShowLabel('name') }">
+              <label class="address-bold floating-label" for="name">NAME<span class="required">*</span></label>
               <input
                 type="text"
                 id="name"
                 name="name"
-
+                placeholder="NAME*"
                 v-model.trim="formData.name"
-                @blur="validateField('name')"
+                @focus="handleFocus('name')"
+                @blur="handleBlur('name')"
               >
-              <span class="error-message" v-if="errors.name">{{ errors.name }}</span>
+              <span class="error-message" v-if="formAttempted && errors.name">{{ errors.name }}</span>
             </div>
-            <div class="form-group" :class="{ 'has-error': errors.email }">
-              <label for="email">E-MAIL-ADRESSE<span class="required">*</span></label>
+            <div class="form-group" :class="{ 'has-error': formAttempted && errors.email, 'has-value': shouldShowLabel('email') }">
+              <label class="address-bold floating-label" for="email">E-MAIL-ADRESSE<span class="required">*</span></label>
               <input
                 type="email"
                 id="email"
                 name="email"
-
+                placeholder="E-MAIL-ADRESSE*"
                 v-model.trim="formData.email"
-                @blur="validateField('email')"
+                @focus="handleFocus('email')"
+                @blur="handleBlur('email')"
               >
-              <span class="error-message" v-if="errors.email">{{ errors.email }}</span>
+              <span class="error-message" v-if="formAttempted && errors.email">{{ errors.email }}</span>
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group" :class="{ 'has-error': errors.firma }">
-              <label for="firma">FIRMA</label>
+            <div class="form-group" :class="{ 'has-error': formAttempted && errors.firma, 'has-value': shouldShowLabel('firma') }">
+              <label class="address-bold floating-label" for="firma">FIRMA</label>
               <input
                 type="text"
                 id="firma"
                 name="firma"
-
+                placeholder="FIRMA"
                 v-model.trim="formData.firma"
-                @blur="validateField('firma')"
+                @focus="handleFocus('firma')"
+                @blur="handleBlur('firma')"
               >
-              <span class="error-message" v-if="errors.firma">{{ errors.firma }}</span>
+              <span class="error-message" v-if="formAttempted && errors.firma">{{ errors.firma }}</span>
             </div>
 
-            <div class="form-group" :class="{ 'has-error': errors.betreff }">
-              <label for="betreff">BETREFF<span class="required">*</span></label>
+            <div class="form-group" :class="{ 'has-error': formAttempted && errors.anmerkungen, 'has-value': shouldShowLabel('anmerkungen') }">
+              <label class="address-bold floating-label" for="anmerkungen">ANMERKUNGEN</label>
+              <textarea
+                id="anmerkungen"
+                name="anmerkungen"
+                rows="1"
+                placeholder="ANMERKUNGEN"
+                v-model.trim="formData.anmerkungen"
+                @focus="handleFocus('anmerkungen')"
+                @blur="handleBlur('anmerkungen')"
+              ></textarea>
+              <span class="error-message" v-if="formAttempted && errors.anmerkungen">{{ errors.anmerkungen }}</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" :class="{ 'has-error': formAttempted && errors.betreff, 'has-value': shouldShowLabel('betreff') }">
+              <label class="address-bold floating-label" for="betreff">BETREFF<span class="required">*</span></label>
               <input
                 type="text"
                 id="betreff"
                 name="betreff"
-
+                placeholder="BETREFF*"
                 v-model.trim="formData.betreff"
-                @blur="validateField('betreff')"
+                @focus="handleFocus('betreff')"
+                @blur="handleBlur('betreff')"
               >
-              <span class="error-message" v-if="errors.betreff">{{ errors.betreff }}</span>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group" :class="{ 'has-error': errors.anmerkungen }">
-              <label for="anmerkungen">ANMERKUNGEN</label>
-              <textarea
-                id="anmerkungen"
-                name="anmerkungen"
-                rows="4"
-
-                v-model.trim="formData.anmerkungen"
-                @blur="validateField('anmerkungen')"
-              ></textarea>
-              <span class="error-message" v-if="errors.anmerkungen">{{ errors.anmerkungen }}</span>
+              <span class="error-message" v-if="formAttempted && errors.betreff">{{ errors.betreff }}</span>
             </div>
 
-            <div class="form-submit" style="text-align: left;">
-              <button type="submit" class="submit-image-btn" :disabled="isSubmitting" :class="{ 'animate-in': isVisible }" style="margin-left: 0; text-align: left;">
-                <img src="../../assets/images/submit.svg" alt="Submit" class="contact-button__image" style="margin-left: 0;" />
+            <div class="form-submit">
+              <button type="submit" class="submit-image-btn" :disabled="isSubmitting" :class="{ 'animate-in': isVisible }">
+                <img src="../../assets/images/submit.svg" alt="Submit" class="contact-button__image" />
                 <span v-if="isSubmitting" class="loading-overlay">WIRD GESENDET...</span>
               </button>
-              <div v-if="formSubmitted" class="success-message" style="text-align: left;">Vielen Dank für Ihre Nachricht!</div>
+              <div v-if="formSubmitted" class="success-message">Vielen Dank für Ihre Nachricht!</div>
             </div>
           </div>
         </form>
@@ -85,14 +92,14 @@
         <div class="contact-info">
           <div class="company-info">
             <h3>TAKTZEIT GMBH</h3>
-            <p>YOUR SALES ACTIVATION AGENCY</p>
-            <p>BURGMÜLLERSTR. 28</p>
-            <p>40235 DÜSSELDORF</p>
+            <p class="address-bold">YOUR SALES ACTIVATION AGENCY</p>
+            <p class="address-bold">BURGMÜLLERSTR. 28</p>
+            <p class="address-bold">40235 DÜSSELDORF</p>
           </div>
 
           <div class="contact-details">
-            <p>+49 211 36 11 78 90</p>
-            <p>HELLO@TAKTZEIT.COM</p>
+            <p class="address-bold">+49 211 36 11 78 90</p>
+            <p class="address-bold">HELLO@TAKTZEIT.COM</p>
           </div>
         </div>
       </div>
@@ -124,7 +131,15 @@ export default {
       isSubmitting: false,
       formSubmitted: false,
       isVisible: false,
-      observer: null
+      observer: null,
+      formAttempted: false, // Track if form submission has been attempted
+      focusedFields: {
+        name: false,
+        email: false,
+        firma: false,
+        betreff: false,
+        anmerkungen: false
+      }
     };
   },
   mounted() {
@@ -216,6 +231,25 @@ export default {
       // For now, we're just using our own observer
     },
 
+    // Handle input field focus
+    handleFocus(field) {
+      this.focusedFields[field] = true;
+    },
+
+    // Handle input field blur
+    handleBlur(field) {
+      this.focusedFields[field] = false;
+      // Only validate on blur if the form has been attempted to be submitted
+      if (this.formAttempted) {
+        this.validateField(field);
+      }
+    },
+
+    // Check if a label should be visible
+    shouldShowLabel(field) {
+      return this.focusedFields[field] || this.formData[field];
+    },
+
     initGsapAnimations() {
       // Import GSAP dynamically to avoid SSR issues
       import('gsap').then(({ gsap }) => {
@@ -264,6 +298,9 @@ export default {
     },
 
     async submitForm() {
+      // Set formAttempted to true when form is submitted
+      this.formAttempted = true;
+
       // Validate the form
       if (!this.validateForm()) {
         return;
@@ -304,6 +341,7 @@ export default {
         };
 
         this.formSubmitted = true;
+        this.formAttempted = false; // Reset formAttempted state
 
         // Hide success message after 5 seconds
         setTimeout(() => {

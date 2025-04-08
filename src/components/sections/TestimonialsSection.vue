@@ -22,8 +22,8 @@
             </div>
             <div class="testimonial-logo-container">
               <div class="testimonial-logo">
-                <LazyImage
-                  src="../../assets/images/bridgestone-logo.svg"
+                <img
+                  src="../../assets/images/client-logos/bridgestone.svg"
                   alt="Bridgestone Logo"
                   width="100%"
                   height="auto"
@@ -46,8 +46,8 @@
             </div>
             <div class="testimonial-logo-container">
               <div class="testimonial-logo">
-                <LazyImage
-                  src="../../assets/images/bridgestone-logo.svg"
+                <img
+                  src="../../assets/images/client-logos/bridgestone.svg"
                   alt="Bridgestone Logo"
                   width="100%"
                   height="auto"
@@ -59,7 +59,9 @@
       </div>
 
       <!-- Navigation Arrows -->
-      <HorizontalNavigation @prev="prevSlide" @next="nextSlide" />
+      <div class="navigation-container">
+        <HorizontalNavigation @prev="prevSlide" @next="nextSlide" />
+      </div>
     </div>
 
   </section>
@@ -107,7 +109,7 @@ export default {
   max-width: 100vw;
 
   .container {
-    max-width: 1920px;
+    max-width: 1200px; /* Reduced max-width to match design */
     width: 100%;
     margin: 0 auto;
     padding: 0 2rem;
@@ -115,8 +117,7 @@ export default {
     z-index: 2;
     display: flex; /* Added flex display */
     flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center children horizontally */
-
+    align-items: flex-start; /* Align children to the left */
   }
 }
 
@@ -138,6 +139,8 @@ export default {
 .testimonials-header {
   margin-bottom: 4rem;
   max-width: 800px;
+  width: 100%;
+  align-self: flex-start; /* Align to the left edge of the container */
 }
 
 .testimonials-title {
@@ -172,7 +175,7 @@ export default {
   margin-bottom: 6rem; /* Increased from 2rem to 6rem to make room for navigation */
   width: 100%; /* Ensure it takes full width */
   max-width: 1200px; /* Limit maximum width for better readability */
-
+  align-self: flex-start; /* Align to the left edge of the container */
 
   &__wrapper {
     display: flex;
@@ -189,6 +192,8 @@ export default {
 
 .testimonial-content {
   max-width: 800px;
+  width: 100%;
+  align-self: flex-start; /* Align to the left edge of the slide */
 }
 
 .testimonial-text {
@@ -234,5 +239,11 @@ export default {
   }
 }
 
-/* Navigation styles moved to HorizontalNavigation component */
+/* Navigation styles */
+.navigation-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
 </style>
