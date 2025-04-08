@@ -87,6 +87,16 @@
       transform: scale(1.05);
     }
 
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 3px solid #4d90fe;
+      outline-offset: 3px;
+      box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.5);
+    }
+
     &:active {
       transform: scale(0.95);
     }
@@ -192,6 +202,17 @@
         transform: scale(1.2);
       }
 
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible {
+        outline: 3px solid #4d90fe;
+        outline-offset: 3px;
+        box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.5);
+        transform: scale(1.2);
+      }
+
       img {
         width: 24px;
         height: 24px;
@@ -222,6 +243,17 @@
 
     &:hover {
       color: darken($text-color, 15%);
+      transform: translateY(-2px);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 3px solid #4d90fe;
+      outline-offset: 3px;
+      box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.5);
       transform: translateY(-2px);
     }
 

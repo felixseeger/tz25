@@ -74,6 +74,17 @@
       &:hover {
         opacity: 0.7;
       }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible {
+        outline: 3px solid #4d90fe;
+        outline-offset: 3px;
+        box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.5);
+        opacity: 0.9;
+      }
     }
   }
 
@@ -93,6 +104,17 @@
       }
 
       &:hover {
+        transform: scale(1.2);
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible {
+        outline: 3px solid #4d90fe;
+        outline-offset: 3px;
+        box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.5);
         transform: scale(1.2);
       }
     }

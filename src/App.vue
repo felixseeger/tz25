@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <!-- Skip to content link for accessibility -->
-    <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
     <!-- Keyboard focus indicator -->
     <div class="keyboard-focus-indicator" :class="{ 'visible': showKeyboardFocusIndicator }">

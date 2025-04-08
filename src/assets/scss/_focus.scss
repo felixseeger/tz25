@@ -1,0 +1,101 @@
+/* Focus styles for all interactive elements */
+
+/* Base focus style for all interactive elements */
+:focus {
+  outline: 2px solid transparent;
+}
+
+/* Enhanced focus style for keyboard navigation */
+:focus-visible {
+  outline: 3px solid #4d90fe;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.5);
+  z-index: 1;
+  position: relative;
+}
+
+/* Remove focus styles for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Button focus styles */
+button:focus-visible,
+.button:focus-visible,
+[role="button"]:focus-visible,
+input[type="button"]:focus-visible,
+input[type="submit"]:focus-visible,
+input[type="reset"]:focus-visible {
+  outline: 3px solid #4d90fe;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.5);
+}
+
+/* Link focus styles */
+a:focus-visible {
+  outline: 3px solid #4d90fe;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.5);
+  text-decoration: underline;
+}
+
+/* Form input focus styles */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #4d90fe;
+  outline-offset: 0;
+  box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.5);
+  border-color: #4d90fe;
+}
+
+/* Checkbox and radio focus styles */
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+  outline: 3px solid #4d90fe;
+  outline-offset: 2px;
+}
+
+/* Focus styles for elements with tabindex */
+[tabindex]:focus-visible {
+  outline: 3px solid #4d90fe;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.5);
+}
+
+/* Focus styles for interactive elements within cards */
+.card button:focus-visible,
+.card a:focus-visible,
+.card input:focus-visible,
+.card select:focus-visible,
+.card textarea:focus-visible {
+  outline-color: #4d90fe;
+  z-index: 2; /* Ensure focus outline is visible above card */
+}
+
+/* Focus styles for navigation items */
+.navbar a:focus-visible,
+.navbar button:focus-visible,
+.footer a:focus-visible,
+.footer button:focus-visible {
+  outline-color: #4d90fe;
+  outline-offset: 3px;
+}
+
+/* Focus styles for dark backgrounds */
+.dark-bg :focus-visible,
+.primary-bg :focus-visible,
+.secondary-bg :focus-visible,
+[style*="background-color"] :focus-visible {
+  outline-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+/* High contrast focus styles for users with high contrast mode */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid CanvasText;
+    outline-offset: 3px;
+  }
+}

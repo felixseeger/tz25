@@ -57,8 +57,8 @@
 - ☐ Ensure proper keyboard navigation throughout the site
 - ☐ Improve color contrast for better readability
 - ☐ Add alt text to all images
-- ☐ Implement focus styles for interactive elements
-- ☐ Add skip navigation links for screen readers
+- ☑️ Implement focus styles for interactive elements
+- ☑️ Remove skip to main content buttons from the interface
 - ☐ Ensure proper heading hierarchy throughout the site
 - ☐ Test with screen readers and fix any issues
 - ☐ Implement proper form labels and error messages
