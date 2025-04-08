@@ -2,12 +2,22 @@
   <teleport to="body" v-if="isOpen">
     <div class="video-modal" role="dialog" aria-modal="true" aria-labelledby="video-modal-title">
       <div class="video-modal__overlay" @click="closeModal" aria-hidden="true"></div>
-      <button class="video-modal__close" @click="closeModal" aria-label="Close video">
+      <button
+        class="video-modal__close"
+        @click="closeModal"
+        aria-label="Close video"
+        tabindex="0"
+      >
         ×
       </button>
       <div class="video-modal__content">
         <div class="video-modal__header">
-          <button class="video-modal__sound-toggle" @click="toggleSound" :aria-label="isMuted ? 'Unmute video' : 'Mute video'">
+          <button
+            class="video-modal__sound-toggle"
+            @click="toggleSound"
+            :aria-label="isMuted ? 'Unmute video' : 'Mute video'"
+            tabindex="0"
+          >
             <span class="video-modal__sound-icon" :class="{ 'video-modal__sound-icon--muted': isMuted }">
               <svg v-if="!isMuted" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -33,6 +43,7 @@
             @ended="videoEnded"
             id="video-modal-title"
             aria-label="Video content"
+            tabindex="0"
           ></video>
         </div>
       </div>

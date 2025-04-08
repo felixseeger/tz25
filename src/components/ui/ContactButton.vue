@@ -1,7 +1,14 @@
 <template>
   <div class="contact-button" :class="{ 'is-hidden': shouldHideButton }">
-    <a href="#contact" class="contact-button__link" @click.prevent="scrollToContact">
-      <img src="../../assets/images/contact.svg" alt="Let's Move" class="contact-button__image" />
+    <a
+      href="#contact"
+      class="contact-button__link"
+      @click.prevent="scrollToContact"
+      aria-label="Scroll to contact section"
+      tabindex="0"
+      role="button"
+    >
+      <img src="../../assets/images/contact.svg" alt="" class="contact-button__image" aria-hidden="true" />
     </a>
   </div>
 </template>
@@ -54,27 +61,14 @@ export default {
       console.log('History visible:', isHistorySectionVisible.value);
       console.log('Contact visible:', isContactSectionVisible.value);
 
-      // Check if we're in the history section - more aggressive check
-      const inHistorySection = activeSection.value === 'history' || isHistorySectionVisible.value || window.location.hash === '#history';
+      // Only hide when we're exactly in the contact section
+      const inContactSection = activeSection.value === 'contact';
 
-      // Check if we're in the contact section
-      const inContactSection = activeSection.value === 'contact' || isContactSectionVisible.value;
+      // For debugging purposes, log the current state
+      console.log('Should hide button:', inContactSection);
 
-      // Also check manually if the history section is in viewport as a fallback
-      const historySection = document.getElementById('history');
-      let historyInViewport = false;
-
-      if (historySection) {
-        const rect = historySection.getBoundingClientRect();
-        historyInViewport = (
-          rect.top <= window.innerHeight &&
-          rect.bottom >= 0
-        );
-      }
-
-      console.log('History in viewport (manual check):', historyInViewport);
-
-      return inHistorySection || inContactSection || historyInViewport;
+      // Only hide when in contact section
+      return inContactSection;
     });
 
     const scrollToContact = () => {

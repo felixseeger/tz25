@@ -21,7 +21,7 @@
 
   &__ui-elements {
     position: fixed;
-    z-index: $z-index-ui-elements;
+    z-index: 9999; /* Extremely high z-index to ensure it's above everything */
     pointer-events: none;
     top: 0;
     left: 0;

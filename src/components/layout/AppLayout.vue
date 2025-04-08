@@ -6,13 +6,13 @@
     </header>
 
     <!-- Main Content -->
-    <main class="app-layout__content">
+    <main id="main-content" class="app-layout__content" tabindex="-1">
       <!-- Default slot for page content -->
       <slot></slot>
     </main>
 
     <!-- Fixed UI Elements -->
-    <div class="app-layout__ui-elements">
+    <div class="app-layout__ui-elements" style="z-index: 9999;">
       <ContactButton />
       <CookieButton />
       <ScrollToTop />

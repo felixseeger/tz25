@@ -10,6 +10,7 @@
           @click="resetFilter"
           aria-label="Show all clients"
           :aria-pressed="!selectedClientId"
+          tabindex="0"
         >
           All Clients
         </button>
@@ -21,6 +22,7 @@
           @click="selectClient(client.id)"
           :aria-label="`Filter by ${client.name}`"
           :aria-pressed="selectedClientId === client.id"
+          tabindex="0"
         >
           {{ client.name }}
         </button>
@@ -34,6 +36,7 @@
           @click="resetCategoryFilter"
           aria-label="Show all categories"
           :aria-pressed="!selectedCategory"
+          tabindex="0"
         >
           All Categories
         </button>
@@ -45,6 +48,7 @@
           @click="selectCategory(category.id)"
           :aria-label="`Filter by ${category.name} category`"
           :aria-pressed="selectedCategory === category.id"
+          tabindex="0"
         >
           {{ category.name }}
         </button>
@@ -90,6 +94,7 @@
           class="filter-button reset-button"
           @click="resetAllFilters"
           aria-label="Reset all filters"
+          tabindex="0"
         >
           Reset Filters
         </button>

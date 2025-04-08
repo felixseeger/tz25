@@ -1,7 +1,12 @@
 <template>
   <div class="cookie-button" :class="{ 'is-hidden': shouldHideButton }">
-    <button class="cookie-button__btn" @click="openCookieManager">
-      <img src="../../assets/images/cookies.svg" alt="Cookie Settings" class="cookie-button__icon" />
+    <button
+      class="cookie-button__btn"
+      @click="openCookieManager"
+      aria-label="Open cookie settings"
+      tabindex="0"
+    >
+      <img src="../../assets/images/cookies.svg" alt="" class="cookie-button__icon" aria-hidden="true" />
     </button>
   </div>
 </template>
@@ -19,9 +24,13 @@ export default {
 
     // Compute whether the button should be hidden
     const shouldHideButton = computed(() => {
-      return activeSection.value === 'contact' ||
-             activeSection.value === 'footer' ||
-             isContactSectionVisible.value;
+      // Only hide when exactly in the contact or footer section
+      const shouldHide = activeSection.value === 'contact' || activeSection.value === 'footer';
+
+      // Log for debugging
+      console.log('Cookie button should hide:', shouldHide, 'Active section:', activeSection.value);
+
+      return shouldHide;
     });
 
     // Create a method to open the cookie manager

@@ -10,8 +10,8 @@
 - ☑️ Make carousel elements draggable on the x-axis
 - ☑️ Reduce scrolling speed for auto-scrolling carousels
 - ☑️ Make team section carousel elements fit within 80vh height
-- ☑️ Position client logo filters with absolute positioning and z-index overlay above 
--  
+- ☑️ Position client logo filters with absolute positioning and z-index overlay above
+-
 - ☑️ Improve portfolio slider navigation with custom arrow SVGs
 - ☑️ Add hover effects to portfolio images
 - ☑️ Implement smooth scrolling between sections
@@ -53,7 +53,7 @@
 - ☐ Implement proper error boundaries for component failures
 
 ## Accessibility
-- ☐ Add proper ARIA attributes to all interactive elements
+- ☑️ Add proper ARIA attributes to all interactive elements
 - ☐ Ensure proper keyboard navigation throughout the site
 - ☐ Improve color contrast for better readability
 - ☐ Add alt text to all images

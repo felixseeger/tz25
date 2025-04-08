@@ -26,6 +26,16 @@
     &:hover {
       transform: translateY(-3px);
     }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 3px solid #4d90fe;
+      outline-offset: 3px;
+      box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.5);
+    }
   }
 
   &__icon {

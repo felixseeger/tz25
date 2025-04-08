@@ -1,5 +1,12 @@
 <template>
   <div id="app">
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <!-- Keyboard focus indicator -->
+    <div class="keyboard-focus-indicator" :class="{ 'visible': showKeyboardFocusIndicator }">
+      Keyboard navigation active
+    </div>
     <!-- Scroll progress indicator at the top of the page -->
     <ScrollIndicator position="top" height="4px" :z-index="1001" />
 
@@ -23,12 +30,13 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, onMounted, onBeforeUnmount } from 'vue';
 import { AppLayout } from './components/layout';
 import { ScrollIndicator } from './components/ui';
 import { PageLoader } from './components/ui';
 import { useScrollTo } from './composables/useScrollTo';
 import { usePageTransition } from './composables/usePageTransition';
+import { useKeyboardNavigation } from './composables/useKeyboardNavigation';
 
 export default defineComponent({
   name: 'App',
@@ -48,6 +56,9 @@ export default defineComponent({
       transitionName,
       onTransitionComplete
     } = usePageTransition();
+
+    // Use the keyboard navigation composable
+    const { showKeyboardFocusIndicator } = useKeyboardNavigation();
 
     // Animation states
     const pageAnimating = ref(false);
@@ -117,6 +128,7 @@ export default defineComponent({
       transitionName,
       pageAnimating,
       pageLoader,
+      showKeyboardFocusIndicator,
       handleBeforeEnter,
       handleAfterEnter,
       handleTransitionComplete

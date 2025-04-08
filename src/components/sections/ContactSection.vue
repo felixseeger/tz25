@@ -22,6 +22,7 @@
                 :aria-invalid="formAttempted && errors.name ? 'true' : 'false'"
                 :aria-describedby="formAttempted && errors.name ? 'name-error' : null"
                 aria-required="true"
+                tabindex="0"
               >
               <span class="error-message" v-if="formAttempted && errors.name" id="name-error" role="alert">{{ errors.name }}</span>
             </div>
@@ -38,6 +39,7 @@
                 :aria-invalid="formAttempted && errors.email ? 'true' : 'false'"
                 :aria-describedby="formAttempted && errors.email ? 'email-error' : null"
                 aria-required="true"
+                tabindex="0"
               >
               <span class="error-message" v-if="formAttempted && errors.email" id="email-error" role="alert">{{ errors.email }}</span>
             </div>
@@ -55,6 +57,7 @@
                 @blur="handleBlur('firma')"
                 :aria-invalid="formAttempted && errors.firma ? 'true' : 'false'"
                 :aria-describedby="formAttempted && errors.firma ? 'firma-error' : null"
+                tabindex="0"
               >
               <span class="error-message" v-if="formAttempted && errors.firma" id="firma-error" role="alert">{{ errors.firma }}</span>
             </div>
@@ -71,6 +74,7 @@
                 @blur="handleBlur('anmerkungen')"
                 :aria-invalid="formAttempted && errors.anmerkungen ? 'true' : 'false'"
                 :aria-describedby="formAttempted && errors.anmerkungen ? 'anmerkungen-error' : null"
+                tabindex="0"
               ></textarea>
               <span class="error-message" v-if="formAttempted && errors.anmerkungen" id="anmerkungen-error" role="alert">{{ errors.anmerkungen }}</span>
             </div>
@@ -89,6 +93,7 @@
                 :aria-invalid="formAttempted && errors.betreff ? 'true' : 'false'"
                 :aria-describedby="formAttempted && errors.betreff ? 'betreff-error' : null"
                 aria-required="true"
+                tabindex="0"
               >
               <span class="error-message" v-if="formAttempted && errors.betreff" id="betreff-error" role="alert">{{ errors.betreff }}</span>
             </div>
@@ -100,6 +105,7 @@
                 :disabled="isSubmitting"
                 :class="{ 'animate-in': isVisible }"
                 aria-label="Formular absenden"
+                tabindex="0"
               >
                 <img src="../../assets/images/submit.svg" alt="" class="contact-button__image" aria-hidden="true" />
                 <span v-if="isSubmitting" class="loading-overlay" aria-live="polite">WIRD GESENDET...</span>
