@@ -61,14 +61,15 @@ export default {
       console.log('History visible:', isHistorySectionVisible.value);
       console.log('Contact visible:', isContactSectionVisible.value);
 
-      // Hide when in contact section
+      // Hide when in contact section or history section
       const inContactSection = activeSection.value === 'contact';
+      const inHistorySection = activeSection.value === 'history' || isHistorySectionVisible.value;
 
       // For debugging purposes, log the current state
-      console.log('Should hide button:', inContactSection);
+      console.log('Should hide button:', inContactSection || inHistorySection);
 
-      // Only hide when in contact section
-      return inContactSection;
+      // Hide when in contact section or history section
+      return inContactSection || inHistorySection;
     });
 
     const scrollToContact = () => {

@@ -71,7 +71,7 @@ export default {
 .fixed-history-button-container {
   position: fixed;
   right: 2rem;
-  top: calc(50% + 100px); /* Moved 100px down from center */
+  top: 50%; /* Center vertically */
   transform: translateY(-50%);
   z-index: 1000;
   display: block;
@@ -115,10 +115,9 @@ export default {
 
 @media (max-width: 768px) {
   .fixed-history-button-container {
-    right: 0.5rem;
-    bottom: 5rem; /* Adjusted for better mobile positioning */
-    top: auto;
-    transform: none;
+    right: 1rem;
+    top: 50%; /* Keep centered vertically */
+    transform: translateY(-50%);
 
     &.is-visible {
       visibility: visible;
