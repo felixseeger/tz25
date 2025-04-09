@@ -104,7 +104,7 @@
   /* Position description in bottom half */
   .history-description {
     margin-top: 6rem; /* Push down to bottom half */
-    max-width: 600px; /* Narrower width for better readability */
+    max-width: 1200px; /* Match the width of the headlines */
     text-align: left; /* Left-align the text */
     margin-left: auto; /* Center the block element */
     margin-right: auto; /* Center the block element */
@@ -128,7 +128,7 @@
   flex: 0 0 auto;
   margin-left: 2rem;
   position: absolute;
-  right: -2rem; /* Add some right margin */
+  right: 2rem; /* Position on the right side */
   top: 50%; /* Position at the vertical center */
   transform: translateY(-50%); /* Center it perfectly */
   z-index: 5; /* Ensure it's above the background */

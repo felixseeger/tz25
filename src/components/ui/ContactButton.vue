@@ -61,7 +61,7 @@ export default {
       console.log('History visible:', isHistorySectionVisible.value);
       console.log('Contact visible:', isContactSectionVisible.value);
 
-      // Only hide when we're exactly in the contact section
+      // Hide when in contact section
       const inContactSection = activeSection.value === 'contact';
 
       // For debugging purposes, log the current state
