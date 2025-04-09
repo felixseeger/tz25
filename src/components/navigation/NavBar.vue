@@ -41,7 +41,10 @@
       </div>
     </div>
 
-    <!-- Menu Overlay -->
+  </nav>
+
+  <!-- Menu Overlay (moved outside the navbar to be a direct child of body) -->
+  <Teleport to="body">
     <div class="menu-overlay" :class="{ 'is-active': menuOpen }">
       <button
         class="menu-overlay__close"
@@ -99,7 +102,7 @@
         </nav>
       </div>
     </div>
-  </nav>
+  </Teleport>
 </template>
 
 <script>
