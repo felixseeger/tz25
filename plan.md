@@ -17,6 +17,7 @@
 - ☑️ Implement smooth scrolling between sections
 - ☑️ Add loading animations for page transitions
 - ☑️ Optimize mobile layout for all sections
+- ☑️ Hide cart-icon on mobile screens
 
 ## Code Quality
 - ☑️ Move inline styles from HistorySection.vue to SCSS file

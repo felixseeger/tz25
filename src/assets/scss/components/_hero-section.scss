@@ -322,6 +322,11 @@
     text-align: center;
     position: relative;
     z-index: 10;
+
+    /* Hide cart wrapper on mobile devices */
+    @media (max-width: $breakpoint-sm) {
+      display: none;
+    }
   }
 
   &__cart-icon {

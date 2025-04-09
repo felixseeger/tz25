@@ -7,7 +7,7 @@
       <TeamSection id="team" />
       <ServicesSection id="services" />
       <BrandSection id="brand" />
-      <PortfolioSectionFiltered id="portfolio" />
+      <PortfolioGridSection id="portfolio" />
       <ContactSection id="contact" />
       <FooterSection id="footer" />
     </div>

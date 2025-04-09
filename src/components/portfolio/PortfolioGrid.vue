@@ -307,16 +307,19 @@ export default {
 
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2rem;
+  max-width: 1800px;
+  margin: 0 auto;
 
   @media (max-width: $breakpoint-md) {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
   }
 
   @media (max-width: $breakpoint-sm) {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
@@ -341,8 +344,10 @@ export default {
   position: relative;
   width: 100%;
   height: 0;
-  padding-bottom: 75%; /* 4:3 aspect ratio */
+  padding-bottom: 66.67%; /* 3:2 aspect ratio */
   background-color: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .portfolio-item-image {
