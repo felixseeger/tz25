@@ -38,6 +38,7 @@
 - ☑️ Fix image link paths in components
 - ☑️ Make portfolio section full-page-width
 - ☑️ Center portfolio section content
+- ☑️ Limit portfolio grid to two rows of four items
 - ☑️ Fix contact form alignment to be left-aligned
 - ☑️ Create comprehensive Playwright tests for all features and functionality
 - ☐ Add TypeScript type definitions for all components

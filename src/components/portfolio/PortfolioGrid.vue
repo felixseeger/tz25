@@ -163,7 +163,8 @@ export default {
         items = items.filter(item => item.category === selectedCategory.value);
       }
 
-      return items;
+      // Limit to 8 items (2 rows of 4 items)
+      return items.slice(0, 8);
     });
 
     // Methods
@@ -307,13 +308,13 @@ export default {
 
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   max-width: 1800px;
   margin: 0 auto;
 
-  @media (max-width: $breakpoint-md) {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
 
