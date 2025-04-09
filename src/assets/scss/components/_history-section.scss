@@ -9,15 +9,16 @@
   max-width: 100vw;
 
   .container {
-    max-width: 100%;
-    width: 100vw;
+    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 2rem; /* Add horizontal padding */
+    padding: 0;
     position: relative;
     z-index: 2;
     display: flex; /* Use flexbox for better alignment */
     flex-direction: column;
     justify-content: center;
+    align-items: center; /* Center horizontally */
     height: 100vh; /* Full height */
     overflow: visible; /* Ensure content doesn't get clipped */
   }
@@ -68,10 +69,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center; /* Center horizontally */
     padding: 0;
     height: 100%;
     position: relative; /* Ensure proper stacking context */
     z-index: 2; /* Lower than button container */
+    width: 100%; /* Ensure full width */
   }
 
   /* Position title and headline for proper layout */
@@ -82,8 +85,8 @@
     text-align: left; /* Left-align the text */
     width: 100%; /* Ensure full width */
     max-width: 1200px; /* Set a max-width for the container */
-    margin-left: 0; /* Left-align the block element */
-    margin-right: auto;
+    margin-left: auto; /* Center the block element */
+    margin-right: auto; /* Center the block element */
   }
 
   .history-headline {
@@ -93,8 +96,8 @@
     text-align: left; /* Left-align the text */
     width: 100%; /* Ensure full width */
     max-width: 1200px; /* Set a max-width for the container */
-    margin-left: 0; /* Left-align the block element */
-    margin-right: auto;
+    margin-left: auto; /* Center the block element */
+    margin-right: auto; /* Center the block element */
     /* Font size is now controlled by the main .history-headline class */
   }
 
@@ -105,8 +108,8 @@
     text-align: left; /* Left-align the text */
     margin-left: auto; /* Center the block element */
     margin-right: auto; /* Center the block element */
-    padding-left: 2rem; /* Add padding for smaller screens */
-    padding-right: 2rem; /* Add padding for smaller screens */
+    padding-left: 0; /* Remove padding */
+    padding-right: 0; /* Remove padding */
   }
 }
 
@@ -175,7 +178,7 @@
   text-transform: uppercase;
   letter-spacing: -2px;
   line-height: 0.9;
-  padding-top: 2rem; /* Space between title and headline */
+  padding-top: 1rem; /* Space between title and headline */
   will-change: transform, opacity; /* Optimize for animations */
   @include boxed-centered-text(1200px);
 
@@ -200,8 +203,10 @@
   @media (max-width: $breakpoint-md) {
     font-size: 1rem;
     max-width: 100%;
-    margin-left: 0; /* Maintain left alignment on mobile */
-    padding-left: 0; /* Maintain left alignment on mobile */
+    margin-left: auto; /* Center on mobile */
+    margin-right: auto; /* Center on mobile */
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -264,8 +269,8 @@
     .history-title,
     .history-headline,
     .history-description {
-      padding-left: 1rem;
-      padding-right: 1rem;
+      padding-left: 0;
+      padding-right: 0;
       text-align: left;
       width: 100%;
       max-width: 100%;

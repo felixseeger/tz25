@@ -10,7 +10,7 @@
           </div> -->
           <div class="hero__title-overlay" >
             <img src="../../assets/images/hero.png" alt="WEMOVESALES" class="hero__title-image hero__title-image--base"  />
-            <img src="../../assets/images/wemovesales_in.png" alt="WEMOVESALES IN" class="hero__title-image hero__title-image--overlay"  />
+            <!-- <img src="../../assets/images/wemovesales_in.png" alt="WEMOVESALES IN" class="hero__title-image hero__title-image--overlay"  /> -->
           </div>
           <!-- CTA buttons for mobile - will be positioned via CSS -->
           <!-- <div class="hero__cta hero__cta--mobile" ref="heroCtaMobile">

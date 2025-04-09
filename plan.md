@@ -4,6 +4,7 @@
 - ☑️ Make client logos full-width and create auto-scrolling carousel
 - ☑️ Add scroll indicator on bottom center of hero section
 - ☑️ Split history background vertically into two colors (#595959 top, #D9D9D9 bottom)
+- ☑️ Align history headlines and description text evenly and centered
 - ☑️ Increase history title size by 20%
 - ☑️ Fix "Unsere Geschichte" button to show only on history section
 - ☑️ Align contact input fields and headline to the left

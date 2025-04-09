@@ -2,7 +2,7 @@
   <div class="portfolio-grid-container" role="region" aria-label="Portfolio projects">
     <!-- Filter section -->
     <div class="portfolio-filters" role="group" aria-label="Portfolio filters">
-      <!-- Client filters -->
+      <!-- Client filters
       <div class="filter-group client-filters" role="group" aria-label="Client filters">
         <button
           class="filter-button"
@@ -26,7 +26,7 @@
         >
           {{ client.name }}
         </button>
-      </div>
+      </div> -->
 
       <!-- Category filters -->
       <div class="filter-group category-filters" role="group" aria-label="Category filters">
