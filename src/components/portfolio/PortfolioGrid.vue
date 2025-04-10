@@ -361,19 +361,7 @@ export default {
   padding: 0 2rem;
 }
 
-.portfolio-filters-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-
-  @media (max-width: $breakpoint-md) {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
+// Styles moved to _portfolio-pagination.scss
 
 .portfolio-filters {
   display: flex;
@@ -578,81 +566,11 @@ export default {
   }
 }
 
-/* Pagination styles */
-.top-pagination {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* Pagination styles moved to _portfolio-pagination.scss */
 
-  @media (max-width: $breakpoint-md) {
-    justify-content: center;
-    width: 100%;
-    margin-top: 1rem;
-  }
-}
+/* Pagination button styles moved to _portfolio-pagination.scss */
 
-.pagination-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid #ddd;
-  background-color: white;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 1rem;
-  color: $primary-color;
+/* Pagination pages styles moved to _portfolio-pagination.scss */
 
-  &:hover:not(:disabled) {
-    background-color: #f5f5f5;
-    border-color: #ccc;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  &.prev, &.next {
-    font-weight: bold;
-  }
-}
-
-.pagination-pages {
-  display: flex;
-  gap: 0.25rem;
-  justify-content: center;
-}
-
-.pagination-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid #ddd;
-  background-color: white;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.9rem;
-
-  &:hover {
-    background-color: #f5f5f5;
-  }
-
-  &.active {
-    background-color: $primary-color;
-    color: white;
-    border-color: $primary-color;
-    font-weight: bold;
-  }
-}
+/* Pagination page styles moved to _portfolio-pagination.scss */
 </style>
