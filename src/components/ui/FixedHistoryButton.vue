@@ -80,8 +80,8 @@ export default {
   transition: opacity 0.3s ease, visibility 0.3s ease;
 
   &.is-visible {
-    visibility: visible;
-    opacity: 1;
+    visibility: hidden; /* Hide when history section is visible */
+    opacity: 0;
   }
 }
 

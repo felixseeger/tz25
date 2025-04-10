@@ -126,12 +126,12 @@
   justify-content: center;
   align-items: center;
   flex: 0 0 auto;
-  margin-left: 2rem;
-  position: absolute;
+  margin-left: 0;
+  position: fixed;
   right: 2rem; /* Position on the right side */
   top: 50%; /* Position at the vertical center */
   transform: translateY(-50%); /* Center it perfectly */
-  z-index: 5; /* Ensure it's above the background */
+  z-index: 900; /* Ensure it's above the background but below menu overlay */
   visibility: visible; /* Ensure it's visible */
   pointer-events: auto; /* Make sure it's clickable */
 
@@ -140,14 +140,42 @@
   }
 
   @media (max-width: $breakpoint-md) {
-    position: relative;
-    right: auto;
-    top: auto;
-    transform: none;
-    margin-top: 2rem;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: 0;
     margin-left: 0;
-    align-self: center;
     padding-right: 0;
+  }
+}
+
+.history-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &__image {
+    width: 200px;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    &__image {
+      width: 150px;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &__image {
+      width: 120px;
+    }
   }
 }
 
