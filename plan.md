@@ -84,8 +84,8 @@
 
 ## Testing
 - ☑️ Implement Playwright tests for UI features
-- ☐ Implement unit tests for critical components
-- ☐ Add integration tests for key user flows
+- ☑️ Implement unit tests for critical components
+- ☑️ Add integration tests for key user flows
 - ☐ Implement end-to-end tests for critical paths
 - ☐ Set up continuous integration for automated testing
 - ☐ Add visual regression testing
