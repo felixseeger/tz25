@@ -100,39 +100,42 @@
         </button>
       </div>
 
-      <!-- Pagination controls -->
-      <div v-if="totalPages > 1" class="portfolio-pagination" role="navigation" aria-label="Portfolio pagination">
-        <button
-          class="pagination-button prev"
-          :disabled="currentPage === 1"
-          @click="goToPreviousPage"
-          aria-label="Go to previous page"
-        >
-          <span aria-hidden="true">←</span>
-        </button>
-
-        <div class="pagination-pages">
+      <!-- Pagination controls wrapper -->
+      <div class="pagination-wrapper">
+        <!-- Pagination controls -->
+        <div v-if="totalPages > 1" class="portfolio-pagination" role="navigation" aria-label="Portfolio pagination">
           <button
-            v-for="page in totalPages"
-            :key="page"
-            class="pagination-page"
-            :class="{ 'active': currentPage === page }"
-            @click="goToPage(page)"
-            :aria-label="`Go to page ${page}`"
-            :aria-current="currentPage === page ? 'page' : null"
+            class="pagination-button prev"
+            :disabled="currentPage === 1"
+            @click="goToPreviousPage"
+            aria-label="Go to previous page"
           >
-            {{ page }}
+            <span aria-hidden="true">←</span>
+          </button>
+
+          <div class="pagination-pages">
+            <button
+              v-for="page in totalPages"
+              :key="page"
+              class="pagination-page"
+              :class="{ 'active': currentPage === page }"
+              @click="goToPage(page)"
+              :aria-label="`Go to page ${page}`"
+              :aria-current="currentPage === page ? 'page' : null"
+            >
+              {{ page }}
+            </button>
+          </div>
+
+          <button
+            class="pagination-button next"
+            :disabled="currentPage === totalPages"
+            @click="goToNextPage"
+            aria-label="Go to next page"
+          >
+            <span aria-hidden="true">→</span>
           </button>
         </div>
-
-        <button
-          class="pagination-button next"
-          :disabled="currentPage === totalPages"
-          @click="goToNextPage"
-          aria-label="Go to next page"
-        >
-          <span aria-hidden="true">→</span>
-        </button>
       </div>
     </div>
   </div>
@@ -353,7 +356,7 @@ export default {
 .portfolio-grid-container {
   width: 100%;
   max-width: 1920px;
-  margin: 140px auto;
+  margin: 40px auto; /* Reduced from 140px to 40px to move up by 100px */
   padding: 0 2rem;
 }
 
@@ -548,14 +551,20 @@ export default {
 }
 
 /* Pagination styles */
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+
 .portfolio-pagination {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2rem auto 0;
   gap: 0.5rem;
-  width: 100%;
   text-align: center;
+  margin: 0 auto;
 }
 
 .pagination-button {
