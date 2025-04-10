@@ -552,8 +552,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  margin: 2rem auto 0;
   gap: 0.5rem;
+  width: 100%;
+  text-align: center;
 }
 
 .pagination-button {
@@ -588,6 +590,7 @@ export default {
 .pagination-pages {
   display: flex;
   gap: 0.25rem;
+  justify-content: center;
 }
 
 .pagination-page {
