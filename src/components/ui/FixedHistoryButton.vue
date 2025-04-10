@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-history-button-container" :class="{ 'is-visible': isHistorySectionVisible }">
+  <div class="fixed-history-button-container" :class="{ 'is-visible': isHistorySectionVisible }" :style="{ visibility: isHistorySectionVisible ? 'visible' : 'hidden', opacity: isHistorySectionVisible ? 1 : 0 }">
     <button @click="openTimeline" class="fixed-history-button">
       <img src="../../assets/images/history-btn.svg" alt="Unsere Geschichte" class="fixed-history-button__image">
     </button>
@@ -17,25 +17,44 @@ export default {
 
     // Function to check if history section is in view
     const setupIntersectionObserver = () => {
-      const historySection = document.getElementById('history');
+      // Wait for DOM to be fully loaded
+      setTimeout(() => {
+        const historySection = document.getElementById('history');
+        console.log('History section element found:', !!historySection);
 
-      if (historySection && 'IntersectionObserver' in window) {
-        observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            isHistorySectionVisible.value = entry.isIntersecting;
-            console.log('History section visible:', isHistorySectionVisible.value);
+        if (historySection && 'IntersectionObserver' in window) {
+          observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              isHistorySectionVisible.value = entry.isIntersecting;
+              console.log('History section visible:', isHistorySectionVisible.value);
+            });
+          }, {
+            threshold: 0.01, // Show button when at least 1% of history section is visible
+            rootMargin: '0px' // No margin
           });
-        }, {
-          threshold: 0.05 // Show button when at least 5% of history section is visible
-        });
 
-        observer.observe(historySection);
+          observer.observe(historySection);
+          console.log('Observer set up for history section');
+        } else {
+          console.error('History section not found or IntersectionObserver not supported');
+        }
+      }, 500); // Short delay to ensure DOM is ready
+    };
+
+    // Function to handle history section visibility event
+    const handleHistorySectionVisible = (event) => {
+      if (event && event.detail) {
+        isHistorySectionVisible.value = event.detail.visible;
+        console.log('History section visibility event received:', isHistorySectionVisible.value);
       }
     };
 
     // Setup observer when component is mounted
     onMounted(() => {
       setupIntersectionObserver();
+
+      // Also listen for custom events from the HistorySection component
+      document.addEventListener('history-section-visible', handleHistorySectionVisible);
     });
 
     // Clean up observer when component is unmounted
@@ -43,6 +62,9 @@ export default {
       if (observer) {
         observer.disconnect();
       }
+
+      // Remove event listener
+      document.removeEventListener('history-section-visible', handleHistorySectionVisible);
     });
 
     // Method to open timeline
@@ -73,11 +95,12 @@ export default {
   right: 2rem;
   top: 50%; /* Center vertically */
   transform: translateY(-50%);
-  z-index: 1000;
+  z-index: 9000; /* Higher z-index to ensure it's above other elements */
   display: block;
   visibility: hidden; /* Hidden by default */
   opacity: 0;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: auto; /* Ensure it's clickable */
 
   &.is-visible {
     visibility: visible !important; /* Show when history section is visible */
@@ -118,6 +141,7 @@ export default {
     right: 1rem;
     top: 50%; /* Keep centered vertically */
     transform: translateY(-50%);
+    z-index: 9000; /* Ensure consistent z-index on mobile */
 
     &.is-visible {
       visibility: visible !important;
