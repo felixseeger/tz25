@@ -117,7 +117,7 @@ export default {
   position: fixed;
   right: 2rem;
   top: 50%; /* Center vertically */
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateX(31px);
   z-index: 9000; /* Higher z-index to ensure it's above other elements */
   display: block;
   visibility: hidden; /* Hidden by default */
@@ -171,7 +171,7 @@ export default {
   .fixed-history-button-container {
     right: 1rem;
     top: 50%; /* Keep centered vertically */
-    transform: translateY(-50%);
+    transform: translateY(-50%) translateX(31px);
     z-index: 9000; /* Ensure consistent z-index on mobile */
     padding-left: 30px; /* Reduced padding for mobile */
 
