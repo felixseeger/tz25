@@ -407,6 +407,19 @@ export default {
     background-color: $primary-color;
     color: white;
   }
+
+  &.category-filter {
+    background-color: #2A6FEE;
+    color: white;
+
+    &:hover {
+      background-color: darken(#2A6FEE, 10%);
+    }
+
+    &.active {
+      background-color: darken(#2A6FEE, 15%);
+    }
+  }
 }
 
 .reset-button {
