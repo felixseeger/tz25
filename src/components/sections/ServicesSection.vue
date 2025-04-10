@@ -15,8 +15,7 @@
             <h3 class="service-name">MARKE & DESIGN</h3>
             <p class="service-text">
               Der erste Eindruck zählt! Ihr Markenauftritt ist ihre wichtigste Visitenkarte. Deshalb unterstützen wir Sie bei der optimalen Markenpositionierung in
-              der internen und externen Darstellung. So erobern Sie das Bewusstsein von
-              Kunden und Verbrauchern.
+              der internen und externen Darstellung. So erobern Sie das Bewusstsein von Kunden und Verbrauchern.
             </p>
 
           </div>
@@ -30,8 +29,8 @@
             <h3 class="service-name">STRATEGIE & KONZEPT</h3>
             <p class="service-text">
               Die Stunde der Wahrheit schlägt, wenn es um die Kaufentscheidung geht.
-              Hier hilft Ihnen TAKTZEIT mit langjähriger Expertise, fundierten Handels-
-              kenntnissen, tiefen Shopper Insights – und vor allem Herzblut. Denn Verkaufen steckt uns in den Genen.
+              Hier hilft Ihnen TAKTZEIT mit langjähriger Expertise, fundierten Handelskenntnissen, 
+              tiefen Shopper Insights – und vor allem Herzblut. Denn Verkaufen steckt uns in den Genen.
             </p>
 
           </div>

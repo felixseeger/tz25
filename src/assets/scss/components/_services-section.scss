@@ -86,7 +86,7 @@
 .service-content {
   flex: 1;
   text-align: left;
-  width: 25vw; // Reduced from 30vw to 25vw (5% reduction)
+  width: 20vw;
   padding-right: 2em;
   font-family: $font-headline; // Changed to Greycliff CF font
 
@@ -109,6 +109,7 @@
 }
 
 .service-text {
+  width: 24vw;
   font-size: $font-size-base;
   line-height: 1.466;
   color: #ffffff;
