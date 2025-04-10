@@ -106,6 +106,10 @@ export default {
   &.is-visible {
     visibility: visible !important; /* Show when history section is visible */
     opacity: 1 !important;
+
+    .fixed-history-button__image {
+      animation: moveInFromRight 0.8s ease-out 0.5s both; /* Animation with 0.5s delay */
+    }
   }
 }
 
@@ -124,6 +128,9 @@ export default {
     width: 200px;
     height: auto;
     display: block;
+    /* Animation will be applied when the button is visible */
+    transform: translateX(0); /* Default position */
+    transition: transform 0.3s ease;
   }
 }
 
@@ -148,11 +155,32 @@ export default {
     &.is-visible {
       visibility: visible !important;
       opacity: 1 !important;
+
+      .fixed-history-button__image {
+        animation: moveInFromRight 0.8s ease-out 0.5s both; /* Animation with 0.5s delay */
+      }
     }
   }
 
   .fixed-history-button__image {
     width: 120px;
+  }
+}
+
+/* Animation keyframes */
+@keyframes moveInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  80% {
+    transform: translateX(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 </style>
