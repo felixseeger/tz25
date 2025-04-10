@@ -26,7 +26,7 @@ export default {
     const carouselSlides = [
       {
         title: 'MARKE & DESIGN',
-        bgColor: '#d32f2f', // Red color from the screenshot
+        bgColor: 'rgba(211, 47, 47, 0.9)', // Red color with transparency
         items: [
           {
             title: 'COOPERATE IDENTITY',
@@ -64,7 +64,7 @@ export default {
       },
       {
         title: 'STRATEGIE & KONZEPT',
-        bgColor: '#f5f5f5', // Light gray background
+        bgColor: 'rgba(77, 77, 77, 0.9)', // Dark gray with transparency
         items: [
           {
             title: 'Sales Marketing Strategien',
@@ -102,7 +102,7 @@ export default {
       },
       {
         title: 'SERVICE & UMSETZUNG',
-        bgColor: '#f5f5f5', // Light gray background
+        bgColor: 'rgba(77, 77, 77, 0.9)', // Dark gray with transparency
         items: [
           {
             title: 'Projekt Management',
@@ -144,7 +144,7 @@ export default {
       },
       {
         title: 'DIGITALE LÖSUNGEN',
-        bgColor: '#f5f5f5', // Light gray background
+        bgColor: 'rgba(77, 77, 77, 0.9)', // Dark gray with transparency
         items: [
           {
             title: 'Websites',

@@ -9,6 +9,7 @@
         :style="{ transform: `translateX(${100 * (index - currentSlide)}%)` }"
       >
         <div class="slide-content" :style="{ backgroundColor: slide.bgColor }">
+          <img src="@/assets/images/brand_bg.svg" alt="Background" class="slide-background" />
           <h2 class="slide-title">{{ slide.title }}</h2>
 
           <div class="brand-grid">
@@ -165,6 +166,19 @@ export default {
   height: 100%;
   padding: 3rem 2rem;
   color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.8;
 }
 
 .slide-title {
@@ -173,12 +187,16 @@ export default {
   margin-bottom: 2rem;
   text-align: left;
   font-family: $font-headline;
+  position: relative;
+  z-index: 1;
 }
 
 .brand-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+  position: relative;
+  z-index: 1;
 
   @media (max-width: $breakpoint-lg) {
     grid-template-columns: repeat(2, 1fr);
