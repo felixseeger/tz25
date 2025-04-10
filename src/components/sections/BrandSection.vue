@@ -1,8 +1,14 @@
 <template>
   <section id="brand" class="brand-section">
-    <div class="brand-content">
-      <div class="container">
-        <BrandCarousel :slides="carouselSlides" :autoplay="true" :autoplay-speed="6000" />
+    <div class="container">
+      <h2 class="brand-title">{{ currentSlideTitle }}</h2>
+      <div class="brand-content">
+        <BrandCarousel
+          :slides="carouselSlides"
+          :autoplay="true"
+          :autoplay-speed="6000"
+          @slide-changed="handleSlideChange"
+        />
       </div>
     </div>
   </section>
@@ -21,12 +27,13 @@ export default {
   setup() {
     const { createTimeline } = useGsap();
     const carouselContainer = ref(null);
+    const currentSlideTitle = ref('MARKE & DESIGN'); // Default title
 
     // Define the carousel slides with content from the screenshots
     const carouselSlides = [
       {
         title: 'MARKE & DESIGN',
-        bgColor: 'rgba(211, 47, 47, 0.9)', // Red color with transparency
+
         items: [
           {
             title: 'COOPERATE IDENTITY',
@@ -64,7 +71,7 @@ export default {
       },
       {
         title: 'STRATEGIE & KONZEPT',
-        bgColor: 'rgba(77, 77, 77, 0.9)', // Dark gray with transparency
+
         items: [
           {
             title: 'Sales Marketing Strategien',
@@ -102,7 +109,7 @@ export default {
       },
       {
         title: 'SERVICE & UMSETZUNG',
-        bgColor: 'rgba(77, 77, 77, 0.9)', // Dark gray with transparency
+
         items: [
           {
             title: 'Projekt Management',
@@ -144,7 +151,7 @@ export default {
       },
       {
         title: 'DIGITALE LÖSUNGEN',
-        bgColor: 'rgba(77, 77, 77, 0.9)', // Dark gray with transparency
+
         items: [
           {
             title: 'Websites',
@@ -201,18 +208,30 @@ export default {
         }
       });
 
-      // Animate the carousel with a fade-in effect
-      tl.from('.brand-carousel', {
+      // Animate the title and carousel with a fade-in effect
+      tl.from('.brand-title', {
+        opacity: 0,
+        y: 30,
+        duration: 0.6,
+        ease: 'power3.out'
+      }).from('.brand-carousel', {
         opacity: 0,
         y: 50,
         duration: 0.8,
         ease: 'power3.out'
-      });
+      }, '-=0.3');
     });
+
+    // Function to handle slide change event from carousel
+    const handleSlideChange = (title) => {
+      currentSlideTitle.value = title;
+    };
 
     return {
       carouselSlides,
-      carouselContainer
+      carouselContainer,
+      currentSlideTitle,
+      handleSlideChange
     };
   }
 }

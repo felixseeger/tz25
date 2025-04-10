@@ -10,7 +10,6 @@
       >
         <div class="slide-content" :style="{ backgroundColor: slide.bgColor }">
           <img src="@/assets/images/brand_bg.svg" alt="Background" class="slide-background" />
-          <h2 class="slide-title">{{ slide.title }}</h2>
 
           <div class="brand-grid">
             <div
@@ -56,17 +55,24 @@ export default {
       default: 5000
     }
   },
-  setup(props) {
+  setup(props, { emit }) {
     const currentSlide = ref(0);
     const carouselContainer = ref(null);
     let autoplayInterval = null;
 
+    // Emit the initial slide title when component is mounted
+    onMounted(() => {
+      emit('slide-changed', props.slides[currentSlide.value].title);
+    });
+
     const nextSlide = () => {
       currentSlide.value = (currentSlide.value + 1) % props.slides.length;
+      emit('slide-changed', props.slides[currentSlide.value].title);
     };
 
     const prevSlide = () => {
       currentSlide.value = (currentSlide.value - 1 + props.slides.length) % props.slides.length;
+      emit('slide-changed', props.slides[currentSlide.value].title);
     };
 
     const startAutoplay = () => {
