@@ -7,6 +7,11 @@
 
       <div class="contact-content">
         <form class="contact-form" @submit.prevent="submitForm" aria-labelledby="contact-form-title" novalidate>
+          <!-- Honeypot field to catch bots - hidden from real users but visible to bots -->
+          <div class="honeypot-field" aria-hidden="true" style="display: none;">
+            <label for="honeypot">Leave this field empty</label>
+            <input type="text" id="honeypot" name="honeypot" v-model="formData.honeypot" tabindex="-1" autocomplete="off">
+          </div>
           <h2 id="contact-form-title" class="visually-hidden">Kontaktformular</h2>
           <div class="form-row">
             <div class="form-group" :class="{ 'has-error': formAttempted && errors.name, 'has-value': shouldShowLabel('name') }">
@@ -135,6 +140,7 @@
 
 <script>
 import emailjs from '@emailjs/browser';
+import { validateField, validateForm, sanitizeForm, hasErrors, generateCSRFToken } from '../../utils/formValidation';
 
 export default {
   name: 'ContactSection',
@@ -145,14 +151,24 @@ export default {
         email: '',
         firma: '',
         betreff: '',
-        anmerkungen: ''
+        anmerkungen: '',
+        csrfToken: '',
+        honeypot: '' // Honeypot field to catch bots
       },
       errors: {
         name: '',
         email: '',
         firma: '',
         betreff: '',
-        anmerkungen: ''
+        anmerkungen: '',
+        csrfToken: ''
+      },
+      requiredFields: {
+        name: true,
+        email: true,
+        firma: false,
+        betreff: true,
+        anmerkungen: false
       },
       isSubmitting: false,
       formSubmitted: false,
@@ -177,6 +193,9 @@ export default {
 
     // Initialize GSAP animations
     this.initGsapAnimations();
+
+    // Generate CSRF token
+    this.formData.csrfToken = generateCSRFToken();
   },
   unmounted() {
     // Clean up observer and event listeners
@@ -190,34 +209,26 @@ export default {
       // Reset the error for this field
       this.errors[field] = '';
 
-      // Validate required fields
-      if (['name', 'email', 'betreff'].includes(field) && !this.formData[field]) {
-        this.errors[field] = 'Dieses Feld ist erforderlich';
-        return false;
-      }
+      // Use the validation utility
+      const isRequired = this.requiredFields[field] || false;
+      const error = validateField(field, this.formData[field], isRequired);
 
-      // Email validation
-      if (field === 'email' && this.formData.email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(this.formData.email)) {
-          this.errors.email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
-          return false;
-        }
+      if (error) {
+        this.errors[field] = error;
+        return false;
       }
 
       return true;
     },
     validateForm() {
-      let isValid = true;
+      // Use the validation utility to validate all fields
+      const errors = validateForm(this.formData, this.requiredFields);
 
-      // Validate all fields
-      ['name', 'email', 'firma', 'betreff', 'anmerkungen'].forEach(field => {
-        if (!this.validateField(field)) {
-          isValid = false;
-        }
-      });
+      // Update the errors object
+      this.errors = { ...errors };
 
-      return isValid;
+      // Return true if there are no errors
+      return !hasErrors(errors);
     },
     setupIntersectionObserver() {
       // Create a new Intersection Observer
@@ -327,6 +338,17 @@ export default {
       // Set formAttempted to true when form is submitted
       this.formAttempted = true;
 
+      // Check if honeypot field is filled (bot detection)
+      if (this.formData.honeypot && this.formData.honeypot.trim() !== '') {
+        console.warn('Bot submission detected');
+        // Pretend the form was submitted successfully to avoid alerting bots
+        this.formSubmitted = true;
+        setTimeout(() => {
+          this.formSubmitted = false;
+        }, 5000);
+        return;
+      }
+
       // Validate the form
       if (!this.validateForm()) {
         return;
@@ -335,15 +357,19 @@ export default {
       this.isSubmitting = true;
 
       try {
+        // Sanitize the form data
+        const sanitizedData = sanitizeForm(this.formData);
+
         // Prepare the template parameters for EmailJS
         const templateParams = {
           to_email: 'felix.seeger@taktzeit.com', // The recipient email
-          from_name: this.formData.name,
-          from_email: this.formData.email,
-          company: this.formData.firma || 'Not provided',
-          subject: this.formData.betreff,
-          message: this.formData.anmerkungen || 'No message provided',
-          reply_to: this.formData.email
+          from_name: sanitizedData.name,
+          from_email: sanitizedData.email,
+          company: sanitizedData.firma || 'Not provided',
+          subject: sanitizedData.betreff,
+          message: sanitizedData.anmerkungen || 'No message provided',
+          reply_to: sanitizedData.email,
+          csrfToken: sanitizedData.csrfToken // Include CSRF token for server-side validation
         };
 
         // Send the email using EmailJS
@@ -363,7 +389,9 @@ export default {
           email: '',
           firma: '',
           betreff: '',
-          anmerkungen: ''
+          anmerkungen: '',
+          honeypot: '',
+          csrfToken: generateCSRFToken() // Generate a new CSRF token
         };
 
         this.formSubmitted = true;
@@ -375,7 +403,15 @@ export default {
         }, 5000);
       } catch (error) {
         console.error('Error submitting form:', error);
-        alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.');
+
+        // Check if the error is related to validation
+        if (error.response && error.response.status === 400 && error.response.data && error.response.data.errors) {
+          // Update the errors object with the server-side validation errors
+          this.errors = { ...error.response.data.errors };
+        } else {
+          // Generic error message for other errors
+          alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.');
+        }
       } finally {
         this.isSubmitting = false;
       }
@@ -386,6 +422,18 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/scss/_variables.scss';
+
+// Honeypot field styling - ensure it's hidden from users but visible to bots
+.honeypot-field {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  z-index: -1;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
 
 .form-group {
   position: relative;
