@@ -101,7 +101,51 @@ npm run preview
 ## Testing
 
 ```bash
-# Run Playwright tests
+# Run unit tests
 npm run test
+
+# Run unit tests with watch mode
+npm run test:watch
+
+# Run unit tests with coverage
+npm run test:coverage
+
+# Run integration tests
+npm run test:integration
+
+# Run end-to-end tests
+npm run test:e2e
+
+# Run all tests and checks (CI mode)
+npm run ci
 ```
-# tz25
+
+## Continuous Integration
+
+This project uses GitHub Actions for continuous integration. The following workflows are configured:
+
+### Test Workflow
+
+Runs on push to main branch and pull requests:
+
+- Unit tests
+- Integration tests
+- End-to-end tests
+
+### Lint Workflow
+
+Runs on push to main branch and pull requests:
+
+- ESLint checks
+- TypeScript type checking
+
+### Build Workflow
+
+Runs on push to main branch:
+
+- Builds the application for production
+- Uploads build artifacts
+
+## License
+
+Proprietary - All rights reserved

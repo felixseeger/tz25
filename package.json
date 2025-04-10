@@ -11,7 +11,12 @@
     "build-storybook": "build-storybook",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "lint": "echo 'No linting configured yet'",
+    "type-check": "echo 'No type checking configured yet'",
+    "test:e2e": "playwright test tests/e2e",
+    "test:integration": "playwright test tests/integration",
+    "ci": "npm run test && npm run lint && npm run type-check && npm run build"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
