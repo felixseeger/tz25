@@ -95,7 +95,7 @@
 - ☑️ Add CSRF protection for forms
 - ☑️ Ensure secure handling of user data
 - ☑️ Implement proper error handling to prevent information leakage
-- ☐ Add Content Security Policy headers
+- ☑️ Add Content Security Policy headers
 
 ## SEO & Analytics
 - ☐ Add proper meta tags for SEO

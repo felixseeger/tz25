@@ -8,6 +8,10 @@
     <!-- Cache control meta tags -->
     <meta http-equiv="Cache-Control" content="max-age=86400" />
 
+    <!-- Content Security Policy -->
+    <!-- This will be replaced at build time with the appropriate CSP for the environment -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.emailjs.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'self' https://api.emailjs.com; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'self'; upgrade-insecure-requests; block-all-mixed-content">
+
     <!-- Font preloading for critical fonts -->
     <link rel="preload" href="./assets/fonts/subsets/gotham-narrow-regular-subset.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="./assets/fonts/subsets/gotham-narrow-bold-subset.woff2" as="font" type="font/woff2" crossorigin>
