@@ -1,7 +1,7 @@
 <template>
   <section id="brand" class="brand-section">
     <div class="container">
-      <h2 class="brand-title">{{ currentSlideTitle }}</h2>
+      <h2 class="brand-title" style="opacity: 1 !important; color: #333333; display: block !important; visibility: visible !important;">{{ currentSlideTitle }}</h2>
       <div class="brand-content">
         <BrandCarousel
           :slides="carouselSlides"
@@ -209,11 +209,12 @@ export default {
       });
 
       // Animate the title and carousel with a fade-in effect
-      tl.from('.brand-title', {
-        opacity: 0,
-        y: 30,
+      tl.to('.brand-title', { // Changed from 'from' to 'to' to ensure final state is visible
+        opacity: 1,
+        y: 0,
         duration: 0.6,
-        ease: 'power3.out'
+        ease: 'power3.out',
+        immediateRender: false // Ensure it doesn't set initial state
       }).from('.brand-carousel', {
         opacity: 0,
         y: 50,

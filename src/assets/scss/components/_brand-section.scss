@@ -42,13 +42,15 @@
   font-family: $font-headline;
   font-weight: 700;
   margin-bottom: 2rem;
-  color: $text-color;
+  color: #333333; /* Changed to a darker color for better visibility */
   text-align: left;
-  transition: opacity 0.3s ease;
-  display: block; /* Ensure it's displayed as a block element */
-  visibility: visible; /* Ensure it's visible */
+  opacity: 1 !important; /* Force opacity to 1 */
+  display: block !important; /* Force display as block */
+  visibility: visible !important; /* Force visibility */
   position: relative; /* Ensure proper stacking context */
-  z-index: 10; /* Ensure it's above other elements */
+  z-index: 100 !important; /* Higher z-index to ensure it's above everything */
+  padding: 1rem 0; /* Add padding for better spacing */
+  border-bottom: 1px solid #eee; /* Add a subtle border for visual separation */
 
   @media (max-width: $breakpoint-md) {
     font-size: 2.5rem;
@@ -68,7 +70,7 @@
 .carousel-container {
   position: relative;
   width: 100%;
-  height: 542px;
+  height: 600px;
 }
 
 .carousel-slide {
