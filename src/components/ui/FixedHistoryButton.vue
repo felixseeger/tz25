@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-history-button-container" :class="{ 'is-visible': isHistorySectionVisible }" :style="{ visibility: isHistorySectionVisible ? 'visible' : 'hidden', opacity: isHistorySectionVisible ? 1 : 0 }">
+  <div class="fixed-history-button-container" :class="{ 'is-visible': isHistorySectionVisible && !isTimelineOpen }" :style="{ visibility: (isHistorySectionVisible && !isTimelineOpen) ? 'visible' : 'hidden', opacity: (isHistorySectionVisible && !isTimelineOpen) ? 1 : 0 }">
     <button @click="openTimeline" class="fixed-history-button">
       <img src="../../assets/images/history-btn.svg" alt="Unsere Geschichte" class="fixed-history-button__image">
     </button>
@@ -13,6 +13,7 @@ export default {
   name: 'FixedHistoryButton',
   setup() {
     const isHistorySectionVisible = ref(false);
+    const isTimelineOpen = ref(false);
     let observer = null;
 
     // Function to check if history section is in view
@@ -49,12 +50,31 @@ export default {
       }
     };
 
+    // Function to handle timeline open event
+    const handleTimelineOpen = () => {
+      isTimelineOpen.value = true;
+      console.log('Timeline opened, hiding button');
+    };
+
+    // Function to handle timeline close event
+    const handleTimelineClose = () => {
+      isTimelineOpen.value = false;
+      console.log('Timeline closed, showing button if in history section');
+    };
+
     // Setup observer when component is mounted
     onMounted(() => {
       setupIntersectionObserver();
 
-      // Also listen for custom events from the HistorySection component
+      // Listen for custom events from the HistorySection component
       document.addEventListener('history-section-visible', handleHistorySectionVisible);
+
+      // Listen for timeline open/close events
+      document.body.addEventListener('timeline-open', handleTimelineOpen);
+      document.body.addEventListener('timeline-close', handleTimelineClose);
+
+      // Check if timeline is already open (in case component mounts after timeline is opened)
+      isTimelineOpen.value = document.body.classList.contains('timeline-open');
     });
 
     // Clean up observer when component is unmounted
@@ -63,8 +83,10 @@ export default {
         observer.disconnect();
       }
 
-      // Remove event listener
+      // Remove event listeners
       document.removeEventListener('history-section-visible', handleHistorySectionVisible);
+      document.body.removeEventListener('timeline-open', handleTimelineOpen);
+      document.body.removeEventListener('timeline-close', handleTimelineClose);
     });
 
     // Method to open timeline
@@ -83,6 +105,7 @@ export default {
 
     return {
       isHistorySectionVisible,
+      isTimelineOpen,
       openTimeline
     };
   }
