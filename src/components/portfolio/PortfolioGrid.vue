@@ -99,6 +99,41 @@
           Reset Filters
         </button>
       </div>
+
+      <!-- Pagination controls -->
+      <div v-if="totalPages > 1" class="portfolio-pagination" role="navigation" aria-label="Portfolio pagination">
+        <button
+          class="pagination-button prev"
+          :disabled="currentPage === 1"
+          @click="goToPreviousPage"
+          aria-label="Go to previous page"
+        >
+          <span aria-hidden="true">←</span>
+        </button>
+
+        <div class="pagination-pages">
+          <button
+            v-for="page in totalPages"
+            :key="page"
+            class="pagination-page"
+            :class="{ 'active': currentPage === page }"
+            @click="goToPage(page)"
+            :aria-label="`Go to page ${page}`"
+            :aria-current="currentPage === page ? 'page' : null"
+          >
+            {{ page }}
+          </button>
+        </div>
+
+        <button
+          class="pagination-button next"
+          :disabled="currentPage === totalPages"
+          @click="goToNextPage"
+          aria-label="Go to next page"
+        >
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -150,7 +185,12 @@ export default {
       return categoriesList;
     });
 
-    const filteredItems = computed(() => {
+    // Pagination state
+    const currentPage = ref(1);
+    const itemsPerPage = 8; // 2 rows of 4 items
+
+    // Filtered items without pagination
+    const allFilteredItems = computed(() => {
       let items = [...portfolioItems];
 
       // Filter by client if selected
@@ -163,8 +203,18 @@ export default {
         items = items.filter(item => item.category === selectedCategory.value);
       }
 
-      // Limit to 8 items (2 rows of 4 items)
-      return items.slice(0, 8);
+      return items;
+    });
+
+    // Total number of pages
+    const totalPages = computed(() => {
+      return Math.ceil(allFilteredItems.value.length / itemsPerPage);
+    });
+
+    // Current page items
+    const filteredItems = computed(() => {
+      const startIndex = (currentPage.value - 1) * itemsPerPage;
+      return allFilteredItems.value.slice(startIndex, startIndex + itemsPerPage);
     });
 
     // Methods
@@ -213,6 +263,61 @@ export default {
       return categoriesMap[categoryId]?.name || categoryId;
     };
 
+    // Pagination methods
+    const goToPage = (page) => {
+      currentPage.value = page;
+      // Scroll to top of grid when changing pages
+      const gridElement = document.querySelector('.portfolio-grid');
+      if (gridElement) {
+        gridElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    const goToNextPage = () => {
+      if (currentPage.value < totalPages.value) {
+        goToPage(currentPage.value + 1);
+      }
+    };
+
+    const goToPreviousPage = () => {
+      if (currentPage.value > 1) {
+        goToPage(currentPage.value - 1);
+      }
+    };
+
+    // Reset pagination when filters change
+    const resetPagination = () => {
+      currentPage.value = 1;
+    };
+
+    // Update selectClient to reset pagination
+    const selectClientWithPagination = (clientId) => {
+      selectClient(clientId);
+      resetPagination();
+    };
+
+    // Update selectCategory to reset pagination
+    const selectCategoryWithPagination = (categoryId) => {
+      selectCategory(categoryId);
+      resetPagination();
+    };
+
+    // Update reset methods to reset pagination
+    const resetFilterWithPagination = () => {
+      resetFilter();
+      resetPagination();
+    };
+
+    const resetCategoryFilterWithPagination = () => {
+      resetCategoryFilter();
+      resetPagination();
+    };
+
+    const resetAllFiltersWithPagination = () => {
+      resetAllFilters();
+      resetPagination();
+    };
+
     // Log initial state for debugging
     onMounted(() => {
       console.log('Portfolio Grid mounted with', portfolioItems.length, 'items');
@@ -224,11 +329,16 @@ export default {
       clientsList,
       categories,
       filteredItems,
-      selectClient,
-      selectCategory,
-      resetFilter,
-      resetCategoryFilter,
-      resetAllFilters,
+      currentPage,
+      totalPages,
+      selectClient: selectClientWithPagination,
+      selectCategory: selectCategoryWithPagination,
+      resetFilter: resetFilterWithPagination,
+      resetCategoryFilter: resetCategoryFilterWithPagination,
+      resetAllFilters: resetAllFiltersWithPagination,
+      goToPage,
+      goToNextPage,
+      goToPreviousPage,
       getClientLogo,
       getClientName,
       getCategoryName
@@ -434,6 +544,74 @@ export default {
     margin-bottom: 1rem;
     font-size: 1.1rem;
     color: #666;
+  }
+}
+
+/* Pagination styles */
+.portfolio-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 0.5rem;
+}
+
+.pagination-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  color: $primary-color;
+
+  &:hover:not(:disabled) {
+    background-color: #f5f5f5;
+    border-color: #ccc;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.prev, &.next {
+    font-weight: bold;
+  }
+}
+
+.pagination-pages {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.pagination-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+
+  &.active {
+    background-color: $primary-color;
+    color: white;
+    border-color: $primary-color;
+    font-weight: bold;
   }
 }
 </style>
