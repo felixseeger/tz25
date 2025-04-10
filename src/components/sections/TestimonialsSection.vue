@@ -37,7 +37,7 @@
           <div class="testimonial-slide">
             <div class="testimonial-content">
               <p class="testimonial-text">
-                „TAKTZEIT steht bei uns für die Entwicklung von genialen und sinnvollen Design- Konzepten und dem guten und zielgruppengenauen Aufbau von B2B und B2C Strategien. Das vielseitige Know-how unterstützt uns digital, analog und strategisch enorm. Die schnelle und zuverlässige Bearbeitung unserer Ideen wird durch eine sehr enge und kollegiale Zusammenarbeit abgerundet. 
+                „TAKTZEIT steht bei uns für die Entwicklung von genialen und sinnvollen Design- Konzepten und dem guten und zielgruppengenauen Aufbau von B2B und B2C Strategien. Das vielseitige Know-how unterstützt uns digital, analog und strategisch enorm. Die schnelle und zuverlässige Bearbeitung unserer Ideen wird durch eine sehr enge und kollegiale Zusammenarbeit abgerundet.
               <br>
               Mit TAKTZEIT haben wir eine Agentur gefunden, die mitdenkt und unsere Werbeaussagen emotional und empathisch visualisiert. Hier stehen die Wünsche der Kunden an erster Stelle, wir sagen Danke!"
               </p>
@@ -56,7 +56,7 @@ Dr.Clauder Solution for pets GmbH</p>
               </div>
             </div>
           </div>
-          
+
           <!-- Epson Testimonial -->
           <div class="testimonial-slide">
             <div class="testimonial-content">
@@ -77,32 +77,38 @@ Epson Europe</p>
               </div>
             </div>
           </div>
-          
+
           <!-- Remy & Nauen Testimonial -->
           <div class="testimonial-slide">
             <div class="testimonial-content">
               <p class="testimonial-text">
-                „Die Zusammenarbeit mit TAKTZEIT hat unsere Erwartungen in jeder Hinsicht übertroffen. Das Team hat ein tiefes Verständnis für die Besonderheiten unserer Branche entwickelt und konnte dadurch maßgeschneiderte Kommunikationslösungen entwickeln, die genau auf unsere Zielgruppe zugeschnitten sind. Die strategische Beratung und die kreative Umsetzung haben wesentlich dazu beigetragen, unsere Markenwahrnehmung zu verbessern und neue Kundengruppen zu erschließen."
+                „TAKTZEIT begleitet uns mit seiner interdisziplinären Marketing- und Kommunikations-Expertise bereits seit vielen Jahren hochprofessionell in größeren und kleineren Projekten. So hat sich TAKTZEIT mit strategischem Weitblick um unseren umfassenden und medienübergreifenden Markenrelaunch gekümmert und setzt darauf aufbauend unsere analogen und digitalen Werbemaßnahmen um.“
               </p>
-              <p class="testimonial-author">Geschäftsführung
-Remy & Nauen</p>
+              <p class="testimonial-author">Philipp Mehdorn
+Geschäftsführer
+REMY / NAUEN GmbH / Co. KG</p>
             </div>
             <div class="testimonial-logo-container">
               <div class="testimonial-logo">
-                <!-- Placeholder for Remy & Nauen logo -->
-                <div class="testimonial-logo-placeholder">Remy & Nauen</div>
+                <img
+                  src="../../assets/images/client-logos/remyundnauen.webp"
+                  alt="Remy & Nauen Logo"
+                  width="100%"
+                  height="auto"
+                />
               </div>
             </div>
           </div>
-          
+
           <!-- Hapert Testimonial -->
           <div class="testimonial-slide">
             <div class="testimonial-content">
               <p class="testimonial-text">
-                „TAKTZEIT hat uns dabei geholfen, unsere Marke neu zu positionieren und eine konsistente Kommunikationsstrategie über alle Kanäle hinweg zu entwickeln. Die Agentur versteht es, komplexe technische Produkte verständlich und emotional aufzuladen. Besonders hervorzuheben ist die enge und partnerschaftliche Zusammenarbeit, bei der wir uns jederzeit gut beraten und verstanden fühlen. Die Ergebnisse sprechen für sich: Wir konnten unsere Marktpräsenz deutlich steigern und neue Zielgruppen erschließen."
+                „TAKTZEIT denkt immer mit und trägt dadurch bei wichtigen Entscheidungen oder Projekten zu optimalen Lösungen bei. Die Agentur hält sich stets an Vereinbarungen und die Kommunikation läuft reibungslos! Kurz gesagt, eine sehr angenehme Agentur, mit der man gut zusammenarbeiten kann.“
               </p>
-              <p class="testimonial-author">Marketing Manager
-Hapert Anhänger</p>
+              <p class="testimonial-author">Malou Kokken
+Marketing Managerin
+WAGENBOUW HAPERT B.V./HAPERT Anhänger</p>
             </div>
             <div class="testimonial-logo-container">
               <div class="testimonial-logo">
@@ -115,7 +121,7 @@ Hapert Anhänger</p>
               </div>
             </div>
           </div>
-          
+
           <!-- Sofidel/Regina Testimonial -->
           <div class="testimonial-slide">
             <div class="testimonial-content">
@@ -136,7 +142,7 @@ Sofidel Group</p>
               </div>
             </div>
           </div>
-          
+
           <!-- Bechem Testimonial -->
           <div class="testimonial-slide">
             <div class="testimonial-content">
@@ -157,7 +163,7 @@ Carl Bechem GmbH</p>
               </div>
             </div>
           </div>
-          
+
           <!-- Evonik Testimonial -->
           <div class="testimonial-slide">
             <div class="testimonial-content">
