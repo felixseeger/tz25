@@ -26,7 +26,7 @@ export default {
             console.log('History section visible:', isHistorySectionVisible.value);
           });
         }, {
-          threshold: 0.2 // Show button when at least 20% of history section is visible
+          threshold: 0.05 // Show button when at least 5% of history section is visible
         });
 
         observer.observe(historySection);
@@ -80,8 +80,8 @@ export default {
   transition: opacity 0.3s ease, visibility 0.3s ease;
 
   &.is-visible {
-    visibility: visible; /* Show when history section is visible */
-    opacity: 1;
+    visibility: visible !important; /* Show when history section is visible */
+    opacity: 1 !important;
   }
 }
 
@@ -120,8 +120,8 @@ export default {
     transform: translateY(-50%);
 
     &.is-visible {
-      visibility: visible;
-      opacity: 1;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
   }
 
