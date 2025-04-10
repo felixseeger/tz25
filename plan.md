@@ -12,6 +12,8 @@
 - ☑️ Reduce scrolling speed for auto-scrolling carousels
 - ☑️ Make team section carousel elements fit within 80vh height
 - ☑️ Position client logo filters with absolute positioning and z-index overlay above
+- ☑️ add: honeypot field to contact form
+- ☑️ disable fixed cookie-settings button visbility while scrolling in contact and footer section
 -
 - ☑️ Improve portfolio slider navigation with custom arrow SVGs
 - ☑️ Add hover effects to portfolio images
