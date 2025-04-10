@@ -21,14 +21,22 @@ export default {
     // Use the active section composable to track the current section
     const { activeSection } = useActiveSection();
     const isContactSectionVisible = ref(false);
+    const isFooterSectionVisible = ref(false);
 
     // Compute whether the button should be hidden
     const shouldHideButton = computed(() => {
-      // Only hide when exactly in the contact or footer section
-      const shouldHide = activeSection.value === 'contact' || activeSection.value === 'footer';
+      // Hide when in contact or footer section (either by active section or by visibility event)
+      const shouldHide =
+        activeSection.value === 'contact' ||
+        activeSection.value === 'footer' ||
+        isContactSectionVisible.value ||
+        isFooterSectionVisible.value;
 
       // Log for debugging
-      console.log('Cookie button should hide:', shouldHide, 'Active section:', activeSection.value);
+      console.log('Cookie button should hide:', shouldHide,
+        'Active section:', activeSection.value,
+        'Contact visible:', isContactSectionVisible.value,
+        'Footer visible:', isFooterSectionVisible.value);
 
       return shouldHide;
     });
@@ -48,14 +56,23 @@ export default {
       isContactSectionVisible.value = event.detail.visible;
     };
 
+    // Handle the custom event from FooterSection
+    const handleFooterSectionVisible = (event) => {
+      isFooterSectionVisible.value = event.detail.visible;
+    };
+
     onMounted(() => {
       // Listen for the contact section visibility event
       document.addEventListener('contact-section-visible', handleContactSectionVisible);
+
+      // Listen for the footer section visibility event
+      document.addEventListener('footer-section-visible', handleFooterSectionVisible);
     });
 
     onUnmounted(() => {
-      // Clean up event listener
+      // Clean up event listeners
       document.removeEventListener('contact-section-visible', handleContactSectionVisible);
+      document.removeEventListener('footer-section-visible', handleFooterSectionVisible);
     });
 
     return {
