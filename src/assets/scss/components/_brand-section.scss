@@ -40,7 +40,7 @@
 .brand-title {
   font-size: 3.5rem;
   font-family: $font-headline;
-  font-weight: 700;
+  font-weight: 900;
   margin-bottom: 2rem;
   color: white; /* Changed to white as requested */
   text-align: left;
@@ -125,7 +125,8 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   width: 100%;
-  padding-top: 10%; /* Added padding-top as requested */
+  padding-top: 5%; /* Added padding-top as requested */
+  padding-left: 5%;
 
   @media (max-width: $breakpoint-lg) {
     grid-template-columns: repeat(2, 1fr);
@@ -153,6 +154,7 @@
     font-weight: 700;
     margin-bottom: 0.5rem;
     color: inherit;
+    text-transform: uppercase; /* Added text-transform to uppercase */
 
     @media (max-width: $breakpoint-md) {
       font-size: 1rem;
