@@ -2,61 +2,7 @@
   <section id="brand" class="brand-section">
     <div class="brand-content">
       <div class="container">
-      <h2 class="brand-title">MARKE & DESIGN</h2>
-
-      <div class="brand-grid-wrapper">
-        <img src="@/assets/images/brand_bg.svg" alt="Background" class="brand-grid-background" />
-        <img src="@/assets/images/brand_tria.svg" alt="Triangle" class="brand-grid-triangle" ref="brandTriangle" />
-        <div class="brand-grid" ref="brandGrid">
-          <!-- Row 1 -->
-          <div class="brand-item" ref="brandItem">
-            <h3 class="brand-item__title">SCHLAGWORT BLINDTEXT</h3>
-            <p class="brand-item__description">Pudae essitias aut officientam veremposse ofitatet mo volorest vlis aut verit re</p>
-          </div>
-
-          <div class="brand-item" ref="brandItem">
-            <h3 class="brand-item__title">SCHLAGWORT BLINDTEXT</h3>
-            <p class="brand-item__description">Pudae essitias aut officientam veremposse ofitatet mo volorest vlis aut verit re</p>
-          </div>
-
-          <div class="brand-item" ref="brandItem">
-            <h3 class="brand-item__title">SCHLAGWORT BLINDTEXT</h3>
-            <p class="brand-item__description">Pudae essitias aut officientam veremposse ofitatet mo volorest vlis aut verit re</p>
-          </div>
-
-          <!-- Row 2 -->
-          <div class="brand-item" ref="brandItem">
-            <h3 class="brand-item__title">SCHLAGWORT BLINDTEXT</h3>
-            <p class="brand-item__description">Pudae essitias aut officientam veremposse ofitatet mo volorest vlis aut verit re</p>
-          </div>
-
-          <div class="brand-item" ref="brandItem">
-            <h3 class="brand-item__title">SCHLAGWORT BLINDTEXT</h3>
-            <p class="brand-item__description">Pudae essitias aut officientam veremposse ofitatet mo volorest vlis aut verit re</p>
-          </div>
-
-          <div class="brand-item" ref="brandItem">
-            <h3 class="brand-item__title">SCHLAGWORT BLINDTEXT</h3>
-            <p class="brand-item__description">Pudae essitias aut officientam veremposse ofitatet mo volorest vlis aut verit re</p>
-          </div>
-
-          <!-- Row 3 -->
-          <div class="brand-item" ref="brandItem">
-            <h3 class="brand-item__title">SCHLAGWORT BLINDTEXT</h3>
-            <p class="brand-item__description">Pudae essitias aut officientam veremposse ofitatet mo volorest vlis aut verit re</p>
-          </div>
-
-          <div class="brand-item" ref="brandItem">
-            <h3 class="brand-item__title">SCHLAGWORT BLINDTEXT</h3>
-            <p class="brand-item__description">Pudae essitias aut officientam veremposse ofitatet mo volorest vlis aut verit re</p>
-          </div>
-
-          <div class="brand-item" ref="brandItem">
-            <h3 class="brand-item__title">SCHLAGWORT BLINDTEXT</h3>
-            <p class="brand-item__description">Pudae essitias aut officientam veremposse ofitatet mo volorest vlis aut verit re</p>
-          </div>
-        </div>
-      </div>
+        <BrandCarousel :slides="carouselSlides" :autoplay="true" :autoplay-speed="6000" />
       </div>
     </div>
   </section>
@@ -65,64 +11,208 @@
 <script>
 import { ref, onMounted } from 'vue';
 import { useGsap } from '../../composables/useGsap';
+import BrandCarousel from '../ui/BrandCarousel.vue';
 
 export default {
   name: 'BrandSection',
+  components: {
+    BrandCarousel
+  },
   setup() {
-    const brandGrid = ref(null);
-    const brandItems = ref([]);
-    const brandTriangle = ref(null);
-
     const { createTimeline } = useGsap();
+    const carouselContainer = ref(null);
+
+    // Define the carousel slides with content from the screenshots
+    const carouselSlides = [
+      {
+        title: 'MARKE & DESIGN',
+        bgColor: '#d32f2f', // Red color from the screenshot
+        items: [
+          {
+            title: 'COOPERATE IDENTITY',
+            description: 'Wir geben Ihrer Marke ein klares Profil'
+          },
+          {
+            title: 'PACKAGING DESIGN',
+            description: 'Für eine Verpackung, die zum Zugreifen verführt'
+          },
+          {
+            title: 'DESIGN TEMPLATES',
+            description: 'Für vielfältige Design-Vorlagen im Baukasten-System'
+          },
+          {
+            title: 'COOPERATE DESIGN',
+            description: 'Für einen stimmigen Look'
+          },
+          {
+            title: 'STYLEGUIDES',
+            description: 'Damit alles perfekt zusammenpasst'
+          },
+          {
+            title: 'DESIGN CLEARING',
+            description: 'Das Beauty make over für Ihr bestehendes Design'
+          },
+          {
+            title: 'POSITIONIERUNGEN',
+            description: 'Für ein klares Statement zu Ihrem Markenversprechen'
+          },
+          {
+            title: 'COMMUNICATION GUIDELINES',
+            description: 'Für eine einheitliche Sprache in Ihrer Markenkommunikation'
+          }
+        ]
+      },
+      {
+        title: 'STRATEGIE & KONZEPT',
+        bgColor: '#f5f5f5', // Light gray background
+        items: [
+          {
+            title: 'Sales Marketing Strategien',
+            description: 'Mit der richtigen Strategie mehr Verkaufen'
+          },
+          {
+            title: 'Trade & Shopper Marketing',
+            description: 'Mit profunder Kenntnis von Handel und Shopper zum Erfolg'
+          },
+          {
+            title: 'POS Marketing',
+            description: 'Da punkten, wo die Kaufentscheidung fällt'
+          },
+          {
+            title: 'Sales Promotions',
+            description: 'Abverkaufs-Power, die auch auf die Marke einzahlt'
+          },
+          {
+            title: 'Verkaufsförderung',
+            description: 'Die Kaufentscheidung zu Ihren Gunsten pushen'
+          },
+          {
+            title: 'Go-to-market Strategien',
+            description: 'Treue Kunden sind die besten – und rentabelsten'
+          },
+          {
+            title: 'Channel-Strategien',
+            description: 'Die richtigen Vertriebs- und Kommunikations-Kanäle nutzen'
+          },
+          {
+            title: 'E-Commerce',
+            description: 'Damit Ihnen mehr Kunden ins Netz gehen'
+          }
+        ]
+      },
+      {
+        title: 'SERVICE & UMSETZUNG',
+        bgColor: '#f5f5f5', // Light gray background
+        items: [
+          {
+            title: 'Projekt Management',
+            description: 'Für die komplette Abwicklung Ihrer Projekte'
+          },
+          {
+            title: 'Artworks & Layouts',
+            description: 'Für die visuelle Gestaltung Ihrer Maßnahmen'
+          },
+          {
+            title: 'Textentwicklung',
+            description: 'Für treffende Texte aller Art, von Headline bis Website Content'
+          },
+          {
+            title: 'Druckdaten-Erstellung',
+            description: 'Für den optimalen Druck Ihrer Werbemittel'
+          },
+          {
+            title: 'Produktionssteuerung',
+            description: 'Für Produktions-Handling, bei dem Sie entspannen können'
+          },
+          {
+            title: 'Verlagshandling',
+            description: 'Für die zuverlässige, kompetente Schnittstelle zwischen Kunde und Verlag'
+          },
+          {
+            title: 'Mediaplanung & -buchung',
+            description: 'Für den effizienten Einsatz Ihres Mediaspendings'
+          },
+          {
+            title: 'Sourcing',
+            description: 'Für effektive Beschaffungsstrategien Ihrer Waren und Dienstleistungen'
+          },
+          {
+            title: 'Analyse & Reporting',
+            description: 'Für eine sorgfältige Nachbereitung und Auswertung Ihrer Maßnahmen'
+          }
+        ]
+      },
+      {
+        title: 'DIGITALE LÖSUNGEN',
+        bgColor: '#f5f5f5', // Light gray background
+        items: [
+          {
+            title: 'Websites',
+            description: 'Für Ihren glanzvollen Auftritt im Netz'
+          },
+          {
+            title: 'Apps',
+            description: 'Für optimale Anwendungslösungen für jedes Endgerät'
+          },
+          {
+            title: 'Social Media',
+            description: 'Für guten Content und ergebnisstarke Kampagnen'
+          },
+          {
+            title: 'Webhosting',
+            description: 'Für den sicheren Webspace Ihrer individuellen Anforderungen'
+          },
+          {
+            title: 'Domain-Service',
+            description: 'Für Ihre Wunschdomain im World Wide Web'
+          },
+          {
+            title: 'Onlineshops / Plattformen',
+            description: 'Für erfolgreiches Verkaufen im Internet'
+          },
+          {
+            title: 'Film / Video / TV',
+            description: 'Für bewegte Bilder, die Bewegung in Ihr Business bringen'
+          },
+          {
+            title: 'Audio & Sounddesign',
+            description: 'Für den perfekten Sound Ihrer Marke'
+          },
+          {
+            title: 'SEO & SEA',
+            description: 'Für Werbung, die auch dem Algorithmus schmeckt'
+          },
+          {
+            title: 'Digitale Transformation',
+            description: 'Für Ihren Weg von Analog nach Digital'
+          }
+        ]
+      }
+    ];
 
     onMounted(() => {
-      // Wait for the DOM to be fully rendered
-      setTimeout(() => {
-        // Get all brand items from the DOM
-        const items = document.querySelectorAll('.brand-item');
-
-        // Update the refs
-        brandItems.value = Array.from(items);
-
-        // Create a timeline for the brand grid animation
-        const tl = createTimeline({
-          scrollTrigger: {
-            trigger: brandGrid.value,
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse',
-            // markers: true, // Uncomment for debugging
-          }
-        });
-
-        // Animate the triangle
-        if (brandTriangle.value) {
-          tl.from(brandTriangle.value, {
-            x: -100,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power3.out'
-          });
+      // Create a timeline for the carousel animation
+      const tl = createTimeline({
+        scrollTrigger: {
+          trigger: '.brand-section',
+          start: 'top 80%',
+          end: 'bottom 20%',
+          toggleActions: 'play none none reverse',
         }
+      });
 
-        // Animate each brand item with a stagger effect
-        if (brandItems.value.length > 0) {
-          tl.from(brandItems.value, {
-            y: 50,
-            opacity: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: 'power2.out'
-          }, '-=0.4');
-        }
-      }, 500);
+      // Animate the carousel with a fade-in effect
+      tl.from('.brand-carousel', {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        ease: 'power3.out'
+      });
     });
 
     return {
-      brandGrid,
-      brandItems,
-      brandTriangle,
-      brandItem: brandItems
+      carouselSlides,
+      carouselContainer
     };
   }
 }
