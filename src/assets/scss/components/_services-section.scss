@@ -86,9 +86,13 @@
 .service-content {
   flex: 1;
   text-align: left;
-  width: 30vw;
+  width: 25vw; // Reduced from 30vw to 25vw (5% reduction)
   padding-right: 2em;
   font-family: $font-headline; // Changed to Greycliff CF font
+
+  @media (max-width: $breakpoint-lg) {
+    width: 100%; // Full width on smaller screens
+  }
 }
 
 .service-name {
