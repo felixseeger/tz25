@@ -101,6 +101,7 @@ export default {
   opacity: 0;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   pointer-events: auto; /* Ensure it's clickable */
+  padding-left: 50px; /* Add padding to fix it to the right side */
 
   &.is-visible {
     visibility: visible !important; /* Show when history section is visible */
@@ -142,6 +143,7 @@ export default {
     top: 50%; /* Keep centered vertically */
     transform: translateY(-50%);
     z-index: 9000; /* Ensure consistent z-index on mobile */
+    padding-left: 30px; /* Reduced padding for mobile */
 
     &.is-visible {
       visibility: visible !important;
