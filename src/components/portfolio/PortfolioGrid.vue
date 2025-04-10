@@ -243,7 +243,7 @@ export default {
 .portfolio-grid-container {
   width: 100%;
   max-width: 1920px;
-  margin: 0 auto;
+  margin: 140px auto;
   padding: 0 2rem;
 }
 
