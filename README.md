@@ -116,6 +116,12 @@ npm run test:integration
 # Run end-to-end tests
 npm run test:e2e
 
+# Run visual regression tests
+npm run test:visual
+
+# Update visual regression test snapshots
+npm run test:visual:update
+
 # Run all tests and checks (CI mode)
 npm run ci
 ```
