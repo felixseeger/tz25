@@ -99,8 +99,8 @@
       </button>
     </div>
 
-    <!-- Pagination indicators -->
-    <div v-if="slides.length > 1" class="portfolio-pagination">
+    <!-- Bottom pagination indicators (hidden, now moved to top) -->
+    <!-- <div v-if="slides.length > 1" class="portfolio-pagination">
       <button
         v-for="(_, index) in slides"
         :key="index"
@@ -108,7 +108,7 @@
         :class="['pagination-dot', { active: currentSlide === index }]"
         :aria-label="'Go to slide ' + (index + 1)"
       ></button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -125,10 +125,15 @@ export default {
     selectedClient: {
       type: Object,
       default: null
+    },
+    externalCurrentSlide: {
+      type: Number,
+      default: 0
     }
   },
-  setup(props) {
-    const currentSlide = ref(0);
+  emits: ['update:currentSlide'],
+  setup(props, { emit }) {
+    const currentSlide = ref(props.externalCurrentSlide || 0);
     const isTransitioning = ref(false);
     const portfolioCarousel = ref(null);
     const portfolioTrack = ref(null);
@@ -138,7 +143,15 @@ export default {
       // Reset to first slide with a small delay to allow for fade out
       setTimeout(() => {
         currentSlide.value = 0;
+        emit('update:currentSlide', 0);
       }, 300);
+    });
+
+    // Watch for changes in the external current slide
+    watch(() => props.externalCurrentSlide, (newValue) => {
+      if (newValue !== currentSlide.value && !isTransitioning.value) {
+        goToSlide(newValue);
+      }
     });
 
     // Navigation methods
@@ -149,7 +162,9 @@ export default {
       // Fade out current slide first
       setTimeout(() => {
         // Then change the slide
-        currentSlide.value = (currentSlide.value - 1 + props.slides.length) % props.slides.length;
+        const newSlideIndex = (currentSlide.value - 1 + props.slides.length) % props.slides.length;
+        currentSlide.value = newSlideIndex;
+        emit('update:currentSlide', newSlideIndex);
 
         // Reset transition state after animation completes
         setTimeout(() => {
@@ -165,7 +180,9 @@ export default {
       // Fade out current slide first
       setTimeout(() => {
         // Then change the slide
-        currentSlide.value = (currentSlide.value + 1) % props.slides.length;
+        const newSlideIndex = (currentSlide.value + 1) % props.slides.length;
+        currentSlide.value = newSlideIndex;
+        emit('update:currentSlide', newSlideIndex);
 
         // Reset transition state after animation completes
         setTimeout(() => {
@@ -182,6 +199,7 @@ export default {
       setTimeout(() => {
         // Then change the slide
         currentSlide.value = index;
+        emit('update:currentSlide', index);
 
         // Reset transition state after animation completes
         setTimeout(() => {

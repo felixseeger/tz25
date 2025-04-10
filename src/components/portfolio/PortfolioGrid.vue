@@ -1,56 +1,93 @@
 <template>
   <div class="portfolio-grid-container" role="region" aria-label="Portfolio projects">
-    <!-- Filter section -->
-    <div class="portfolio-filters" role="group" aria-label="Portfolio filters">
-      <!-- Client filters
-      <div class="filter-group client-filters" role="group" aria-label="Client filters">
-        <button
-          class="filter-button"
-          :class="{ 'active': !selectedClientId }"
-          @click="resetFilter"
-          aria-label="Show all clients"
-          :aria-pressed="!selectedClientId"
-          tabindex="0"
-        >
-          All Clients
-        </button>
-        <button
-          v-for="client in clientsList"
-          :key="client.id"
-          class="filter-button client-filter"
-          :class="{ 'active': selectedClientId === client.id }"
-          @click="selectClient(client.id)"
-          :aria-label="`Filter by ${client.name}`"
-          :aria-pressed="selectedClientId === client.id"
-          tabindex="0"
-        >
-          {{ client.name }}
-        </button>
-      </div> -->
+    <!-- Filter section with pagination -->
+    <div class="portfolio-filters-container">
+      <div class="portfolio-filters" role="group" aria-label="Portfolio filters">
+        <!-- Client filters
+        <div class="filter-group client-filters" role="group" aria-label="Client filters">
+          <button
+            class="filter-button"
+            :class="{ 'active': !selectedClientId }"
+            @click="resetFilter"
+            aria-label="Show all clients"
+            :aria-pressed="!selectedClientId"
+            tabindex="0"
+          >
+            All Clients
+          </button>
+          <button
+            v-for="client in clientsList"
+            :key="client.id"
+            class="filter-button client-filter"
+            :class="{ 'active': selectedClientId === client.id }"
+            @click="selectClient(client.id)"
+            :aria-label="`Filter by ${client.name}`"
+            :aria-pressed="selectedClientId === client.id"
+            tabindex="0"
+          >
+            {{ client.name }}
+          </button>
+        </div> -->
 
-      <!-- Category filters -->
-      <div class="filter-group category-filters" role="group" aria-label="Category filters">
+        <!-- Category filters -->
+        <div class="filter-group category-filters" role="group" aria-label="Category filters">
+          <button
+            class="filter-button"
+            :class="{ 'active': !selectedCategory }"
+            @click="resetCategoryFilter"
+            aria-label="Show all categories"
+            :aria-pressed="!selectedCategory"
+            tabindex="0"
+          >
+            All Categories
+          </button>
+          <button
+            v-for="category in categories"
+            :key="category.id"
+            class="filter-button category-filter"
+            :class="{ 'active': selectedCategory === category.id }"
+            @click="selectCategory(category.id)"
+            :aria-label="`Filter by ${category.name} category`"
+            :aria-pressed="selectedCategory === category.id"
+            tabindex="0"
+          >
+            {{ category.name }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Pagination controls moved to top right -->
+      <div v-if="totalPages > 1" class="top-pagination" role="navigation" aria-label="Portfolio pagination">
         <button
-          class="filter-button"
-          :class="{ 'active': !selectedCategory }"
-          @click="resetCategoryFilter"
-          aria-label="Show all categories"
-          :aria-pressed="!selectedCategory"
-          tabindex="0"
+          class="pagination-button prev"
+          :disabled="currentPage === 1"
+          @click="goToPreviousPage"
+          aria-label="Go to previous page"
         >
-          All Categories
+          <span aria-hidden="true">←</span>
         </button>
+
+        <div class="pagination-pages">
+          <button
+            v-for="page in totalPages"
+            :key="page"
+            class="pagination-page"
+            :class="{ 'active': currentPage === page }"
+            @click="goToPage(page)"
+            :aria-label="`Go to page ${page}`"
+            :aria-current="currentPage === page ? 'page' : null"
+          >
+            {{ page }}
+          </button>
+        </div>
+
         <button
-          v-for="category in categories"
-          :key="category.id"
-          class="filter-button category-filter"
-          :class="{ 'active': selectedCategory === category.id }"
-          @click="selectCategory(category.id)"
-          :aria-label="`Filter by ${category.name} category`"
-          :aria-pressed="selectedCategory === category.id"
-          tabindex="0"
+          class="pagination-button next"
+          :disabled="currentPage === totalPages"
+          @click="goToNextPage"
+          aria-label="Go to next page"
         >
-          {{ category.name }}
+          <span aria-hidden="true">→</span>
         </button>
       </div>
     </div>
@@ -100,43 +137,7 @@
         </button>
       </div>
 
-      <!-- Pagination controls wrapper -->
-      <div class="pagination-wrapper">
-        <!-- Pagination controls -->
-        <div v-if="totalPages > 1" class="portfolio-pagination" role="navigation" aria-label="Portfolio pagination">
-          <button
-            class="pagination-button prev"
-            :disabled="currentPage === 1"
-            @click="goToPreviousPage"
-            aria-label="Go to previous page"
-          >
-            <span aria-hidden="true">←</span>
-          </button>
-
-          <div class="pagination-pages">
-            <button
-              v-for="page in totalPages"
-              :key="page"
-              class="pagination-page"
-              :class="{ 'active': currentPage === page }"
-              @click="goToPage(page)"
-              :aria-label="`Go to page ${page}`"
-              :aria-current="currentPage === page ? 'page' : null"
-            >
-              {{ page }}
-            </button>
-          </div>
-
-          <button
-            class="pagination-button next"
-            :disabled="currentPage === totalPages"
-            @click="goToNextPage"
-            aria-label="Go to next page"
-          >
-            <span aria-hidden="true">→</span>
-          </button>
-        </div>
-      </div>
+      <!-- Pagination controls wrapper removed from here and moved to top -->
     </div>
   </div>
 </template>
@@ -360,11 +361,25 @@ export default {
   padding: 0 2rem;
 }
 
-.portfolio-filters {
+.portfolio-filters-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.portfolio-filters {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
+  flex: 1;
 
   @media (max-width: $breakpoint-md) {
     flex-direction: column;
@@ -564,20 +579,21 @@ export default {
 }
 
 /* Pagination styles */
-.pagination-wrapper {
+.top-pagination {
   display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-top: 2rem;
-}
-
-.portfolio-pagination {
-  display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 0.5rem;
-  text-align: center;
-  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: $breakpoint-md) {
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+  }
 }
 
 .pagination-button {
