@@ -1,7 +1,7 @@
 <template>
   <section id="brand" class="brand-section">
     <div class="container">
-      <h2 class="brand-title" style="opacity: 1 !important; color: #333333; display: block !important; visibility: visible !important;">{{ currentSlideTitle }}</h2>
+      <h2 class="brand-title" style="opacity: 1 !important; color: white; display: block !important; visibility: visible !important;">{{ currentSlideTitle }}</h2>
       <div class="brand-content">
         <BrandCarousel
           :slides="carouselSlides"
