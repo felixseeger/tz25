@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 import viteImagemin from 'vite-plugin-imagemin'
+import { configDefaults } from 'vitest/config'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -45,6 +46,15 @@ export default defineConfig(({ mode }) => ({
   },
   css: {
     postcss: './postcss.config.cjs'
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    exclude: [...configDefaults.exclude, 'e2e/*'],
+    root: fileURLToPath(new URL('./', import.meta.url)),
+    transformMode: {
+      web: [/\.[jt]sx$/]
+    }
   },
   server: {
     // Don't specify a port to let Vite choose an available one
