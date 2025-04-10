@@ -28,7 +28,7 @@ const MAX_LENGTHS = {
  */
 function validateContactForm(formData) {
   const errors = {};
-  
+
   // Validate required fields
   if (!formData.name || formData.name.trim() === '') {
     errors.name = 'Name is required';
@@ -37,7 +37,7 @@ function validateContactForm(formData) {
   } else if (!REGEX.TEXT.test(formData.name)) {
     errors.name = 'Name contains invalid characters';
   }
-  
+
   if (!formData.email || formData.email.trim() === '') {
     errors.email = 'Email is required';
   } else if (formData.email.length > MAX_LENGTHS.EMAIL) {
@@ -45,7 +45,7 @@ function validateContactForm(formData) {
   } else if (!REGEX.EMAIL.test(formData.email)) {
     errors.email = 'Please enter a valid email address';
   }
-  
+
   if (!formData.betreff || formData.betreff.trim() === '') {
     errors.betreff = 'Subject is required';
   } else if (formData.betreff.length > MAX_LENGTHS.SUBJECT) {
@@ -53,7 +53,7 @@ function validateContactForm(formData) {
   } else if (!REGEX.SUBJECT.test(formData.betreff)) {
     errors.betreff = 'Subject contains invalid characters';
   }
-  
+
   // Validate optional fields if they're not empty
   if (formData.firma && formData.firma.trim() !== '') {
     if (formData.firma.length > MAX_LENGTHS.COMPANY) {
@@ -62,7 +62,7 @@ function validateContactForm(formData) {
       errors.firma = 'Company name contains invalid characters';
     }
   }
-  
+
   if (formData.anmerkungen && formData.anmerkungen.trim() !== '') {
     if (formData.anmerkungen.length > MAX_LENGTHS.MESSAGE) {
       errors.anmerkungen = `Message must be less than ${MAX_LENGTHS.MESSAGE} characters`;
@@ -70,17 +70,36 @@ function validateContactForm(formData) {
       errors.anmerkungen = 'Message contains invalid characters';
     }
   }
-  
+
   // Check for CSRF token
   if (!formData.csrfToken) {
     errors.csrfToken = 'CSRF token is missing';
   }
-  
+
   // Check for honeypot field (if implemented)
   if (formData.honeypot && formData.honeypot.trim() !== '') {
-    errors.honeypot = 'Bot detected';
+    errors.honeypot = 'Bot detected: Honeypot field filled';
   }
-  
+
+  // Check if math challenge answer is missing or empty
+  if (!formData.mathAnswer || formData.mathAnswer.trim() === '') {
+    errors.mathAnswer = 'Math challenge answer is missing';
+  }
+
+  // Check if form was submitted too quickly (less than 3 seconds)
+  if (formData.formStartTime) {
+    const submissionTime = Date.now();
+    const formStartTime = parseInt(formData.formStartTime, 10);
+
+    if (!isNaN(formStartTime)) {
+      const timeElapsed = (submissionTime - formStartTime) / 1000; // in seconds
+
+      if (timeElapsed < 3) {
+        errors.formStartTime = `Bot detected: Form submitted too quickly (${timeElapsed.toFixed(2)} seconds)`;
+      }
+    }
+  }
+
   return {
     isValid: Object.keys(errors).length === 0,
     errors
@@ -94,7 +113,7 @@ function validateContactForm(formData) {
  */
 function sanitizeContactForm(formData) {
   const sanitizedData = {};
-  
+
   // Function to sanitize a string
   const sanitizeString = (str) => {
     if (!str) return '';
@@ -105,7 +124,7 @@ function sanitizeContactForm(formData) {
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
   };
-  
+
   // Sanitize each field
   sanitizedData.name = sanitizeString(formData.name);
   sanitizedData.email = sanitizeString(formData.email);
@@ -113,7 +132,7 @@ function sanitizeContactForm(formData) {
   sanitizedData.betreff = sanitizeString(formData.betreff);
   sanitizedData.anmerkungen = sanitizeString(formData.anmerkungen);
   sanitizedData.csrfToken = formData.csrfToken; // Don't sanitize the token
-  
+
   return sanitizedData;
 }
 
@@ -128,10 +147,10 @@ function contactFormMiddleware(req, res, next) {
   if (req.method !== 'POST' || req.path !== '/api/contact') {
     return next();
   }
-  
+
   // Validate the form data
   const validation = validateContactForm(req.body);
-  
+
   // If validation fails, return error response
   if (!validation.isValid) {
     return res.status(400).json({
@@ -139,13 +158,13 @@ function contactFormMiddleware(req, res, next) {
       errors: validation.errors
     });
   }
-  
+
   // Sanitize the form data
   const sanitizedData = sanitizeContactForm(req.body);
-  
+
   // Replace the request body with the sanitized data
   req.body = sanitizedData;
-  
+
   // Continue to the next middleware
   next();
 }

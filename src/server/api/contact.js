@@ -1,12 +1,13 @@
 /**
  * Contact form API endpoint
- * 
+ *
  * This is a simple example of how to implement server-side validation
  * for the contact form. In a real application, this would be implemented
  * as a serverless function or as part of a Node.js backend.
  */
 
 const { validateContactForm, sanitizeContactForm } = require('../contactFormValidator');
+const { checkRateLimit, incrementSubmissionCount, getRateLimitMessage } = require('../../utils/rateLimiter');
 
 /**
  * Handler for contact form submissions
@@ -21,10 +22,24 @@ exports.handler = async (req, res) => {
       message: 'Method not allowed'
     });
   }
-  
+
+  // Get client IP address
+  const clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+  // Check rate limit
+  const rateLimitCheck = checkRateLimit(clientIp);
+
+  if (rateLimitCheck.isLimited) {
+    return res.status(429).json({
+      success: false,
+      message: getRateLimitMessage(clientIp),
+      resetTime: rateLimitCheck.resetTime
+    });
+  }
+
   // Validate the form data
   const validation = validateContactForm(req.body);
-  
+
   // If validation fails, return error response
   if (!validation.isValid) {
     return res.status(400).json({
@@ -32,17 +47,20 @@ exports.handler = async (req, res) => {
       errors: validation.errors
     });
   }
-  
+
   // Sanitize the form data
   const sanitizedData = sanitizeContactForm(req.body);
-  
+
+  // Increment submission count for this IP
+  incrementSubmissionCount(clientIp);
+
   try {
     // In a real application, you would send the email here
     // For this example, we'll just simulate a successful response
-    
+
     // Simulate a delay to mimic sending an email
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     // Return success response
     return res.status(200).json({
       success: true,
@@ -50,7 +68,7 @@ exports.handler = async (req, res) => {
     });
   } catch (error) {
     console.error('Error sending email:', error);
-    
+
     // Return error response
     return res.status(500).json({
       success: false,
