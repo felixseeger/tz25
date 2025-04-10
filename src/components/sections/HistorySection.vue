@@ -11,11 +11,8 @@
           </p>
         </div>
 
-        <div class="history-button-container">
-          <button class="history-button" @click="openTimeline">
-            <img src="../../assets/images/history-btn.svg" alt="Unsere Geschichte" class="history-button__image">
-          </button>
-        </div>
+        <!-- History button moved outside the component to be fixed -->
+        <!-- It will be handled by the FixedHistoryButton component -->
       </div>
     </div>
 
