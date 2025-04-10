@@ -1,4 +1,5 @@
 <template>
+
   <section class="testimonials-section">
     <div class="testimonials-background"></div>
     <div class="container">
@@ -121,20 +122,7 @@ export default {
   }
 }
 
-.testimonials-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #444444;
-  background-image: url('../assets/images/testamonials.svg');
-  background-size: cover;
-  background-position: vertical center;
-  background-repeat: no-repeat;
-  opacity: 1; /* Adjust opacity to ensure text is readable */
-  z-index: 1;
-}
+/* Moved to _testimonials-section.scss */
 
 .testimonials-header {
   margin-bottom: 4rem;
