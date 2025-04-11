@@ -8,8 +8,8 @@
     <!-- Scroll progress indicator at the top of the page -->
     <ScrollIndicator position="top" height="4px" :z-index="1001" />
 
-    <!-- Page loading animation -->
-    <PageLoader ref="pageLoader" :show-text="true" text="Loading..." />
+    <!-- Page loading animation (disabled) -->
+    <!-- <PageLoader ref="pageLoader" :show-text="true" text="Loading..." /> -->
 
     <AppLayout>
       <router-view v-slot="{ Component, route }">
@@ -61,15 +61,8 @@ export default defineComponent({
     // Animation states
     const pageAnimating = ref(false);
 
-    // Reference to the page loader component
-    const pageLoader = ref(null);
-
-    // Hide the page loader after a short delay (in case it's stuck)
-    setTimeout(() => {
-      if (pageLoader.value && pageLoader.value.hideLoader) {
-        pageLoader.value.hideLoader();
-      }
-    }, 1000);
+    // Page loader has been disabled
+    // const pageLoader = ref(null);
 
     /**
      * Handle before enter transition event
@@ -117,15 +110,15 @@ export default defineComponent({
       }
     };
 
-    // Expose the pageLoader ref
-    expose({ pageLoader });
+    // Page loader has been disabled
+    // expose({ pageLoader });
 
     return {
       isLoading,
       isTransitioning,
       transitionName,
       pageAnimating,
-      pageLoader,
+      // pageLoader removed as it's disabled
       showKeyboardFocusIndicator,
       handleBeforeEnter,
       handleAfterEnter,

@@ -1,5 +1,4 @@
 <template>
-  <!-- MODIFIED: Loading animation disabled - always hidden -->
   <div class="page-loader" :class="{ 'is-active': isActive }">
     <div class="page-loader__content">
       <div class="page-loader__spinner">
@@ -13,7 +12,8 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'PageLoader',
@@ -35,13 +35,36 @@ export default defineComponent({
       default: 100 // Delay before showing the loader in milliseconds
     }
   },
-  setup() {
-    // MODIFIED: Loading animation disabled - always set to false
-    const isActive = ref(false);
+  setup() { // Removed unused props parameter
+    const router = useRouter();
+    const isActive = ref(false); // Always start with loader inactive
     const showTimeout = ref(null);
     const hideTimeout = ref(null);
+    // Removed unused startTime ref
 
-    // Method to manually hide the loader (kept for API compatibility)
+    // Watch for route changes - disabled but kept for future reference
+    watch(
+      () => router.currentRoute.value,
+      () => {
+        // Clear any existing timeouts
+        if (showTimeout.value) clearTimeout(showTimeout.value);
+        if (hideTimeout.value) clearTimeout(hideTimeout.value);
+
+        // Loader is disabled, so we don't activate it
+        // isActive remains false
+      },
+      { immediate: true }
+    );
+
+    // Listen for the beforeResolve event - still needed for navigation
+    router.beforeResolve((_, __, next) => { // Using _ and __ for unused parameters
+      // No need to calculate times since loader is disabled
+      // isActive remains false
+
+      next();
+    });
+
+    // Method to manually hide the loader - kept for API compatibility
     const hideLoader = () => {
       if (showTimeout.value) clearTimeout(showTimeout.value);
       if (hideTimeout.value) clearTimeout(hideTimeout.value);
@@ -49,7 +72,7 @@ export default defineComponent({
     };
 
     // Ensure the loader is always hidden
-    hideLoader();
+    isActive.value = false;
 
     return {
       isActive,
