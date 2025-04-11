@@ -64,6 +64,18 @@
   opacity: 1; /* Start visible */
   visibility: visible; /* Start visible */
 
+  // Animation states
+  &.initial-state {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &.animated-state {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+
   /* Adjust for mobile */
   @media (max-width: $breakpoint-sm) {
     min-height: auto;
@@ -110,8 +122,19 @@
   z-index: 2;
   flex: 1;
   max-width: 160px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.6s ease;
   cursor: pointer;
+
+  // Animation states
+  &.initial-state {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  &.animated-state {
+    opacity: 1;
+    transform: none;
+  }
 
   &:hover {
     transform: translateY(-5px);
@@ -195,6 +218,18 @@
     width: 2px;
     transform-origin: center center; /* For scaling animation */
     will-change: transform, opacity; /* Optimize for animations */
+    transition: transform 0.8s ease, opacity 0.8s ease;
+
+    // Animation states
+    &.initial-state {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    &.animated-state {
+      opacity: 1;
+      transform: none;
+    }
 
     @media (max-width: $breakpoint-lg) {
       display: none;

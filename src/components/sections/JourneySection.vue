@@ -11,9 +11,9 @@
         </p>
       </div>
 
-      <div class="journey-steps-container" ref="journeyStepsContainer">
+      <div class="journey-steps-container initial-state" ref="journeyStepsContainer">
         <div class="journey-steps">
-          <div class="journey-step" ref="journeyStep">
+          <div class="journey-step initial-state" ref="journeyStep">
             <h3 class="journey-step__title">ESSENTIALS</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/essentilas-icn.svg" alt="Essentials" />
@@ -23,9 +23,9 @@
             </div>
           </div>
 
-          <div class="journey-step__divider" ref="journeyDivider"></div>
+          <div class="journey-step__divider initial-state" ref="journeyDivider"></div>
 
-          <div class="journey-step" ref="journeyStep">
+          <div class="journey-step initial-state" ref="journeyStep">
             <h3 class="journey-step__title">SELL-IN</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/sell-in-icn.svg" alt="Sell-In" />
@@ -35,9 +35,9 @@
             </div>
           </div>
 
-          <div class="journey-step__divider" ref="journeyDivider"></div>
+          <div class="journey-step__divider initial-state" ref="journeyDivider"></div>
 
-          <div class="journey-step" ref="journeyStep">
+          <div class="journey-step initial-state" ref="journeyStep">
             <h3 class="journey-step__title">SELL-THROUGH</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/sell-through-icn.svg" alt="Sell-Through" />
@@ -47,9 +47,9 @@
             </div>
           </div>
 
-          <div class="journey-step__divider" ref="journeyDivider"></div>
+          <div class="journey-step__divider initial-state" ref="journeyDivider"></div>
 
-          <div class="journey-step" ref="journeyStep">
+          <div class="journey-step initial-state" ref="journeyStep">
             <h3 class="journey-step__title">SELL-OUT</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/sell-out_txt-ico.svg" alt="Sell-Out" />
@@ -59,14 +59,14 @@
             </div>
           </div>
 
-          <div class="journey-step__divider" ref="journeyDivider"></div>
+          <div class="journey-step__divider initial-state" ref="journeyDivider"></div>
 
-          <div class="journey-step" ref="journeyStep">
+          <div class="journey-step initial-state" ref="journeyStep">
             <h3 class="journey-step__title">FULL SERVICE</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/full-service_txt-ico.svg" alt="Full Service" />
               <div class="journey-step__overlay">
-                <p>FULL-SERVICE: Umsetzung aus einer Hand: Kreation, Aktionsbetreuung, Clearing, Produktion, Bespielung aller Touchpoints u.v.m.</p>
+                <p>Umsetzung aus einer Hand: Kreation, Aktionsbetreuung, Clearing, Produktion, Bespielung aller Touchpoints u.v.m.</p>
               </div>
             </div>
           </div>
@@ -158,19 +158,19 @@ export default {
 
         // Make sure the container is visible
         if (journeyStepsContainer.value) {
-          journeyStepsContainer.value.style.opacity = '1';
-          journeyStepsContainer.value.style.visibility = 'visible';
+          journeyStepsContainer.value.classList.add('animated-state');
+          journeyStepsContainer.value.classList.remove('initial-state');
         }
 
         // Make all steps visible first (in case animation fails)
         steps.forEach(step => {
-          step.style.opacity = '1';
-          step.style.transform = 'none';
+          step.classList.add('animated-state');
+          step.classList.remove('initial-state');
         });
 
         dividers.forEach(divider => {
-          divider.style.opacity = '1';
-          divider.style.transform = 'none';
+          divider.classList.add('animated-state');
+          divider.classList.remove('initial-state');
         });
 
         // Now set up for animation
@@ -225,18 +225,18 @@ export default {
         const container = document.querySelector('.journey-steps-container');
 
         if (container) {
-          container.style.opacity = '1';
-          container.style.visibility = 'visible';
+          container.classList.add('animated-state');
+          container.classList.remove('initial-state');
         }
 
         allSteps.forEach(step => {
-          step.style.opacity = '1';
-          step.style.transform = 'none';
+          step.classList.add('animated-state');
+          step.classList.remove('initial-state');
         });
 
         allDividers.forEach(divider => {
-          divider.style.opacity = '1';
-          divider.style.transform = 'none';
+          divider.classList.add('animated-state');
+          divider.classList.remove('initial-state');
         });
 
         console.log('Fallback visibility applied to journey steps');
