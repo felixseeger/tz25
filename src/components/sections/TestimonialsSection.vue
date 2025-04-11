@@ -1,9 +1,7 @@
 <template>
 
   <section class="testimonials-section">
-    <div class="testimonials-background">
-      <img src="../../assets/images/testamonials.svg" alt="Testimonials Background" class="testimonials-background-image" />
-    </div>
+    <div class="testimonials-background"></div>
     <div class="container">
       <div class="testimonials-header">
         <h2 class="testimonials-title">DAS SAGEN UNSERE</h2>
@@ -35,156 +33,28 @@
             </div>
           </div>
 
-          <!-- Dr. Clauder Testimonial -->
+          <!-- Add more testimonials as needed -->
           <div class="testimonial-slide">
             <div class="testimonial-content">
               <p class="testimonial-text">
-                „TAKTZEIT steht bei uns für die Entwicklung von genialen und sinnvollen Design- Konzepten und dem guten und zielgruppengenauen Aufbau von B2B und B2C Strategien. Das vielseitige Know-how unterstützt uns digital, analog und strategisch enorm. Die schnelle und zuverlässige Bearbeitung unserer Ideen wird durch eine sehr enge und kollegiale Zusammenarbeit abgerundet.
-              <br>
-              Mit TAKTZEIT haben wir eine Agentur gefunden, die mitdenkt und unsere Werbeaussagen emotional und empathisch visualisiert. Hier stehen die Wünsche der Kunden an erster Stelle, wir sagen Danke!"
+                „Unser langjähriger Agenturpartner TAKTZEIT versteht es, sich auf unsere vielfältigen Anforderungen agil einzustellen und sich mit uns kontinuierlich weiter-
+                zuentwickeln. Das Agenturteam überzeugt durch sein herausragendes Servicelevel und verbindet zuverlässig kreative Ideen mit tatsächlicher Umsetzbarkeit.
+                Die tiefgreifende Expertise von TAKTZEIT im Bereich Sales Activation und der kompetente Umgang mit unseren Marken erfüllen unsere hohen Ansprüche an
+                einen modernen Kreativ-Dienstleister."
               </p>
-              <p class="testimonial-author">Anna Heuvens
-Marketing Managerin
-Dr.Clauder Solution for pets GmbH</p>
-            </div>
-            <div class="testimonial-logo-container">
-              <div class="testimonial-logo">
-                <img
-                  src="../../assets/images/client-logos/drclauder.png"
-                  alt="Dr. Clauder Logo"
-                  width="100%"
-                  height="auto"
-                />
-              </div>
-            </div>
-          </div>
+              <p class="testimonial-author">Michael Schmidt | Marketing Director | Beispiel GmbH</p>
 
-          <!-- Epson Testimonial -->
-          <div class="testimonial-slide">
-            <div class="testimonial-content">
-              <p class="testimonial-text">
-                „Mit TAKTZEIT haben wir einen Partner gefunden, der unsere komplexen Produkte versteht und es schafft, diese in klare und ansprechende Marketingbotschaften zu übersetzen. Die Kreativität und das technische Verständnis des Teams haben uns dabei geholfen, unsere Marktposition im B2B-Bereich deutlich zu stärken. Besonders beeindruckt hat uns die Fähigkeit, sowohl digitale als auch analoge Kampagnen nahtlos zu integrieren und dabei stets den Fokus auf messbare Ergebnisse zu legen."
-              </p>
-              <p class="testimonial-author">Marketing Director
-Epson Europe</p>
             </div>
             <div class="testimonial-logo-container">
               <div class="testimonial-logo">
                 <img
-                  src="../../assets/images/client-logos/epson.png"
-                  alt="Epson Logo"
+                  src="../../assets/images/client-logos/bridgestone.svg"
+                  alt="Bridgestone Logo"
                   width="100%"
                   height="auto"
                 />
-              </div>
-            </div>
-          </div>
-
-          <!-- Remy & Nauen Testimonial -->
-          <div class="testimonial-slide">
-            <div class="testimonial-content">
-              <p class="testimonial-text">
-                „TAKTZEIT begleitet uns mit seiner interdisziplinären Marketing- und Kommunikations-Expertise bereits seit vielen Jahren hochprofessionell in größeren und kleineren Projekten. So hat sich TAKTZEIT mit strategischem Weitblick um unseren umfassenden und medienübergreifenden Markenrelaunch gekümmert und setzt darauf aufbauend unsere analogen und digitalen Werbemaßnahmen um.“
-              </p>
-              <p class="testimonial-author">Philipp Mehdorn
-Geschäftsführer
-REMY / NAUEN GmbH / Co. KG</p>
-            </div>
-            <div class="testimonial-logo-container">
-              <div class="testimonial-logo">
-                <img
-                  src="../../assets/images/client-logos/remyundnauen.webp"
-                  alt="Remy & Nauen Logo"
-                  width="100%"
-                  height="auto"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Hapert Testimonial -->
-          <div class="testimonial-slide">
-            <div class="testimonial-content">
-              <p class="testimonial-text">
-                „TAKTZEIT denkt immer mit und trägt dadurch bei wichtigen Entscheidungen oder Projekten zu optimalen Lösungen bei. Die Agentur hält sich stets an Vereinbarungen und die Kommunikation läuft reibungslos! Kurz gesagt, eine sehr angenehme Agentur, mit der man gut zusammenarbeiten kann.“
-              </p>
-              <p class="testimonial-author">Malou Kokken
-Marketing Managerin
-WAGENBOUW HAPERT B.V./HAPERT Anhänger</p>
-            </div>
-            <div class="testimonial-logo-container">
-              <div class="testimonial-logo">
-                <img
-                  src="../../assets/images/client-logos/hapert.png"
-                  alt="Hapert Logo"
-                  width="100%"
-                  height="auto"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Sofidel/Regina Testimonial -->
-          <div class="testimonial-slide">
-            <div class="testimonial-content">
-              <p class="testimonial-text">
-                „Die Zusammenarbeit mit TAKTZEIT zeichnet sich durch ein hohes Maß an Professionalität, Kreativität und Zuverlässigkeit aus. Das Team hat es geschafft, unsere Marke Regina im hart umkämpften Konsumgütermarkt erfolgreich zu positionieren und durch innovative Kampagnen die Kundenbindung zu stärken. Besonders beeindruckt hat uns die Fähigkeit, schnell auf Marktveränderungen zu reagieren und flexible Lösungen anzubieten, die unsere Verkaufszahlen nachweislich gesteigert haben."
-              </p>
-              <p class="testimonial-author">Brand Manager
-Sofidel Group</p>
-            </div>
-            <div class="testimonial-logo-container">
-              <div class="testimonial-logo">
-                <img
-                  src="../../assets/images/client-logos/regina.png"
-                  alt="Regina Logo"
-                  width="100%"
-                  height="auto"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Bechem Testimonial -->
-          <div class="testimonial-slide">
-            <div class="testimonial-content">
-              <p class="testimonial-text">
-                „Mit TAKTZEIT haben wir einen strategischen Partner gefunden, der uns dabei unterstützt, unsere komplexen Industrieprodukte verständlich und zielgruppengerecht zu kommunizieren. Die Agentur hat ein tiefes Verständnis für unsere technischen Anforderungen entwickelt und schafft es, diese in überzeugende Marketingbotschaften zu übersetzen. Die professionelle Beratung und die kreativen Lösungen haben wesentlich dazu beigetragen, unsere Marktposition zu stärken und neue Geschäftsbeziehungen aufzubauen."
-              </p>
-              <p class="testimonial-author">Leiter Marketing
-Carl Bechem GmbH</p>
-            </div>
-            <div class="testimonial-logo-container">
-              <div class="testimonial-logo">
-                <img
-                  src="../../assets/images/client-logos/bechem.png"
-                  alt="Bechem Logo"
-                  width="100%"
-                  height="auto"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Evonik Testimonial -->
-          <div class="testimonial-slide">
-            <div class="testimonial-content">
-              <p class="testimonial-text">
-                „TAKTZEIT hat uns mit ihrer strategischen Beratung und kreativen Umsetzung dabei geholfen, unsere komplexen Spezialchemieprodukte verständlich und überzeugend zu kommunizieren. Die Agentur versteht es, wissenschaftliche Inhalte in ansprechende Marketingbotschaften zu übersetzen und dabei die Balance zwischen Fachlichkeit und Zugänglichkeit zu wahren. Die enge Zusammenarbeit und das tiefe Verständnis für unsere Branche machen TAKTZEIT zu einem wertvollen Partner für unsere Kommunikationsaktivitäten."
-              </p>
-              <p class="testimonial-author">Head of Marketing Communications
-Evonik Industries AG</p>
-            </div>
-            <div class="testimonial-logo-container">
-              <div class="testimonial-logo">
-                <img
-                  src="../../assets/images/client-logos/evonik.png"
-                  alt="Evonik Logo"
-                  width="100%"
-                  height="auto"
-                />
-              </div>
-            </div>
+                </div>
+                </div>
           </div>
         </div>
       </div>
@@ -211,7 +81,7 @@ export default {
   data() {
     return {
       currentSlide: 0,
-      totalSlides: 8 // Updated to match the number of testimonials
+      totalSlides: 2 // Update this based on the number of testimonials
     }
   },
   methods: {
@@ -252,7 +122,20 @@ export default {
   }
 }
 
-/* Moved to _testimonials-section.scss */
+.testimonials-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #444444;
+  background-image: url('../assets/images/testamonials.svg');
+  background-size: cover;
+  background-position: vertical center;
+  background-repeat: no-repeat;
+  opacity: 1; /* Adjust opacity to ensure text is readable */
+  z-index: 1;
+}
 
 .testimonials-header {
   margin-bottom: 4rem;
@@ -355,17 +238,6 @@ export default {
     color: $text-color;
     margin: 0 0 2rem 0;
   }
-}
-
-/* Placeholder for companies without logos */
-.testimonial-logo-placeholder {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: $text-color;
-  padding: 1rem 2rem;
-  border: 2px solid $text-color;
-  border-radius: 4px;
-  text-align: center;
 }
 
 /* Navigation styles */
