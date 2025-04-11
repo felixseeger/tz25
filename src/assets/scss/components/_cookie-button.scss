@@ -3,7 +3,12 @@
   left: 20px;
   bottom: 20px;
   z-index: $z-index-contact-button;
-  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.3s ease;
+  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.3s ease, bottom 0.5s ease;
+
+  // Move up when banner is closed
+  &.banner-closed {
+    bottom: 40px; // Move up when banner is closed
+  }
 
   &.is-hidden {
     opacity: 0;

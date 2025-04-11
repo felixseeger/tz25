@@ -1,5 +1,5 @@
 <template>
-  <div class="cookie-button" :class="{ 'is-hidden': shouldHideButton }">
+  <div class="cookie-button" :class="{ 'is-hidden': shouldHideButton, 'banner-closed': !isCookieBannerVisible }">
     <button
       class="cookie-button__btn"
       @click="openCookieManager"
@@ -23,24 +23,32 @@ export default {
     const isContactSectionVisible = ref(false);
     const isFooterSectionVisible = ref(false);
     const isCookieSettingsOpen = ref(false);
+    const isCookieBannerVisible = ref(true); // Initially assume cookie banner is visible
+    const hasUserInteractedWithCookies = ref(false); // Track if user has interacted with cookies
 
     // Compute whether the button should be hidden
     const shouldHideButton = computed(() => {
       // Hide when in contact or footer section (either by active section or by visibility event)
       // Also hide when cookie settings are open
+      // Also hide when cookie banner is visible
+      // Also hide when user hasn't interacted with cookies yet
       const shouldHide =
         activeSection.value === 'contact' ||
         activeSection.value === 'footer' ||
         isContactSectionVisible.value ||
         isFooterSectionVisible.value ||
-        isCookieSettingsOpen.value;
+        isCookieSettingsOpen.value ||
+        isCookieBannerVisible.value ||
+        !hasUserInteractedWithCookies.value;
 
       // Log for debugging
       console.log('Cookie button should hide:', shouldHide,
         'Active section:', activeSection.value,
         'Contact visible:', isContactSectionVisible.value,
         'Footer visible:', isFooterSectionVisible.value,
-        'Cookie settings open:', isCookieSettingsOpen.value);
+        'Cookie settings open:', isCookieSettingsOpen.value,
+        'Cookie banner visible:', isCookieBannerVisible.value,
+        'User interacted with cookies:', hasUserInteractedWithCookies.value);
 
       return shouldHide;
     });
@@ -75,6 +83,17 @@ export default {
       isCookieSettingsOpen.value = false;
     };
 
+    // Handle cookie banner closed event
+    const handleCookieBannerClosed = () => {
+      isCookieBannerVisible.value = false;
+      hasUserInteractedWithCookies.value = true;
+    };
+
+    // Handle cookie banner opened event
+    const handleCookieBannerOpened = () => {
+      isCookieBannerVisible.value = true;
+    };
+
     onMounted(() => {
       // Listen for the contact section visibility event
       document.addEventListener('contact-section-visible', handleContactSectionVisible);
@@ -85,6 +104,18 @@ export default {
       // Listen for cookie settings events
       document.addEventListener('cookie-settings-opened', handleCookieSettingsOpened);
       document.addEventListener('cookie-settings-closed', handleCookieSettingsClosed);
+
+      // Listen for cookie banner events
+      document.addEventListener('cookie-banner-closed', handleCookieBannerClosed);
+      document.addEventListener('cookie-banner-opened', handleCookieBannerOpened);
+
+      // Check if cookie consent has already been given
+      const consent = localStorage.getItem('cookieConsent');
+      if (consent) {
+        // User has already interacted with cookies
+        hasUserInteractedWithCookies.value = true;
+        isCookieBannerVisible.value = false;
+      }
     });
 
     onUnmounted(() => {
@@ -93,11 +124,14 @@ export default {
       document.removeEventListener('footer-section-visible', handleFooterSectionVisible);
       document.removeEventListener('cookie-settings-opened', handleCookieSettingsOpened);
       document.removeEventListener('cookie-settings-closed', handleCookieSettingsClosed);
+      document.removeEventListener('cookie-banner-closed', handleCookieBannerClosed);
+      document.removeEventListener('cookie-banner-opened', handleCookieBannerOpened);
     });
 
     return {
       openCookieManager,
-      shouldHideButton
+      shouldHideButton,
+      isCookieBannerVisible
     };
   }
 }
