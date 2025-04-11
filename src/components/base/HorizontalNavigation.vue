@@ -23,6 +23,7 @@ export default {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
+  margin-top: 2rem;
   position: relative;
   z-index: 10;
   width: 100%;
@@ -41,12 +42,14 @@ export default {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     background-color: transparent;
     border: 1px solid white;
 
     &:hover {
+      background-color: rgba(255, 255, 255, 0.5);
       transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     }
 
     &:active {
@@ -66,10 +69,11 @@ export default {
     .horizontal-nav__prev,
     .horizontal-nav__next {
       background: transparent;
-      border: 1px solid rgba(#333, 0.8);
+      border: 1px solid rgba(#333, 0.5);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
       &:hover {
-        border-color: rgba(#333, 1);
+        background-color: rgba(#333, 0.05);
       }
     }
 

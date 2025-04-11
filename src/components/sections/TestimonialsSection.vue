@@ -18,7 +18,7 @@
       </div>
 
       <div class="testimonials-carousel">
-        <div class="testimonials-carousel__wrapper" :style="{ '--slide-offset': `-${currentSlide * 100}%` }">
+        <div class="testimonials-carousel__wrapper" :style="{ '--slide-offset': `-${currentSlide * 12.5}%` }">
           <!-- Testimonial 1 -->
           <div class="testimonial-slide">
             <div class="testimonial-content">
@@ -46,10 +46,10 @@
           <div class="testimonial-slide">
             <div class="testimonial-content">
               <p class="testimonial-text">
-                „Unser langjähriger Agenturpartner TAKTZEIT versteht es, sich auf unsere vielfältigen Anforderungen agil einzustellen und sich mit uns kontinuierlich weiter-
-                zuentwickeln. Das Agenturteam überzeugt durch sein herausragendes Servicelevel und verbindet zuverlässig kreative Ideen mit tatsächlicher Umsetzbarkeit.
-                Die tiefgreifende Expertise von TAKTZEIT im Bereich Sales Activation und der kompetente Umgang mit unseren Marken erfüllen unsere hohen Ansprüche an
-                einen modernen Kreativ-Dienstleister."
+                „TAKTZEIT steht bei uns für die Entwicklung von genialen und sinnvollen Design- Konzepten und dem guten und zielgruppengenauen Aufbau von B2B und B2C Strategien. Das vielseitige Know-how unterstützt uns digital, analog und strategisch enorm. Die schnelle und zuverlässige Bearbeitung unserer Ideen wird durch eine sehr enge und kollegiale Zusammenarbeit abgerundet.
+              </p>
+              <p>
+                Mit TAKTZEIT haben wir eine Agentur gefunden, die mitdenkt und unsere Werbeaussagen emotional und empathisch visualisiert. Hier stehen die Wünsche der Kunden an erster Stelle, wir sagen Danke!“
               </p>
               <p class="testimonial-author">Michael Schmidt | Marketing Director | Beispiel GmbH</p>
 
