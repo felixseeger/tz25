@@ -41,68 +41,80 @@
       </div>
     </div>
 
-  </nav>
-
-  <!-- Menu Overlay (moved outside the navbar to be a direct child of body) -->
-  <Teleport to="body">
+    <!-- Menu Overlay -->
     <div class="menu-overlay" :class="{ 'is-active': menuOpen }">
-      <button
-        class="menu-overlay__close"
-        @click="closeMenu"
-        aria-label="Close menu"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18 6L6 18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M6 6L18 18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
       <div class="menu-overlay__content">
+        <!-- Logo at the top left -->
+        <div class="menu-overlay__logo">
+          <router-link to="/" @click="closeMenu">
+            <img src="../../assets/images/logo.svg" alt="TAKTZEIT Logo" />
+          </router-link>
+        </div>
+
         <nav class="menu-overlay__nav">
-          <!-- Home page sections -->
-          <div class="menu-overlay__section">
-            <a href="#hero" class="menu-overlay__link" @click.prevent="navigateToSection('hero')" :class="{ 'active': isActiveSection('hero') }">STARTSEITE</a>
-            <a href="#journey" class="menu-overlay__link" @click.prevent="navigateToSection('journey')" :class="{ 'active': isActiveSection('journey') }">ÜBER UNS</a>
-            <a href="#testimonials" class="menu-overlay__link" @click.prevent="navigateToSection('testimonials')" :class="{ 'active': isActiveSection('testimonials') }">KUNDEN</a>
-            <a href="#team" class="menu-overlay__link" @click.prevent="navigateToSection('team')" :class="{ 'active': isActiveSection('team') }">TEAM TAKTZEIT</a>
-            <a href="#services" class="menu-overlay__link" @click.prevent="navigateToSection('services')" :class="{ 'active': isActiveSection('services') }">LEISTUNGEN</a>
-            <a href="#history" class="menu-overlay__link" @click.prevent="navigateToSection('history')" :class="{ 'active': isActiveSection('history') }">GESCHICHTE</a>
-            <a href="#portfolio" class="menu-overlay__link" @click.prevent="navigateToSection('portfolio')" :class="{ 'active': isActiveSection('portfolio') }">PORTFOLIO</a>
-            <a href="#brand" class="menu-overlay__link" @click.prevent="navigateToSection('brand')" :class="{ 'active': isActiveSection('brand') }">MARKE & DESIGN</a>
-            <a href="#contact" class="menu-overlay__link" @click.prevent="navigateToSection('contact')" :class="{ 'active': isActiveSection('contact') }">KONTAKT</a>
+          <!-- Column 1: Main Sections -->
+          <div class="menu-overlay__column">
+            <h3 class="menu-overlay__column-title">NAVIGATION</h3>
+            <div class="menu-overlay__section">
+              <a href="#hero" class="menu-overlay__link" @click.prevent="navigateToSection('hero')" :class="{ 'active': isActiveSection('hero') }">STARTSEITE</a>
+              <a href="#journey" class="menu-overlay__link" @click.prevent="navigateToSection('journey')" :class="{ 'active': isActiveSection('journey') }">ÜBER UNS</a>
+              <a href="#testimonials" class="menu-overlay__link" @click.prevent="navigateToSection('testimonials')" :class="{ 'active': isActiveSection('testimonials') }">KUNDEN</a>
+              <a href="#team" class="menu-overlay__link" @click.prevent="navigateToSection('team')" :class="{ 'active': isActiveSection('team') }">TEAM TAKTZEIT</a>
+              <a href="#services" class="menu-overlay__link" @click.prevent="navigateToSection('services')" :class="{ 'active': isActiveSection('services') }">LEISTUNGEN</a>
+              <a href="#history" class="menu-overlay__link" @click.prevent="navigateToSection('history')" :class="{ 'active': isActiveSection('history') }">GESCHICHTE</a>
+              <a href="#portfolio" class="menu-overlay__link" @click.prevent="navigateToSection('portfolio')" :class="{ 'active': isActiveSection('portfolio') }">PORTFOLIO</a>
+              <a href="#brand" class="menu-overlay__link" @click.prevent="navigateToSection('brand')" :class="{ 'active': isActiveSection('brand') }">MARKE & DESIGN</a>
+              <a href="#contact" class="menu-overlay__link" @click.prevent="navigateToSection('contact')" :class="{ 'active': isActiveSection('contact') }">KONTAKT</a>
+            </div>
           </div>
 
-          <!-- Separate pages -->
-          <div class="menu-overlay__section menu-overlay__section--pages">
-            <router-link to="/karriere" class="menu-overlay__link" @click="closeMenu">KARRIERE</router-link>
-            <router-link to="/employer-branding" class="menu-overlay__link" @click="closeMenu">
-              EMPLOYER BRANDING <span class="new-tag">NEW</span>
-            </router-link>
-            <router-link to="/packaging" class="menu-overlay__link" @click="closeMenu">
-              PACKAGING <span class="new-tag">NEW</span>
-            </router-link>
-            <router-link to="/automotive" class="menu-overlay__link" @click="closeMenu">
-              AUTOMOTIVE <span class="new-tag">NEW</span>
-            </router-link>
+          <!-- Column 2: Separate Pages -->
+          <div class="menu-overlay__column">
+            <h3 class="menu-overlay__column-title">BRANCHEN</h3>
+            <div class="menu-overlay__section">
+              <router-link to="/karriere" class="menu-overlay__link" @click="closeMenu">KARRIERE</router-link>
+              <router-link to="/employer-branding" class="menu-overlay__link" @click="closeMenu">
+                EMPLOYER BRANDING <span class="new-tag">NEW</span>
+              </router-link>
+              <router-link to="/packaging" class="menu-overlay__link" @click="closeMenu">
+                PACKAGING <span class="new-tag">NEW</span>
+              </router-link>
+              <router-link to="/automotive" class="menu-overlay__link" @click="closeMenu">
+                AUTOMOTIVE <span class="new-tag">NEW</span>
+              </router-link>
+            </div>
           </div>
 
-          <!-- Social Media Icons for Mobile Menu -->
-          <div class="menu-overlay__section menu-overlay__section--social">
-            <div class="menu-overlay__social">
-              <a href="https://www.facebook.com/taktzeit" target="_blank" rel="noopener" class="menu-overlay__social-link">
-                <img src="@/assets/images/facebook.svg" alt="Facebook" />
-              </a>
-              <a href="https://www.instagram.com/taktzeit" target="_blank" rel="noopener" class="menu-overlay__social-link">
-                <img src="@/assets/images/instagram.svg" alt="Instagram" />
-              </a>
-              <a href="https://www.linkedin.com/company/taktzeit" target="_blank" rel="noopener" class="menu-overlay__social-link">
-                <img src="@/assets/images/linkedin.svg" alt="LinkedIn" />
-              </a>
+          <!-- Column 3: Legal Links and Social Media -->
+          <div class="menu-overlay__column">
+            <h3 class="menu-overlay__column-title">RECHTLICHES</h3>
+            <div class="menu-overlay__section">
+              <router-link to="/impressum" class="menu-overlay__link" @click="closeMenu">IMPRESSUM</router-link>
+              <router-link to="/agb" class="menu-overlay__link" @click="closeMenu">AGB</router-link>
+              <router-link to="/datenschutz" class="menu-overlay__link" @click="closeMenu">DATENSCHUTZ</router-link>
+              <button class="menu-overlay__link menu-overlay__cookie-button" @click="openCookieSettings">COOKIE-EINSTELLUNGEN</button>
+            </div>
+
+            <!-- Social Media Icons -->
+            <div class="menu-overlay__section menu-overlay__section--social">
+              <h3 class="menu-overlay__column-title">SOCIAL MEDIA</h3>
+              <div class="menu-overlay__social">
+                <a href="https://www.facebook.com/taktzeit" target="_blank" rel="noopener" class="menu-overlay__social-link">
+                  <img src="@/assets/images/facebook.svg" alt="Facebook" />
+                </a>
+                <a href="https://www.instagram.com/taktzeit" target="_blank" rel="noopener" class="menu-overlay__social-link">
+                  <img src="@/assets/images/instagram.svg" alt="Instagram" />
+                </a>
+                <a href="https://www.linkedin.com/company/taktzeit" target="_blank" rel="noopener" class="menu-overlay__social-link">
+                  <img src="@/assets/images/linkedin.svg" alt="LinkedIn" />
+                </a>
+              </div>
             </div>
           </div>
         </nav>
       </div>
     </div>
-  </Teleport>
+  </nav>
 </template>
 
 <script>
@@ -171,6 +183,15 @@ export default {
       navigateToHomeSection(sectionId, { closeMenu })
     }
 
+    // Function to open cookie settings
+    const openCookieSettings = () => {
+      // Create and dispatch a custom event that the CookieBanner will listen for
+      const event = new CustomEvent('open-cookie-settings');
+      document.dispatchEvent(event);
+      console.log('Cookie settings button clicked from menu');
+      closeMenu();
+    }
+
     // Lifecycle hooks
     onMounted(() => {
       window.addEventListener('resize', handleResize)
@@ -193,7 +214,8 @@ export default {
       isActiveSection,
       toggleMenu,
       closeMenu,
-      navigateToSection
+      navigateToSection,
+      openCookieSettings
     }
   }
 }

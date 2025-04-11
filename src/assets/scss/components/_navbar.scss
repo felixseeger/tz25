@@ -137,10 +137,10 @@
   width: 100%;
   height: 100vh;
   background-color: rgba(#444444, 0.98);
-  z-index: $z-index-menu-overlay; /* Higher than all UI elements */
+  z-index: 5;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start; /* Changed from center to flex-start */
+  justify-content: flex-start; /* Changed from center to flex-start */
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
@@ -152,73 +152,110 @@
     visibility: visible;
   }
 
-  &__close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: rgba(255, 255, 255, 0.2);
-    
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: calc($z-index-menu-overlay + 1); /* One level higher than menu-overlay */
+  &__content {
+    padding: 80px 40px 40px; /* Increased left padding */
+    width: 100%;
+    max-width: 100%;
 
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-      transform: scale(1.05);
-    }
-
-    svg {
-      width: 50px;
-      height: 50px;
-      stroke-width: 3px; /* Make the X thicker */
+    /* Responsive styles for mobile */
+    @media (max-width: $breakpoint-md) {
+      padding: 80px 20px 40px;
     }
   }
 
-  &__content {
-    padding: 80px 20px 40px;
-    width: 100%;
-    max-width: 100%;
+  &__logo {
+    display: block;
+    margin-bottom: 40px;
+    text-align: left;
+
+    img {
+      width: 350px;
+      height: 40px;
+      transition: transform 0.3s ease;
+      transform: scale(.65);
+      transform-origin: left center; /* Ensure scaling happens from the left */
+
+      &:hover {
+        transform: scale(0.75);
+      }
+
+      /* Responsive styles for mobile */
+      @media (max-width: $breakpoint-sm) {
+        width: 280px;
+        height: 32px;
+      }
+    }
+
+    /* Responsive styles for mobile */
+    @media (max-width: $breakpoint-md) {
+      margin-bottom: 30px;
+    }
   }
 
   &__nav {
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row; /* Changed from column to row */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 2rem;
+    text-align: left; /* Changed from center to left */
+    align-items: flex-start; /* Changed from center to flex-start */
+    justify-content: flex-start; /* Changed from center to flex-start */
+
+    /* Responsive styles for mobile */
+    @media (max-width: $breakpoint-md) {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+
+  &__column {
+    flex: 1;
+    min-width: 250px; /* Ensure columns have a minimum width */
+    max-width: 350px; /* Limit maximum width for better readability */
+    margin-bottom: 2rem;
+
+    /* Responsive styles for mobile */
+    @media (max-width: $breakpoint-md) {
+      min-width: 100%;
+      max-width: 100%;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &__column-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: $primary-color;
+    letter-spacing: 1px;
+    text-align: left;
   }
 
   &__section {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-    align-items: center;
+    align-items: flex-start; /* Changed from center to flex-start */
     width: 100%;
+    margin-bottom: 2rem;
 
     &--pages {
-      margin-top: 1rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba($text-color, 0.2);
+      margin-top: 0; /* Removed top margin */
+      padding-top: 0; /* Removed top padding */
+      border-top: none; /* Removed border */
     }
 
     &--social {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba($text-color, 0.2);
+      margin-top: 0; /* Removed top margin */
+      padding-top: 0; /* Removed top padding */
+      border-top: none; /* Removed border */
     }
   }
 
   &__social {
     display: flex;
     gap: 1.5rem;
-    justify-content: center;
+    justify-content: flex-start; /* Changed from center to flex-start */
 
     &-link {
       display: flex;
@@ -257,21 +294,31 @@
     padding: 0.3rem 0;
     letter-spacing: 0.5px;
     position: relative;
+    text-align: left; /* Ensure text is left-aligned */
+    display: block; /* Make links block-level for better alignment */
+    width: 100%; /* Take full width of container */
+    background: none; /* For button elements */
+    border: none; /* For button elements */
+    cursor: pointer; /* For button elements */
 
     &:after {
       content: '';
       position: absolute;
       bottom: -2px;
-      left: 50%;
+      left: 0; /* Changed from 50% to 0 for left alignment */
       width: 0;
       height: 2px;
       background-color: $primary-color;
-      transition: width 0.3s ease, left 0.3s ease;
+      transition: width 0.3s ease;
     }
 
     &:hover {
       color: darken($text-color, 15%);
       transform: translateY(-2px);
+
+      &:after {
+        width: 30px; /* Show underline on hover */
+      }
     }
 
     &:focus {
@@ -291,8 +338,14 @@
 
       &:after {
         width: 30px;
-        left: calc(50% - 15px);
+        left: 0; /* Changed from calc(50% - 15px) to 0 for left alignment */
       }
+    }
+
+    /* Style for cookie settings button */
+    &.menu-overlay__cookie-button {
+      text-align: left;
+      padding-left: 0;
     }
 
     .new-tag {
