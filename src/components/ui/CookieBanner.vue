@@ -112,7 +112,7 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue';
 
 export default {
   name: 'CookieBanner',
-  emits: ['cookies-set'],
+  emits: ['cookies-set', 'settings-opened', 'settings-closed'],
   setup(props, { emit }) {
     const showBanner = ref(false);
     const showSettings = ref(false);
@@ -146,6 +146,9 @@ export default {
       showBanner.value = false;
       showSettings.value = false;
       emit('cookies-set', cookieSettings);
+      emit('settings-closed');
+      // Create and dispatch a global event for other components
+      document.dispatchEvent(new CustomEvent('cookie-settings-closed'));
     };
 
     // Accept all cookies
@@ -166,11 +169,17 @@ export default {
     // Open detailed settings
     const openSettings = () => {
       showSettings.value = true;
+      emit('settings-opened');
+      // Create and dispatch a global event for other components
+      document.dispatchEvent(new CustomEvent('cookie-settings-opened'));
     };
 
     // Close detailed settings
     const closeSettings = () => {
       showSettings.value = false;
+      emit('settings-closed');
+      // Create and dispatch a global event for other components
+      document.dispatchEvent(new CustomEvent('cookie-settings-closed'));
     };
 
     // Reset cookie consent (for testing)
@@ -187,6 +196,9 @@ export default {
     const handleOpenCookieSettings = () => {
       showBanner.value = true;
       showSettings.value = true;
+      emit('settings-opened');
+      // Create and dispatch a global event for other components
+      document.dispatchEvent(new CustomEvent('cookie-settings-opened'));
     };
 
     onMounted(() => {

@@ -22,21 +22,25 @@ export default {
     const { activeSection } = useActiveSection();
     const isContactSectionVisible = ref(false);
     const isFooterSectionVisible = ref(false);
+    const isCookieSettingsOpen = ref(false);
 
     // Compute whether the button should be hidden
     const shouldHideButton = computed(() => {
       // Hide when in contact or footer section (either by active section or by visibility event)
+      // Also hide when cookie settings are open
       const shouldHide =
         activeSection.value === 'contact' ||
         activeSection.value === 'footer' ||
         isContactSectionVisible.value ||
-        isFooterSectionVisible.value;
+        isFooterSectionVisible.value ||
+        isCookieSettingsOpen.value;
 
       // Log for debugging
       console.log('Cookie button should hide:', shouldHide,
         'Active section:', activeSection.value,
         'Contact visible:', isContactSectionVisible.value,
-        'Footer visible:', isFooterSectionVisible.value);
+        'Footer visible:', isFooterSectionVisible.value,
+        'Cookie settings open:', isCookieSettingsOpen.value);
 
       return shouldHide;
     });
@@ -61,18 +65,34 @@ export default {
       isFooterSectionVisible.value = event.detail.visible;
     };
 
+    // Handle cookie settings opened event
+    const handleCookieSettingsOpened = () => {
+      isCookieSettingsOpen.value = true;
+    };
+
+    // Handle cookie settings closed event
+    const handleCookieSettingsClosed = () => {
+      isCookieSettingsOpen.value = false;
+    };
+
     onMounted(() => {
       // Listen for the contact section visibility event
       document.addEventListener('contact-section-visible', handleContactSectionVisible);
 
       // Listen for the footer section visibility event
       document.addEventListener('footer-section-visible', handleFooterSectionVisible);
+
+      // Listen for cookie settings events
+      document.addEventListener('cookie-settings-opened', handleCookieSettingsOpened);
+      document.addEventListener('cookie-settings-closed', handleCookieSettingsClosed);
     });
 
     onUnmounted(() => {
       // Clean up event listeners
       document.removeEventListener('contact-section-visible', handleContactSectionVisible);
       document.removeEventListener('footer-section-visible', handleFooterSectionVisible);
+      document.removeEventListener('cookie-settings-opened', handleCookieSettingsOpened);
+      document.removeEventListener('cookie-settings-closed', handleCookieSettingsClosed);
     });
 
     return {
