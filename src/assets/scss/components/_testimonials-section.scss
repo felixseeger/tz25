@@ -89,6 +89,8 @@
     display: flex;
     transition: transform 0.5s ease;
     width: 100%;
+    /* The transform property will be dynamically set via a CSS custom property */
+    transform: translateX(var(--slide-offset, 0));
   }
 }
 
@@ -166,6 +168,14 @@
     color: white; /* Changed to white to match design */
     margin: 0 0 0.5rem 0;
   }
+}
+
+/* Navigation styles */
+.navigation-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .carousel-nav {
