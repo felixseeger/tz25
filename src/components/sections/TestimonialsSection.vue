@@ -1,7 +1,16 @@
 <template>
 
   <section class="testimonials-section">
-    <div class="testimonials-background"></div>
+    <div class="testimonials-background">
+      <img
+        src="../../assets/images/testamonials.svg"
+        alt="Testimonials Background"
+        class="testimonials-background-image loading"
+        loading="lazy"
+        ref="backgroundImage"
+        @load="handleImageLoaded"
+      />
+    </div>
     <div class="container">
       <div class="testimonials-header">
         <h2 class="testimonials-title">DAS SAGEN UNSERE</h2>
@@ -81,7 +90,7 @@ export default {
   data() {
     return {
       currentSlide: 0,
-      totalSlides: 2 // Update this based on the number of testimonials
+      totalSlides: 8 // Updated to match the number of testimonials
     }
   },
   methods: {
@@ -90,6 +99,13 @@ export default {
     },
     prevSlide() {
       this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+    },
+    handleImageLoaded() {
+      // When the image is loaded, remove the loading class and add the loaded class
+      if (this.$refs.backgroundImage) {
+        this.$refs.backgroundImage.classList.remove('loading');
+        this.$refs.backgroundImage.classList.add('loaded');
+      }
     }
   }
 }
