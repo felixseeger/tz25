@@ -18,7 +18,7 @@
             <div class="journey-step__icon">
               <img src="../../assets/images/essentilas-icn.svg" alt="Essentials" />
               <div class="journey-step__overlay">
-                <p>ESSENTIALS: Marke, Positionierung, Strategie und Packaging Design – die Grundlage für erfolgreiches Absatzmarketing.</p>
+                <p>Marke, Positionierung, Strategie und Packaging Design – die Grundlage für erfolgreiches Absatzmarketing.</p>
               </div>
             </div>
           </div>
@@ -30,7 +30,7 @@
             <div class="journey-step__icon">
               <img src="../../assets/images/sell-in-icn.svg" alt="Sell-In" />
               <div class="journey-step__overlay">
-                <p>SELL IN: Ein top vorbereiteter Außendienst und auf den Vertriebskanal zugeschnittene Maßnahmen steigern den Hineinverkauf.</p>
+                <p>Ein top vorbereiteter Außendienst und auf den Vertriebskanal zugeschnittene Maßnahmen steigern den Hineinverkauf.</p>
               </div>
             </div>
           </div>
@@ -42,7 +42,7 @@
             <div class="journey-step__icon">
               <img src="../../assets/images/sell-through-icn.svg" alt="Sell-Through" />
               <div class="journey-step__overlay">
-                <p>SELL THROUGH: Strategien, Konzepte und maßgeschneiderte Tools für Großhandelspartner optimieren den Durchverkauf.</p>
+                <p>Strategien, Konzepte und maßgeschneiderte Tools für Großhandelspartner optimieren den Durchverkauf.</p>
               </div>
             </div>
           </div>
@@ -54,7 +54,7 @@
             <div class="journey-step__icon">
               <img src="../../assets/images/sell-out_txt-ico.svg" alt="Sell-Out" />
               <div class="journey-step__overlay">
-                <p>SELL-OUT: Endverbaucher-Nachfrage beim Handel steigern und starke Impulse für den Abverkauf setzen.</p>
+                <p>Endverbaucher-Nachfrage beim Handel steigern und starke Impulse für den Abverkauf setzen.</p>
               </div>
             </div>
           </div>
@@ -274,11 +274,11 @@ export default {
   background-color: #D8292F; /* The red background color you specified */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Changed from center to flex-start for left alignment */
   opacity: 0;
   transition: opacity 0.3s ease;
   padding: 1rem;
-  text-align: center;
+  text-align: left; /* Changed from center to left */
   color: white;
   font-size: 0.9rem;
   line-height: 1.4;
@@ -292,6 +292,8 @@ export default {
 .journey-step__overlay p {
   margin: 0;
   font-weight: 500;
+  text-align: left;
+  width: 100%;
 }
 
 /* Responsive adjustments for the overlay */
