@@ -241,26 +241,26 @@ export default {
 }
 
 .carousel-control {
-  background: rgba(0, 0, 0, 0.3);
-  border: none;
+  background-color: transparent;
+  border: 1px solid white;
   border-radius: 50%;
   cursor: pointer;
   padding: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
   z-index: 100;
 
   img {
     width: 24px;
     height: 24px;
-    filter: invert(1);
+    filter: invert(1); /* Makes the arrow white */
   }
 
   &:hover {
     transform: scale(1.1);
-    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.8);
   }
 
   &:focus {
