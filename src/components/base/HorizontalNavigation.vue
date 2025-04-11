@@ -34,7 +34,6 @@ export default {
 
   &__prev,
   &__next {
-
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -43,12 +42,12 @@ export default {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background-color: transparent;
+    border: 1px solid white;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.5);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      border-color: rgba(255, 255, 255, 0.8);
     }
 
     &:active {
@@ -68,11 +67,10 @@ export default {
     .horizontal-nav__prev,
     .horizontal-nav__next {
       background: transparent;
-      border: 1px solid rgba(#333, 0.5);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(#333, 0.8);
 
       &:hover {
-        background-color: rgba(#333, 0.05);
+        border-color: rgba(#333, 1);
       }
     }
 
