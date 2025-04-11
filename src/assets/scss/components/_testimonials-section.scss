@@ -27,12 +27,16 @@
   width: 100%;
   height: 100%;
   background-color: #444444; /* Match the design reference */
-  background-image: url(../../images/testamonials.svg); /* Fixed typo in filename */
-  background-size: cover;
-  background-position: center center; /* Added to ensure proper positioning */
-  background-repeat: no-repeat;
-  opacity: 1; /* Ensure full opacity */
   z-index: 1;
+  overflow: hidden;
+}
+
+.testimonials-background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  opacity: 1;
 }
 
 .testimonials-header {
@@ -122,6 +126,7 @@
 }
 
 .testimonial-text {
+  width: 100vw;
   font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 1rem;

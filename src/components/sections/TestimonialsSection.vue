@@ -1,7 +1,9 @@
 <template>
 
   <section class="testimonials-section">
-    <div class="testimonials-background"></div>
+    <div class="testimonials-background">
+      <img src="../../assets/images/testamonials.svg" alt="Testimonials Background" class="testimonials-background-image" />
+    </div>
     <div class="container">
       <div class="testimonials-header">
         <h2 class="testimonials-title">DAS SAGEN UNSERE</h2>
