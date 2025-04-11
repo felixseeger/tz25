@@ -1,4 +1,5 @@
 <template>
+  <!-- MODIFIED: Loading animation disabled - always hidden -->
   <div class="page-loader" :class="{ 'is-active': isActive }">
     <div class="page-loader__content">
       <div class="page-loader__spinner">
@@ -12,8 +13,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'PageLoader',
@@ -35,53 +35,21 @@ export default defineComponent({
       default: 100 // Delay before showing the loader in milliseconds
     }
   },
-  setup(props) {
-    const router = useRouter();
+  setup() {
+    // MODIFIED: Loading animation disabled - always set to false
     const isActive = ref(false);
     const showTimeout = ref(null);
     const hideTimeout = ref(null);
-    const startTime = ref(0);
 
-    // Watch for route changes
-    watch(
-      () => router.currentRoute.value,
-      () => {
-        // Clear any existing timeouts
-        if (showTimeout.value) clearTimeout(showTimeout.value);
-        if (hideTimeout.value) clearTimeout(hideTimeout.value);
-
-        // Start loading after a short delay to avoid flashing for quick transitions
-        showTimeout.value = setTimeout(() => {
-          isActive.value = true;
-          startTime.value = Date.now();
-        }, props.delay);
-      },
-      { immediate: true }
-    );
-
-    // Listen for the beforeResolve event to hide the loader
-    router.beforeResolve((to, from, next) => {
-      const currentTime = Date.now();
-      const elapsedTime = currentTime - startTime.value;
-      const remainingTime = Math.max(0, props.minDuration - elapsedTime);
-
-      // Ensure the loader is shown for at least minDuration
-      hideTimeout.value = setTimeout(() => {
-        isActive.value = false;
-      }, remainingTime);
-
-      next();
-    });
-
-    // Method to manually hide the loader
+    // Method to manually hide the loader (kept for API compatibility)
     const hideLoader = () => {
       if (showTimeout.value) clearTimeout(showTimeout.value);
       if (hideTimeout.value) clearTimeout(hideTimeout.value);
       isActive.value = false;
     };
 
-    // Hide the loader initially (in case it's stuck)
-    setTimeout(hideLoader, 1000);
+    // Ensure the loader is always hidden
+    hideLoader();
 
     return {
       isActive,

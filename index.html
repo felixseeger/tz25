@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="fonts-loading">
+<html lang="en" class="fonts-loaded fonts-critical-loaded fonts-important-loaded">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -19,15 +19,14 @@
 
     <!-- Font loading optimization styles -->
     <style>
-      /* Hide text until fonts are loaded to prevent FOUT */
-      .fonts-loading .font-critical {
-        opacity: 0;
+      /* MODIFIED: Font loading animation disabled - text is always visible */
+      .font-critical {
+        opacity: 1;
       }
 
       /* Show text when critical fonts are loaded */
       .fonts-critical-loaded .font-critical {
         opacity: 1;
-        transition: opacity 0.2s ease-in-out;
       }
 
       /* Font subset definitions */
