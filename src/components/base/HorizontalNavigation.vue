@@ -23,7 +23,6 @@ export default {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  margin-top: 2rem;
   position: relative;
   z-index: 10;
   width: 100%;
