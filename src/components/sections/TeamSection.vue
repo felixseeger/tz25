@@ -13,7 +13,6 @@
       </div>
 
       <div class="team-carousel" ref="teamCarousel">
-        <VerticalNavigation @prev="scrollLeft" @next="scrollRight" class="team-nav light" />
         <div class="team-carousel__wrapper" ref="carouselWrapper">
           <!-- First row -->
           <div class="team-carousel__row">
@@ -45,6 +44,7 @@
                   alt="Team Member"
                   aspect-ratio="1/1"
                   placeholder-color="#333333"
+
                 />
               </div>
             </div>
@@ -116,22 +116,21 @@
             </div>
           </div>
         </div>
+        <HorizontalNavigation @prev="scrollLeft" @next="scrollRight" class="team-nav light" />
       </div>
-
-      <!-- VerticalNavigation moved inside team-carousel -->
     </div>
   </section>
 </template>
 
 <script>
 import { ref, onMounted, onUnmounted } from 'vue';
-import { VerticalNavigation } from './../base';
+import { HorizontalNavigation } from './../base';
 import { LazyImage } from './../ui';
 
 export default {
   name: 'TeamSection',
   components: {
-    VerticalNavigation,
+    HorizontalNavigation,
     LazyImage
   },
   setup() {
@@ -143,11 +142,11 @@ export default {
 
     // Variables for drag functionality
     let isDragging = false;
-    let startY = 0;
+    let startX = 0;
     let startScrollPosition = 0;
     let dragVelocity = 0;
     let lastDragTime = 0;
-    let lastDragY = 0;
+    let lastDragX = 0;
     let momentumAnimationId = null;
 
     // Function to scroll to previous row
@@ -192,25 +191,25 @@ export default {
 
       // Calculate the offset based on the current row's position
       const currentRow = rows[currentIndex.value];
-      const rowHeight = currentRow.offsetHeight;
-      const offset = currentIndex.value * rowHeight;
+      const rowWidth = currentRow.offsetWidth;
+      const offset = currentIndex.value * rowWidth;
 
       // Apply the transform
-      carouselWrapper.value.style.transform = `translateY(-${offset}px)`;
+      carouselWrapper.value.style.transform = `translateX(-${offset}px)`;
 
       // Log for debugging
-      console.log(`Scrolling to row ${currentIndex.value}, offset: ${offset}px, row height: ${rowHeight}px`);
+      console.log(`Scrolling to row ${currentIndex.value}, offset: ${offset}px, row width: ${rowWidth}px`);
     };
 
     // Drag functionality
     const startDrag = (e) => {
-      // Get the appropriate client Y position (touch or mouse)
-      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+      // Get the appropriate client X position (touch or mouse)
+      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
 
       isDragging = true;
-      startY = clientY;
+      startX = clientX;
       startScrollPosition = currentIndex.value;
-      lastDragY = clientY;
+      lastDragX = clientX;
       lastDragTime = Date.now();
       dragVelocity = 0;
 
@@ -239,21 +238,21 @@ export default {
       // Prevent default to avoid scrolling the page
       if (e.cancelable) e.preventDefault();
 
-      // Get the appropriate client Y position (touch or mouse)
-      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-      const deltaY = clientY - startY;
+      // Get the appropriate client X position (touch or mouse)
+      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+      const deltaX = clientX - startX;
 
       // Calculate the potential new index based on drag distance
       // We use a threshold to determine when to switch rows
-      const rowHeight = carouselWrapper.value.offsetHeight / (maxIndex.value + 1);
-      const dragThreshold = rowHeight * 0.2; // 20% of row height
+      const rowWidth = carouselWrapper.value.offsetWidth / (maxIndex.value + 1);
+      const dragThreshold = rowWidth * 0.2; // 20% of row width
 
       let newIndex = startScrollPosition;
-      if (deltaY > dragThreshold) {
-        // Dragging down, decrease index
+      if (deltaX > dragThreshold) {
+        // Dragging right, decrease index
         newIndex = Math.max(0, startScrollPosition - 1);
-      } else if (deltaY < -dragThreshold) {
-        // Dragging up, increase index
+      } else if (deltaX < -dragThreshold) {
+        // Dragging left, increase index
         newIndex = Math.min(maxIndex.value, startScrollPosition + 1);
       }
 
@@ -268,8 +267,8 @@ export default {
       const elapsed = now - lastDragTime;
 
       if (elapsed > 0) {
-        dragVelocity = (clientY - lastDragY) / elapsed;
-        lastDragY = clientY;
+        dragVelocity = (clientX - lastDragX) / elapsed;
+        lastDragX = clientX;
         lastDragTime = now;
       }
     };
@@ -290,10 +289,10 @@ export default {
       if (Math.abs(dragVelocity) > 0.5) {
         // Determine direction based on velocity
         if (dragVelocity > 0) {
-          // Scrolling down (negative index direction)
+          // Scrolling right (negative index direction)
           scrollLeft();
         } else {
-          // Scrolling up (positive index direction)
+          // Scrolling left (positive index direction)
           scrollRight();
         }
       }
@@ -328,9 +327,9 @@ export default {
 
       // Add keyboard navigation
       const handleKeyDown = (event) => {
-        if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+        if (event.key === 'ArrowLeft') {
           scrollLeft();
-        } else if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+        } else if (event.key === 'ArrowRight') {
           scrollRight();
         }
       };
