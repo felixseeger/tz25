@@ -1,5 +1,6 @@
 <template>
   <div class="brand-carousel" ref="brandCarousel">
+    <!-- Carousel Track with Slides -->
     <div
       class="brand-carousel-track"
       ref="brandTrack"
@@ -163,7 +164,18 @@
       </div>
     </div>
 
-    <!-- Navigation controls -->
+    <!-- Pagination indicators (hidden but kept for accessibility) -->
+    <div class="brand-pagination">
+      <button
+        v-for="index in 3"
+        :key="index - 1"
+        @click="goToSlide(index - 1)"
+        :class="['pagination-dot', { active: currentSlide === index - 1 }]"
+        :aria-label="'Go to slide ' + index"
+      ></button>
+    </div>
+
+    <!-- Navigation controls (moved outside the carousel track) -->
     <div class="brand-navigation">
       <button
         class="nav-button prev"
@@ -181,17 +193,6 @@
       >
         <img src="@/assets/images/arrow_right.svg" alt="Next" class="arrow-icon" />
       </button>
-    </div>
-
-    <!-- Pagination indicators (hidden but kept for accessibility) -->
-    <div class="brand-pagination" style="display: none;">
-      <button
-        v-for="index in 3"
-        :key="index - 1"
-        @click="goToSlide(index - 1)"
-        :class="['pagination-dot', { active: currentSlide === index - 1 }]"
-        :aria-label="'Go to slide ' + index"
-      ></button>
     </div>
   </div>
 </template>
@@ -288,14 +289,14 @@ export default {
 .brand-slide {
   flex: 0 0 100%;
   width: 100%;
+  height: 80%;
   opacity: 1;
   transition: opacity 0.3s ease;
   background-image: url('@/assets/images/brand_bg.svg');
   background-size: cover;
   background-position: center;
-  padding: 2rem;
-  border-radius: 8px;
-  min-height: 542px; /* Set a fixed height to match the design */
+
+  min-height: 502px; /* Set a fixed height to match the design */
 
   &.active {
     opacity: 1;
@@ -305,7 +306,7 @@ export default {
 .brand-title {
   color: white;
   margin-bottom: 2rem;
-  text-align: center;
+  text-align: left;
 
   @media (max-width: 768px) {
     font-size: 2rem;
@@ -338,32 +339,34 @@ export default {
   }
 
   &__title {
-    font-size: 1.2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     color: white;
     text-transform: uppercase;
+    text-align: center;
   }
 
   &__description {
-    font-size: 0.95rem;
+    font-size: 1.2rem;
     line-height: 1.5;
+    text-align: center;
     color: rgba(255, 255, 255, 0.9);
   }
 }
 
 .brand-navigation {
-  position: absolute;
-  bottom: 30%; /* Position lower in the slide */
-  left: 50%;
-  transform: translate(-50%, 50%); /* Center both horizontally and vertically */
+  position: relative; /* Changed from absolute to relative */
+  margin-top: 30px; /* Increased space between carousel and navigation */
+  margin-bottom: 20px; /* Add space below navigation */
   display: flex;
-  gap: 0.5rem;
+  justify-content: center; /* Center horizontally */
+  gap: 1rem; /* Increased gap between buttons */
   z-index: 10;
 
   .nav-button {
     background: transparent;
-    border: 2px solid white;
+    border: 2px solid #444; /* Changed from white to dark gray */
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -375,7 +378,8 @@ export default {
     margin: 0 10px; /* Add some spacing between buttons */
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(68, 68, 68, 0.1);
+      border-color: #2A6FEE; /* Primary color on hover */
     }
 
     &:disabled {
@@ -386,12 +390,13 @@ export default {
     .arrow-icon {
       width: 25px;
       height: 25px;
+      filter: invert(0.3); /* Make the white arrows darker to match the new style */
     }
   }
 }
 
 .brand-pagination {
-  display: flex;
+  display: none; /* Moved from inline style */
   justify-content: center;
   gap: 0.5rem;
   margin-top: 1rem;
