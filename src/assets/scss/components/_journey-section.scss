@@ -64,18 +64,6 @@
   opacity: 1; /* Start visible */
   visibility: visible; /* Start visible */
 
-  // Animation states
-  &.initial-state {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  &.animated-state {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-  }
-
   /* Adjust for mobile */
   @media (max-width: $breakpoint-sm) {
     min-height: auto;
@@ -122,25 +110,18 @@
   z-index: 2;
   flex: 1;
   max-width: 160px;
-  transition: transform 0.3s ease, opacity 0.6s ease;
+  transition: transform 0.3s ease;
   cursor: pointer;
-
-  // Animation states
-  &.initial-state {
-    opacity: 0;
-    transform: translateY(100px);
-  }
-
-  &.animated-state {
-    opacity: 1;
-    transform: none;
-  }
 
   &:hover {
     transform: translateY(-5px);
 
     .journey-step__icon img {
       transform: scale(1.1);
+    }
+
+    .journey-step__overlay {
+      opacity: 1;
     }
   }
 
@@ -173,6 +154,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    position: relative; /* Added for overlay positioning */
+    overflow: hidden; /* Added to contain the overlay */
 
     /* Adjust icon size for mobile */
     @media (max-width: $breakpoint-sm) {
@@ -189,6 +172,8 @@
       max-width: 100%;
       max-height: 100%;
       transition: transform 0.3s ease;
+      position: relative; /* Added for z-index to work */
+      z-index: 1; /* Ensure image is above the overlay initially */
 
       /* Ensure images don't overflow on mobile */
       @media (max-width: $breakpoint-sm) {
@@ -198,6 +183,32 @@
       }
     }
   }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #D8292F; /* Red background as shown in the image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2; /* Above the image on hover */
+    padding: 1rem;
+  }
+
+  &__overlay-text {
+    color: white;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: left; /* Left-aligned text as per requirements */
+    max-width: 100%;
+  }
+
+  /* Hover behavior moved to the main journey-step hover rule */
 
   &__title {
     font-size: 1.2rem;
@@ -218,18 +229,6 @@
     width: 2px;
     transform-origin: center center; /* For scaling animation */
     will-change: transform, opacity; /* Optimize for animations */
-    transition: transform 0.8s ease, opacity 0.8s ease;
-
-    // Animation states
-    &.initial-state {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-
-    &.animated-state {
-      opacity: 1;
-      transform: none;
-    }
 
     @media (max-width: $breakpoint-lg) {
       display: none;

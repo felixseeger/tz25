@@ -11,62 +11,62 @@
         </p>
       </div>
 
-      <div class="journey-steps-container initial-state" ref="journeyStepsContainer">
+      <div class="journey-steps-container" ref="journeyStepsContainer">
         <div class="journey-steps">
-          <div class="journey-step initial-state" ref="journeyStep">
+          <div class="journey-step" ref="journeyStep">
             <h3 class="journey-step__title">ESSENTIALS</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/essentilas-icn.svg" alt="Essentials" />
               <div class="journey-step__overlay">
-                <p>Marke, Positionierung, Strategie und Packaging Design – die Grundlage für erfolgreiches Absatzmarketing.</p>
+                <p class="journey-step__overlay-text">Marke, Positionierung, Strategie und Packaging Design – die Grundlage für erfolgreiches Absatzmarketing.</p>
               </div>
             </div>
           </div>
 
-          <div class="journey-step__divider initial-state" ref="journeyDivider"></div>
+          <div class="journey-step__divider" ref="journeyDivider"></div>
 
-          <div class="journey-step initial-state" ref="journeyStep">
+          <div class="journey-step" ref="journeyStep">
             <h3 class="journey-step__title">SELL-IN</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/sell-in-icn.svg" alt="Sell-In" />
               <div class="journey-step__overlay">
-                <p>Ein top vorbereiteter Außendienst und auf den Vertriebskanal zugeschnittene Maßnahmen steigern den Hineinverkauf.</p>
+                <p class="journey-step__overlay-text">Ein top vorbereiteter Außendienst und auf den Vertriebskanal zugeschnittene Maßnahmen steigern den Hineinverkauf.</p>
               </div>
             </div>
           </div>
 
-          <div class="journey-step__divider initial-state" ref="journeyDivider"></div>
+          <div class="journey-step__divider" ref="journeyDivider"></div>
 
-          <div class="journey-step initial-state" ref="journeyStep">
+          <div class="journey-step" ref="journeyStep">
             <h3 class="journey-step__title">SELL-THROUGH</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/sell-through-icn.svg" alt="Sell-Through" />
               <div class="journey-step__overlay">
-                <p>Strategien, Konzepte und maßgeschneiderte Tools für Großhandelspartner optimieren den Durchverkauf.</p>
+                <p class="journey-step__overlay-text">Strategien, Konzepte und maßgeschneiderte Tools für Großhändler optimieren den Durchverkauf.</p>
               </div>
             </div>
           </div>
 
-          <div class="journey-step__divider initial-state" ref="journeyDivider"></div>
+          <div class="journey-step__divider" ref="journeyDivider"></div>
 
-          <div class="journey-step initial-state" ref="journeyStep">
+          <div class="journey-step" ref="journeyStep">
             <h3 class="journey-step__title">SELL-OUT</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/sell-out_txt-ico.svg" alt="Sell-Out" />
               <div class="journey-step__overlay">
-                <p>Endverbaucher-Nachfrage beim Handel steigern und starke Impulse für den Abverkauf setzen.</p>
+                <p class="journey-step__overlay-text">Endverbraucher-Nachfrage beim Handel steigern und starke Impulse für den Abverkauf setzen.</p>
               </div>
             </div>
           </div>
 
-          <div class="journey-step__divider initial-state" ref="journeyDivider"></div>
+          <div class="journey-step__divider" ref="journeyDivider"></div>
 
-          <div class="journey-step initial-state" ref="journeyStep">
+          <div class="journey-step" ref="journeyStep">
             <h3 class="journey-step__title">FULL SERVICE</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/full-service_txt-ico.svg" alt="Full Service" />
               <div class="journey-step__overlay">
-                <p>Umsetzung aus einer Hand: Kreation, Aktionsbetreuung, Clearing, Produktion, Bespielung aller Touchpoints u.v.m.</p>
+                <p class="journey-step__overlay-text">Umsetzung aus einer Hand. Kreation, Automatisierung, Crafting, Produktion, Bespielung aller Touchpoints.</p>
               </div>
             </div>
           </div>
@@ -158,19 +158,19 @@ export default {
 
         // Make sure the container is visible
         if (journeyStepsContainer.value) {
-          journeyStepsContainer.value.classList.add('animated-state');
-          journeyStepsContainer.value.classList.remove('initial-state');
+          journeyStepsContainer.value.style.opacity = '1';
+          journeyStepsContainer.value.style.visibility = 'visible';
         }
 
         // Make all steps visible first (in case animation fails)
         steps.forEach(step => {
-          step.classList.add('animated-state');
-          step.classList.remove('initial-state');
+          step.style.opacity = '1';
+          step.style.transform = 'none';
         });
 
         dividers.forEach(divider => {
-          divider.classList.add('animated-state');
-          divider.classList.remove('initial-state');
+          divider.style.opacity = '1';
+          divider.style.transform = 'none';
         });
 
         // Now set up for animation
@@ -225,18 +225,18 @@ export default {
         const container = document.querySelector('.journey-steps-container');
 
         if (container) {
-          container.classList.add('animated-state');
-          container.classList.remove('initial-state');
+          container.style.opacity = '1';
+          container.style.visibility = 'visible';
         }
 
         allSteps.forEach(step => {
-          step.classList.add('animated-state');
-          step.classList.remove('initial-state');
+          step.style.opacity = '1';
+          step.style.transform = 'none';
         });
 
         allDividers.forEach(divider => {
-          divider.classList.add('animated-state');
-          divider.classList.remove('initial-state');
+          divider.style.opacity = '1';
+          divider.style.transform = 'none';
         });
 
         console.log('Fallback visibility applied to journey steps');
@@ -259,55 +259,4 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/_variables.scss';
 
-.journey-step__icon {
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px; /* Optional: adds rounded corners to the overlay */
-}
-
-.journey-step__overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #D8292F; /* The red background color you specified */
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* Changed from center to flex-start for left alignment */
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  padding: 1rem;
-  text-align: left; /* Changed from center to left */
-  color: white;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  pointer-events: none; /* Ensures the overlay doesn't interfere with hover */
-}
-
-.journey-step:hover .journey-step__overlay {
-  opacity: 0.95; /* Slightly transparent to show a hint of the icon underneath */
-}
-
-.journey-step__overlay p {
-  margin: 0;
-  font-weight: 500;
-  text-align: left;
-  width: 100%;
-}
-
-/* Responsive adjustments for the overlay */
-@media (max-width: $breakpoint-md) {
-  .journey-step__overlay {
-    font-size: 0.8rem;
-    padding: 0.75rem;
-  }
-}
-
-@media (max-width: $breakpoint-sm) {
-  .journey-step__overlay {
-    font-size: 0.75rem;
-    padding: 0.5rem;
-  }
-}
 </style>
