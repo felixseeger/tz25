@@ -85,5 +85,24 @@ export default {
       }
     }
   }
+
+  /* Light theme variant with more visibility */
+  &.light {
+    .horizontal-nav__prev,
+    .horizontal-nav__next {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 2px solid #4D4D4D;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+      &:hover {
+        background-color: white;
+        transform: translateY(-2px);
+      }
+    }
+
+    .horizontal-nav__arrow {
+      filter: brightness(0); /* Make the SVG black */
+    }
+  }
 }
 </style>

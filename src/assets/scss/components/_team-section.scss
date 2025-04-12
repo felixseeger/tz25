@@ -1,7 +1,7 @@
 // Team Section Styles
 .team-section {
   background-color: #D9D9D9;
-  padding: 4rem 0;
+  padding: 4rem 0 8rem; /* Increased bottom padding to accommodate navigation */
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -220,10 +220,12 @@
 .team-carousel {
   position: relative; /* Ensure the carousel has a position context for absolute positioning */
 
-  .team-nav {
-    bottom: -3rem; /* Position below the carousel */
+  .horizontal-nav.team-nav {
+    position: absolute;
+    bottom: -5rem; /* Position further below the carousel for better visibility */
     left: 50%;
     transform: translateX(-50%);
     z-index: 100; /* Ensure it's above other elements */
+    margin-top: 0; /* Override the default margin-top */
   }
 }
