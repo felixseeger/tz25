@@ -354,24 +354,25 @@ export default {
 
 .brand-navigation {
   position: absolute;
-  bottom: 1rem;
+  bottom: 30%; /* Position lower in the slide */
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, 50%); /* Center both horizontally and vertically */
   display: flex;
   gap: 0.5rem;
   z-index: 10;
 
   .nav-button {
     background: transparent;
-    border: 1px solid white;
+    border: 2px solid white;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin: 0 10px; /* Add some spacing between buttons */
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
@@ -383,8 +384,8 @@ export default {
     }
 
     .arrow-icon {
-      width: 20px;
-      height: 20px;
+      width: 25px;
+      height: 25px;
     }
   }
 }
