@@ -56,12 +56,19 @@ export default {
 
     // Hide button on history and contact sections or when scrolling to contact section
     const shouldHideButton = computed(() => {
-      // Check if we're in the contact section based on URL hash or active section
-      const inContactSection = activeSection.value === 'contact' || window.location.hash === '#contact' || isContactSectionVisible.value;
-      const inHistorySection = activeSection.value === 'history' || isHistorySectionVisible.value || window.location.hash === '#history';
+      // Debug logs
+      console.log('Active section:', activeSection.value);
+      console.log('History visible:', isHistorySectionVisible.value);
+      console.log('Contact visible:', isContactSectionVisible.value);
 
-      // Hide when in contact section or history section
-      return inContactSection || inHistorySection;
+      // Only hide when we're exactly in the contact section
+      const inContactSection = activeSection.value === 'contact';
+
+      // For debugging purposes, log the current state
+      console.log('Should hide button:', inContactSection);
+
+      // Only hide when in contact section
+      return inContactSection;
     });
 
     const scrollToContact = () => {
@@ -81,7 +88,8 @@ export default {
 
     // Force re-evaluation of shouldHideButton on scroll
     const handleScroll = () => {
-      // Check if the history section is in the viewport
+      // This will trigger a re-evaluation of the computed property
+      // by checking if the history section is in the viewport
       const historySection = document.getElementById('history');
       if (historySection) {
         const rect = historySection.getBoundingClientRect();
@@ -95,30 +103,11 @@ export default {
         if (Math.abs(rect.top) < 300 || Math.abs(rect.bottom - window.innerHeight) < 300) {
           isHistorySectionVisible.value = true;
         }
-      }
 
-      // Check if the contact section is in the viewport
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        const rect = contactSection.getBoundingClientRect();
-        // Consider visible even if just partially in viewport
-        isContactSectionVisible.value = (
-          rect.top <= window.innerHeight &&
-          rect.bottom >= 0
-        );
-
-        // If we're very close to the contact section, consider it visible
-        if (Math.abs(rect.top) < 300 || Math.abs(rect.bottom - window.innerHeight) < 300) {
-          isContactSectionVisible.value = true;
+        // Also check if the URL hash is #history
+        if (window.location.hash === '#history') {
+          isHistorySectionVisible.value = true;
         }
-      }
-
-      // Also check URL hash
-      if (window.location.hash === '#history') {
-        isHistorySectionVisible.value = true;
-      }
-      if (window.location.hash === '#contact') {
-        isContactSectionVisible.value = true;
       }
     };
 

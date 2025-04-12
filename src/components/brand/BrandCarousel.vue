@@ -270,6 +270,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/scss/_variables.scss';
+
 .brand-carousel {
   position: relative;
   width: 100%;
@@ -305,7 +307,7 @@ export default {
   margin-bottom: 2rem;
   text-align: center;
 
-  @media (max-width: $breakpoint-md) {
+  @media (max-width: 768px) {
     font-size: 2rem;
   }
 }
@@ -317,11 +319,11 @@ export default {
   max-width: 90%; /* Reduce width to match design */
   margin: 0 auto; /* Center the grid */
 
-  @media (max-width: $breakpoint-lg) {
+  @media (max-width: 992px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: $breakpoint-sm) {
+  @media (max-width: 576px) {
     grid-template-columns: 1fr;
   }
 }
