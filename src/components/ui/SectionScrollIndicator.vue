@@ -24,7 +24,7 @@ export default {
     // Sections where the indicator should be visible
     visibleSections: {
       type: Array,
-      default: () => ['hero', 'journey', 'history', 'services', 'brand']
+      default: () => ['hero', 'journey', 'history', 'services'] // Removed 'brand' from visible sections
     },
     // Z-index for the indicator
     zIndex: {
