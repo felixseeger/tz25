@@ -219,13 +219,43 @@
 /* Custom positioning for the horizontal navigation in the team section */
 .team-carousel {
   position: relative; /* Ensure the carousel has a position context for absolute positioning */
+}
 
-  .horizontal-nav.team-nav {
-    position: absolute;
-    bottom: -5rem; /* Position further below the carousel for better visibility */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 100; /* Ensure it's above other elements */
-    margin-top: 0; /* Override the default margin-top */
+/* Team navigation styles */
+.team-navigation-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem auto;
+  z-index: 100;
+}
+
+.team-nav-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid #4D4D4D;
+
+  &:hover {
+    background-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
   }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.team-nav-arrow {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0); /* Make the SVG black */
 }

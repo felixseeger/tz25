@@ -31,7 +31,7 @@
             <!-- Middle column with quote -->
             <div class="team-carousel__item team-carousel__item--quote">
               <div class="quote">
-                <span class="quote-mark">“</span>
+                <span class="quote-mark">"</span>
                 <p class="quote-text">Utam acerios nobitae quatqui cuptius illatnibus dolest, odia dit etusandan-to quo dolectem. Itatis et voluptiores enihilab ipsum, nus delit rerupta</p>
               </div>
             </div>
@@ -44,7 +44,7 @@
                   alt="Team Member"
                   aspect-ratio="1/1"
                   placeholder-color="#333333"
-
+                  
                 />
               </div>
             </div>
@@ -79,7 +79,7 @@
             <!-- Right column with quote -->
             <div class="team-carousel__item team-carousel__item--quote">
               <div class="quote">
-                <span class="quote-mark">“</span>
+                <span class="quote-mark">"</span>
                 <p class="quote-text">Utam acerios nobitae quatqui cuptius illatnibus dolest, odia dit etusandan-to quo dolectem. Itatis et voluptiores enihilab ipsum, nus delit rerupta</p>
               </div>
             </div>
@@ -90,7 +90,7 @@
             <!-- Left column with quote -->
             <div class="team-carousel__item team-carousel__item--quote">
               <div class="quote">
-                <span class="quote-mark">“</span>
+                <span class="quote-mark">"</span>
                 <p class="quote-text">Utam acerios nobitae quatqui cuptius illatnibus dolest, odia dit etusandan-to quo dolectem. Itatis et voluptiores enihilab ipsum, nus delit rerupta</p>
               </div>
             </div>
@@ -116,7 +116,14 @@
             </div>
           </div>
         </div>
-        <HorizontalNavigation @prev="scrollLeft" @next="scrollRight" class="team-nav light" />
+      </div>
+      <div class="team-navigation-container">
+        <button class="team-nav-button team-nav-button--prev" @click="scrollLeft">
+          <img src="../../assets/images/arrow_left.svg" alt="Previous" class="team-nav-arrow">
+        </button>
+        <button class="team-nav-button team-nav-button--next" @click="scrollRight">
+          <img src="../../assets/images/arrow_right.svg" alt="Next" class="team-nav-arrow">
+        </button>
       </div>
     </div>
   </section>
@@ -124,13 +131,11 @@
 
 <script>
 import { ref, onMounted, onUnmounted } from 'vue';
-import { HorizontalNavigation } from './../base';
 import { LazyImage } from './../ui';
 
 export default {
   name: 'TeamSection',
   components: {
-    HorizontalNavigation,
     LazyImage
   },
   setup() {
