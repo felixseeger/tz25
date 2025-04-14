@@ -34,69 +34,39 @@ export default {
 
   &__prev,
   &__next {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 2px solid #4D4D4D;
+    background-color: rgba(0, 0, 0, 0.2);
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.5);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    }
-
-    &:active {
-      transform: translateY(0);
+      transform: scale(1.1);
+      background-color: rgba(0, 0, 0, 0.3);
     }
   }
 
   &__arrow {
-    width: 30px;
-    height: 30px;
-    filter: brightness(0); /* Make the SVG black */
-    transition: transform 0.3s ease;
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1); /* Make the SVG white */
+    transition: all 0.3s ease;
   }
 
   /* Dark theme variant */
   &.dark {
     .horizontal-nav__prev,
     .horizontal-nav__next {
-      background: transparent;
-      border: 1px solid rgba(#333, 0.5);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border: 2px solid #333;
+      background-color: rgba(255, 255, 255, 0.2);
 
       &:hover {
-        background-color: rgba(#333, 0.05);
-      }
-    }
-
-    .horizontal-nav__arrow {
-      filter: brightness(0.3); /* Make the SVG dark gray */
-
-      &:hover {
-        filter: brightness(0); /* Make the SVG black on hover */
-      }
-    }
-  }
-
-  /* Light theme variant with more visibility */
-  &.light {
-    .horizontal-nav__prev,
-    .horizontal-nav__next {
-      background-color: rgba(255, 255, 255, 0.8);
-      border: 2px solid #4D4D4D;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-
-      &:hover {
-        background-color: white;
-        transform: translateY(-2px);
+        background-color: rgba(255, 255, 255, 0.3);
       }
     }
 

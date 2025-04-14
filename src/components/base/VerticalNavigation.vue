@@ -31,93 +31,45 @@ export default {
 
   &__prev,
   &__next {
-    background: transparent;
-    color: #333;
-    width: 50px;
-    height: 50px;
-    border-radius: 0;
+    width: 40px;
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.2);
     position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(#333, 0);
-      transition: background-color 0.3s ease;
-      z-index: 0;
-    }
 
     &:hover {
       transform: scale(1.1);
-   
-      
-
-      &::before {
-        
-      }
-
-      .vertical-nav__arrow {
-        transform: scale(1.2);
-        
-      }
+      background-color: rgba(0, 0, 0, 0.3);
     }
   }
 
   &__arrow {
     width: 24px;
     height: 24px;
-    filter: brightness(0); /* Make the SVG black */
+    filter: brightness(0) invert(1); /* Make the SVG white */
     transition: all 0.3s ease;
-    position: relative;
-    z-index: 1;
-
-    &--up {
-      
-      /* transform: rotate(-90deg);  Rotate left arrow to point up */
-    }
-
-    &--down {
-      /* transform: rotate(90deg); /* Rotate right arrow to point down */
-    }
   }
 
-  /* Light theme variant */
-  &.light {
+  /* Dark theme variant */
+  &.dark {
     .vertical-nav__prev,
     .vertical-nav__next {
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      border: 2px solid #333;
+      background-color: rgba(255, 255, 255, 0.2);
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        transform: scale(1.1);
-
-        .vertical-nav__arrow {
-          transform: scale(1.2);
-        }
+        background-color: rgba(255, 255, 255, 0.3);
       }
     }
 
     .vertical-nav__arrow {
-      filter: brightness(0) invert(0); /* Make the SVG white */
-
-      &--up {
-       /* transform: rotate(-90deg); /* Rotate left arrow to point up */
-      }
-
-      &--down {
-       /* transform: rotate(90deg); /* Rotate right arrow to point down */
-      }
+      filter: brightness(0); /* Make the SVG black */
     }
   }
 }

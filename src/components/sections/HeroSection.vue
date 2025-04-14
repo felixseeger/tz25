@@ -19,13 +19,30 @@
               </div>
               <div class="hero__column hero__column--right">
                 <div class="hero__video">
-                  <div class="hero__video-container" @click="openVideoModal" role="button" tabindex="0" @keydown.enter="openVideoModal" @keydown.space="openVideoModal">
-                    <h2 class="hero__video-title">PLAY<span>FULLY</span></h2>
-                    <div class="hero__play-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8 5v14l11-7z"/>
-                      </svg>
+                  <div class="hero__video-container"
+                       @click="handleVideoClick"
+                       role="button"
+                       tabindex="0"
+                       @keydown.enter="handleVideoClick"
+                       @keydown.space="handleVideoClick">
+                    <!-- Cookie consent overlay -->
+                    <div v-if="!vimeoCookiesAccepted" class="hero__video-cookie-consent">
+                      <h3 class="hero__video-cookie-consent-title">Bitte akzeptieren Sie Cookies von Vimeo um dieses Video anzuschauen.</h3>
+                      <p class="hero__video-cookie-consent-text">Vimeo Cookie-Richtlinie</p>
+                      <p class="hero__video-cookie-consent-text">Wenn Sie diesen Hinweis akzeptieren, wird Ihre Auswahl gespeichert und die Seite aktualisiert.</p>
+                      <button class="hero__video-cookie-consent-button" @click.stop="acceptVimeoCookies">
+                        Cookies akzeptieren
+                      </button>
                     </div>
+                    <!-- Video content (only visible after accepting cookies) -->
+                    <template v-if="vimeoCookiesAccepted">
+                      <h2 class="hero__video-title">PLAY<span>FULLY</span></h2>
+                      <div class="hero__play-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </div>
+                    </template>
                   </div>
                 </div>
                 <div class="hero__text" ref="heroText">
@@ -49,16 +66,19 @@
             <div class="hero__content">
               <div class="hero__column hero__column--left">
                 <div class="hero__title-overlay">
-                  <h1 class="hero__slide-title">INNOVATIVE<br><span>SOLUTIONS</span></h1>
+
+                  <h1 class="hero__slide-title">Wir haben was<br><span>zu feiern</span></h1>
+
                 </div>
               </div>
               <div class="hero__column hero__column--right">
                 <div class="hero__text">
+                  <p><img src="../../assets/images/20_years.gif" alt="20 years taktzeit"  /></p>
                   <p>
                     Unsere innovativen Lösungen verbinden kreative Konzepte mit technischer Exzellenz. Wir entwickeln maßgeschneiderte Strategien, die Ihre Marke stärken und Ihren Absatz steigern. Mit unserem ganzheitlichen Ansatz begleiten wir Sie von der ersten Idee bis zur erfolgreichen Umsetzung.
                   </p>
                   <div class="hero__cta">
-                    <a href="#services" class="hero__button" @click.prevent="scrollToServices">Unsere Services</a>
+                    <a href="#history" class="hero__button" @click.prevent="scrollToServices">Unsere Geschichte</a>
                   </div>
                 </div>
               </div>
@@ -74,7 +94,7 @@
             <div class="hero__content">
               <div class="hero__column hero__column--left">
                 <div class="hero__title-overlay">
-                  <h1 class="hero__slide-title">EXPERT<br><span>TEAM</span></h1>
+                  <h1 class="hero__slide-title">CommUnity International <br><span>Network MEETING <br>in RIGA</span></h1>
                 </div>
               </div>
               <div class="hero__column hero__column--right">
@@ -105,22 +125,16 @@
 
         <!-- Carousel Arrows -->
         <button class="hero__carousel-arrow hero__carousel-arrow--prev" @click="prevSlide" aria-label="Previous slide">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-          </svg>
+          <img src="../../assets/images/arrow_left.svg" alt="Previous" class="hero__carousel-arrow-icon" />
         </button>
         <button class="hero__carousel-arrow hero__carousel-arrow--next" @click="nextSlide" aria-label="Next slide">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-          </svg>
+          <img src="../../assets/images/arrow_right.svg" alt="Next" class="hero__carousel-arrow-icon" />
         </button>
       </div>
       <!-- Hero Scroll Indicator - Visible only in hero section -->
       <div class="hero__scroll-indicator" :class="{ 'is-hidden': !showHeroScrollIndicator }" @click="scrollToNextSection">
         <div class="hero__scroll-indicator-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-          </svg>
+          <img src="../../assets/images/arrow_down.svg" alt="Scroll down" class="hero__scroll-indicator-arrow" />
         </div>
         <div class="hero__scroll-indicator-text">Scroll</div>
       </div>
@@ -140,8 +154,6 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { useNavigation } from '../../composables/useNavigation';
 import { useGsap } from '../../composables/useGsap';
 import { VideoModal } from '../ui';
-// Use a placeholder for the video file since it doesn't exist
-const videoFile = '';
 
 export default {
   name: 'HeroSection',
@@ -150,22 +162,51 @@ export default {
   },
   setup() {
     const isVideoModalOpen = ref(false);
-    const videoSrc = videoFile; // Using the imported video file
+    const vimeoCookiesAccepted = ref(false);
+    const videoSrc = 'https://player.vimeo.com/video/YOUR_VIDEO_ID?h=YOUR_HASH';
     const heroTitle = ref(null);
     const heroText = ref(null);
     const heroCta = ref(null);
-    // Mobile CTA is commented out in the template
     const heroCtaMobile = ref(null);
-
-    // Carousel state
     const currentSlide = ref(0);
     const autoplayInterval = ref(null);
-    const autoplayDelay = 5000; // 5 seconds between slides
-
-    // Track visibility of hero scroll indicator
+    const autoplayDelay = 5000;
     const showHeroScrollIndicator = ref(true);
-    // Flag to track if user has scrolled past threshold
     const hasScrolledPastThreshold = ref(false);
+
+    // Cookie consent handling
+    const initializeCookieConsent = () => {
+      const cookieConsent = localStorage.getItem('vimeoCookieConsent');
+      vimeoCookiesAccepted.value = cookieConsent === 'accepted';
+      console.log('Vimeo cookie consent status:', vimeoCookiesAccepted.value);
+    };
+
+    const acceptVimeoCookies = () => {
+      vimeoCookiesAccepted.value = true;
+      localStorage.setItem('vimeoCookieConsent', 'accepted');
+      console.log('Vimeo cookies accepted');
+    };
+
+    // Video modal handling
+    const openVideoModal = () => {
+      if (vimeoCookiesAccepted.value) {
+        console.log('Opening video modal');
+        isVideoModalOpen.value = true;
+      }
+    };
+
+    const closeVideoModal = () => {
+      console.log('Closing video modal');
+      isVideoModalOpen.value = false;
+    };
+
+    const handleVideoClick = () => {
+      if (vimeoCookiesAccepted.value) {
+        openVideoModal();
+      } else {
+        console.log('Cookies not accepted yet');
+      }
+    };
 
     const { navigateToHomeSection } = useNavigation();
     const { createTimeline } = useGsap();
@@ -263,16 +304,6 @@ export default {
       navigateToHomeSection('journey', { scrollDelay: 300 });
     };
 
-    const openVideoModal = () => {
-      console.log('Opening video modal');
-      isVideoModalOpen.value = true;
-    };
-
-    const closeVideoModal = () => {
-      console.log('Closing video modal');
-      isVideoModalOpen.value = false;
-    };
-
     // Carousel functions
     const nextSlide = () => {
       console.log('Next slide clicked, current slide:', currentSlide.value);
@@ -351,7 +382,10 @@ export default {
       currentSlide,
       nextSlide,
       prevSlide,
-      setSlide
+      setSlide,
+      vimeoCookiesAccepted,
+      acceptVimeoCookies,
+      handleVideoClick
     };
   }
 }
