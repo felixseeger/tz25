@@ -229,33 +229,58 @@ export const applyFontLoadingOptimizations = () => {
 /**
  * Initialize font loading with staged approach
  * This function should be called as early as possible in the application lifecycle
- *
- * MODIFIED: Loading animation disabled - fonts are marked as loaded immediately
  */
 export const initFontLoading = () => {
-  // Skip optimizations that would add the loading class
-  // applyFontLoadingOptimizations();
+  // Apply optimizations first
+  applyFontLoadingOptimizations();
 
   // Add preload links for critical fonts
   addFontPreloadLinks(CRITICAL_FONTS);
 
-  // Immediately mark all font stages as loaded
-  console.log('Font loading animation disabled - marking all fonts as loaded immediately');
-  document.documentElement.classList.add('fonts-critical-loaded');
-  document.documentElement.classList.add('fonts-important-loaded');
-  document.documentElement.classList.add('fonts-loaded');
-  document.documentElement.classList.remove('fonts-loading');
+  // Stage 1: Load critical fonts
+  preloadCriticalFonts()
+    .then(() => {
+      console.log('Critical fonts loaded successfully');
+      // Add a class to indicate critical fonts are loaded
+      document.documentElement.classList.add('fonts-critical-loaded');
 
-  // Still load fonts in the background for better rendering
-  Promise.all([
-    preloadCriticalFonts(),
-    preloadImportantFonts(),
-    preloadCompleteFonts()
-  ])
-  .then(() => {
-    console.log('All fonts loaded in the background');
-  })
-  .catch((error) => {
-    console.error('Failed to preload fonts in the background:', error);
-  });
+      // Stage 2: Load important fonts after a short delay
+      setTimeout(() => {
+        preloadImportantFonts()
+          .then(() => {
+            console.log('Important fonts loaded successfully');
+            // Add a class to indicate important fonts are loaded
+            document.documentElement.classList.add('fonts-important-loaded');
+
+            // Stage 3: Load remaining fonts after user interaction or idle time
+            if ('requestIdleCallback' in window) {
+              requestIdleCallback(() => {
+                preloadCompleteFonts()
+                  .then(() => {
+                    console.log('All fonts loaded successfully');
+                    // Add a class to indicate all fonts are loaded
+                    document.documentElement.classList.add('fonts-loaded');
+                    // Remove the loading class
+                    document.documentElement.classList.remove('fonts-loading');
+                  });
+              }, { timeout: 5000 });
+            } else {
+              // Fallback for browsers without requestIdleCallback
+              setTimeout(() => {
+                preloadCompleteFonts()
+                  .then(() => {
+                    console.log('All fonts loaded successfully');
+                    document.documentElement.classList.add('fonts-loaded');
+                    document.documentElement.classList.remove('fonts-loading');
+                  });
+              }, 2000);
+            }
+          });
+      }, 500);
+    })
+    .catch((error) => {
+      console.error('Failed to preload critical fonts:', error);
+      // Remove the loading class to ensure content is visible even if fonts fail to load
+      document.documentElement.classList.remove('fonts-loading');
+    });
 };

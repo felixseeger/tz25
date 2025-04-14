@@ -197,7 +197,7 @@
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 2; /* Above the image on hover */
-    padding: 1rem;
+
   }
 
   &__overlay-text {
@@ -211,7 +211,8 @@
   /* Hover behavior moved to the main journey-step hover rule */
 
   &__title {
-    font-size: 1.2rem;
+    width: 100vw;
+    font-size: 1.875rem;
     font-weight: 700;
     font-family: $font-headline;
     letter-spacing: 1px;

@@ -11,6 +11,7 @@
         class="brand-slide"
         :class="{ 'active': currentSlide === 0 }"
       >
+        <div class="brand-grid-triangle"></div>
         <h2 class="brand-title">STRATEGIE & KONZEPT</h2>
         <div class="brand-grid">
           <div class="brand-item">
@@ -60,6 +61,7 @@
         class="brand-slide"
         :class="{ 'active': currentSlide === 1 }"
       >
+        <div class="brand-grid-triangle"></div>
         <h2 class="brand-title">DIGITALE LÖSUNGEN</h2>
         <div class="brand-grid">
           <div class="brand-item">
@@ -119,6 +121,7 @@
         class="brand-slide"
         :class="{ 'active': currentSlide === 2 }"
       >
+        <div class="brand-grid-triangle"></div>
         <h2 class="brand-title">MARKE & DESIGN</h2>
         <div class="brand-grid">
           <div class="brand-item">
@@ -175,25 +178,25 @@
       ></button>
     </div>
 
-    <!-- Navigation controls (moved outside the carousel track) -->
-    <div class="brand-navigation">
-      <button
-        class="nav-button prev"
-        @click="prevSlide"
-        :disabled="isTransitioning"
-        aria-label="Previous slide"
-      >
-        <img src="@/assets/images/arrow_left.svg" alt="Previous" class="arrow-icon" />
-      </button>
-      <button
-        class="nav-button next"
-        @click="nextSlide"
-        :disabled="isTransitioning"
-        aria-label="Next slide"
-      >
-        <img src="@/assets/images/arrow_right.svg" alt="Next" class="arrow-icon" />
-      </button>
-    </div>
+  </div>
+  <!-- Navigation controls (moved outside the carousel track) -->
+  <div class="brand-navigation">
+    <button
+      class="nav-button prev"
+      @click="prevSlide"
+      :disabled="isTransitioning"
+      aria-label="Previous slide"
+    >
+      <img src="@/assets/images/arrow_left.svg" alt="Previous" class="arrow-icon" />
+    </button>
+    <button
+      class="nav-button next"
+      @click="nextSlide"
+      :disabled="isTransitioning"
+      aria-label="Next slide"
+    >
+      <img src="@/assets/images/arrow_right.svg" alt="Next" class="arrow-icon" />
+    </button>
   </div>
 </template>
 
@@ -276,8 +279,10 @@ export default {
 .brand-carousel {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  height: 75vh;
+  overflow: hidden; /* Changed from hidden to visible */
   margin-bottom: 2rem;
+  padding-top: 70px; /* Add padding to create space for the title */
 }
 
 .brand-carousel-track {
@@ -289,14 +294,17 @@ export default {
 .brand-slide {
   flex: 0 0 100%;
   width: 100%;
-  height: 80%;
+  height: auto;
   opacity: 1;
   transition: opacity 0.3s ease;
   background-image: url('@/assets/images/brand_bg.svg');
   background-size: cover;
   background-position: center;
-
+  position: relative;
   min-height: 502px; /* Set a fixed height to match the design */
+  padding: 6rem 2rem 2rem; /* Increased top padding for the title */
+  overflow: visible; /* Ensure content isn't clipped */
+  margin-top: 70px; /* Add margin to create space for the title */
 
   &.active {
     opacity: 1;
@@ -307,9 +315,24 @@ export default {
   color: white;
   margin-bottom: 2rem;
   text-align: left;
+  margin-top: -140px; /* Position title 70px up from its original position */
+  padding-top: 0; /* Remove padding */
+  font-size: 2.5rem; /* Increase font size for better visibility */
+  font-weight: 700; /* Make the title bold */
+  text-transform: uppercase; /* Match the uppercase style of other headings */
+  position: absolute; /* Use absolute positioning */
+  top: 70px; /* Position from the top */
+  left: 2rem; /* Align with the left padding */
+  z-index: 5; /* Ensure it's above other elements */
+  display: block; /* Ensure it's displayed as a block element */
+  opacity: 1; /* Ensure it's fully visible */
+  visibility: visible; /* Ensure it's visible */
+  width: calc(100% - 4rem); /* Set width to prevent overflow */
 
   @media (max-width: 768px) {
     font-size: 2rem;
+    top: 50px; /* Adjust top position for mobile */
+    margin-top: -100px; /* Adjust margin for mobile */
   }
 }
 
@@ -355,44 +378,19 @@ export default {
   }
 }
 
-.brand-navigation {
-  position: relative; /* Changed from absolute to relative */
-  margin-top: 30px; /* Increased space between carousel and navigation */
-  margin-bottom: 20px; /* Add space below navigation */
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  gap: 1rem; /* Increased gap between buttons */
-  z-index: 10;
+/* Navigation styles moved to _brand-section.scss */
 
-  .nav-button {
-    background: transparent;
-    border: 2px solid #444; /* Changed from white to dark gray */
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 0 10px; /* Add some spacing between buttons */
-
-    &:hover {
-      background-color: rgba(68, 68, 68, 0.1);
-      border-color: #2A6FEE; /* Primary color on hover */
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .arrow-icon {
-      width: 25px;
-      height: 25px;
-      filter: invert(0.3); /* Make the white arrows darker to match the new style */
-    }
-  }
+.brand-grid-triangle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 63px; /* Match the SVG dimensions */
+  height: 58px;
+  z-index: 3;
+  pointer-events: none; /* Allow clicks to pass through */
+  background-image: url('@/assets/images/brand_tria.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .brand-pagination {

@@ -12,7 +12,7 @@
     </main>
 
     <!-- Fixed UI Elements -->
-    <div class="app-layout__ui-elements" style="z-index: 1100;">
+    <div class="app-layout__ui-elements" style="z-index: 9999;">
       <ContactButton />
       <CookieButton />
       <ScrollToTop />

@@ -27,9 +27,8 @@ $breakpoint-xxxl: 1600px; // XXX-large devices (extra large desktops)
 $breakpoint-4k: 2560px;  // 4K displays
 
 // Z-indices
-$z-index-content: 1;
+$z-index-navbar: 1000;
 $z-index-contact-button: 900;
 $z-index-cookie-banner: 950;
-$z-index-navbar: 1000;
-$z-index-ui-elements: 1100; // Higher than navbar but lower than menu-overlay
-$z-index-menu-overlay: 10000; // Highest z-index for menu overlay
+$z-index-ui-elements: 1100; // Increased to be higher than all other elements
+$z-index-content: 1;

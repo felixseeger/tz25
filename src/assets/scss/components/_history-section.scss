@@ -9,16 +9,15 @@
   max-width: 100vw;
 
   .container {
-    max-width: 1200px;
-    width: 100%;
+    max-width: 100%;
+    width: 100vw;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 2rem; /* Add horizontal padding */
     position: relative;
     z-index: 2;
     display: flex; /* Use flexbox for better alignment */
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* Center horizontally */
     height: 100vh; /* Full height */
     overflow: visible; /* Ensure content doesn't get clipped */
   }
@@ -69,12 +68,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* Center horizontally */
     padding: 0;
     height: 100%;
     position: relative; /* Ensure proper stacking context */
     z-index: 2; /* Lower than button container */
-    width: 100%; /* Ensure full width */
   }
 
   /* Position title and headline for proper layout */
@@ -85,8 +82,8 @@
     text-align: left; /* Left-align the text */
     width: 100%; /* Ensure full width */
     max-width: 1200px; /* Set a max-width for the container */
-    margin-left: auto; /* Center the block element */
-    margin-right: auto; /* Center the block element */
+    margin-left: 0; /* Left-align the block element */
+    margin-right: auto;
   }
 
   .history-headline {
@@ -96,20 +93,20 @@
     text-align: left; /* Left-align the text */
     width: 100%; /* Ensure full width */
     max-width: 1200px; /* Set a max-width for the container */
-    margin-left: auto; /* Center the block element */
-    margin-right: auto; /* Center the block element */
+    margin-left: 0; /* Left-align the block element */
+    margin-right: auto;
     /* Font size is now controlled by the main .history-headline class */
   }
 
   /* Position description in bottom half */
   .history-description {
     margin-top: 6rem; /* Push down to bottom half */
-    max-width: 1200px; /* Match the width of the headlines */
+    max-width: 600px; /* Narrower width for better readability */
     text-align: left; /* Left-align the text */
     margin-left: auto; /* Center the block element */
     margin-right: auto; /* Center the block element */
-    padding-left: 0; /* Remove padding */
-    padding-right: 0; /* Remove padding */
+    padding-left: 2rem; /* Add padding for smaller screens */
+    padding-right: 2rem; /* Add padding for smaller screens */
   }
 }
 
@@ -121,7 +118,35 @@
   flex: 1;
 }
 
-/* History button styles moved to FixedHistoryButton component */
+.history-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+  margin-left: 2rem;
+  position: absolute;
+  right: -2rem; /* Add some right margin */
+  top: 50%; /* Position at the vertical center */
+  transform: translateY(-50%); /* Center it perfectly */
+  z-index: 5; /* Ensure it's above the background */
+  visibility: visible; /* Ensure it's visible */
+  pointer-events: auto; /* Make sure it's clickable */
+
+  @media (max-width: $breakpoint-lg) {
+    right: 2rem;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    margin-top: 2rem;
+    margin-left: 0;
+    align-self: center;
+    padding-right: 0;
+  }
+}
 
 .history-title {
   @include critical-font('Gotham Narrow', 300);
@@ -150,7 +175,7 @@
   text-transform: uppercase;
   letter-spacing: -2px;
   line-height: 0.9;
-  padding-top: 1rem; /* Space between title and headline */
+  padding-top: 2rem; /* Space between title and headline */
   will-change: transform, opacity; /* Optimize for animations */
   @include boxed-centered-text(1200px);
 
@@ -175,10 +200,8 @@
   @media (max-width: $breakpoint-md) {
     font-size: 1rem;
     max-width: 100%;
-    margin-left: auto; /* Center on mobile */
-    margin-right: auto; /* Center on mobile */
-    padding-left: 0;
-    padding-right: 0;
+    margin-left: 0; /* Maintain left alignment on mobile */
+    padding-left: 0; /* Maintain left alignment on mobile */
   }
 }
 
@@ -241,8 +264,8 @@
     .history-title,
     .history-headline,
     .history-description {
-      padding-left: 0;
-      padding-right: 0;
+      padding-left: 1rem;
+      padding-right: 1rem;
       text-align: left;
       width: 100%;
       max-width: 100%;

@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-history-button-container" :class="{ 'is-visible': isHistorySectionVisible && !isTimelineOpen }" :style="{ visibility: (isHistorySectionVisible && !isTimelineOpen) ? 'visible' : 'hidden', opacity: (isHistorySectionVisible && !isTimelineOpen) ? 1 : 0 }">
+  <div class="fixed-history-button-container" :class="{ 'is-visible': isHistorySectionVisible }">
     <button @click="openTimeline" class="fixed-history-button">
       <img src="../../assets/images/history-btn.svg" alt="Unsere Geschichte" class="fixed-history-button__image">
     </button>
@@ -13,68 +13,29 @@ export default {
   name: 'FixedHistoryButton',
   setup() {
     const isHistorySectionVisible = ref(false);
-    const isTimelineOpen = ref(false);
     let observer = null;
 
     // Function to check if history section is in view
     const setupIntersectionObserver = () => {
-      // Wait for DOM to be fully loaded
-      setTimeout(() => {
-        const historySection = document.getElementById('history');
-        console.log('History section element found:', !!historySection);
+      const historySection = document.getElementById('history');
 
-        if (historySection && 'IntersectionObserver' in window) {
-          observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              isHistorySectionVisible.value = entry.isIntersecting;
-              console.log('History section visible:', isHistorySectionVisible.value);
-            });
-          }, {
-            threshold: 0.01, // Show button when at least 1% of history section is visible
-            rootMargin: '0px' // No margin
+      if (historySection && 'IntersectionObserver' in window) {
+        observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            isHistorySectionVisible.value = entry.isIntersecting;
+            console.log('History section visible:', isHistorySectionVisible.value);
           });
+        }, {
+          threshold: 0.2 // Show button when at least 20% of history section is visible
+        });
 
-          observer.observe(historySection);
-          console.log('Observer set up for history section');
-        } else {
-          console.error('History section not found or IntersectionObserver not supported');
-        }
-      }, 500); // Short delay to ensure DOM is ready
-    };
-
-    // Function to handle history section visibility event
-    const handleHistorySectionVisible = (event) => {
-      if (event && event.detail) {
-        isHistorySectionVisible.value = event.detail.visible;
-        console.log('History section visibility event received:', isHistorySectionVisible.value);
+        observer.observe(historySection);
       }
-    };
-
-    // Function to handle timeline open event
-    const handleTimelineOpen = () => {
-      isTimelineOpen.value = true;
-      console.log('Timeline opened, hiding button');
-    };
-
-    // Function to handle timeline close event
-    const handleTimelineClose = () => {
-      isTimelineOpen.value = false;
-      console.log('Timeline closed, showing button if in history section');
     };
 
     // Setup observer when component is mounted
     onMounted(() => {
       setupIntersectionObserver();
-
-      // Listen for custom events from the HistorySection component
-      document.addEventListener('history-section-visible', handleHistorySectionVisible);
-
-      // Listen for timeline open/close events
-      document.body.addEventListener('timeline-open', handleTimelineOpen);
-      document.body.addEventListener('timeline-close', handleTimelineClose);
-
-      // Check if timeline is already open (in case component mounts after timeline is opened)
-      isTimelineOpen.value = document.body.classList.contains('timeline-open');
     });
 
     // Clean up observer when component is unmounted
@@ -82,11 +43,6 @@ export default {
       if (observer) {
         observer.disconnect();
       }
-
-      // Remove event listeners
-      document.removeEventListener('history-section-visible', handleHistorySectionVisible);
-      document.body.removeEventListener('timeline-open', handleTimelineOpen);
-      document.body.removeEventListener('timeline-close', handleTimelineClose);
     });
 
     // Method to open timeline
@@ -105,7 +61,6 @@ export default {
 
     return {
       isHistorySectionVisible,
-      isTimelineOpen,
       openTimeline
     };
   }
@@ -116,23 +71,17 @@ export default {
 .fixed-history-button-container {
   position: fixed;
   right: 2rem;
-  top: 50%; /* Center vertically */
-  transform: translateY(-50%) translateX(31px);
-  z-index: 9000; /* Higher z-index to ensure it's above other elements */
+  top: calc(50% + 100px); /* Moved 100px down from center */
+  transform: translateY(-50%);
+  z-index: 1000;
   display: block;
   visibility: hidden; /* Hidden by default */
   opacity: 0;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  pointer-events: auto; /* Ensure it's clickable */
-  padding-left: 50px; /* Add padding to fix it to the right side */
 
   &.is-visible {
-    visibility: visible !important; /* Show when history section is visible */
-    opacity: 1 !important;
-
-    .fixed-history-button__image {
-      animation: moveInFromRight 0.8s ease-out 0.5s both; /* Animation with 0.5s delay */
-    }
+    visibility: visible;
+    opacity: 1;
   }
 }
 
@@ -151,9 +100,6 @@ export default {
     width: 200px;
     height: auto;
     display: block;
-    /* Animation will be applied when the button is visible */
-    transform: translateX(0); /* Default position */
-    transition: transform 0.3s ease;
   }
 }
 
@@ -169,41 +115,19 @@ export default {
 
 @media (max-width: 768px) {
   .fixed-history-button-container {
-    right: 1rem;
-    top: 50%; /* Keep centered vertically */
-    transform: translateY(-50%) translateX(31px);
-    z-index: 9000; /* Ensure consistent z-index on mobile */
-    padding-left: 30px; /* Reduced padding for mobile */
+    right: 0.5rem;
+    bottom: 5rem; /* Adjusted for better mobile positioning */
+    top: auto;
+    transform: none;
 
     &.is-visible {
-      visibility: visible !important;
-      opacity: 1 !important;
-
-      .fixed-history-button__image {
-        animation: moveInFromRight 0.8s ease-out 0.5s both; /* Animation with 0.5s delay */
-      }
+      visibility: visible;
+      opacity: 1;
     }
   }
 
   .fixed-history-button__image {
     width: 120px;
-  }
-}
-
-/* Animation keyframes */
-@keyframes moveInFromRight {
-  0% {
-    opacity: 0;
-    transform: translateX(100px);
-  }
-
-  80% {
-    transform: translateX(-10px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0);
   }
 }
 </style>

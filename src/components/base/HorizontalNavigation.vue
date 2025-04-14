@@ -34,8 +34,8 @@ export default {
 
   &__prev,
   &__next {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -43,8 +43,8 @@ export default {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    background-color: transparent;
-    border: 1px solid white;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #4D4D4D;
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.5);
@@ -58,9 +58,9 @@ export default {
   }
 
   &__arrow {
-    width: 20px;
-    height: 20px;
-    filter: brightness(0) invert(1); /* Make the SVG white */
+    width: 30px;
+    height: 30px;
+    filter: brightness(0); /* Make the SVG black */
     transition: transform 0.3s ease;
   }
 

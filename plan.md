@@ -4,7 +4,6 @@
 - ☑️ Make client logos full-width and create auto-scrolling carousel
 - ☑️ Add scroll indicator on bottom center of hero section
 - ☑️ Split history background vertically into two colors (#595959 top, #D9D9D9 bottom)
-- ☑️ Align history headlines and description text evenly and centered
 - ☑️ Increase history title size by 20%
 - ☑️ Fix "Unsere Geschichte" button to show only on history section
 - ☑️ Align contact input fields and headline to the left
@@ -12,15 +11,12 @@
 - ☑️ Reduce scrolling speed for auto-scrolling carousels
 - ☑️ Make team section carousel elements fit within 80vh height
 - ☑️ Position client logo filters with absolute positioning and z-index overlay above
-- ☑️ add: honeypot field to contact form
-- ☑️ disable fixed cookie-settings button visbility while scrolling in contact and footer section
 -
 - ☑️ Improve portfolio slider navigation with custom arrow SVGs
 - ☑️ Add hover effects to portfolio images
 - ☑️ Implement smooth scrolling between sections
 - ☑️ Add loading animations for page transitions
 - ☑️ Optimize mobile layout for all sections
-- ☑️ Hide cart-icon on mobile screens
 
 ## Code Quality
 - ☑️ Move inline styles from HistorySection.vue to SCSS file
@@ -40,7 +36,6 @@
 - ☑️ Fix image link paths in components
 - ☑️ Make portfolio section full-page-width
 - ☑️ Center portfolio section content
-- ☑️ Limit portfolio grid to two rows of four items
 - ☑️ Fix contact form alignment to be left-aligned
 - ☑️ Create comprehensive Playwright tests for all features and functionality
 - ☐ Add TypeScript type definitions for all components
@@ -66,7 +61,7 @@
 - ☑️ Remove skip to main content buttons from the interface
 - ☑️ Ensure proper heading hierarchy throughout the site
 - ☐ Test with screen readers and fix any issues
-- ☑️ Implement proper form labels and error messages
+- ☐ Implement proper form labels and error messages
 
 ## Browser Compatibility
 - ☐ Test across different browsers (Chrome, Firefox, Safari, Edge)
@@ -86,18 +81,18 @@
 
 ## Testing
 - ☑️ Implement Playwright tests for UI features
-- ☑️ Implement unit tests for critical components
-- ☑️ Add integration tests for key user flows
-- ☑️ Implement end-to-end tests for critical paths
-- ☑️ Set up continuous integration for automated testing
-- ☑️ Add visual regression testing
+- ☐ Implement unit tests for critical components
+- ☐ Add integration tests for key user flows
+- ☐ Implement end-to-end tests for critical paths
+- ☐ Set up continuous integration for automated testing
+- ☐ Add visual regression testing
 
 ## Security
-- ☑️ Implement proper form validation and sanitization
-- ☑️ Add CSRF protection for forms
-- ☑️ Ensure secure handling of user data
-- ☑️ Implement proper error handling to prevent information leakage
-- ☑️ Add Content Security Policy headers
+- ☐ Implement proper form validation and sanitization
+- ☐ Add CSRF protection for forms
+- ☐ Ensure secure handling of user data
+- ☐ Implement proper error handling to prevent information leakage
+- ☐ Add Content Security Policy headers
 
 ## SEO & Analytics
 - ☐ Add proper meta tags for SEO

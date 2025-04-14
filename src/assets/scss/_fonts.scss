@@ -79,21 +79,23 @@
   font-display: swap;
 }
 
-/* Font loading classes - MODIFIED: Loading animation disabled */
-.font-critical {
-  opacity: 1;
+/* Font loading classes */
+.fonts-loading .font-critical {
+  opacity: 0;
 }
 
 .fonts-critical-loaded .font-critical {
   opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }
 
-.font-important {
-  opacity: 1;
+.fonts-loading .font-important {
+  opacity: 0;
 }
 
 .fonts-important-loaded .font-important {
   opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }
 
 /* Font fallback definitions */

@@ -112,7 +112,7 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue';
 
 export default {
   name: 'CookieBanner',
-  emits: ['cookies-set', 'settings-opened', 'settings-closed', 'banner-opened', 'banner-closed'],
+  emits: ['cookies-set'],
   setup(props, { emit }) {
     const showBanner = ref(false);
     const showSettings = ref(false);
@@ -128,23 +128,14 @@ export default {
       const consent = localStorage.getItem('cookieConsent');
       if (!consent) {
         showBanner.value = true;
-        emit('banner-opened');
-        // Create and dispatch a global event for other components
-        document.dispatchEvent(new CustomEvent('cookie-banner-opened'));
       } else {
         try {
           const savedSettings = JSON.parse(consent);
           Object.assign(cookieSettings, savedSettings);
           emit('cookies-set', cookieSettings);
-          emit('banner-closed');
-          // Create and dispatch a global event for other components
-          document.dispatchEvent(new CustomEvent('cookie-banner-closed'));
         } catch (e) {
           console.error('Error parsing cookie consent:', e);
           showBanner.value = true;
-          emit('banner-opened');
-          // Create and dispatch a global event for other components
-          document.dispatchEvent(new CustomEvent('cookie-banner-opened'));
         }
       }
     };
@@ -155,11 +146,6 @@ export default {
       showBanner.value = false;
       showSettings.value = false;
       emit('cookies-set', cookieSettings);
-      emit('settings-closed');
-      emit('banner-closed');
-      // Create and dispatch a global event for other components
-      document.dispatchEvent(new CustomEvent('cookie-settings-closed'));
-      document.dispatchEvent(new CustomEvent('cookie-banner-closed'));
     };
 
     // Accept all cookies
@@ -180,17 +166,11 @@ export default {
     // Open detailed settings
     const openSettings = () => {
       showSettings.value = true;
-      emit('settings-opened');
-      // Create and dispatch a global event for other components
-      document.dispatchEvent(new CustomEvent('cookie-settings-opened'));
     };
 
     // Close detailed settings
     const closeSettings = () => {
       showSettings.value = false;
-      emit('settings-closed');
-      // Create and dispatch a global event for other components
-      document.dispatchEvent(new CustomEvent('cookie-settings-closed'));
     };
 
     // Reset cookie consent (for testing)
@@ -207,9 +187,6 @@ export default {
     const handleOpenCookieSettings = () => {
       showBanner.value = true;
       showSettings.value = true;
-      emit('settings-opened');
-      // Create and dispatch a global event for other components
-      document.dispatchEvent(new CustomEvent('cookie-settings-opened'));
     };
 
     onMounted(() => {

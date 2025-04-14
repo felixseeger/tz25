@@ -1,93 +1,56 @@
 <template>
   <div class="portfolio-grid-container" role="region" aria-label="Portfolio projects">
-    <!-- Filter section with pagination -->
-    <div class="portfolio-filters-container">
-      <div class="portfolio-filters" role="group" aria-label="Portfolio filters">
-        <!-- Client filters
-        <div class="filter-group client-filters" role="group" aria-label="Client filters">
-          <button
-            class="filter-button"
-            :class="{ 'active': !selectedClientId }"
-            @click="resetFilter"
-            aria-label="Show all clients"
-            :aria-pressed="!selectedClientId"
-            tabindex="0"
-          >
-            All Clients
-          </button>
-          <button
-            v-for="client in clientsList"
-            :key="client.id"
-            class="filter-button client-filter"
-            :class="{ 'active': selectedClientId === client.id }"
-            @click="selectClient(client.id)"
-            :aria-label="`Filter by ${client.name}`"
-            :aria-pressed="selectedClientId === client.id"
-            tabindex="0"
-          >
-            {{ client.name }}
-          </button>
-        </div> -->
-
-        <!-- Category filters -->
-        <div class="filter-group category-filters" role="group" aria-label="Category filters">
-          <button
-            class="filter-button"
-            :class="{ 'active': !selectedCategory }"
-            @click="resetCategoryFilter"
-            aria-label="Show all categories"
-            :aria-pressed="!selectedCategory"
-            tabindex="0"
-          >
-            All Categories
-          </button>
-          <button
-            v-for="category in categories"
-            :key="category.id"
-            class="filter-button category-filter"
-            :class="{ 'active': selectedCategory === category.id }"
-            @click="selectCategory(category.id)"
-            :aria-label="`Filter by ${category.name} category`"
-            :aria-pressed="selectedCategory === category.id"
-            tabindex="0"
-          >
-            {{ category.name }}
-          </button>
-        </div>
-      </div>
-
-      <!-- Pagination controls moved to top right -->
-      <div v-if="totalPages > 1" class="top-pagination" role="navigation" aria-label="Portfolio pagination">
+    <!-- Filter section -->
+    <div class="portfolio-filters" role="group" aria-label="Portfolio filters">
+      <!-- Client filters
+      <div class="filter-group client-filters" role="group" aria-label="Client filters">
         <button
-          class="pagination-button prev"
-          :disabled="currentPage === 1"
-          @click="goToPreviousPage"
-          aria-label="Go to previous page"
+          class="filter-button"
+          :class="{ 'active': !selectedClientId }"
+          @click="resetFilter"
+          aria-label="Show all clients"
+          :aria-pressed="!selectedClientId"
+          tabindex="0"
         >
-          <span aria-hidden="true">←</span>
+          All Clients
         </button>
-
-        <div class="pagination-pages">
-          <button
-            v-for="page in totalPages"
-            :key="page"
-            class="pagination-page"
-            :class="{ 'active': currentPage === page }"
-            @click="goToPage(page)"
-            :aria-label="`Go to page ${page}`"
-            :aria-current="currentPage === page ? 'page' : null"
-          >
-            {{ page }}
-          </button>
-        </div>
-
         <button
-          class="pagination-button next"
-          :disabled="currentPage === totalPages"
-          @click="goToNextPage"
-          aria-label="Go to next page"
+          v-for="client in clientsList"
+          :key="client.id"
+          class="filter-button client-filter"
+          :class="{ 'active': selectedClientId === client.id }"
+          @click="selectClient(client.id)"
+          :aria-label="`Filter by ${client.name}`"
+          :aria-pressed="selectedClientId === client.id"
+          tabindex="0"
         >
-          <span aria-hidden="true">→</span>
+          {{ client.name }}
+        </button>
+      </div> -->
+
+      <!-- Category filters -->
+      <div class="filter-group category-filters" role="group" aria-label="Category filters">
+        <button
+          class="filter-button"
+          :class="{ 'active': !selectedCategory }"
+          @click="resetCategoryFilter"
+          aria-label="Show all categories"
+          :aria-pressed="!selectedCategory"
+          tabindex="0"
+        >
+          All Categories
+        </button>
+        <button
+          v-for="category in categories"
+          :key="category.id"
+          class="filter-button category-filter"
+          :class="{ 'active': selectedCategory === category.id }"
+          @click="selectCategory(category.id)"
+          :aria-label="`Filter by ${category.name} category`"
+          :aria-pressed="selectedCategory === category.id"
+          tabindex="0"
+        >
+          {{ category.name }}
         </button>
       </div>
     </div>
@@ -136,8 +99,6 @@
           Reset Filters
         </button>
       </div>
-
-      <!-- Pagination controls wrapper removed from here and moved to top -->
     </div>
   </div>
 </template>
@@ -189,12 +150,7 @@ export default {
       return categoriesList;
     });
 
-    // Pagination state
-    const currentPage = ref(1);
-    const itemsPerPage = 8; // 2 rows of 4 items
-
-    // Filtered items without pagination
-    const allFilteredItems = computed(() => {
+    const filteredItems = computed(() => {
       let items = [...portfolioItems];
 
       // Filter by client if selected
@@ -208,17 +164,6 @@ export default {
       }
 
       return items;
-    });
-
-    // Total number of pages
-    const totalPages = computed(() => {
-      return Math.ceil(allFilteredItems.value.length / itemsPerPage);
-    });
-
-    // Current page items
-    const filteredItems = computed(() => {
-      const startIndex = (currentPage.value - 1) * itemsPerPage;
-      return allFilteredItems.value.slice(startIndex, startIndex + itemsPerPage);
     });
 
     // Methods
@@ -267,61 +212,6 @@ export default {
       return categoriesMap[categoryId]?.name || categoryId;
     };
 
-    // Pagination methods
-    const goToPage = (page) => {
-      currentPage.value = page;
-      // Scroll to top of grid when changing pages
-      const gridElement = document.querySelector('.portfolio-grid');
-      if (gridElement) {
-        gridElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    };
-
-    const goToNextPage = () => {
-      if (currentPage.value < totalPages.value) {
-        goToPage(currentPage.value + 1);
-      }
-    };
-
-    const goToPreviousPage = () => {
-      if (currentPage.value > 1) {
-        goToPage(currentPage.value - 1);
-      }
-    };
-
-    // Reset pagination when filters change
-    const resetPagination = () => {
-      currentPage.value = 1;
-    };
-
-    // Update selectClient to reset pagination
-    const selectClientWithPagination = (clientId) => {
-      selectClient(clientId);
-      resetPagination();
-    };
-
-    // Update selectCategory to reset pagination
-    const selectCategoryWithPagination = (categoryId) => {
-      selectCategory(categoryId);
-      resetPagination();
-    };
-
-    // Update reset methods to reset pagination
-    const resetFilterWithPagination = () => {
-      resetFilter();
-      resetPagination();
-    };
-
-    const resetCategoryFilterWithPagination = () => {
-      resetCategoryFilter();
-      resetPagination();
-    };
-
-    const resetAllFiltersWithPagination = () => {
-      resetAllFilters();
-      resetPagination();
-    };
-
     // Log initial state for debugging
     onMounted(() => {
       console.log('Portfolio Grid mounted with', portfolioItems.length, 'items');
@@ -333,16 +223,11 @@ export default {
       clientsList,
       categories,
       filteredItems,
-      currentPage,
-      totalPages,
-      selectClient: selectClientWithPagination,
-      selectCategory: selectCategoryWithPagination,
-      resetFilter: resetFilterWithPagination,
-      resetCategoryFilter: resetCategoryFilterWithPagination,
-      resetAllFilters: resetAllFiltersWithPagination,
-      goToPage,
-      goToNextPage,
-      goToPreviousPage,
+      selectClient,
+      selectCategory,
+      resetFilter,
+      resetCategoryFilter,
+      resetAllFilters,
       getClientLogo,
       getClientName,
       getCategoryName
@@ -352,225 +237,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/_variables.scss';
-
-.portfolio-grid-container {
-  width: 100%;
-  max-width: 1920px;
-  margin: 40px auto; /* Reduced from 140px to 40px to move up by 100px */
-  padding: 0 2rem;
-}
-
-// Styles moved to _portfolio-pagination.scss
-
-.portfolio-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  flex: 1;
-
-  @media (max-width: $breakpoint-md) {
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-
-  @media (max-width: $breakpoint-md) {
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    &::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Edge */
-    }
-  }
-}
-
-.filter-button {
-  padding: 0.5rem 1rem;
-  background-color: #f0f0f0;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-
-  &:hover {
-    background-color: #e0e0e0;
-  }
-
-  &.active {
-    background-color: $primary-color;
-    color: white;
-  }
-
-  &.category-filter {
-    background-color: #2A6FEE;
-    color: white;
-
-    &:hover {
-      background-color: darken(#2A6FEE, 10%);
-    }
-
-    &.active {
-      background-color: darken(#2A6FEE, 15%);
-    }
-  }
-}
-
-.reset-button {
-  margin-top: 1rem;
-  background-color: $primary-color;
-  color: white;
-
-  &:hover {
-    background-color: darken($primary-color, 10%);
-  }
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  max-width: 1800px;
-  margin: 0 auto;
-
-  @media (max-width: $breakpoint-lg) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  @media (max-width: $breakpoint-sm) {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-}
-
-.portfolio-item {
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-
-    .portfolio-item-overlay {
-      opacity: 1;
-    }
-  }
-}
-
-.portfolio-item-inner {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 66.67%; /* 3:2 aspect ratio */
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.portfolio-item-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.portfolio-item-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1.5rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-
-  @media (max-width: $breakpoint-md) {
-    opacity: 1;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), transparent);
-    justify-content: flex-end;
-  }
-}
-
-.portfolio-item-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.portfolio-item-description {
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  opacity: 0.9;
-
-  @media (max-width: $breakpoint-md) {
-    display: none;
-  }
-}
-
-.portfolio-item-client {
-  display: flex;
-  align-items: center;
-  margin-top: auto;
-
-  .portfolio-item-client-logo {
-    height: 30px;
-    width: auto;
-    max-width: 80px;
-    margin-right: 0.75rem;
-    object-fit: contain;
-    background-color: white;
-    padding: 0.25rem;
-    border-radius: 4px;
-  }
-
-  .portfolio-item-category {
-    font-size: 0.8rem;
-    opacity: 0.8;
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-  }
-}
-
-.portfolio-empty-state {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 3rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-
-  p {
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-    color: #666;
-  }
-}
-
-/* Pagination styles moved to _portfolio-pagination.scss */
-
-/* Pagination button styles moved to _portfolio-pagination.scss */
-
-/* Pagination pages styles moved to _portfolio-pagination.scss */
-
-/* Pagination page styles moved to _portfolio-pagination.scss */
+// Styles moved to src/assets/scss/components/_portfolio-grid.scss
 </style>

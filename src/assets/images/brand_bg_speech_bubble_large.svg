@@ -1,0 +1,7 @@
+<svg width="2123" height="724" viewBox="0 0 2123 724" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main background rectangle with rounded corners -->
+  <path d="M250 120H2073C2100.6 120 2123 142.386 2123 170V674C2123 701.614 2100.6 724 2073 724H50C22.3858 724 0 701.614 0 674V180L250 120Z" fill="#C02020"/>
+  
+  <!-- Speech bubble triangle -->
+  <path d="M0 180L250 0V120L0 180Z" fill="#C02020"/>
+</svg>

@@ -7,17 +7,6 @@
 
       <div class="contact-content">
         <form class="contact-form" @submit.prevent="submitForm" aria-labelledby="contact-form-title" novalidate>
-          <!-- Honeypot field to catch bots - hidden from real users but visible to bots -->
-          <div class="honeypot-field" aria-hidden="true" style="display: none;">
-            <label for="honeypot">Leave this field empty</label>
-            <input type="text" id="honeypot" name="honeypot" v-model="formData.honeypot" tabindex="-1" autocomplete="off">
-          </div>
-
-          <!-- Math challenge for bot detection - hidden but filled via JavaScript -->
-          <div class="math-challenge" aria-hidden="true" style="display: none;">
-            <label for="mathAnswer">What is {{ mathChallenge.num1 }} + {{ mathChallenge.num2 }}?</label>
-            <input type="text" id="mathAnswer" name="mathAnswer" v-model="formData.mathAnswer" tabindex="-1" autocomplete="off">
-          </div>
           <h2 id="contact-form-title" class="visually-hidden">Kontaktformular</h2>
           <div class="form-row">
             <div class="form-group" :class="{ 'has-error': formAttempted && errors.name, 'has-value': shouldShowLabel('name') }">
@@ -146,7 +135,6 @@
 
 <script>
 import emailjs from '@emailjs/browser';
-import { validateField, validateForm, sanitizeForm, hasErrors, generateCSRFToken } from '../../utils/formValidation';
 
 export default {
   name: 'ContactSection',
@@ -157,31 +145,14 @@ export default {
         email: '',
         firma: '',
         betreff: '',
-        anmerkungen: '',
-        csrfToken: '',
-        honeypot: '', // Honeypot field to catch bots
-        formStartTime: Date.now(), // Timestamp when the form was loaded
-        mathAnswer: '' // Answer to the math challenge
-      },
-      mathChallenge: {
-        num1: 0,
-        num2: 0,
-        correctAnswer: 0
+        anmerkungen: ''
       },
       errors: {
         name: '',
         email: '',
         firma: '',
         betreff: '',
-        anmerkungen: '',
-        csrfToken: ''
-      },
-      requiredFields: {
-        name: true,
-        email: true,
-        firma: false,
-        betreff: true,
-        anmerkungen: false
+        anmerkungen: ''
       },
       isSubmitting: false,
       formSubmitted: false,
@@ -206,12 +177,6 @@ export default {
 
     // Initialize GSAP animations
     this.initGsapAnimations();
-
-    // Generate CSRF token
-    this.formData.csrfToken = generateCSRFToken();
-
-    // Set up math challenge
-    this.setupMathChallenge();
   },
   unmounted() {
     // Clean up observer and event listeners
@@ -225,26 +190,34 @@ export default {
       // Reset the error for this field
       this.errors[field] = '';
 
-      // Use the validation utility
-      const isRequired = this.requiredFields[field] || false;
-      const error = validateField(field, this.formData[field], isRequired);
-
-      if (error) {
-        this.errors[field] = error;
+      // Validate required fields
+      if (['name', 'email', 'betreff'].includes(field) && !this.formData[field]) {
+        this.errors[field] = 'Dieses Feld ist erforderlich';
         return false;
+      }
+
+      // Email validation
+      if (field === 'email' && this.formData.email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(this.formData.email)) {
+          this.errors.email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+          return false;
+        }
       }
 
       return true;
     },
     validateForm() {
-      // Use the validation utility to validate all fields
-      const errors = validateForm(this.formData, this.requiredFields);
+      let isValid = true;
 
-      // Update the errors object
-      this.errors = { ...errors };
+      // Validate all fields
+      ['name', 'email', 'firma', 'betreff', 'anmerkungen'].forEach(field => {
+        if (!this.validateField(field)) {
+          isValid = false;
+        }
+      });
 
-      // Return true if there are no errors
-      return !hasErrors(errors);
+      return isValid;
     },
     setupIntersectionObserver() {
       // Create a new Intersection Observer
@@ -303,19 +276,6 @@ export default {
       return this.focusedFields[field] || this.formData[field];
     },
 
-    // Set up a simple math challenge for bot detection
-    setupMathChallenge() {
-      // Generate two random numbers between 1 and 10
-      this.mathChallenge.num1 = Math.floor(Math.random() * 10) + 1;
-      this.mathChallenge.num2 = Math.floor(Math.random() * 10) + 1;
-
-      // Calculate the correct answer
-      this.mathChallenge.correctAnswer = this.mathChallenge.num1 + this.mathChallenge.num2;
-
-      // Set the answer in the form data
-      this.formData.mathAnswer = String(this.mathChallenge.correctAnswer);
-    },
-
     initGsapAnimations() {
       // Import GSAP dynamically to avoid SSR issues
       import('gsap').then(({ gsap }) => {
@@ -367,54 +327,6 @@ export default {
       // Set formAttempted to true when form is submitted
       this.formAttempted = true;
 
-      // Calculate time elapsed since form was loaded (in seconds)
-      const timeElapsed = (Date.now() - this.formData.formStartTime) / 1000;
-
-      // Check for bot activity
-      let isBotSubmission = false;
-      let botDetectionReason = '';
-
-      // Check if honeypot field is filled (bot detection)
-      if (this.formData.honeypot && this.formData.honeypot.trim() !== '') {
-        isBotSubmission = true;
-        botDetectionReason = 'Honeypot field filled';
-      }
-
-      // Check if form was submitted too quickly (less than 3 seconds)
-      if (timeElapsed < 3) {
-        isBotSubmission = true;
-        botDetectionReason = `Form submitted too quickly (${timeElapsed.toFixed(2)} seconds)`;
-      }
-
-      // Check if math challenge answer was modified (bot detection)
-      if (this.formData.mathAnswer !== String(this.mathChallenge.correctAnswer)) {
-        isBotSubmission = true;
-        botDetectionReason = 'Math challenge failed';
-      }
-
-      // Handle bot submission
-      if (isBotSubmission) {
-        // Log bot detection for monitoring
-        console.warn(`Bot submission detected: ${botDetectionReason}`);
-
-        // Log submission details for analysis
-        const submissionDetails = {
-          timestamp: new Date().toISOString(),
-          reason: botDetectionReason,
-          timeElapsed: timeElapsed.toFixed(2) + 's',
-          userAgent: navigator.userAgent,
-          formData: { ...this.formData, honeypot: this.formData.honeypot ? 'filled' : 'empty' }
-        };
-        console.log('Bot submission details:', submissionDetails);
-
-        // Pretend the form was submitted successfully to avoid alerting bots
-        this.formSubmitted = true;
-        setTimeout(() => {
-          this.formSubmitted = false;
-        }, 5000);
-        return;
-      }
-
       // Validate the form
       if (!this.validateForm()) {
         return;
@@ -423,19 +335,15 @@ export default {
       this.isSubmitting = true;
 
       try {
-        // Sanitize the form data
-        const sanitizedData = sanitizeForm(this.formData);
-
         // Prepare the template parameters for EmailJS
         const templateParams = {
           to_email: 'felix.seeger@taktzeit.com', // The recipient email
-          from_name: sanitizedData.name,
-          from_email: sanitizedData.email,
-          company: sanitizedData.firma || 'Not provided',
-          subject: sanitizedData.betreff,
-          message: sanitizedData.anmerkungen || 'No message provided',
-          reply_to: sanitizedData.email,
-          csrfToken: sanitizedData.csrfToken // Include CSRF token for server-side validation
+          from_name: this.formData.name,
+          from_email: this.formData.email,
+          company: this.formData.firma || 'Not provided',
+          subject: this.formData.betreff,
+          message: this.formData.anmerkungen || 'No message provided',
+          reply_to: this.formData.email
         };
 
         // Send the email using EmailJS
@@ -455,15 +363,8 @@ export default {
           email: '',
           firma: '',
           betreff: '',
-          anmerkungen: '',
-          honeypot: '',
-          csrfToken: generateCSRFToken(), // Generate a new CSRF token
-          formStartTime: Date.now(), // Reset the timestamp
-          mathAnswer: '' // Reset the math answer
+          anmerkungen: ''
         };
-
-        // Set up a new math challenge
-        this.setupMathChallenge();
 
         this.formSubmitted = true;
         this.formAttempted = false; // Reset formAttempted state
@@ -474,15 +375,7 @@ export default {
         }, 5000);
       } catch (error) {
         console.error('Error submitting form:', error);
-
-        // Check if the error is related to validation
-        if (error.response && error.response.status === 400 && error.response.data && error.response.data.errors) {
-          // Update the errors object with the server-side validation errors
-          this.errors = { ...error.response.data.errors };
-        } else {
-          // Generic error message for other errors
-          alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.');
-        }
+        alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.');
       } finally {
         this.isSubmitting = false;
       }
@@ -493,19 +386,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/scss/_variables.scss';
-
-// Honeypot field styling - ensure it's hidden from users but visible to bots
-.honeypot-field,
-.math-challenge {
-  position: absolute;
-  left: -9999px;
-  top: -9999px;
-  z-index: -1;
-  opacity: 0;
-  height: 0;
-  width: 0;
-  overflow: hidden;
-}
 
 .form-group {
   position: relative;

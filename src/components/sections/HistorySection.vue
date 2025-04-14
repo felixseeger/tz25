@@ -11,8 +11,11 @@
           </p>
         </div>
 
-        <!-- History button moved outside the component to be fixed -->
-        <!-- It will be handled by the FixedHistoryButton component -->
+        <div class="history-button-container">
+          <button class="history-button" @click="openTimeline">
+            <img src="../../assets/images/history-btn.svg" alt="Unsere Geschichte" class="history-button__image">
+          </button>
+        </div>
       </div>
     </div>
 
@@ -90,10 +93,6 @@ export default {
       this.showTimeline = true;
       document.body.classList.add('timeline-open');
 
-      // Dispatch custom event for timeline open
-      const timelineOpenEvent = new CustomEvent('timeline-open');
-      document.body.dispatchEvent(timelineOpenEvent);
-
       // Add animation for timeline items after the timeline is opened
       setTimeout(() => {
         this.animateTimelineItems();
@@ -102,10 +101,6 @@ export default {
     closeTimeline() {
       this.showTimeline = false;
       document.body.classList.remove('timeline-open');
-
-      // Dispatch custom event for timeline close
-      const timelineCloseEvent = new CustomEvent('timeline-close');
-      document.body.dispatchEvent(timelineCloseEvent);
     },
     handleOpenTimelineEvent() {
       this.openTimeline();

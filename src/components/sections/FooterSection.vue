@@ -32,15 +32,12 @@
 
   <script>
   import { useScrollTo } from '../../composables/useScrollTo';
-  import { ref, onMounted, onUnmounted } from 'vue';
 
   export default {
     name: 'FooterSection',
     components: {},
     setup() {
       const { scrollToTop } = useScrollTo();
-      const observer = ref(null);
-      const isVisible = ref(false);
 
       // Function to open cookie settings
       const openCookieSettings = () => {
@@ -50,59 +47,10 @@
         console.log('Cookie settings button clicked from footer');
       };
 
-      // Set up intersection observer to detect when the footer is visible
-      const setupIntersectionObserver = () => {
-        // Create a new Intersection Observer
-        observer.value = new IntersectionObserver(
-          (entries) => {
-            // Check if the section is intersecting (visible)
-            if (entries[0].isIntersecting) {
-              isVisible.value = true;
-
-              // Dispatch a custom event to notify other components
-              const event = new CustomEvent('footer-section-visible', { detail: { visible: true } });
-              document.dispatchEvent(event);
-              console.log('Footer section visible event dispatched: true');
-            } else {
-              isVisible.value = false;
-
-              // Dispatch a custom event to notify other components
-              const event = new CustomEvent('footer-section-visible', { detail: { visible: false } });
-              document.dispatchEvent(event);
-              console.log('Footer section visible event dispatched: false');
-            }
-          },
-          {
-            // Options for the observer
-            threshold: 0.1, // Trigger when just 10% of the section is visible
-            rootMargin: '0px' // No margin
-          }
-        );
-
-        // Start observing the section
-        const section = document.getElementById('footer');
-        if (section) {
-          observer.value.observe(section);
-        }
-      };
-
-      onMounted(() => {
-        // Set up the intersection observer
-        setupIntersectionObserver();
-      });
-
-      onUnmounted(() => {
-        // Clean up observer when component is unmounted
-        if (observer.value) {
-          observer.value.disconnect();
-        }
-      });
-
       return {
         currentYear: new Date().getFullYear(),
         scrollToTop,
-        openCookieSettings,
-        isVisible
+        openCookieSettings
       };
     }
   }

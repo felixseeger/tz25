@@ -42,14 +42,25 @@ export default {
               entries.forEach(entry => {
                 isHistorySectionVisible.value = entry.isIntersecting;
                 console.log('History section visible:', isHistorySectionVisible.value);
+
+                // If the history section is intersecting, make sure the button is hidden
+                if (entry.isIntersecting) {
+                  // Force update the computed property
+                  isHistorySectionVisible.value = true;
+                }
               });
             },
-            { threshold: 0.05 } // Trigger when just 5% of the section is visible for better sensitivity
+            {
+              threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5], // Multiple thresholds for better detection
+              rootMargin: '0px 0px 0px 0px' // Expand the detection area
+            }
           );
 
           historyObserver.value.observe(historySection);
         } else {
-          console.error('History section not found in the DOM');
+          console.log('History section not found in the DOM yet, will retry on scroll');
+          // Don't show error, just set a flag to check again later
+          isHistorySectionVisible.value = false;
         }
       }, 500); // Short delay to ensure DOM is ready
     });
@@ -61,14 +72,15 @@ export default {
       console.log('History visible:', isHistorySectionVisible.value);
       console.log('Contact visible:', isContactSectionVisible.value);
 
-      // Only hide when we're exactly in the contact section
+      // Hide when in contact section or history section
       const inContactSection = activeSection.value === 'contact';
+      const inHistorySection = activeSection.value === 'history' || isHistorySectionVisible.value;
 
       // For debugging purposes, log the current state
-      console.log('Should hide button:', inContactSection);
+      console.log('Should hide button:', inContactSection || inHistorySection);
 
-      // Only hide when in contact section
-      return inContactSection;
+      // Hide when in contact section or history section
+      return inContactSection || inHistorySection;
     });
 
     const scrollToContact = () => {
@@ -91,23 +103,42 @@ export default {
       // This will trigger a re-evaluation of the computed property
       // by checking if the history section is in the viewport
       const historySection = document.getElementById('history');
+
+      // Check if active section is 'history' regardless of DOM element
+      if (activeSection.value === 'history') {
+        isHistorySectionVisible.value = true;
+        return;
+      }
+
+      // Check URL hash
+      if (window.location.hash === '#history') {
+        isHistorySectionVisible.value = true;
+        return;
+      }
+
       if (historySection) {
         const rect = historySection.getBoundingClientRect();
+
         // More aggressive check - consider visible even if just partially in viewport
+        // The history section is considered visible if any part of it is in the viewport
         isHistorySectionVisible.value = (
           rect.top <= window.innerHeight &&
           rect.bottom >= 0
         );
 
         // If we're very close to the history section, consider it visible
-        if (Math.abs(rect.top) < 300 || Math.abs(rect.bottom - window.innerHeight) < 300) {
+        // Increased threshold to 500px for better detection
+        if (Math.abs(rect.top) < 500 || Math.abs(rect.bottom - window.innerHeight) < 500) {
           isHistorySectionVisible.value = true;
         }
 
-        // Also check if the URL hash is #history
-        if (window.location.hash === '#history') {
+        // Check if we're scrolling through the history section
+        // This ensures the button stays hidden while scrolling through the section
+        if (rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2) {
           isHistorySectionVisible.value = true;
         }
+
+        // These checks are now done before checking for the DOM element
       }
     };
 
