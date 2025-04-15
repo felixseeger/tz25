@@ -70,14 +70,15 @@ export default {
 <style lang="scss" scoped>
 .fixed-history-button-container {
   position: fixed;
-  right: 2rem;
-  top: calc(50% + 100px); /* Moved 100px down from center */
+  right: 0;
+  top: 50%; /* Position at the vertical center */
   transform: translateY(-50%);
   z-index: 1000;
   display: block;
   visibility: hidden; /* Hidden by default */
   opacity: 0;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  padding-left: 50px; /* Add padding to the left as requested */
 
   &.is-visible {
     visibility: visible;
@@ -105,7 +106,8 @@ export default {
 
 @media (max-width: 992px) {
   .fixed-history-button-container {
-    right: 1rem;
+    right: 0;
+    padding-left: 40px; /* Reduced padding for medium screens */
   }
 
   .fixed-history-button__image {
@@ -115,10 +117,11 @@ export default {
 
 @media (max-width: 768px) {
   .fixed-history-button-container {
-    right: 0.5rem;
+    right: 0;
     bottom: 5rem; /* Adjusted for better mobile positioning */
     top: auto;
     transform: none;
+    padding-left: 30px; /* Further reduced padding for small screens */
 
     &.is-visible {
       visibility: visible;
