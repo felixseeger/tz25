@@ -17,35 +17,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70px; /* Circular button */
-    height: 70px; /* Circular button */
-    border-radius: 50%; /* Circular button */
+    width: 70px;
+    height: 70px;
     border: none;
     color: white;
     cursor: pointer;
-    padding: 0; /* Remove padding */
-    overflow: hidden; /* Contain the icon */
-    background-color: $primary-color;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    overflow: hidden;
 
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
 
     &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-      background-color: darken($primary-color, 10%);
+      transform: scale(1.1);
     }
 
     &:active {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transform: scale(0.95);
     }
 
     .arrow-up-icon {
-      width: 48px; /* Sized to fit the button */
-      height: 34px; /* Sized to fit the button */
+      width: 60px; /* Increased size */
+      height: 60px; /* Increased size */
       filter: brightness(0) invert(1); /* Makes the SVG white */
-      transform: scale(1); /* Double the visual size */
     }
   }
 }

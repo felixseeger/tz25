@@ -1,7 +1,7 @@
 <template>
   <div class="scroll-to-top" :class="{ 'visible': isVisible }">
     <button @click="scrollToTop" class="scroll-to-top__button" aria-label="Scroll to top">
-      <img src="../../assets/images/arrow-up.svg" alt="Scroll to top" class="arrow-up-icon">
+      <img src="../../assets/images/arrow_up.svg" alt="Scroll to top" class="arrow-up-icon">
     </button>
   </div>
 </template>
