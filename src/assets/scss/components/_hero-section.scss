@@ -22,10 +22,20 @@
   &__container {
     position: relative;
     z-index: 2;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 0 2rem;
+
+    @media (max-width: $breakpoint-lg) {
+      padding: 0 1.5rem;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      padding: 0 1rem;
+    }
   }
 
   &__content {
@@ -599,11 +609,11 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 75px; /* Increased from 60px by 25% */
-    height: 75px; /* Increased from 60px by 25% */
+    width: 45px; /* Scaled down by 40% from 75px */
+    height: 45px; /* Scaled down by 40% from 75px */
     border-radius: 50%;
 
-    border: 2px solid rgba(255, 255, 255, 1);
+    /* Removed border */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -623,15 +633,13 @@
     }
 
     &-icon {
-      width: 50px; /* Increased from 50px by 25% */
-      height: 50px; /* Increased from 50px by 25% */
+      width: 30px; /* Scaled down by 40% from 50px */
+      height: 30px; /* Scaled down by 40% from 50px */
       filter: brightness(0) invert(1); /* Make the SVG white */
     }
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.2);
       transform: translateY(-50%) scale(1.1);
-
     }
 
     &--prev {
