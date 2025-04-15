@@ -6,9 +6,7 @@
     aria-label="Scroll to next section"
   >
     <div class="section-scroll-indicator__icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-      </svg>
+      <img src="../../assets/images/scroll-indicator.svg" alt="Scroll down" class="section-scroll-indicator__arrow" />
     </div>
     <div class="section-scroll-indicator__text">Scroll</div>
   </div>
@@ -223,16 +221,11 @@ export default {
   }
 
   &__icon {
-    width: 40px;
-    height: 40px;
-    border: 2px solid white;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 0.5rem;
     animation: bounce 2s infinite;
-    background-color: rgba(0, 0, 0, 0.2);
 
     svg {
       width: 24px;
@@ -275,14 +268,9 @@ export default {
   .section-scroll-indicator {
     bottom: 30px;
 
-    &__icon {
-      width: 36px;
-      height: 36px;
-
-      svg {
-        width: 20px;
-        height: 20px;
-      }
+    svg {
+      width: 20px;
+      height: 20px;
     }
 
     &__text {
@@ -295,14 +283,9 @@ export default {
   .section-scroll-indicator {
     bottom: 20px;
 
-    &__icon {
-      width: 32px;
-      height: 32px;
-
-      svg {
-        width: 18px;
-        height: 18px;
-      }
+    svg {
+      width: 18px;
+      height: 18px;
     }
   }
 }
