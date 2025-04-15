@@ -1,0 +1,110 @@
+// Pagination Styles
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  
+  &-button {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    border: none;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+    
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+  
+  &-arrow {
+    width: 48px;
+    height: 48px;
+    filter: brightness(0) invert(1); /* Make the SVG white */
+    transition: all 0.3s ease;
+  }
+  
+  &-info {
+    display: flex;
+    align-items: center;
+    margin: 0 1.5rem;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 500;
+  }
+  
+  &-current {
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  
+  &-separator {
+    margin: 0 0.5rem;
+    opacity: 0.7;
+  }
+  
+  &-total {
+    opacity: 0.7;
+  }
+}
+
+/* Media queries for responsive design */
+@media (max-width: $breakpoint-md) {
+  .pagination {
+    &-button {
+      width: 50px;
+      height: 50px;
+    }
+    
+    &-arrow {
+      width: 40px;
+      height: 40px;
+    }
+    
+    &-info {
+      margin: 0 1rem;
+      font-size: 1rem;
+    }
+    
+    &-current {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .pagination {
+    &-button {
+      width: 40px;
+      height: 40px;
+    }
+    
+    &-arrow {
+      width: 32px;
+      height: 32px;
+    }
+    
+    &-info {
+      margin: 0 0.75rem;
+      font-size: 0.9rem;
+    }
+    
+    &-current {
+      font-size: 1.1rem;
+    }
+  }
+}

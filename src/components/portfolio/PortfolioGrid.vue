@@ -58,7 +58,7 @@
     <!-- Portfolio grid -->
     <div class="portfolio-grid" role="list" aria-label="Portfolio projects">
       <div
-        v-for="item in filteredItems"
+        v-for="item in paginatedItems"
         :key="item.id"
         class="portfolio-item"
         role="listitem"
@@ -100,13 +100,21 @@
         </button>
       </div>
     </div>
+
+    <!-- Pagination -->
+    <Pagination
+      v-if="totalPages > 1"
+      v-model:currentPage="currentPage"
+      :totalPages="totalPages"
+    />
   </div>
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { clients, clientsMap } from '../../data/clients';
 import { portfolioItems } from '../../data/portfolioItems';
+import Pagination from '../ui/Pagination.vue';
 
 // Define categories
 const categoriesList = [
@@ -131,11 +139,16 @@ const categoriesMap = categoriesList.reduce((map, category) => {
 
 export default {
   name: 'PortfolioGrid',
+  components: {
+    Pagination
+  },
   setup() {
     // State
     const selectedClientId = ref(null);
     const selectedCategory = ref(null);
     const clientsList = ref([...clients]);
+    const currentPage = ref(1);
+    const itemsPerPage = 6; // Number of items to show per page
 
     // Computed properties
     const categories = computed(() => {
@@ -164,6 +177,18 @@ export default {
       }
 
       return items;
+    });
+
+    // Calculate total pages based on filtered items
+    const totalPages = computed(() => {
+      return Math.ceil(filteredItems.value.length / itemsPerPage);
+    });
+
+    // Get paginated items for current page
+    const paginatedItems = computed(() => {
+      const startIndex = (currentPage.value - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      return filteredItems.value.slice(startIndex, endIndex);
     });
 
     // Methods
@@ -212,6 +237,11 @@ export default {
       return categoriesMap[categoryId]?.name || categoryId;
     };
 
+    // Reset to first page when filters change
+    watch([selectedClientId, selectedCategory], () => {
+      currentPage.value = 1;
+    });
+
     // Log initial state for debugging
     onMounted(() => {
       console.log('Portfolio Grid mounted with', portfolioItems.length, 'items');
@@ -223,6 +253,9 @@ export default {
       clientsList,
       categories,
       filteredItems,
+      paginatedItems,
+      currentPage,
+      totalPages,
       selectClient,
       selectCategory,
       resetFilter,
