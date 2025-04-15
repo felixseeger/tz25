@@ -1,5 +1,5 @@
 <template>
-  <section id="history" class="history-section">
+  <section id="history" class="history-section" ref="historySection" :class="{ 'in-view': isInView }">
     <div class="history-background"></div>
     <div class="section-container">
       <div class="history-content">
@@ -99,7 +99,8 @@ export default {
   name: 'HistorySection',
   data() {
     return {
-      showTimeline: false
+      showTimeline: false,
+      isInView: false
     }
   },
   methods: {
@@ -222,6 +223,9 @@ export default {
         (entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
+              // Set the isInView property to true when the section is visible
+              this.isInView = true;
+
               // Dispatch a custom event when the history section becomes visible
               document.dispatchEvent(new CustomEvent('history-section-visible', {
                 detail: { visible: true }
@@ -231,6 +235,9 @@ export default {
               // Initialize the animations when the section becomes visible
               this.initAnimations();
             } else {
+              // Set the isInView property to false when the section is not visible
+              this.isInView = false;
+
               document.dispatchEvent(new CustomEvent('history-section-visible', {
                 detail: { visible: false }
               }));
