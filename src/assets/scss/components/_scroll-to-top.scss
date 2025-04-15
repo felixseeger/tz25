@@ -17,8 +17,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70px;
-    height: 70px;
+    width: 35px;
+    height: 25px;
     border: none;
     color: white;
     cursor: pointer;
@@ -36,8 +36,8 @@
     }
 
     .arrow-up-icon {
-      width: 60px; /* Increased size */
-      height: 60px; /* Increased size */
+      width: 30px;
+      height: 20px;
       filter: brightness(0) invert(1); /* Makes the SVG white */
     }
   }
