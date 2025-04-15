@@ -36,13 +36,13 @@ export default {
   min-height: 100vh;
   padding: 6rem 0;
   background-color: #f2f2f2;
-  
+
   .container {
     width: 100%;
     max-width: 1920px;
     margin: 0 auto;
     padding: 0 2rem;
-    
+
     @media (max-width: $breakpoint-md) {
       padding: 0 1rem;
     }
@@ -53,6 +53,7 @@ export default {
   max-width: 950px;
   margin-bottom: 4rem;
   text-align: left;
+  margin-top: 75px; /* Move text down by 75px */
 }
 
 .portfolio-titles {
