@@ -11,32 +11,27 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
-  
+
   &.is-visible {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
   }
-  
+
   &__icon {
-    width: 40px;
-    height: 40px;
-    border: 2px solid white;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 0.5rem;
     animation: bounce 2s infinite;
-    background-color: rgba(0, 0, 0, 0.2);
-    
-    svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
-    }
   }
-  
+
+  &__arrow {
+    width: 32px;
+    height: 32px;
+    /* No filter needed as the SVG is already white */
+  }
+
   &__text {
     color: white;
     font-size: 0.8rem;
@@ -46,7 +41,7 @@
     opacity: 0.8;
     transition: opacity 0.3s ease;
   }
-  
+
   &:hover {
     .section-scroll-indicator__text {
       opacity: 1;
@@ -54,21 +49,30 @@
   }
 }
 
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
 /* Media queries for responsive design */
 @media (max-width: $breakpoint-md) {
   .section-scroll-indicator {
     bottom: 30px;
-    
-    &__icon {
-      width: 36px;
-      height: 36px;
-      
-      svg {
-        width: 20px;
-        height: 20px;
-      }
+
+    /* No need to adjust icon size in media queries anymore */
+
+    &__arrow {
+      width: 28px;
+      height: 28px;
     }
-    
+
     &__text {
       font-size: 0.7rem;
     }
@@ -78,15 +82,12 @@
 @media (max-width: $breakpoint-sm) {
   .section-scroll-indicator {
     bottom: 20px;
-    
-    &__icon {
-      width: 32px;
-      height: 32px;
-      
-      svg {
-        width: 18px;
-        height: 18px;
-      }
+
+    /* No need to adjust icon size in media queries anymore */
+
+    &__arrow {
+      width: 24px;
+      height: 24px;
     }
   }
 }

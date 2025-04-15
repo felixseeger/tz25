@@ -938,21 +938,16 @@
   }
 
   &-icon {
-    width: 40px;
-    height: 40px;
-    border: 2px solid white;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 0.5rem;
     animation: bounce 2s infinite;
-    background-color: rgba(0, 0, 0, 0.2);
 
     &-arrow {
-      width: 24px;
-      height: 24px;
-      filter: brightness(0) invert(1); /* Make the SVG white */
+      width: 32px;
+      height: 32px;
+      /* No filter needed as the SVG is already white */
     }
   }
 
