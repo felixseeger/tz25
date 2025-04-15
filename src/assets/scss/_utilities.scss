@@ -1,5 +1,26 @@
 /* Utility classes */
 
+/* Section container for standardized width */
+.section-container {
+  width: 100%;
+  max-width: $section-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  box-sizing: border-box;
+
+  @media (max-width: $breakpoint-lg) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 /* Visually hidden class for screen readers */
 .visually-hidden {
   position: absolute;

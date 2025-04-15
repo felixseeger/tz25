@@ -1,7 +1,7 @@
 <template>
   <section class="hero">
     <div class="hero__background"></div>
-    <div class="hero__container">
+    <div class="hero__container section-container">
       <!-- Hero Carousel -->
       <div class="hero__carousel">
         <div class="hero__carousel-track">
@@ -134,7 +134,7 @@
       <!-- Hero Scroll Indicator - Visible only in hero section -->
       <div class="hero__scroll-indicator" :class="{ 'is-hidden': !showHeroScrollIndicator }" @click="scrollToNextSection">
         <div class="hero__scroll-indicator-icon">
-          <img src="../../assets/images/arrow_down.svg" alt="Scroll down" class="hero__scroll-indicator-arrow" />
+          <img src="../../assets/images/scroll-indicator.svg" alt="Scroll down" class="hero__scroll-indicator-arrow" />
         </div>
         <div class="hero__scroll-indicator-text">Scroll</div>
       </div>

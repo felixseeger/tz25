@@ -13,7 +13,8 @@ $font-size-h1: 3rem;
 $font-size-h2: 2.5rem;
 
 // Layout
-$container-width: 1200px;
+$container-width: 1200px; // Legacy container width
+$section-width: 1800px; // New standardized section width
 $spacing-unit: 20px;
 
 // Breakpoints

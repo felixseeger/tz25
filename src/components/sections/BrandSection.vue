@@ -1,7 +1,7 @@
 <template>
   <section id="brand" class="brand-section" ref="brandSection">
     <div class="brand-content">
-      <div class="container">
+      <div class="section-container">
         <!-- Brand Carousel Component -->
         <BrandCarousel />
       </div>

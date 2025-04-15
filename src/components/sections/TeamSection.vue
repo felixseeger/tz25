@@ -1,6 +1,6 @@
 <template>
   <section class="team-section">
-    <div class="container">
+    <div class="section-container">
       <div class="team-header">
         <h2 class="team-title">MOVE TOGETHER –</h2>
         <h2 class="team-subtitle">TEAM TAKTZEIT</h2>

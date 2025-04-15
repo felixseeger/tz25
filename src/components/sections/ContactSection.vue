@@ -1,6 +1,6 @@
 <template>
   <section id="contact" class="contact-section">
-    <div class="container">
+    <div class="section-container">
       <div class="contact-heading">
         <img src="../../assets/images/letsmove.svg" alt="LET'S MOVE!" class="contact-heading-image">
       </div>

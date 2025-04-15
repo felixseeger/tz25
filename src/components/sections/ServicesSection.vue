@@ -1,6 +1,6 @@
 <template>
   <section class="services-section">
-    <div class="container">
+    <div class="section-container">
       <div class="services-header">
         <h2 class="services-subtitle">WIR MACHEN ALLES INHOUSE</h2>
         <h2 class="services-title">UNSERE LEISTUNGEN</h2>
@@ -29,7 +29,7 @@
             <h3 class="service-name">STRATEGIE & KONZEPT</h3>
             <p class="service-text">
               Die Stunde der Wahrheit schlägt, wenn es um die Kaufentscheidung geht.
-              Hier hilft Ihnen TAKTZEIT mit langjähriger Expertise, fundierten Handelskenntnissen, 
+              Hier hilft Ihnen TAKTZEIT mit langjähriger Expertise, fundierten Handelskenntnissen,
               tiefen Shopper Insights – und vor allem Herzblut. Denn Verkaufen steckt uns in den Genen.
             </p>
 

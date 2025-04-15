@@ -1,6 +1,6 @@
 <template>
   <section id="portfolio" class="portfolio-section">
-    <div class="container">
+    <div class="section-container">
       <div class="portfolio-header">
         <div class="portfolio-titles">
           <h2 class="portfolio-subtitle">UNSERE PROJEKTE –</h2>

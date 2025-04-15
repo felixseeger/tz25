@@ -1,11 +1,11 @@
 <template>
   <section id="history" class="history-section">
     <div class="history-background"></div>
-    <div class="container">
+    <div class="section-container">
       <div class="history-content">
         <div class="history-text-content">
-          <h2 class="history-title">WIR SIND IHRE NEUE AGENTUR MIT</h2>
-          <h2 class="history-headline">LEIDENSCHAFT</h2>
+          <h2 class="history-title" >WIR SIND IHRE NEUE AGENTUR MIT</h2>
+          <!-- <h2 class="history-headline">LEIDENSCHAFT</h2> -->
           <p class="history-description">
             Wir sind Kreativität, Hands-On Mentalität und Praxisorientierung für zugeschnit­tene Lösungen und das für jedes Budget.
           </p>
@@ -37,40 +37,54 @@
             <div class="timeline-item">
               <div class="timeline-year">2005</div>
               <div class="timeline-content">
-                <h3>GRÜNDUNG</h3>
-                <p>TAKTZEIT wurde als spezialisierte Agentur für Sales Activation im Herzen von Düsseldorf gegründet.</p>
+                <!-- <h3>GRÜNDUNG</h3> -->
+                <p>Im April 2005 gründen wir, Sven Carsten Hennings und Till Belkoura, die Agentur TAKTZEIT in Mönchengladbach. Mit unserem klaren Fokus auf Trade Marketing machen wir schon bald als kleines Start-up großen Eindruck bei namhaften Unternehmen wie Bridgestone oder Disney/Buena Vista.</p>
               </div>
             </div>
 
             <div class="timeline-item">
-              <div class="timeline-year">2010</div>
+              <div class="timeline-year">2007</div>
               <div class="timeline-content">
-                <h3>EXPANSION</h3>
-                <p>Erweiterung des Teams und Umzug in größere Büroräume.</p>
+                <!-- <h3>EXPANSION</h3> -->
+                <p>Gründung einer GmbH, Umzug nach Düsseldorf, erste Mitarbeiter und Azubis, die mit uns Gründern ein starkes Team bilden – Zukunft here we come!</p>
               </div>
             </div>
 
             <div class="timeline-item">
-              <div class="timeline-year">2015</div>
+              <div class="timeline-year">2009</div>
               <div class="timeline-content">
-                <h3>DIGITAL SHIFT</h3>
-                <p>Integration digitaler Strategien und Erweiterung des Serviceangebots.</p>
+                <!-- <h3>DIGITAL SHIFT</h3> -->
+                <p>Ohne Digital läuft nichts! Deshalb erweitern wir unsere Kernkompetenz um digitale Lösungen für vernetzte Kampagnen aus einer Hand. Eine Service Leistung, die neue Kunden wie Wrigley und Lux Tools / Obi voll überzeugt.</p>
               </div>
             </div>
 
+            <div class="timeline-item">
+              <div class="timeline-year">2011</div>
+              <div class="timeline-content">
+                <!-- <h3>INTERNATIONALE KUNDEN</h3> -->
+                <p>Mittlerweile haben wir 10 motivierte Mitarbeiter und Mitarbeiterinnen bei TAKTZEIT – wir brauchen mehr Platz für unsere Kreativität! In der alten Limonadenfabrik in Düsseldorf finden wir den Raum für neue Kompetenzfelder und neue große Etats wie EVONIK und BECHEM in der B2B Kommunikation.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2016</div>
+              <div class="timeline-content">
+                <!-- <h3>INNOVATION & WACHSTUM</h3> -->
+                <p>Wir wachsen weiter – 15 Werbeprofis tummeln sich jetzt in unserem Team. Zeit für einen weiteren Umzug. In einer bezaubernden Gründerzeit-Villa in Düsseldorf Grafenberg finden wir Muße und Motivation für Kunden aus Deutschland, Österreich, der Schweiz und den Niederlanden – mit einem erstmaligen Jahresumsatz von über 2 Mio. Euro.</p>
+              </div>
+            </div>
             <div class="timeline-item">
               <div class="timeline-year">2020</div>
               <div class="timeline-content">
-                <h3>INTERNATIONALE KUNDEN</h3>
-                <p>Ausbau des Kundenportfolios mit internationalen Marken.</p>
+                <!-- <h3>INNOVATION & WACHSTUM</h3> -->
+                <p>Wir starten in das neue Jahrzehnt mit noch mehr Mitarbeitern, noch mehr Kunden und noch mehr Aufgabenbereichen. Durch die erfolgreiche Akquise bei z.B. Epson, Dr. Clauder und Rossmann, kann das mittlerweile 20köpfige Team das komplette Leistungsportfolio im Bereich Sales Activation und B2B voll ausspielen. Wir freuen uns auf die Zukunft. Und auf Sie!</p>
               </div>
             </div>
-
             <div class="timeline-item">
-              <div class="timeline-year">HEUTE</div>
+              <div class="timeline-year">2025</div>
               <div class="timeline-content">
-                <h3>INNOVATION & WACHSTUM</h3>
-                <p>Kontinuierliche Weiterentwicklung als führende Agentur für Sales Activation mit einem vielfältigen Kundenstamm.</p>
+                <!-- <h3>INNOVATION & WACHSTUM</h3> -->
+                <p>Wir feiern unser 20 jähriges Bestehen!</p>
               </div>
             </div>
           </div>

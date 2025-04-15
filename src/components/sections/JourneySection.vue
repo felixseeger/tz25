@@ -1,6 +1,6 @@
 <template>
   <section class="journey-section">
-    <div class="container">
+    <div class="section-container">
       <div class="journey-header" ref="journeyHeader">
         <h2 class="journey-section__title" ref="journeyTitle">IHRE EXPERTEN FÜR DIE GESAMTE</h2>
         <h2 class="journey-section__subtitle" ref="journeySubtitle">SALES ACTIVATION JOURNEY</h2>
