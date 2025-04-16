@@ -65,8 +65,8 @@ background-size: cover;
     margin-bottom: 0;
     text-align: left; /* Left-align the text */
     width: 100%; /* Ensure full width */
-    max-width: 1200px; /* Set a max-width for the container */
-    margin-left: 7vw; /* Left-align the block element */
+    max-width: $section-width; /* Match the section-container width */
+    margin-left: auto; /* Center the block element */
     margin-right: auto;
   }
 
@@ -89,8 +89,8 @@ background-size: cover;
     text-align: left; /* Left-align the text */
     margin-left: auto; /* Center the block element */
     margin-right: auto; /* Center the block element */
-    padding-left: 2rem; /* Add padding for smaller screens */
-    padding-right: 2rem; /* Add padding for smaller screens */
+    padding-left: 0; /* Remove padding to align with section-container */
+    padding-right: 0; /* Remove padding to align with section-container */
   }
 }
 
@@ -133,7 +133,7 @@ background-size: cover;
 }
 
 .history-title {
-  
+
   font-size: 3rem; /* Increased by 20% from 2.5rem */
   font-family: $font-headline;
   font-weight: 300;
@@ -142,7 +142,7 @@ background-size: cover;
   line-height: 1.1;
   padding-top: 0;
   will-change: transform, opacity; /* Optimize for animations */
-  @include boxed-centered-text(1200px);
+  @include boxed-centered-text($section-width);
 
   @media (max-width: $breakpoint-md) {
     font-size: 1.8rem; /* Increased by 20% from 1.5rem */
@@ -150,7 +150,7 @@ background-size: cover;
 }
 
 .history-headline {
- 
+
   /* Fluid font size that scales with viewport width */
   font-size: clamp(4rem, 10vw, 12rem);
   font-family: $font-headline;
@@ -161,7 +161,7 @@ background-size: cover;
   line-height: 0.9;
   padding-top: 2rem; /* Space between title and headline */
   will-change: transform, opacity; /* Optimize for animations */
-  @include boxed-centered-text(1200px);
+  @include boxed-centered-text($section-width);
 
   /* Responsive adjustments */
   @media (max-width: $breakpoint-md) {
@@ -178,7 +178,8 @@ background-size: cover;
   color: #333333; /* Darker text for better contrast with light bottom background */
   font-weight: 400;
   will-change: transform, opacity; /* Optimize for animations */
-  @include boxed-centered-text(600px);
+  @include boxed-centered-text($section-width);
+  max-width: 600px; /* Narrower width for better readability */
   text-align: left; /* Ensure text is left-aligned */
 
   @media (max-width: $breakpoint-md) {
@@ -305,7 +306,7 @@ background-size: cover;
   width: 100%;
   max-width: 450px;
   height: 100%;
-  background-color: $primary-color;
+  background-color: #3B80FF;
   padding: 5rem 2rem 2rem;
   overflow-y: auto;
   pointer-events: auto;
