@@ -87,10 +87,10 @@ background-size: cover;
     margin-top: 35rem; /* Push down to bottom half */
     max-width: 600px; /* Narrower width for better readability */
     text-align: left; /* Left-align the text */
-    margin-left: auto; /* Center the block element */
-    margin-right: auto; /* Center the block element */
-    padding-left: 0; /* Remove padding to align with section-container */
-    padding-right: 0; /* Remove padding to align with section-container */
+    margin-left: 2rem; /* Match the section-container padding */
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -134,18 +134,18 @@ background-size: cover;
 
 .history-title {
 
-  font-size: 3rem; /* Increased by 20% from 2.5rem */
+  font-size: 3rem;
   font-family: $font-headline;
   font-weight: 300;
-  color: white; /* White for better contrast */
+  color: white;
   text-transform: uppercase;
   line-height: 1.1;
   padding-top: 0;
-  will-change: transform, opacity; /* Optimize for animations */
+  will-change: transform, opacity;
   @include boxed-centered-text($section-width);
 
   @media (max-width: $breakpoint-md) {
-    font-size: 1.8rem; /* Increased by 20% from 1.5rem */
+    font-size: 1.8rem;
   }
 }
 
@@ -178,15 +178,17 @@ background-size: cover;
   color: #333333; /* Darker text for better contrast with light bottom background */
   font-weight: 400;
   will-change: transform, opacity; /* Optimize for animations */
-  @include boxed-centered-text($section-width);
+  width: 100%;
   max-width: 600px; /* Narrower width for better readability */
   text-align: left; /* Ensure text is left-aligned */
+  margin-left: 2rem; /* Match the section-container padding */
+  margin-right: auto;
 
   @media (max-width: $breakpoint-md) {
     font-size: 1rem;
     max-width: 100%;
-    margin-left: 0; /* Maintain left alignment on mobile */
-    padding-left: 0; /* Maintain left alignment on mobile */
+    margin-left: 1rem; /* Reduced margin for mobile */
+    padding-left: 0;
   }
 }
 
@@ -271,7 +273,7 @@ background-size: cover;
       margin-top: 3rem;
       max-width: 100%;
       text-align: left; /* Left-align the text */
-      margin-left: auto;
+      margin-left: 1rem; /* Match the title alignment */
       margin-right: auto;
     }
   }
