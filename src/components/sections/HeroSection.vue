@@ -99,11 +99,13 @@
               </div>
               <div class="hero__column hero__column--right">
                 <div class="hero__text">
+                  <p>  <img src="../../assets/images/community_riga.jpg" alt="WEMOVESALES" class="hero__title-image hero__title-image--base" />
+                  </p>
                   <p>
-                    Unser Team aus erfahrenen Experten bringt jahrelange Branchenerfahrung und frische Perspektiven zusammen. Wir verstehen die Herausforderungen des modernen Marketings und entwickeln Lösungen, die Ihre Zielgruppe begeistern und messbare Ergebnisse liefern.
+                    Unser Team aus erfahrenen Experten bringt jahrelange Branchenerfahrung und frische Perspektiven zusammen. <br>Wir verstehen die Herausforderungen des modernen Marketings und entwickeln Lösungen, die Ihre Zielgruppe<br> begeistern und messbare Ergebnisse liefern.
                   </p>
                   <div class="hero__cta">
-                    <a href="#team" class="hero__button" @click.prevent="scrollToTeam">Unser Team</a>
+                    
                   </div>
                 </div>
               </div>
@@ -122,15 +124,15 @@
             :aria-label="`Go to slide ${index}`"
           ></button>
         </div>
-
-        <!-- Carousel Arrows -->
-        <button class="hero__carousel-arrow hero__carousel-arrow--prev" @click="prevSlide" aria-label="Previous slide">
-          <img src="../../assets/images/arrow_left.svg" alt="Previous" class="hero__carousel-arrow-icon" />
-        </button>
-        <button class="hero__carousel-arrow hero__carousel-arrow--next" @click="nextSlide" aria-label="Next slide">
-          <img src="../../assets/images/arrow_right.svg" alt="Next" class="hero__carousel-arrow-icon" />
-        </button>
       </div>
+
+      <!-- Carousel Arrows (moved outside the carousel) -->
+      <button class="hero__carousel-arrow hero__carousel-arrow--prev" @click="prevSlide" aria-label="Previous slide">
+        <img src="../../assets/images/arrow_left.svg" alt="Previous" class="hero__carousel-arrow-icon" />
+      </button>
+      <button class="hero__carousel-arrow hero__carousel-arrow--next" @click="nextSlide" aria-label="Next slide">
+        <img src="../../assets/images/arrow_right.svg" alt="Next" class="hero__carousel-arrow-icon" />
+      </button>
       <!-- Hero Scroll Indicator - Visible only in hero section -->
       <div class="hero__scroll-indicator" :class="{ 'is-hidden': !showHeroScrollIndicator }" @click="scrollToNextSection">
         <div class="hero__scroll-indicator-icon">
