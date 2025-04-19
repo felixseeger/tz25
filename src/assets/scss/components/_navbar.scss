@@ -1,3 +1,6 @@
+// Import Sass color module
+@use 'sass:color';
+
 .navbar {
   position: fixed;
   top: 0;
@@ -136,7 +139,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(#444444, 0.98);
+  background-color: rgba(#555555, 0.98); /* Updated to match the image */
   z-index: 5;
   display: flex;
   align-items: flex-start; /* Changed from center to flex-start */
@@ -153,13 +156,14 @@
   }
 
   &__content {
-    padding: 80px 40px 40px; /* Increased left padding */
+    padding: 80px 60px 60px; /* Increased padding */
     width: 100%;
-    max-width: 100%;
+    max-width: 1400px; /* Set a max-width to center content on large screens */
+    margin: 0 auto; /* Center the content */
 
     /* Responsive styles for mobile */
     @media (max-width: $breakpoint-md) {
-      padding: 80px 20px 40px;
+      padding: 80px 30px 40px;
     }
   }
 
@@ -210,22 +214,24 @@
 
   &__column {
     flex: 1;
-    min-width: 250px; /* Ensure columns have a minimum width */
-    max-width: 350px; /* Limit maximum width for better readability */
+    min-width: 300px; /* Increased minimum width */
+    max-width: 400px; /* Increased maximum width */
     margin-bottom: 2rem;
+    margin-right: 2rem; /* Add right margin for spacing between columns */
 
     /* Responsive styles for mobile */
     @media (max-width: $breakpoint-md) {
       min-width: 100%;
       max-width: 100%;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      margin-right: 0;
     }
   }
 
   &__column-title {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     color: $primary-color;
     letter-spacing: 1px;
     text-align: left;
@@ -234,10 +240,10 @@
   &__section {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 1.2rem; /* Increased gap for better spacing between links */
     align-items: flex-start; /* Changed from center to flex-start */
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem; /* Increased bottom margin */
 
     &--pages {
       margin-top: 0; /* Removed top margin */
@@ -254,8 +260,9 @@
 
   &__social {
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem; /* Increased gap between social icons */
     justify-content: flex-start; /* Changed from center to flex-start */
+    margin-top: 1rem; /* Added top margin */
 
     &-link {
       display: flex;
@@ -279,15 +286,15 @@
       }
 
       img {
-        width: 24px;
-        height: 24px;
+        width: 30px; /* Increased size of social icons */
+        height: 30px; /* Increased size of social icons */
       }
     }
   }
 
   &__link {
     color: $text-color;
-    font-size: 1.2rem;
+    font-size: 2.16rem; /* Increased by 80% from 1.2rem */
     font-weight: 500;
     text-decoration: none;
     transition: color 0.3s ease, transform 0.3s ease;
@@ -313,7 +320,7 @@
     }
 
     &:hover {
-      color: darken($text-color, 15%);
+      color: color.adjust($text-color, $lightness: -15%);
       transform: translateY(-2px);
 
       &:after {
@@ -351,12 +358,13 @@
     .new-tag {
       background-color: $primary-color;
       color: $text-color;
-      font-size: 0.6rem;
+      font-size: 0.8rem;
       padding: 2px 6px;
-      border-radius: 4px;
+      border-radius: 2px;
       vertical-align: super;
-      margin-left: 5px;
+      margin-left: 8px;
       font-weight: bold;
+      display: inline-block;
     }
   }
 }
