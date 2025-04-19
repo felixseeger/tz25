@@ -6,7 +6,7 @@
     aria-label="Scroll to next section"
   >
     <div class="section-scroll-indicator__icon">
-      <img src="../../assets/images/scroll-indicator.svg" alt="Scroll down" class="section-scroll-indicator__arrow" />
+      <img src="../../assets/images/scroll-indicator.svg" alt="Scroll down" class="section-scroll-indicator__arrow" :class="{ 'move-out': isScrollingToHero }" />
     </div>
     <div class="section-scroll-indicator__text">Scroll</div>
   </div>
@@ -33,6 +33,8 @@ export default {
   setup(props) {
     const isVisible = ref(false);
     const currentSection = ref(null);
+    const previousSection = ref(null);
+    const isScrollingToHero = ref(false);
     const { navigateToHomeSection } = useNavigation();
 
     // Define the section order for navigation based on the actual order in HomeView
@@ -112,8 +114,22 @@ export default {
         console.error('Error in checkVisibleSection:', error);
       }
 
+      // Store the previous section before updating the current one
+      previousSection.value = currentSection.value;
+
       // Update current section - now foundSection is always defined, even if it's null
       currentSection.value = foundSection;
+
+      // Check if we're scrolling back to the hero section from another section
+      if (currentSection.value === 'hero' && previousSection.value && previousSection.value !== 'hero') {
+        console.log('Scrolling back to hero section from', previousSection.value);
+        isScrollingToHero.value = true;
+
+        // Reset the flag after animation completes
+        setTimeout(() => {
+          isScrollingToHero.value = false;
+        }, 800); // Slightly longer than the CSS transition
+      }
 
       // Always show the indicator if we're in one of the visible sections
       // and not in the last section (contact or footer)
@@ -191,7 +207,8 @@ export default {
       isVisible,
       currentSection,
       nextSection,
-      scrollToNextSection
+      scrollToNextSection,
+      isScrollingToHero
     };
   }
 };
@@ -226,11 +243,16 @@ export default {
     justify-content: center;
     margin-bottom: 0.5rem;
     animation: bounce 2s infinite;
+  }
 
-    svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
+  &__arrow {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+
+    &.move-out {
+      transform: translateY(100px);
+      opacity: 0;
     }
   }
 
