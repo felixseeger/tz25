@@ -123,11 +123,20 @@ export default {
       marketing: false
     });
 
+    // Function to emit banner visibility change event
+    const emitBannerVisibilityChange = (isVisible) => {
+      document.dispatchEvent(new CustomEvent('cookie-banner-visibility-changed', {
+        detail: { isVisible }
+      }));
+      console.log('Cookie banner visibility changed:', isVisible);
+    };
+
     // Check if cookie consent has already been given
     const checkCookieConsent = () => {
       const consent = localStorage.getItem('cookieConsent');
       if (!consent) {
         showBanner.value = true;
+        emitBannerVisibilityChange(true);
       } else {
         try {
           const savedSettings = JSON.parse(consent);
@@ -136,6 +145,7 @@ export default {
         } catch (e) {
           console.error('Error parsing cookie consent:', e);
           showBanner.value = true;
+          emitBannerVisibilityChange(true);
         }
       }
     };
@@ -146,6 +156,7 @@ export default {
       showBanner.value = false;
       showSettings.value = false;
       emit('cookies-set', cookieSettings);
+      emitBannerVisibilityChange(false);
     };
 
     // Accept all cookies
@@ -187,6 +198,7 @@ export default {
     const handleOpenCookieSettings = () => {
       showBanner.value = true;
       showSettings.value = true;
+      emitBannerVisibilityChange(true);
     };
 
     onMounted(() => {

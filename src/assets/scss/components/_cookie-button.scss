@@ -3,13 +3,13 @@
   left: 20px;
   bottom: 20px;
   z-index: $z-index-contact-button;
-  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.3s ease;
+  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
 
   &.is-hidden {
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
-    transform: translateX(-20px);
+    transform: translateY(100px); // Move down instead of left
   }
 
   &__btn {
