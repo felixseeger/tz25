@@ -146,10 +146,14 @@ export default {
         // Store current scroll position
         scrollPosition.value = window.pageYOffset
         document.body.classList.add('menu-open')
+        // Dispatch event for menu open
+        document.dispatchEvent(new CustomEvent('menu-overlay-state-changed', { detail: { isOpen: true } }))
       } else {
         document.body.classList.remove('menu-open')
         // Restore scroll position
         window.scrollTo(0, scrollPosition.value)
+        // Dispatch event for menu close
+        document.dispatchEvent(new CustomEvent('menu-overlay-state-changed', { detail: { isOpen: false } }))
       }
     }
 
@@ -157,6 +161,8 @@ export default {
       if (menuOpen.value) {
         menuOpen.value = false
         document.body.classList.remove('menu-open')
+        // Dispatch event for menu close
+        document.dispatchEvent(new CustomEvent('menu-overlay-state-changed', { detail: { isOpen: false } }))
       }
     }
 

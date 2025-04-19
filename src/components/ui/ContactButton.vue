@@ -25,6 +25,7 @@ export default {
     const { activeSection } = useActiveSection();
     const isContactSectionVisible = ref(false);
     const isHistorySectionVisible = ref(false);
+    const isMenuOpen = ref(false);
 
     // Create a ref to store the observer
     const historyObserver = ref(null);
@@ -65,23 +66,24 @@ export default {
       }, 500); // Short delay to ensure DOM is ready
     });
 
-    // Hide button on history, contact, and footer sections
+    // Hide button on history, contact, footer sections, or when menu is open
     const shouldHideButton = computed(() => {
       // Debug logs
       console.log('Active section:', activeSection.value);
       console.log('History visible:', isHistorySectionVisible.value);
       console.log('Contact visible:', isContactSectionVisible.value);
+      console.log('Menu open:', isMenuOpen.value);
 
-      // Hide when in contact section, history section, or footer section
+      // Hide when in contact section, history section, footer section, or when menu is open
       const inContactSection = activeSection.value === 'contact';
       const inFooterSection = activeSection.value === 'footer';
       const inHistorySection = activeSection.value === 'history' || isHistorySectionVisible.value;
 
       // For debugging purposes, log the current state
-      console.log('Should hide button:', inContactSection || inHistorySection || inFooterSection);
+      console.log('Should hide button:', inContactSection || inHistorySection || inFooterSection || isMenuOpen.value);
 
-      // Hide when in contact section, history section, or footer section
-      return inContactSection || inHistorySection || inFooterSection;
+      // Hide when in contact section, history section, footer section, or when menu is open
+      return inContactSection || inHistorySection || inFooterSection || isMenuOpen.value;
     });
 
     const scrollToFooter = () => {
@@ -97,6 +99,12 @@ export default {
     const handleHistorySectionVisible = (event) => {
       isHistorySectionVisible.value = event.detail.visible;
       console.log('History section visibility event received:', event.detail.visible);
+    };
+
+    // Handle the menu overlay state change event
+    const handleMenuOverlayStateChanged = (event) => {
+      isMenuOpen.value = event.detail.isOpen;
+      console.log('Menu overlay state changed:', event.detail.isOpen);
     };
 
     // Force re-evaluation of shouldHideButton on scroll
@@ -166,6 +174,9 @@ export default {
       // Listen for the history section visibility event
       document.addEventListener('history-section-visible', handleHistorySectionVisible);
 
+      // Listen for the menu overlay state change event
+      document.addEventListener('menu-overlay-state-changed', handleMenuOverlayStateChanged);
+
       // Add scroll event listener
       window.addEventListener('scroll', handleScroll, { passive: true });
 
@@ -177,6 +188,7 @@ export default {
       // Clean up event listeners
       document.removeEventListener('contact-section-visible', handleContactSectionVisible);
       document.removeEventListener('history-section-visible', handleHistorySectionVisible);
+      document.removeEventListener('menu-overlay-state-changed', handleMenuOverlayStateChanged);
       window.removeEventListener('scroll', handleScroll);
 
       // Clean up the intersection observer

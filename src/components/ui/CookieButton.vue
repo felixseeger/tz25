@@ -24,22 +24,24 @@ export default {
     const { scrollToSection } = useScrollTo();
     const isContactSectionVisible = ref(false);
     const isHistorySectionVisible = ref(false);
+    const isMenuOpen = ref(false);
 
     // Compute whether the button should be hidden
     const shouldHideButton = computed(() => {
       // Debug logs
       console.log('Cookie button - Active section:', activeSection.value);
       console.log('Cookie button - Contact visible:', isContactSectionVisible.value);
+      console.log('Cookie button - Menu open:', isMenuOpen.value);
 
-      // Hide when in contact section or footer section
+      // Hide when in contact section, footer section, or when menu is open
       const inContactSection = activeSection.value === 'contact';
       const inFooterSection = activeSection.value === 'footer';
 
       // For debugging purposes, log the current state
-      console.log('Cookie button should hide:', inContactSection || inFooterSection);
+      console.log('Cookie button should hide:', inContactSection || inFooterSection || isMenuOpen.value);
 
-      // Hide when in contact section or footer section
-      return inContactSection || inFooterSection;
+      // Hide when in contact section, footer section, or when menu is open
+      return inContactSection || inFooterSection || isMenuOpen.value;
     });
 
     // Create a method to open the cookie manager
@@ -55,6 +57,12 @@ export default {
     // Handle the custom event from ContactSection
     const handleContactSectionVisible = (event) => {
       isContactSectionVisible.value = event.detail.visible;
+    };
+
+    // Handle the menu overlay state change event
+    const handleMenuOverlayStateChanged = (event) => {
+      isMenuOpen.value = event.detail.isOpen;
+      console.log('Cookie button - Menu overlay state changed:', event.detail.isOpen);
     };
 
     // Force re-evaluation of shouldHideButton on scroll
@@ -113,6 +121,9 @@ export default {
       // Listen for the contact section visibility event
       document.addEventListener('contact-section-visible', handleContactSectionVisible);
 
+      // Listen for the menu overlay state change event
+      document.addEventListener('menu-overlay-state-changed', handleMenuOverlayStateChanged);
+
       // Add scroll event listener
       window.addEventListener('scroll', handleScroll, { passive: true });
 
@@ -123,6 +134,7 @@ export default {
     onUnmounted(() => {
       // Clean up event listeners
       document.removeEventListener('contact-section-visible', handleContactSectionVisible);
+      document.removeEventListener('menu-overlay-state-changed', handleMenuOverlayStateChanged);
       window.removeEventListener('scroll', handleScroll);
     });
 
