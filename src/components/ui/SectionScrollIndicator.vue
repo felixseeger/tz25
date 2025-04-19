@@ -22,7 +22,7 @@ export default {
     // Sections where the indicator should be visible
     visibleSections: {
       type: Array,
-      default: () => ['journey', 'history', 'services', 'team', 'testimonials'] // Removed 'hero' and 'brand' from visible sections
+      default: () => ['journey', 'history', 'services'] // Removed 'hero', 'brand', 'team', and 'testimonials' from visible sections
     },
     // Z-index for the indicator
     zIndex: {
@@ -140,6 +140,8 @@ export default {
       const willBeVisible = foundSection &&
                           props.visibleSections.includes(foundSection) &&
                           foundSection !== 'hero' &&
+                          foundSection !== 'team' &&
+                          foundSection !== 'testimonials' &&
                           foundSection !== 'contact' &&
                           foundSection !== 'footer';
 
@@ -148,10 +150,12 @@ export default {
       }
 
       // Always show the indicator if we're in one of the visible sections
-      // and not in the hero, contact, or footer section
+      // and not in the hero, team, testimonials, contact, or footer section
       isVisible.value = foundSection &&
                        props.visibleSections.includes(foundSection) &&
                        foundSection !== 'hero' && // Explicitly hide in hero section
+                       foundSection !== 'team' && // Explicitly hide in team section
+                       foundSection !== 'testimonials' && // Explicitly hide in testimonials section
                        foundSection !== 'contact' &&
                        foundSection !== 'footer';
     };
