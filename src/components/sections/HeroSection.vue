@@ -1,5 +1,5 @@
 <template>
-  <section class="hero">
+  <section class="hero" ref="sectionRef">
     <div class="hero__background"></div>
     <div class="hero__container section-container">
       <!-- Hero Carousel -->
@@ -13,12 +13,12 @@
           }">
             <div class="hero__content">
               <div class="hero__column hero__column--left">
-                <div class="hero__title-overlay">
+                <div class="hero__title-overlay" v-animate-on-scroll="{ animation: 'fade-up', delay: 0.1, duration: 1 }">
                   <img src="../../assets/images/hero.png" alt="WEMOVESALES" class="hero__title-image hero__title-image--base" />
                 </div>
               </div>
               <div class="hero__column hero__column--right">
-                <div class="hero__video">
+                <div class="hero__video" v-animate-on-scroll="{ animation: 'fade-up', delay: 0.3, duration: 1 }">
                   <div class="hero__video-container"
                        @click="handleVideoClick"
                        role="button"
@@ -45,11 +45,11 @@
                     </template>
                   </div>
                 </div>
-                <div class="hero__text" ref="heroText">
+                <div class="hero__text" ref="heroText" v-animate-on-scroll="{ animation: 'fade-up', delay: 0.5, duration: 1 }">
                   <p>
                     Sales Activation – Wir aktivieren Absatz. Seit mehr als 15 Jahren stehen wir unseren Kunden mit Herz und Verstand zur Seite. Wir sind über 20 Expert:innen mit einem tiefgreifenden Know-how im Absatzmarketing und bringen Kundenprojekte mit Gespür und höchstem Engagement zum Erfolg. Aus Düsseldorf – für Deutschland, DACH oder ganz Europa.
                   </p>
-                  <div class="hero__cart-wrapper">
+                  <div class="hero__cart-wrapper" v-animate-on-scroll="{ animation: 'fade-up', delay: 0.7, duration: 1 }">
                     <img src="/src/assets/images/cart.svg" alt="Shopping Cart" class="hero__cart-icon">
                   </div>
                 </div>
@@ -67,7 +67,7 @@
               <div class="hero__column hero__column--left">
                 <div class="hero__title-overlay">
 
-                  <h1 class="hero__slide-title">Wir haben was<br><span>zu feiern</span></h1>
+                  <h1 class="hero__slide-title">Wir haben was <br><span>besonderes zu feiern</span></h1>
 
                 </div>
               </div>
@@ -134,7 +134,7 @@
         <img src="../../assets/images/arrow_right.svg" alt="Next" class="hero__carousel-arrow-icon" />
       </button>
       <!-- Hero Scroll Indicator - Visible only in hero section -->
-      <div class="hero__scroll-indicator" :class="{ 'is-hidden': !showHeroScrollIndicator }" @click="scrollToNextSection">
+      <div class="hero__scroll-indicator" :class="{ 'is-hidden': !showHeroScrollIndicator }" @click="scrollToNextSection" v-animate-on-scroll="{ animation: 'fade-up', delay: 1, duration: 1 }">
         <div class="hero__scroll-indicator-icon">
           <img src="../../assets/images/scroll-indicator.svg" alt="Scroll down" class="hero__scroll-indicator-arrow" />
         </div>
@@ -155,6 +155,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { useNavigation } from '../../composables/useNavigation';
 import { useGsap } from '../../composables/useGsap';
+import { useSectionAnimation } from '../../composables/useSectionAnimation';
 import { VideoModal } from '../ui';
 
 export default {
@@ -212,6 +213,14 @@ export default {
 
     const { navigateToHomeSection } = useNavigation();
     const { createTimeline } = useGsap();
+    const { sectionRef } = useSectionAnimation({
+      triggerStart: 'top 10%',
+      triggerEnd: 'bottom 20%',
+      baseDelay: 0.2,
+      staggerDelay: 0.2,
+      duration: 1,
+      distance: 50
+    });
 
     // Initialize animations when component is mounted
     // Function to check if user has scrolled out of hero section
@@ -235,6 +244,9 @@ export default {
     };
 
     onMounted(() => {
+      // Initialize cookie consent
+      initializeCookieConsent();
+
       // Ensure text and buttons are visible immediately
       if (heroText.value) {
         heroText.value.style.opacity = '1';
@@ -393,7 +405,9 @@ export default {
       setSlide,
       vimeoCookiesAccepted,
       acceptVimeoCookies,
-      handleVideoClick
+      handleVideoClick,
+      // Animation ref
+      sectionRef
     };
   }
 }

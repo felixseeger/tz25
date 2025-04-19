@@ -1,9 +1,13 @@
+// Import Sass modules
+@use 'sass:color';
+
 // Import fonts
 @import 'fonts';
 
 // Import variables and mixins
 @import 'variables';
 @import 'mixins';
+@import 'color';
 @import 'reset';
 @import 'typography';
 @import 'utilities';
@@ -32,6 +36,7 @@
 @import 'components/not-found';
 @import 'components/client-logo-filters';
 @import 'components/pagination';
+@import 'components/animations';
 
 // Section Components
 @import 'components/footer-section';

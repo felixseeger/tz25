@@ -10,7 +10,7 @@ import gsap from './utils/gsap'
 import { initFontLoading } from './utils/fontLoader'
 
 // Import directives
-import { lazyLoad } from './directives'
+import { lazyLoad, animateOnScroll } from './directives'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -21,6 +21,7 @@ const app = createApp(App)
 
 // Register global directives
 app.directive('lazy-load', lazyLoad)
+app.directive('animate-on-scroll', animateOnScroll)
 
 // Use router and store
 app.use(router)

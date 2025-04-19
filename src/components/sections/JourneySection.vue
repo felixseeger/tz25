@@ -1,10 +1,10 @@
 <template>
-  <section class="journey-section">
+  <section class="journey-section" ref="sectionRef">
     <div class="section-container">
       <div class="journey-header" ref="journeyHeader">
-        <h2 class="journey-section__title" ref="journeyTitle">IHRE EXPERTEN FÜR DIE GESAMTE</h2>
-        <h2 class="journey-section__subtitle" ref="journeySubtitle">SALES ACTIVATION JOURNEY</h2>
-        <p class="journey-section__description" ref="journeyDescription">
+        <h2 class="journey-section__title" ref="journeyTitle" v-animate-on-scroll="{ animation: 'fade-up', delay: 0.1, duration: 0.8 }">IHRE EXPERTEN FÜR DIE GESAMTE</h2>
+        <h2 class="journey-section__subtitle" ref="journeySubtitle" v-animate-on-scroll="{ animation: 'fade-up', delay: 0.3, duration: 0.8 }">SALES ACTIVATION JOURNEY</h2>
+        <p class="journey-section__description" ref="journeyDescription" v-animate-on-scroll="{ animation: 'fade-up', delay: 0.5, duration: 0.8 }">
           Marke, Vertrieb, Handel, Absatz – hier sind wir zuhause: Stationärer oder digitaler POS, Multi- oder
           Omnichannel-Strategie, kurzfristige Aktivierung oder langfristige Bindung, Außendienst, Handel oder
           Shopper, Packaging Design oder Positionierung – Ihren Herausforderungen im Absatzmarketing begegnen wir auf Augenhöhe & begeistern mit innovativen, kreativen und realistischen Lösungen.
@@ -12,8 +12,8 @@
       </div>
 
       <div class="journey-steps-container" ref="journeyStepsContainer">
-        <div class="journey-steps">
-          <div class="journey-step" ref="journeyStep">
+        <div class="journey-steps grid-animate">
+          <div class="journey-step animate-item" ref="journeyStep" v-animate-on-scroll="{ animation: 'fade-up', delay: 0.1, staggerChildren: true }">
             <h3 class="journey-step__title">ESSENTIALS</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/essentilas-icn.svg" alt="Essentials" />
@@ -23,9 +23,9 @@
             </div>
           </div>
 
-          <div class="journey-step__divider" ref="journeyDivider"></div>
+          <div class="journey-step__divider animate-item" ref="journeyDivider" v-animate-on-scroll="{ animation: 'fade-left', delay: 0.2, duration: 0.6 }"></div>
 
-          <div class="journey-step" ref="journeyStep">
+          <div class="journey-step animate-item" ref="journeyStep" v-animate-on-scroll="{ animation: 'fade-up', delay: 0.2, staggerChildren: true }">
             <h3 class="journey-step__title">SELL-IN</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/sell-in-icn.svg" alt="Sell-In" />
@@ -35,9 +35,9 @@
             </div>
           </div>
 
-          <div class="journey-step__divider" ref="journeyDivider"></div>
+          <div class="journey-step__divider animate-item" ref="journeyDivider" v-animate-on-scroll="{ animation: 'fade-left', delay: 0.3, duration: 0.6 }"></div>
 
-          <div class="journey-step" ref="journeyStep">
+          <div class="journey-step animate-item" ref="journeyStep" v-animate-on-scroll="{ animation: 'fade-up', delay: 0.3, staggerChildren: true }">
             <h3 class="journey-step__title">SELL-THROUGH</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/sell-through-icn.svg" alt="Sell-Through" />
@@ -47,9 +47,9 @@
             </div>
           </div>
 
-          <div class="journey-step__divider" ref="journeyDivider"></div>
+          <div class="journey-step__divider animate-item" ref="journeyDivider" v-animate-on-scroll="{ animation: 'fade-left', delay: 0.4, duration: 0.6 }"></div>
 
-          <div class="journey-step" ref="journeyStep">
+          <div class="journey-step animate-item" ref="journeyStep" v-animate-on-scroll="{ animation: 'fade-up', delay: 0.4, staggerChildren: true }">
             <h3 class="journey-step__title">SELL-OUT</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/sell-out_txt-ico.svg" alt="Sell-Out" />
@@ -59,9 +59,9 @@
             </div>
           </div>
 
-          <div class="journey-step__divider" ref="journeyDivider"></div>
+          <div class="journey-step__divider animate-item" ref="journeyDivider" v-animate-on-scroll="{ animation: 'fade-left', delay: 0.5, duration: 0.6 }"></div>
 
-          <div class="journey-step" ref="journeyStep">
+          <div class="journey-step animate-item" ref="journeyStep" v-animate-on-scroll="{ animation: 'fade-up', delay: 0.5, staggerChildren: true }">
             <h3 class="journey-step__title">FULL SERVICE</h3>
             <div class="journey-step__icon">
               <img src="../../assets/images/full-service_txt-ico.svg" alt="Full Service" />
@@ -79,6 +79,7 @@
 <script>
 import { ref, onMounted } from 'vue';
 import { useGsap } from '../../composables/useGsap';
+import { useSectionAnimation } from '../../composables/useSectionAnimation';
 
 export default {
   name: 'JourneySection',
@@ -93,6 +94,14 @@ export default {
     const journeyDividers = ref([]);
 
     const { createTimeline, gsap } = useGsap();
+    const { sectionRef } = useSectionAnimation({
+      triggerStart: 'top 70%',
+      triggerEnd: 'bottom 20%',
+      baseDelay: 0.2,
+      staggerDelay: 0.2,
+      duration: 0.8,
+      distance: 50
+    });
 
     onMounted(() => {
       // Create a timeline for the header animation
@@ -250,7 +259,8 @@ export default {
       journeyDescription,
       journeyStepsContainer,
       journeyStep: journeySteps,
-      journeyDivider: journeyDividers
+      journeyDivider: journeyDividers,
+      sectionRef
     };
   }
 }
