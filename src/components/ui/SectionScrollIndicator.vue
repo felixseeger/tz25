@@ -22,7 +22,7 @@ export default {
     // Sections where the indicator should be visible
     visibleSections: {
       type: Array,
-      default: () => ['hero', 'journey', 'history', 'services'] // Removed 'brand' from visible sections
+      default: () => ['journey', 'history', 'services', 'team', 'testimonials'] // Removed 'hero' and 'brand' from visible sections
     },
     // Z-index for the indicator
     zIndex: {
@@ -120,6 +120,11 @@ export default {
       // Update current section - now foundSection is always defined, even if it's null
       currentSection.value = foundSection;
 
+      // Log section changes for debugging
+      if (previousSection.value !== currentSection.value) {
+        console.log(`Section changed from ${previousSection.value || 'none'} to ${currentSection.value || 'none'}`);
+      }
+
       // Check if we're scrolling back to the hero section from another section
       if (currentSection.value === 'hero' && previousSection.value && previousSection.value !== 'hero') {
         console.log('Scrolling back to hero section from', previousSection.value);
@@ -131,10 +136,22 @@ export default {
         }, 800); // Slightly longer than the CSS transition
       }
 
+      // Log visibility state for debugging
+      const willBeVisible = foundSection &&
+                          props.visibleSections.includes(foundSection) &&
+                          foundSection !== 'hero' &&
+                          foundSection !== 'contact' &&
+                          foundSection !== 'footer';
+
+      if (isVisible.value !== willBeVisible) {
+        console.log(`Scroll indicator visibility changing to: ${willBeVisible ? 'visible' : 'hidden'} (section: ${foundSection})`);
+      }
+
       // Always show the indicator if we're in one of the visible sections
-      // and not in the last section (contact or footer)
+      // and not in the hero, contact, or footer section
       isVisible.value = foundSection &&
                        props.visibleSections.includes(foundSection) &&
+                       foundSection !== 'hero' && // Explicitly hide in hero section
                        foundSection !== 'contact' &&
                        foundSection !== 'footer';
     };
