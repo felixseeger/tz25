@@ -32,19 +32,19 @@
   .nav-button {
     width: 40px;
     height: 40px;
-    border: 2px solid white;
+    border: none;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: transparent;
     margin: 0 10px;
 
     &:hover {
       transform: scale(1.1);
-      background-color: rgba(0, 0, 0, 0.3);
+      /* Removed background-color for hover state */
     }
 
     &:disabled {
@@ -57,6 +57,7 @@
       height: 24px;
       filter: brightness(0) invert(1); /* Make the SVG white */
       transition: all 0.3s ease;
+      /* Ensure the arrow is white */
     }
   }
 }
