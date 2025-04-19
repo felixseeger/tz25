@@ -36,15 +36,18 @@ export default {
       console.log('Cookie button - Cookie banner visible:', isCookieBannerVisible.value);
 
       // Hide when in contact section, footer section, when menu is open, or when cookie banner is visible
-      const inContactSection = activeSection.value === 'contact';
+      const inContactSection = activeSection.value === 'contact' || isContactSectionVisible.value;
       const inFooterSection = activeSection.value === 'footer';
+
+      // Check if we're near the bottom of the page
+      const isNearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 300;
 
       // For debugging purposes, log the current state
       console.log('Cookie button should hide:',
-        inContactSection || inFooterSection || isMenuOpen.value || isCookieBannerVisible.value);
+        inContactSection || inFooterSection || isMenuOpen.value || isCookieBannerVisible.value || isNearBottom);
 
-      // Hide when in contact section, footer section, when menu is open, or when cookie banner is visible
-      return inContactSection || inFooterSection || isMenuOpen.value || isCookieBannerVisible.value;
+      // Hide when in contact section, footer section, when menu is open, when cookie banner is visible, or near bottom
+      return inContactSection || inFooterSection || isMenuOpen.value || isCookieBannerVisible.value || isNearBottom;
     });
 
     // Create a method to open the cookie manager
@@ -97,18 +100,33 @@ export default {
         if (!section) return false;
 
         const rect = section.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
 
         // Consider visible if any part of the section is in the viewport
-        const isPartiallyVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
+        const isPartiallyVisible = rect.top < viewportHeight && rect.bottom > 0;
 
-        // Consider visible if we're very close to the section
-        const isCloseToSection = Math.abs(rect.top) < 500 || Math.abs(rect.bottom - window.innerHeight) < 500;
+        // Consider visible if we're approaching the section (within 300px)
+        const isApproaching = rect.top > 0 && rect.top < viewportHeight + 300;
 
         // Consider visible if we're scrolling through the section
-        const isScrollingThrough = rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
+        const isScrollingThrough = rect.top <= 0 && rect.bottom >= 0;
 
-        return isPartiallyVisible || isCloseToSection || isScrollingThrough;
+        // Consider visible if we're near the bottom of the page
+        const isNearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 300;
+
+        return isPartiallyVisible || isApproaching || isScrollingThrough || isNearBottom;
       };
+
+      // Get the total height of the document and the current scroll position
+      const totalHeight = document.body.scrollHeight;
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const scrollPercentage = (scrollPosition / totalHeight) * 100;
+
+      // If we're in the bottom 20% of the page, consider contact/footer visible
+      if (scrollPercentage > 80) {
+        isContactSectionVisible.value = true;
+        return;
+      }
 
       // Check contact section
       if (contactSection && checkSectionVisibility(contactSection)) {
@@ -139,13 +157,23 @@ export default {
       // Add scroll event listener
       window.addEventListener('scroll', handleScroll, { passive: true });
 
-      // Initial check
-      handleScroll();
+      // Initial check with a small delay to ensure DOM is fully loaded
+      setTimeout(() => {
+        handleScroll();
+
+        // Force a second check after a longer delay
+        setTimeout(handleScroll, 500);
+      }, 100);
 
       // Check if cookie banner is currently visible
       const cookieBanner = document.querySelector('.cookie-banner');
       if (cookieBanner && window.getComputedStyle(cookieBanner).display !== 'none') {
         isCookieBannerVisible.value = true;
+      }
+
+      // Check if we're already at the bottom of the page
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+        isContactSectionVisible.value = true;
       }
     });
 

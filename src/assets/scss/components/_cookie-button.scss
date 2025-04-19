@@ -3,13 +3,15 @@
   left: 20px;
   bottom: 20px;
   z-index: $z-index-contact-button;
-  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.6s ease, visibility 0.6s ease, transform 0.6s ease;
+  will-change: transform, opacity; // Optimize for animation performance
 
   &.is-hidden {
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
-    transform: translateY(100px); // Move down instead of left
+    transform: translateY(150px); // Move down further for better effect
+    transition-delay: 0.1s; // Small delay for smoother animation
   }
 
   &__btn {
