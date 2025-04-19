@@ -78,7 +78,7 @@
                     Unsere innovativen Lösungen verbinden kreative Konzepte mit technischer Exzellenz. Wir entwickeln maßgeschneiderte Strategien, die Ihre Marke stärken und Ihren Absatz steigern. Mit unserem ganzheitlichen Ansatz begleiten wir Sie von der ersten Idee bis zur erfolgreichen Umsetzung.
                   </p>
                   <div class="hero__cta">
-                    <a href="#history" class="hero__button" @click.prevent="scrollToServices">Unsere Geschichte</a>
+                    <a href="#history" class="hero__button" @click.prevent="scrollToHistory">Unsere Geschichte</a>
                   </div>
                 </div>
               </div>
@@ -105,7 +105,7 @@
                     Unser Team aus erfahrenen Experten bringt jahrelange Branchenerfahrung und frische Perspektiven zusammen. <br>Wir verstehen die Herausforderungen des modernen Marketings und entwickeln Lösungen, die Ihre Zielgruppe<br> begeistern und messbare Ergebnisse liefern.
                   </p>
                   <div class="hero__cta">
-                    
+
                   </div>
                 </div>
               </div>
@@ -355,6 +355,11 @@ export default {
       navigateToHomeSection('team', { scrollDelay: 500 });
     };
 
+    const scrollToHistory = () => {
+      console.log('Scrolling to history section');
+      navigateToHomeSection('history', { scrollDelay: 500 });
+    };
+
     // Note: Autoplay is started in the main onMounted function
 
     // Clean up interval when component is unmounted
@@ -370,6 +375,7 @@ export default {
       scrollToNextSection,
       scrollToServices,
       scrollToTeam,
+      scrollToHistory,
       isVideoModalOpen,
       videoSrc,
       openVideoModal,
