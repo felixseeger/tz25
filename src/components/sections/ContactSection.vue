@@ -283,6 +283,7 @@ export default {
         const contactHeading = document.querySelector('.contact-heading');
         const contactInfo = document.querySelector('.contact-info');
         const formGroups = document.querySelectorAll('.form-group');
+        const submitButton = document.querySelector('.submit-image-btn');
 
         // Create a ScrollTrigger for the contact section
         import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
@@ -318,7 +319,21 @@ export default {
             opacity: 0,
             duration: 0.8,
             ease: 'power2.out'
-          }, '-=0.6');
+          }, '-=0.6')
+          // Add the submit button animation with a delay
+          .to(submitButton, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+            delay: 0.5, // Add a delay before the button appears
+            onStart: () => {
+              // Add the animate-in class when the animation starts
+              if (submitButton) {
+                submitButton.classList.add('animate-in');
+              }
+            }
+          });
         });
       });
     },
@@ -424,15 +439,15 @@ export default {
   margin-left: 0;
   transform: translateY(100px);
   opacity: 0;
-  transition:  transform 0.8s ease, opacity 0.8s ease;
+  /* Remove transition to let GSAP handle the animation */
 
   &.animate-in {
-    transform: translateY(0);
-    opacity: 1;
+    /* These styles will now be applied by GSAP */
+    /* The class is still added for compatibility with existing code */
   }
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) !important; /* Use !important to override GSAP inline styles */
   }
 
   &:disabled {

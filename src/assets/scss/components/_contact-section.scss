@@ -494,8 +494,8 @@
   margin-top: 1rem; /* Add some spacing above the button */
   align-self: flex-start; /* Align to the left */
   margin-left: 0; /* Ensure no left margin */
-  opacity: 0; /* Start hidden for animation */
-  transform: translateY(50px) scale(2); /* Start position for animation - coming from below */
+  opacity: 0; /* Start hidden for animation - now controlled by GSAP */
+  transform: translateY(100px) scale(2); /* Start position for animation - now controlled by GSAP */
 
   @media (max-width: $breakpoint-md) {
     transform: translateY(50px) scale(1.5); /* Smaller scale for medium screens */
@@ -564,38 +564,39 @@
     font-weight: bold;
   }
 
-  /* Animation for button appearance */
+  /* Animation for button appearance - now controlled by GSAP */
   &.animate-in {
-    opacity: 1;
-    transform: translateY(0) scale(2);
+    /* These styles are now applied by GSAP */
+    /* The class is still used as a marker for JavaScript */
 
+    /* Media queries are kept for reference but styles are applied by GSAP */
     @media (max-width: $breakpoint-md) {
-      transform: translateY(0) scale(1.5);
+      /* transform: translateY(0) scale(1.5); */
     }
 
     @media (max-width: $breakpoint-sm) {
-      transform: translateY(0) scale(1.2);
+      /* transform: translateY(0) scale(1.2); */
     }
 
     @media (max-width: $breakpoint-xs) {
-      transform: translateY(0) scale(1);
+      /* transform: translateY(0) scale(1); */
     }
 
     /* Desktop Media Queries */
     @media (min-width: $breakpoint-xl) {
-      transform: translateY(0) scale(2.2);
+      /* transform: translateY(0) scale(2.2); */
     }
 
     @media (min-width: $breakpoint-xxl) {
-      transform: translateY(0) scale(2.5);
+      /* transform: translateY(0) scale(2.5); */
     }
 
     @media (min-width: $breakpoint-xxxl) {
-      transform: translateY(0) scale(3);
+      /* transform: translateY(0) scale(3); */
     }
 
     @media (min-width: $breakpoint-4k) {
-      transform: translateY(0) scale(4);
+      /* transform: translateY(0) scale(4); */
     }
   }
 }
