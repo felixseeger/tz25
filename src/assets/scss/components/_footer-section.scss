@@ -11,9 +11,12 @@
 
   &__container {
     width: 100%;
-    max-width: 1600px;
+    max-width: 1800px; /* Match section-container max-width */
     margin: 0 auto;
     padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align content to the right */
   }
 
   &__content {
@@ -24,7 +27,7 @@
 
   &__column {
     &--legal {
-      text-align: center;
+      text-align: right;
     }
   }
 
@@ -53,6 +56,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
+    justify-content: flex-end; /* Align links to the right */
 
     li {
       margin-bottom: 0.75rem;
@@ -122,14 +126,16 @@
 
   &__bottom {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; /* Align to the right */
     align-items: center;
     padding-top: 1rem;
     border-top: 0px solid rgba($text-color, 0.2);
+    width: 100%;
 
     @media (max-width: $breakpoint-sm) {
       flex-direction: column;
       gap: 1.5rem;
+      justify-content: center; /* Center on mobile */
     }
   }
 
@@ -189,7 +195,7 @@
       width: 103px;
       height: 122px;
 
-      @media (max-width: $breakpoint-md) and (min-width: $breakpoint-sm + 1) {
+      @media (max-width: $breakpoint-md) and (min-width: ($breakpoint-sm + 1px)) {
         width: 150px;
         height: 150px;
       }
