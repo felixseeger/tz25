@@ -1,10 +1,10 @@
 <template>
   <div class="contact-button" :class="{ 'is-hidden': shouldHideButton }">
     <a
-      href="#contact"
+      href="#footer"
       class="contact-button__link"
-      @click.prevent="scrollToContact"
-      aria-label="Scroll to contact section"
+      @click.prevent="scrollToFooter"
+      aria-label="Scroll to footer section"
       tabindex="0"
       role="button"
     >
@@ -84,8 +84,8 @@ export default {
       return inContactSection || inHistorySection || inFooterSection;
     });
 
-    const scrollToContact = () => {
-      scrollToSection('contact', { offset: 80 }); // 80px offset to account for the navbar height
+    const scrollToFooter = () => {
+      scrollToSection('footer', { offset: 80 }); // 80px offset to account for the navbar height
     };
 
     // Handle the custom event from ContactSection
@@ -186,7 +186,7 @@ export default {
     });
 
     return {
-      scrollToContact,
+      scrollToFooter,
       shouldHideButton,
       isHistorySectionVisible
     };
