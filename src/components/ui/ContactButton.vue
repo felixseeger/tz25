@@ -65,22 +65,23 @@ export default {
       }, 500); // Short delay to ensure DOM is ready
     });
 
-    // Hide button on history and contact sections or when scrolling to contact section
+    // Hide button on history, contact, and footer sections
     const shouldHideButton = computed(() => {
       // Debug logs
       console.log('Active section:', activeSection.value);
       console.log('History visible:', isHistorySectionVisible.value);
       console.log('Contact visible:', isContactSectionVisible.value);
 
-      // Hide when in contact section or history section
+      // Hide when in contact section, history section, or footer section
       const inContactSection = activeSection.value === 'contact';
+      const inFooterSection = activeSection.value === 'footer';
       const inHistorySection = activeSection.value === 'history' || isHistorySectionVisible.value;
 
       // For debugging purposes, log the current state
-      console.log('Should hide button:', inContactSection || inHistorySection);
+      console.log('Should hide button:', inContactSection || inHistorySection || inFooterSection);
 
-      // Hide when in contact section or history section
-      return inContactSection || inHistorySection;
+      // Hide when in contact section, history section, or footer section
+      return inContactSection || inHistorySection || inFooterSection;
     });
 
     const scrollToContact = () => {
@@ -103,43 +104,59 @@ export default {
       // This will trigger a re-evaluation of the computed property
       // by checking if the history section is in the viewport
       const historySection = document.getElementById('history');
+      const contactSection = document.getElementById('contact');
+      const footerSection = document.getElementById('footer');
 
-      // Check if active section is 'history' regardless of DOM element
-      if (activeSection.value === 'history') {
+      // Check if active section is 'history', 'contact', or 'footer' regardless of DOM element
+      if (activeSection.value === 'history' || activeSection.value === 'contact' || activeSection.value === 'footer') {
         isHistorySectionVisible.value = true;
         return;
       }
 
       // Check URL hash
-      if (window.location.hash === '#history') {
+      if (window.location.hash === '#history' || window.location.hash === '#contact' || window.location.hash === '#footer') {
         isHistorySectionVisible.value = true;
         return;
       }
 
-      if (historySection) {
-        const rect = historySection.getBoundingClientRect();
+      // Check if any of the sections that should hide the button are visible
+      const checkSectionVisibility = (section) => {
+        if (!section) return false;
 
-        // More aggressive check - consider visible even if just partially in viewport
-        // The history section is considered visible if any part of it is in the viewport
-        isHistorySectionVisible.value = (
-          rect.top <= window.innerHeight &&
-          rect.bottom >= 0
-        );
+        const rect = section.getBoundingClientRect();
 
-        // If we're very close to the history section, consider it visible
-        // Increased threshold to 500px for better detection
-        if (Math.abs(rect.top) < 500 || Math.abs(rect.bottom - window.innerHeight) < 500) {
-          isHistorySectionVisible.value = true;
-        }
+        // Consider visible if any part of the section is in the viewport
+        const isPartiallyVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
 
-        // Check if we're scrolling through the history section
-        // This ensures the button stays hidden while scrolling through the section
-        if (rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2) {
-          isHistorySectionVisible.value = true;
-        }
+        // Consider visible if we're very close to the section
+        const isCloseToSection = Math.abs(rect.top) < 500 || Math.abs(rect.bottom - window.innerHeight) < 500;
 
-        // These checks are now done before checking for the DOM element
+        // Consider visible if we're scrolling through the section
+        const isScrollingThrough = rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
+
+        return isPartiallyVisible || isCloseToSection || isScrollingThrough;
+      };
+
+      // Check history section
+      if (historySection && checkSectionVisibility(historySection)) {
+        isHistorySectionVisible.value = true;
+        return;
       }
+
+      // Check contact section
+      if (contactSection && checkSectionVisibility(contactSection)) {
+        isHistorySectionVisible.value = true;
+        return;
+      }
+
+      // Check footer section
+      if (footerSection && checkSectionVisibility(footerSection)) {
+        isHistorySectionVisible.value = true;
+        return;
+      }
+
+      // If none of the sections are visible, set to false
+      isHistorySectionVisible.value = false;
     };
 
     onMounted(() => {
