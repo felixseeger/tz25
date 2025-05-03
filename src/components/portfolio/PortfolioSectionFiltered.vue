@@ -33,6 +33,13 @@
                     <h3 class="portfolio-item-title">{{ item.title }}</h3>
                     <p class="portfolio-item-description">{{ item.description }}</p>
                     <div class="portfolio-item-category">{{ item.category }}</div>
+                    <button
+                      class="portfolio-item-link"
+                      @click="openProjectModal(item)"
+                      aria-label="View project details"
+                    >
+                      View Project
+                    </button>
                   </div>
                 </div>
               </div>
@@ -91,20 +98,30 @@
         />
       </div>
     </div>
+
+    <!-- Project Modal -->
+    <ProjectModal
+      v-if="selectedProject"
+      :show="showModal"
+      :project="selectedProject"
+      @close="closeProjectModal"
+    />
   </section>
 </template>
 
 <script>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import ClientLogoFilters from './ClientLogoFilters.vue';
 import PortfolioSlider from './PortfolioSlider.vue';
+import ProjectModal from './ProjectModal.vue';
 import { usePortfolioFilter } from '../../composables/usePortfolioFilter';
 
 export default {
   name: 'PortfolioSectionFiltered',
   components: {
     ClientLogoFilters,
-    PortfolioSlider
+    PortfolioSlider,
+    ProjectModal
   },
   setup() {
     // Use our portfolio filter composable
@@ -194,6 +211,32 @@ export default {
       }
     };
 
+    // Modal state
+    const showModal = ref(false);
+    const selectedProject = ref(null);
+
+    // Open project modal
+    const openProjectModal = (project) => {
+      selectedProject.value = project;
+      showModal.value = true;
+
+      // Prevent body scrolling when modal is open
+      document.body.style.overflow = 'hidden';
+    };
+
+    // Close project modal
+    const closeProjectModal = () => {
+      showModal.value = false;
+
+      // Restore body scrolling
+      document.body.style.overflow = '';
+
+      // Set selectedProject to null after animation completes
+      setTimeout(() => {
+        selectedProject.value = null;
+      }, 300);
+    };
+
     return {
       selectedClientId,
       selectedClient,
@@ -210,7 +253,12 @@ export default {
       goToPage,
       handleClientSelect,
       handleResetFilter,
-      handlePageChange
+      handlePageChange,
+      // Modal
+      showModal,
+      selectedProject,
+      openProjectModal,
+      closeProjectModal
     };
   }
 }

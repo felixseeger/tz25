@@ -156,6 +156,11 @@
         opacity: 1;
         box-shadow: 0 4px 12px rgba(216, 41, 47, 0.5);
       }
+
+      .portfolio-item-link {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
   }
 
@@ -221,7 +226,8 @@
 
       .portfolio-item-title,
       .portfolio-item-description,
-      .portfolio-item-category {
+      .portfolio-item-category,
+      .portfolio-item-link {
         transform: translateY(0);
         opacity: 1;
       }
@@ -308,6 +314,39 @@
                 opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
                 box-shadow 0.5s ease;
     transition-delay: 0.3s;
+  }
+
+  .portfolio-item-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 10;
+    position: relative;
+    transform: translateY(60px);
+    opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 0.3s ease;
+    transition-delay: 0.4s;
+
+    &:hover {
+      background-color: white;
+      color: black;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      transform: translateY(0);
+      opacity: 1;
+      transition: background-color 0.3s ease;
+      margin-top: 1rem;
+    }
   }
 
   .portfolio-pagination {

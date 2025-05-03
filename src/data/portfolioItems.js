@@ -7,7 +7,12 @@ export const portfolioItems = [
     description: 'Comprehensive brand campaign for pharmacy products',
     image: '/src/assets/images/portfolio-item-placeholder.jpg',
     clientId: 'altapharma',
-    category: 'branding'
+    category: 'branding',
+    client: 'Altapharma',
+    year: '2023',
+    services: 'Brand Strategy, Visual Identity, Marketing Collateral',
+    link: 'https://example.com/altapharma',
+    detailedDescription: 'A complete brand refresh for Altapharma\'s pharmacy product line. The campaign included a new visual identity, packaging design, and marketing collateral. The goal was to position Altapharma as a premium, trustworthy brand in the pharmacy market.'
   },
   {
     id: 'altapharma2',
