@@ -3,24 +3,30 @@
     <div class="client-logos">
       <div class="client-logos-track">
         <!-- "All" filter option -->
-        <div
+        <button
+          type="button"
           class="client-logo logo-item"
           :class="{ 'active': !selectedClientId }"
           @click="resetFilter"
+          aria-label="Show all clients"
+          :aria-pressed="!selectedClientId"
         >
           <div class="all-clients">All</div>
-        </div>
+        </button>
 
         <!-- Client logo filter buttons -->
-        <div
+        <button
           v-for="client in clientsList"
           :key="client.id"
+          type="button"
           class="client-logo logo-item"
           :class="{ 'active': client.active }"
           @click="selectClient(client.id)"
+          :aria-label="`Filter by ${client.name}`"
+          :aria-pressed="client.active"
         >
           <img :src="client.logo" :alt="client.name" />
-        </div>
+        </button>
       </div>
     </div>
   </div>

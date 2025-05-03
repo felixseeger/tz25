@@ -51,7 +51,7 @@ export default {
 
 .portfolio-header {
   max-width: 950px;
-  margin-bottom: 4rem;
+  margin-bottom: 6rem; /* Increased margin to create more space between text and grid */
   text-align: left;
   margin-top: 75px; /* Move text down by 75px */
 }

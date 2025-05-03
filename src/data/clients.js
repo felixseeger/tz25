@@ -61,18 +61,6 @@ export const clients = [
     active: false
   },
   {
-    id: 'drclauder',
-    name: 'Dr. Clauder',
-    logo: '/src/assets/images/client-logos/drclauder.png',
-    active: false
-  },
-  {
-    id: 'panasonic',
-    name: 'Panasonic',
-    logo: '/src/assets/images/client-logos/panasonic.png',
-    active: false
-  },
-  {
     id: 'epson',
     name: 'Epson',
     logo: '/src/assets/images/client-logos/epson.png',

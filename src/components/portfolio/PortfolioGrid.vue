@@ -1,61 +1,6 @@
 <template>
   <div class="portfolio-grid-container" role="region" aria-label="Portfolio projects">
-    <!-- Filter section -->
-    <div class="portfolio-filters" role="group" aria-label="Portfolio filters">
-      <!-- Client filters
-      <div class="filter-group client-filters" role="group" aria-label="Client filters">
-        <button
-          class="filter-button"
-          :class="{ 'active': !selectedClientId }"
-          @click="resetFilter"
-          aria-label="Show all clients"
-          :aria-pressed="!selectedClientId"
-          tabindex="0"
-        >
-          All Clients
-        </button>
-        <button
-          v-for="client in clientsList"
-          :key="client.id"
-          class="filter-button client-filter"
-          :class="{ 'active': selectedClientId === client.id }"
-          @click="selectClient(client.id)"
-          :aria-label="`Filter by ${client.name}`"
-          :aria-pressed="selectedClientId === client.id"
-          tabindex="0"
-        >
-          {{ client.name }}
-        </button>
-      </div> -->
-
-      <!-- Category filters -->
-      <div class="filter-group category-filters" role="group" aria-label="Category filters">
-        <button
-          class="filter-button"
-          :class="{ 'active': !selectedCategory }"
-          @click="resetCategoryFilter"
-          aria-label="Show all categories"
-          :aria-pressed="!selectedCategory"
-          tabindex="0"
-        >
-          All Categories
-        </button>
-        <button
-          v-for="category in categories"
-          :key="category.id"
-          class="filter-button category-filter"
-          :class="{ 'active': selectedCategory === category.id }"
-          @click="selectCategory(category.id)"
-          :aria-label="`Filter by ${category.name} category`"
-          :aria-pressed="selectedCategory === category.id"
-          tabindex="0"
-        >
-          {{ category.name }}
-        </button>
-      </div>
-    </div>
-
-    <!-- Portfolio grid -->
+    <!-- Portfolio grid with filter overlay -->
     <div class="portfolio-grid" role="list" aria-label="Portfolio projects">
       <div
         v-for="item in paginatedItems"
@@ -101,12 +46,64 @@
       </div>
     </div>
 
-    <!-- Pagination -->
+    <!-- Pagination - only show when there are more than 6 projects after filtering -->
     <Pagination
-      v-if="totalPages > 1"
+      v-if="filteredItems.length > itemsPerPage"
       v-model:currentPage="currentPage"
       :totalPages="totalPages"
     />
+
+    <!-- Filter overlay section - positioned at Y-center of the grid -->
+    <div class="portfolio-filters" role="group" aria-label="Portfolio filters">
+      <!-- Client logo filters with duplicated content for infinite scrolling -->
+      <div class="filter-group client-filters" role="group" aria-label="Client filters">
+        <div class="filter-logos-container">
+          <!-- First set of logos -->
+          <div class="filter-logos-set">
+            <button
+              v-for="client in clientsList"
+              :key="`first-${client.id}`"
+              class="filter-button client-filter"
+              :class="{ 'active': selectedClientId === client.id }"
+              @click="selectClient(client.id)"
+              :aria-label="`Filter by ${client.name}`"
+              :aria-pressed="selectedClientId === client.id"
+              tabindex="0"
+            >
+              <img
+                v-if="getClientLogo(client.id)"
+                :src="getClientLogo(client.id)"
+                :alt="client.name"
+                class="client-logo-img"
+              />
+              <span v-else>{{ client.name }}</span>
+            </button>
+          </div>
+
+          <!-- Duplicated set of logos for seamless infinite scrolling -->
+          <div class="filter-logos-set">
+            <button
+              v-for="client in clientsList"
+              :key="`second-${client.id}`"
+              class="filter-button client-filter"
+              :class="{ 'active': selectedClientId === client.id }"
+              @click="selectClient(client.id)"
+              :aria-label="`Filter by ${client.name}`"
+              :aria-pressed="selectedClientId === client.id"
+              tabindex="0"
+            >
+              <img
+                v-if="getClientLogo(client.id)"
+                :src="getClientLogo(client.id)"
+                :alt="client.name"
+                class="client-logo-img"
+              />
+              <span v-else>{{ client.name }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -148,7 +145,7 @@ export default {
     const selectedCategory = ref(null);
     const clientsList = ref([...clients]);
     const currentPage = ref(1);
-    const itemsPerPage = 6; // Number of items to show per page
+    const itemsPerPage = 6; // Number of items to show per page - each client should have at least 6 items
 
     // Computed properties
     const categories = computed(() => {
@@ -171,11 +168,6 @@ export default {
         items = items.filter(item => item.clientId === selectedClientId.value);
       }
 
-      // Filter by category if selected
-      if (selectedCategory.value) {
-        items = items.filter(item => item.category === selectedCategory.value);
-      }
-
       return items;
     });
 
@@ -193,7 +185,7 @@ export default {
 
     // Methods
     const selectClient = (clientId) => {
-      // If clicking the already selected client, deselect it
+      // If clicking the already selected client, deselect it (show all)
       if (selectedClientId.value === clientId) {
         selectedClientId.value = null;
       } else {
@@ -245,6 +237,29 @@ export default {
     // Log initial state for debugging
     onMounted(() => {
       console.log('Portfolio Grid mounted with', portfolioItems.length, 'items');
+
+      // Debug: Count projects per client
+      const countByClient = {};
+      portfolioItems.forEach(item => {
+        if (!countByClient[item.clientId]) {
+          countByClient[item.clientId] = 0;
+        }
+        countByClient[item.clientId]++;
+      });
+
+      // Log clients with fewer than 6 projects
+      const clientsWithFewerThan6 = Object.entries(countByClient)
+        .filter(([_, count]) => count < 6)
+        .map(([clientId, count]) => ({ clientId, count }));
+
+      console.log('Clients with fewer than 6 projects:', clientsWithFewerThan6);
+
+      // Log clients with no projects
+      const clientsWithNoProjects = clients
+        .filter(c => !countByClient[c.id])
+        .map(c => c.id);
+
+      console.log('Clients with no projects:', clientsWithNoProjects);
     });
 
     return {
