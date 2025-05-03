@@ -38,11 +38,11 @@
     color: #333;
     margin-bottom: 1rem;
     line-height: 1.2;
-    
+
     @media (max-width: $breakpoint-md) {
       font-size: 2.5rem;
     }
-    
+
     @media (max-width: $breakpoint-sm) {
       font-size: 2rem;
     }
@@ -53,11 +53,11 @@
     color: #666;
     font-family: $font-primary;
     line-height: 1.5;
-    
+
     @media (max-width: $breakpoint-md) {
       font-size: 1.1rem;
     }
-    
+
     @media (max-width: $breakpoint-sm) {
       font-size: 1rem;
     }
@@ -75,19 +75,12 @@
   .client-logos-overlay {
     /* This class is applied to the ClientLogoFilters component */
     position: absolute;
-    top: 38.5%;
+    top: 50%; /* Exactly in the middle */
     left: 0;
     right: 0;
     transform: translateY(-50%);
     z-index: 100;
     pointer-events: auto;
-    
-    @media (max-width: $breakpoint-md) {
-      top: 35%;
-    }
-    
-    @media (max-width: $breakpoint-sm) {
-      top: 30%;
-    }
+    width: 100%;
   }
 }

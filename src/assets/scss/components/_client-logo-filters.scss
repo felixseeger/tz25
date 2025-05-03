@@ -6,38 +6,37 @@
   right: 0;
   top: 50%; /* Position in the middle of the section */
   transform: translateY(-50%); /* Center vertically */
-  height: 10vh; /* Increased height for larger logos */
-  width: 100vw; /* Full viewport width */
-  margin-left: calc(-50vw + 50%); /* Center the container when it's wider than its parent */
+  height: 80px; /* Fixed height instead of viewport-relative */
+  width: 100%; /* Full width */
   background-color: rgba($primary-color, 0.9); /* Semi-transparent red background */
   overflow: hidden;
   padding: 0; /* Remove vertical padding */
   z-index: 100; /* High z-index to overlay above images */
   backdrop-filter: blur(5px); /* Add a blur effect for modern browsers */
-  max-width: none; /* Ensure no max-width constraints */
   box-sizing: border-box; /* Include padding in width calculation */
   margin: 0; /* Remove vertical margin */
   display: flex;
   align-items: center; /* Center content vertically */
   justify-content: center; /* Center content horizontally */
   pointer-events: auto; /* Ensure clicks are registered */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
 
   @media (max-width: $breakpoint-md) {
-    height: 8vh; /* Slightly smaller height on medium screens */
+    height: 70px; /* Slightly smaller fixed height on medium screens */
   }
 
   @media (max-width: $breakpoint-sm) {
-    height: 6vh; /* Even smaller height on small screens */
+    height: 60px; /* Even smaller fixed height on small screens */
   }
 }
 
 .client-logos {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100%; /* Full height of container */
   overflow: hidden;
   margin: 0;
-  padding: 0;
+  padding: 0 2rem;
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
@@ -48,22 +47,18 @@
   position: relative;
   display: flex;
   align-items: center; /* Center items vertically within the track */
-  width: 200vw; /* Make it twice the viewport width to ensure full coverage */
+  flex-wrap: nowrap; /* Prevent wrapping to ensure single row */
+  justify-content: center; /* Center the logos */
+  width: auto; /* Let it size to content */
   margin: 0 auto; /* Center horizontally */
   padding: 0;
-  animation: scrollLogos 60s linear infinite; /* Add infinite scrolling animation */
-  left: 50%; /* Position at the center */
-  transform: translateX(-50%); /* Offset by half its width to center */
-  pointer-events: none; /* Allow clicks to pass through to the logos */
+  pointer-events: auto; /* Enable clicks */
   z-index: 101; /* Higher than the container to ensure clickability */
 
-  @media (max-width: $breakpoint-md) {
-    animation: scrollLogos 40s linear infinite; /* Faster scrolling on medium screens */
-  }
-
-  @media (max-width: $breakpoint-sm) {
-    animation: scrollLogos 30s linear infinite; /* Even faster scrolling on small screens */
-  }
+  /* Remove animation for better usability */
+  animation: none;
+  transform: none;
+  left: auto;
 }
 
 @keyframes scrollLogos {
@@ -81,29 +76,34 @@
 }
 
 .client-logo {
-  flex: 0 0 auto; /* Changed from flex: 1 to prevent shrinking */
-  height: 50%;
-  margin: 0 1rem; /* Added horizontal margin for spacing */
+  flex: 0 0 auto; /* Prevent shrinking */
+  height: 60px; /* Fixed height to match container */
+  margin: 0 0.75rem; /* Reduced horizontal margin for tighter spacing */
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease, opacity 0.3s ease;
   cursor: pointer;
-  padding: 0;
-  min-width: 200px; /* Set minimum width for logos */
+  padding: 0 0.5rem;
+  min-width: 120px; /* Smaller minimum width */
+  max-width: 160px; /* Add maximum width to prevent oversized logos */
   pointer-events: auto; /* Ensure clicks are registered */
   z-index: 102; /* Higher z-index to ensure it's above other elements for clickability */
   position: relative; /* Needed for z-index to work */
 
   @media (max-width: $breakpoint-md) {
-    min-width: 150px; /* Smaller minimum width on medium screens */
-    margin: 0 0.75rem; /* Reduced margin */
+    min-width: 100px; /* Smaller minimum width on medium screens */
+    max-width: 140px; /* Smaller maximum width on medium screens */
+    margin: 0 0.5rem; /* Reduced margin */
+    height: 50px; /* Adjusted height */
   }
 
   @media (max-width: $breakpoint-sm) {
-    min-width: 120px; /* Even smaller minimum width on small screens */
-    margin: 0 0.5rem; /* Further reduced margin */
-    height: 40%; /* Slightly smaller height */
+    min-width: 80px; /* Even smaller minimum width on small screens */
+    max-width: 120px; /* Even smaller maximum width on small screens */
+    margin: 0 0.25rem; /* Further reduced margin */
+    height: 40px; /* Adjusted height */
+    padding: 0 0.25rem;
   }
 
   &:hover {
@@ -127,26 +127,24 @@
   }
 
   img {
-    height: 100%;
+    height: 70%; /* Slightly smaller than container */
     max-width: 100%;
     object-fit: contain;
-    filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1); /* Make logos white */
     margin: 0 auto;
-    padding: 0 1rem;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-    /* Removed scale transform to decrease size by 50% */
+    padding: 0;
+    opacity: 0.9; /* Slightly transparent by default */
+    transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: auto; /* Ensure clicks are registered on images */
     position: relative; /* Needed for z-index to work */
     z-index: 103; /* Higher than parent for clickability */
 
     @media (max-width: $breakpoint-md) {
-      padding: 0 0.75rem;
+      height: 65%;
     }
 
     @media (max-width: $breakpoint-sm) {
-      padding: 0 0.5rem;
-      height: 90%; /* Slightly smaller height */
+      height: 60%;
     }
   }
 
@@ -158,11 +156,25 @@
     color: white;
     font-weight: bold;
     font-size: 1.2rem;
-    opacity: 1;
-    transition: opacity 0.3s ease;
+    opacity: 0.9; /* Match image opacity */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 1.1rem;
+      padding: 0.4rem 0.8rem;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: 1rem;
+      padding: 0.3rem 0.6rem;
+    }
   }
 
   &:hover .all-clients, &.active .all-clients {
     opacity: 1;
+    border-color: white;
   }
 }
