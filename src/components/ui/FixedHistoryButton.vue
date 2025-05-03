@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-history-button-container" :class="{ 'is-visible': isHistorySectionVisible }">
+  <div class="fixed-history-button-container" :class="{ 'is-visible': isHistorySectionVisible && !isTimelineOpen }">
     <button @click="openTimeline" class="fixed-history-button">
       <img src="../../assets/images/history-btn.svg" alt="Unsere Geschichte" class="fixed-history-button__image">
     </button>
@@ -13,6 +13,7 @@ export default {
   name: 'FixedHistoryButton',
   setup() {
     const isHistorySectionVisible = ref(false);
+    const isTimelineOpen = ref(false);
     let observer = null;
 
     // Function to check if history section is in view
@@ -39,12 +40,28 @@ export default {
       console.log('History button: History section visibility changed to', isHistorySectionVisible.value);
     };
 
+    // Handle timeline open event
+    const handleTimelineOpen = () => {
+      isTimelineOpen.value = true;
+      console.log('History button: Timeline opened, hiding button');
+    };
+
+    // Handle timeline close event
+    const handleTimelineClose = () => {
+      isTimelineOpen.value = false;
+      console.log('History button: Timeline closed, showing button');
+    };
+
     // Setup observer when component is mounted
     onMounted(() => {
       setupIntersectionObserver();
 
       // Listen for history section visibility events
       document.addEventListener('history-section-visible', handleHistorySectionVisible);
+
+      // Listen for timeline open/close events
+      document.addEventListener('timeline-opened', handleTimelineOpen);
+      document.addEventListener('timeline-closed', handleTimelineClose);
     });
 
     // Clean up observer when component is unmounted
@@ -55,6 +72,8 @@ export default {
 
       // Remove event listeners
       document.removeEventListener('history-section-visible', handleHistorySectionVisible);
+      document.removeEventListener('timeline-opened', handleTimelineOpen);
+      document.removeEventListener('timeline-closed', handleTimelineClose);
     });
 
     // Method to open timeline
@@ -73,6 +92,7 @@ export default {
 
     return {
       isHistorySectionVisible,
+      isTimelineOpen,
       openTimeline
     };
   }
@@ -89,12 +109,14 @@ export default {
   display: block;
   visibility: hidden; /* Hidden by default */
   opacity: 0;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
   padding-left: 0; /* Remove left padding */
+  transform: translateY(-50%) translateX(50px); /* Start off-screen */
 
   &.is-visible {
     visibility: visible;
     opacity: 1;
+    transform: translateY(-50%) translateX(0); /* Slide in from the right */
   }
 }
 

@@ -100,6 +100,10 @@ export default {
       this.showTimeline = true;
       document.body.classList.add('timeline-open');
 
+      // Dispatch a custom event when timeline is opened
+      document.dispatchEvent(new CustomEvent('timeline-opened'));
+      console.log('Timeline opened event dispatched');
+
       // Add animation for timeline items after the timeline is opened
       setTimeout(() => {
         this.animateTimelineItems();
@@ -108,6 +112,10 @@ export default {
     closeTimeline() {
       this.showTimeline = false;
       document.body.classList.remove('timeline-open');
+
+      // Dispatch a custom event when timeline is closed
+      document.dispatchEvent(new CustomEvent('timeline-closed'));
+      console.log('Timeline closed event dispatched');
     },
     handleOpenTimelineEvent() {
       this.openTimeline();
