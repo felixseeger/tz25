@@ -10,12 +10,6 @@
             Wir sind Kreativität, Hands-On Mentalität und Praxisorientierung für zugeschnit­tene Lösungen und das für jedes Budget.
           </p>
         </div>
-
-        <div class="history-button-container">
-          <button class="history-button" @click="openTimeline">
-            <img src="../../assets/images/history-btn.svg" alt="Unsere Geschichte" class="history-button__image">
-          </button>
-        </div>
       </div>
     </div>
 

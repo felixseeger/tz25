@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-history-button-container" :class="{ 'is-visible': isHistorySectionVisible }">
+  <div class="fixed-history-button-container" :class="{ 'is-visible': true }">
     <button @click="openTimeline" class="fixed-history-button">
       <img src="../../assets/images/history-btn.svg" alt="Unsere Geschichte" class="fixed-history-button__image">
     </button>
@@ -78,7 +78,7 @@ export default {
   visibility: hidden; /* Hidden by default */
   opacity: 0;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  padding-left: 50px; /* Add padding to the left as requested */
+  padding-left: 0; /* Remove left padding */
 
   &.is-visible {
     visibility: visible;
@@ -107,7 +107,7 @@ export default {
 @media (max-width: 992px) {
   .fixed-history-button-container {
     right: 0;
-    padding-left: 40px; /* Reduced padding for medium screens */
+    padding-left: 0;
   }
 
   .fixed-history-button__image {
@@ -118,10 +118,10 @@ export default {
 @media (max-width: 768px) {
   .fixed-history-button-container {
     right: 0;
-    bottom: 5rem; /* Adjusted for better mobile positioning */
-    top: auto;
-    transform: none;
-    padding-left: 30px; /* Further reduced padding for small screens */
+    bottom: auto; /* Keep at vertical center */
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: 0;
 
     &.is-visible {
       visibility: visible;

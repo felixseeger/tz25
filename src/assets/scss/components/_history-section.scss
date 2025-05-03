@@ -9,6 +9,7 @@
   max-width: 100vw;
   padding: 0;
 
+
   .container {
     max-width: 100%;
     width: 100vw;
@@ -32,8 +33,8 @@
   height: 100vh;
   z-index: 1;
   padding: 0;
-background-image: url('@/assets/images/history.svg');
-background-size: cover;
+  background-image: url('../../images/history_bg.svg');
+  background-size: cover;
 
 }
 
@@ -107,12 +108,11 @@ background-size: cover;
   justify-content: center;
   align-items: center;
   flex: 0 0 auto;
-  margin-left: 2rem;
-  position: absolute;
-  right: -2rem; /* Add some right margin */
-  top: 60%; /* Position at the vertical center */
+  position: fixed; /* Change to fixed position */
+  right: 0; /* Align to the right edge of the viewport */
+  top: 50%; /* Position at the vertical center */
   transform: translateY(-50%); /* Center it perfectly */
-  z-index: 5; /* Ensure it's above the background */
+  z-index: 50; /* Ensure it's above other elements */
   visibility: visible; /* Ensure it's visible */
   pointer-events: auto; /* Make sure it's clickable */
 
@@ -208,8 +208,7 @@ background-size: cover;
     width: 256px;
     height: auto;
     display: block;
-    padding-top: 40vh;
-
+    padding: 0; /* Remove padding-top */
   }
 
   &:hover {
