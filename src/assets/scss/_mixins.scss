@@ -1,3 +1,5 @@
+@import 'variables';
+
 // Media query for max-width (mobile-first approach)
 @mixin respond-to($breakpoint) {
   @if $breakpoint == xs {
@@ -43,16 +45,14 @@
 
 // Apply font with fallback
 @mixin font-with-fallback($family, $weight: 400, $style: normal) {
-  $fallback: map-get($font-fallbacks, $family);
-  font-family: $family, $fallback;
+  font-family: $family, 'sans-serif';
   font-weight: $weight;
   font-style: $style;
 }
 
 // Apply critical font with subset
 @mixin critical-font($family, $weight: 400, $style: normal) {
-  $fallback: map-get($font-fallbacks, $family);
-  font-family: '#{$family} Subset', $family, $fallback;
+  font-family: '#{$family} Subset', $family, 'sans-serif';
   font-weight: $weight;
   font-style: $style;
 }

@@ -22,7 +22,7 @@ export default {
 .horizontal-nav {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 3rem;
   margin-top: 2rem;
   position: relative;
   z-index: 10;
@@ -34,8 +34,8 @@ export default {
 
   &__prev,
   &__next {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border: 2px solid white;
     border-radius: 50%;
     display: flex;
@@ -43,19 +43,55 @@ export default {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: transparent;
+    /* Add focus styles for accessibility */
+    outline: none;
+    position: relative;
+    z-index: 20;
 
     &:hover {
       transform: scale(1.1);
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+    }
+
+    @media (max-width: $breakpoint-md) {
+      width: 40px;
+      height: 40px;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      width: 35px;
+      height: 35px;
     }
   }
 
   &__arrow {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     filter: brightness(0) invert(1); /* Make the SVG white */
     transition: all 0.3s ease;
+
+    @media (max-width: $breakpoint-md) {
+      width: 24px;
+      height: 24px;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    gap: 2rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    gap: 1.5rem;
   }
 
   /* Dark theme variant */

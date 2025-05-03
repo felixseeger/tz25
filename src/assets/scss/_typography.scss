@@ -1,4 +1,5 @@
 /* Typography Styles */
+@import 'variables';
 
 body {
   font-family: $font-primary;
@@ -56,7 +57,7 @@ p {
   font-family: $font-headline;
   position: relative;
   display: inline-block;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -66,4 +67,4 @@ p {
     height: 3px;
     background-color: $primary-color;
   }
-} 
+}

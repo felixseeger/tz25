@@ -18,13 +18,13 @@
       <span class="base-button__loader-dot"></span>
       <span class="base-button__loader-dot"></span>
     </span>
-    
+
     <!-- Icon (if provided) -->
     <span v-if="icon && !loading" class="base-button__icon" :class="{ 'base-button__icon--right': iconPosition === 'right' }">
       <img v-if="typeof icon === 'string'" :src="icon" :alt="iconAlt || 'button icon'" class="base-button__icon-img">
       <component v-else :is="icon"></component>
     </span>
-    
+
     <!-- Button Content -->
     <span class="base-button__content" :class="{ 'base-button__content--hidden': loading }">
       <slot></slot>
@@ -141,133 +141,133 @@ export default {
   transition: all 0.3s ease;
   position: relative;
   text-decoration: none;
-  
+
   &:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
   }
-  
+
   &:active {
     transform: translateY(1px);
   }
-  
+
   // Variants
   &--primary {
     background-color: $primary-color;
     color: $text-color;
-    
+
     &:hover:not(.base-button--disabled):not(.base-button--loading) {
       background-color: darken($primary-color, 10%);
     }
   }
-  
+
   &--secondary {
     background-color: $secondary-color;
     color: $text-color;
-    
+
     &:hover:not(.base-button--disabled):not(.base-button--loading) {
       background-color: darken($secondary-color, 10%);
     }
   }
-  
+
   &--outline {
     background-color: transparent;
     border: 2px solid $primary-color;
     color: $primary-color;
-    
+
     &:hover:not(.base-button--disabled):not(.base-button--loading) {
       background-color: rgba($primary-color, 0.1);
     }
   }
-  
+
   &--text {
     background-color: transparent;
     color: $primary-color;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    
+
     &:hover:not(.base-button--disabled):not(.base-button--loading) {
       background-color: rgba($primary-color, 0.1);
     }
   }
-  
+
   &--danger {
     background-color: #e53935;
     color: white;
-    
+
     &:hover:not(.base-button--disabled):not(.base-button--loading) {
       background-color: darken(#e53935, 10%);
     }
   }
-  
+
   // Sizes
   &--small {
     font-size: 0.875rem;
     padding: 0.5rem 1rem;
     min-height: 36px;
   }
-  
+
   &--medium {
     font-size: 1rem;
     padding: 0.75rem 1.5rem;
     min-height: 44px;
   }
-  
+
   &--large {
     font-size: 1.125rem;
     padding: 1rem 2rem;
     min-height: 52px;
   }
-  
+
   // Block
   &--block {
     display: flex;
     width: 100%;
   }
-  
+
   // Disabled
   &--disabled {
     opacity: 0.6;
     cursor: not-allowed;
     pointer-events: none;
   }
-  
+
   // Loading
   &--loading {
     cursor: wait;
   }
-  
+
   // Icon
   &__icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    
+
     &:not(&--right) {
       margin-right: 0.5rem;
     }
-    
+
     &--right {
       margin-left: 0.5rem;
       order: 1;
     }
-    
+
     &-img {
       width: 1em;
       height: 1em;
       object-fit: contain;
     }
   }
-  
+
   // Content
   &__content {
     transition: opacity 0.2s ease;
-    
+
     &--hidden {
       opacity: 0;
     }
   }
-  
+
   // Loader
   &__loader {
     position: absolute;
@@ -276,7 +276,7 @@ export default {
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
-    
+
     &-dot {
       width: 6px;
       height: 6px;
@@ -285,11 +285,11 @@ export default {
       margin: 0 2px;
       opacity: 0.8;
       animation: dot-flashing 1s infinite alternate;
-      
+
       &:nth-child(2) {
         animation-delay: 0.2s;
       }
-      
+
       &:nth-child(3) {
         animation-delay: 0.4s;
       }

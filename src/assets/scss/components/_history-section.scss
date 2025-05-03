@@ -82,7 +82,7 @@
   }
 
   .history-headline {
-    color: white; /* White text for better visibility */
+    color: #D9D9D9; /* White text for better visibility */
     margin-top: 0;
     margin-bottom: 0;
     text-align: left; /* Left-align the text */
@@ -124,7 +124,7 @@
   font-size: 2rem;
   font-family: $font-headline;
   font-weight: 300;
-  color: white;
+  color: #D9D9D9;
   text-transform: uppercase;
   line-height: 1.1;
   padding-top: 0;
@@ -145,11 +145,11 @@
   font-size: clamp(8rem, 12vw, 25rem);
   font-family: $font-headline;
   font-weight: 700;
-  color: #ffffff; /* White text for better visibility */
+  color: #D9D9D9; /* White text for better visibility */
   text-transform: uppercase;
   letter-spacing: -4px;
   line-height: 0.9;
-  padding-top: 0; /* Reduce space between title and headline */
+  padding-top: 12.2vh; /* Reduce space between title and headline */
   will-change: transform, opacity; /* Optimize for animations */
   margin-left: 0; /* Align with the left edge */
   text-align: left; /* Left-align the text */

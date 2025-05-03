@@ -1,0 +1,418 @@
+// Brand Carousel Styles
+@import '../variables';
+
+.brand-carousel {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 600px;
+  overflow: visible;
+  margin-bottom: 2rem;
+  padding-top: 70px;
+  background-color: #D9261C;
+
+  @media (max-width: 1920px) {
+    min-height: 580px;
+  }
+
+  @media (max-width: 1680px) {
+    min-height: 560px;
+  }
+
+  @media (max-width: $breakpoint-lg) {
+    min-height: 540px;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    height: auto;
+    min-height: 433.6px;
+    margin-bottom: 1.5rem;
+    padding-top: 60px;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    min-height: 433.6px;
+    margin-bottom: 1rem;
+    padding-top: 50px;
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    min-height: 433.6px;
+    margin-bottom: 0.8rem;
+    padding-top: 40px;
+  }
+}
+
+.brand-carousel-track {
+  display: flex;
+  transition: transform 0.8s ease;
+  width: 100%;
+}
+
+.brand-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: auto;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  position: relative;
+  min-height: 542px;
+  padding: 6rem 2rem 2rem;
+  overflow: visible;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-image: url('@/assets/images/brand_bg.svg');
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 1920px) {
+    min-height: 542px;
+    padding: 5rem 1.5rem 1.5rem;
+  }
+
+  @media (max-width: 1680px) {
+    min-height: 520px;
+    padding: 4.5rem 1.25rem 1.25rem;
+  }
+
+  @media (max-width: $breakpoint-lg) {
+    min-height: 500px;
+    padding: 4rem 1.5rem 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    min-height: 433.6px;
+    padding: 4rem 1rem 1rem;
+    margin-top: 60px;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    min-height: 433.6px;
+    padding: 3.5rem 0.8rem 0.8rem;
+    margin-top: 50px;
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    min-height: 433.6px;
+    padding: 3rem 0.6rem 0.6rem;
+    margin-top: 40px;
+  }
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.brand-title {
+  color: white;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  text-align: left;
+  text-transform: uppercase;
+  position: absolute;
+  top: 70px;
+  left: 2rem;
+  z-index: 5;
+  width: calc(100% - 4rem);
+
+  @media (max-width: 1920px) {
+    font-size: 2.8rem;
+    top: 60px;
+    left: 1.5rem;
+    width: calc(100% - 3rem);
+  }
+
+  @media (max-width: 1680px) {
+    font-size: 2.6rem;
+    top: 55px;
+    left: 1.25rem;
+    width: calc(100% - 2.5rem);
+  }
+
+  @media (max-width: $breakpoint-lg) {
+    font-size: 2.4rem;
+    top: 50px;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 2.2rem;
+    top: 40px;
+    left: 1.2rem;
+    width: calc(100% - 2.4rem);
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: 2rem;
+    top: 30px;
+    left: 1rem;
+    width: calc(100% - 2rem);
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    font-size: 1.8rem;
+    top: 20px;
+    left: 0.8rem;
+    width: calc(100% - 1.6rem);
+    margin-bottom: 1rem;
+  }
+}
+
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-top: 20px; /* Added 20px padding-top */
+
+  @media (max-width: 1920px) {
+    gap: 1.2rem;
+    max-width: 95%;
+    padding-top: 20px;
+  }
+
+  @media (max-width: 1680px) {
+    gap: 1rem;
+    max-width: 98%;
+    padding-top: 20px;
+  }
+
+  @media (max-width: $breakpoint-lg) {
+    gap: 0.9rem;
+    padding-top: 20px;
+  }
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 100%;
+    padding: 1.5rem;
+    padding-top: 20px;
+  }
+
+  @media (max-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    padding: 1rem;
+    padding-top: 20px;
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    padding: 0.8rem;
+    padding-top: 20px;
+  }
+}
+
+.brand-item {
+  text-align: center;
+  transition: transform 0.3s ease;
+  padding: 1.5rem;
+  padding-top: 20px; /* Added 20px padding-top */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  height: 100%; /* Ensure all items have the same height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  &__title {
+    font-size: 1.44rem; /* Scaled up by 20% from 1.2rem */
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: white;
+    text-transform: uppercase;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+  }
+
+  &__description {
+    font-size: 1.2rem; /* Scaled up by 20% from 1rem */
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: 0.9rem;
+      line-height: 1.2;
+    }
+  }
+}
+
+.brand-grid-triangle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 63px;
+  height: 58px;
+  z-index: 3;
+  pointer-events: none;
+  background-image: url('@/assets/images/brand_tria.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.brand-pagination {
+  display: none;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  .pagination-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &.active {
+      background-color: white;
+      transform: scale(1.2);
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    @media (max-width: $breakpoint-md) {
+      width: 10px;
+      height: 10px;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      width: 8px;
+      height: 8px;
+    }
+  }
+}
+
+/* Navigation Controls */
+.brand-navigation {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 2rem;
+  margin: 0 auto;
+  margin-top: -50px;
+  z-index: 10;
+
+  @media (max-width: 1920px) {
+    max-width: 95%;
+  }
+
+  @media (max-width: 1680px) {
+    max-width: 98%;
+  }
+
+  @media (max-width: $breakpoint-lg) {
+    top: -230px;
+    padding: 0 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    top: -220px;
+    padding: 0 1rem;
+    max-width: 100%;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    top: -200px;
+    padding: 0 0.5rem;
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    top: -180px;
+    padding: 0 0.3rem;
+  }
+
+  .nav-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+
+    @media (max-width: $breakpoint-lg) {
+      width: 45px;
+      height: 45px;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      width: 35px;
+      height: 35px;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .arrow-icon {
+      width: 20px;
+      height: 20px;
+      filter: brightness(0) invert(1);
+
+      @media (max-width: $breakpoint-md) {
+        width: 18px;
+        height: 18px;
+      }
+
+      @media (max-width: $breakpoint-sm) {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}

@@ -1,10 +1,8 @@
-@use "sass:color";
-
 // Helper functions to replace deprecated color functions
 @function darken-compat($color, $amount) {
-  @return color.adjust($color, $lightness: -$amount);
+  @return darken($color, $amount);
 }
 
 @function lighten-compat($color, $amount) {
-  @return color.adjust($color, $lightness: $amount);
+  @return lighten($color, $amount);
 }

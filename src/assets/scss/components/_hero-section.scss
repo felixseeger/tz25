@@ -691,6 +691,8 @@
         height: 40px; /* Increased to match other arrow icons on mobile */
       }
 
+      z-index: 1000;
+
       &--prev {
         left: 10px;
       }
@@ -698,8 +700,6 @@
       &--next {
         right: 10px;
       }
-
-      z-index: 1000;
     }
   }
 }

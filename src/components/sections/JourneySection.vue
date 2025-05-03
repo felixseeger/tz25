@@ -103,30 +103,57 @@ export default {
       distance: 50
     });
 
-    onMounted(() => {
-      // Initialize section animations
-      initAnimations();
+    // Function to initialize animations
+    const initAnimations = () => {
+      // Create a timeline for the journey section
+      const tl = createTimeline({
+        trigger: sectionRef.value,
+        start: 'top 70%',
+        end: 'bottom 20%',
+        toggleActions: 'play none none reverse'
+      });
 
-      // Log for debugging
-      console.log('Journey section animations initialized');
+      // Add animations to the timeline if elements exist
+      if (journeyHeader.value) {
+        tl.from(journeyHeader.value, {
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out'
+        });
+      }
 
       // Ensure the journey steps container is visible
       if (journeyStepsContainer.value) {
         journeyStepsContainer.value.style.opacity = '1';
         journeyStepsContainer.value.style.visibility = 'visible';
       }
+    };
+
+    onMounted(() => {
+      // Initialize section animations
+      try {
+        initAnimations();
+        console.log('Journey section animations initialized');
+      } catch (error) {
+        console.error('Error initializing journey section animations:', error);
+      }
 
       // Get all journey steps and dividers for reference
       setTimeout(() => {
-        const steps = document.querySelectorAll('.journey-step');
-        const dividers = document.querySelectorAll('.journey-step__divider');
+        try {
+          const steps = document.querySelectorAll('.journey-step');
+          const dividers = document.querySelectorAll('.journey-step__divider');
 
-        console.log('Found journey steps:', steps.length);
-        console.log('Found journey dividers:', dividers.length);
+          console.log('Found journey steps:', steps.length);
+          console.log('Found journey dividers:', dividers.length);
 
-        // Update the refs for potential future use
-        journeySteps.value = Array.from(steps);
-        journeyDividers.value = Array.from(dividers);
+          // Update the refs for potential future use
+          journeySteps.value = Array.from(steps);
+          journeyDividers.value = Array.from(dividers);
+        } catch (error) {
+          console.error('Error getting journey steps and dividers:', error);
+        }
       }, 500);
     });
 
