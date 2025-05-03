@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-history-button-container" :class="{ 'is-visible': true }">
+  <div class="fixed-history-button-container" :class="{ 'is-visible': isHistorySectionVisible }">
     <button @click="openTimeline" class="fixed-history-button">
       <img src="../../assets/images/history-btn.svg" alt="Unsere Geschichte" class="fixed-history-button__image">
     </button>
@@ -26,16 +26,25 @@ export default {
             console.log('History section visible:', isHistorySectionVisible.value);
           });
         }, {
-          threshold: 0.2 // Show button when at least 20% of history section is visible
+          threshold: 0.1 // Show button when at least 10% of history section is visible
         });
 
         observer.observe(historySection);
       }
     };
 
+    // Handle history section visibility events
+    const handleHistorySectionVisible = (event) => {
+      isHistorySectionVisible.value = event.detail?.visible || false;
+      console.log('History button: History section visibility changed to', isHistorySectionVisible.value);
+    };
+
     // Setup observer when component is mounted
     onMounted(() => {
       setupIntersectionObserver();
+
+      // Listen for history section visibility events
+      document.addEventListener('history-section-visible', handleHistorySectionVisible);
     });
 
     // Clean up observer when component is unmounted
@@ -43,6 +52,9 @@ export default {
       if (observer) {
         observer.disconnect();
       }
+
+      // Remove event listeners
+      document.removeEventListener('history-section-visible', handleHistorySectionVisible);
     });
 
     // Method to open timeline
@@ -92,13 +104,14 @@ export default {
   cursor: pointer;
   padding: 0;
   transition: transform 0.3s ease;
+  display: block;
 
   &:hover {
     transform: scale(1.05);
   }
 
   &__image {
-    width: 200px;
+    width: 256px;
     height: auto;
     display: block;
   }
