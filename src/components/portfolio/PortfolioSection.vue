@@ -11,6 +11,59 @@
         </p>
       </div>
 
+      <!-- Filter buttons using client logos -->
+      <div class="portfolio-filter-container">
+        <div class="portfolio-filter">
+          <button
+            class="filter-button"
+            :class="{ 'active': activeFilter === 'all' }"
+            @click="setFilter('all')"
+          >
+            Alle
+          </button>
+          <button
+            class="filter-button"
+            :class="{ 'active': activeFilter === 'automotive' }"
+            @click="setFilter('automotive')"
+          >
+            <LazyImage
+              src="../../assets/images/client-logos/bridgestone-logo.svg"
+              alt="Automotive"
+              width="100%"
+              height="100%"
+            />
+          </button>
+          <button
+            class="filter-button"
+            :class="{ 'active': activeFilter === 'retail' }"
+            @click="setFilter('retail')"
+          >
+            <div class="placeholder-logo">Retail</div>
+          </button>
+          <button
+            class="filter-button"
+            :class="{ 'active': activeFilter === 'b2b' }"
+            @click="setFilter('b2b')"
+          >
+            <div class="placeholder-logo">B2B</div>
+          </button>
+          <button
+            class="filter-button"
+            :class="{ 'active': activeFilter === 'fmcg' }"
+            @click="setFilter('fmcg')"
+          >
+            <div class="placeholder-logo">FMCG</div>
+          </button>
+          <button
+            class="filter-button"
+            :class="{ 'active': activeFilter === 'other' }"
+            @click="setFilter('other')"
+          >
+            <div class="placeholder-logo">Other</div>
+          </button>
+        </div>
+      </div>
+
       <!-- Portfolio Showcase Carousel -->
       <div class="portfolio-showcase-container">
         <div class="portfolio-carousel" ref="portfolioCarousel">
@@ -85,58 +138,7 @@
         </div>
       </div>
 
-      <!-- Filter buttons using client logos -->
-      <div class="portfolio-filter-container">
-        <div class="portfolio-filter">
-          <button
-            class="filter-button"
-            :class="{ 'active': activeFilter === 'all' }"
-            @click="setFilter('all')"
-          >
-            Alle
-          </button>
-          <button
-            class="filter-button"
-            :class="{ 'active': activeFilter === 'automotive' }"
-            @click="setFilter('automotive')"
-          >
-            <LazyImage
-              src="../../assets/images/client-logos/bridgestone-logo.svg"
-              alt="Automotive"
-              width="100%"
-              height="100%"
-            />
-          </button>
-          <button
-            class="filter-button"
-            :class="{ 'active': activeFilter === 'retail' }"
-            @click="setFilter('retail')"
-          >
-            <div class="placeholder-logo">Retail</div>
-          </button>
-          <button
-            class="filter-button"
-            :class="{ 'active': activeFilter === 'b2b' }"
-            @click="setFilter('b2b')"
-          >
-            <div class="placeholder-logo">B2B</div>
-          </button>
-          <button
-            class="filter-button"
-            :class="{ 'active': activeFilter === 'fmcg' }"
-            @click="setFilter('fmcg')"
-          >
-            <div class="placeholder-logo">FMCG</div>
-          </button>
-          <button
-            class="filter-button"
-            :class="{ 'active': activeFilter === 'other' }"
-            @click="setFilter('other')"
-          >
-            <div class="placeholder-logo">Other</div>
-          </button>
-        </div>
-      </div>
+
     </div>
   </section>
 </template>
