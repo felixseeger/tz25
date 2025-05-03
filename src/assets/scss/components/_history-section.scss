@@ -64,6 +64,7 @@
     position: relative; /* Ensure proper stacking context */
     z-index: 2; /* Lower than button container */
     width: 100%;
+    position: relative; /* For absolute positioning of children */
   }
 
   /* Position title and headline for proper layout */
@@ -81,20 +82,21 @@
   }
 
   .history-headline {
-    color: white; /* White for headline */
-    margin-top: 0;
+    color: #D9D9D9; /* Match the lower background color */
+    margin-top: 58vh; /* Position at the split point (60% from top) - adjusted to overlap the split */
     margin-bottom: 0;
     text-align: left; /* Left-align the text */
     width: 100%; /* Ensure full width */
     max-width: 100%; /* Allow full width */
     margin-left: 0; /* Left-align the block element */
     margin-right: auto;
+    position: absolute; /* Position absolutely to place at the split */
     /* Font size is now controlled by the main .history-headline class */
   }
 
   /* Position description in bottom half */
   .history-description {
-    margin-top: 40vh; /* Push down to bottom half - 60/40 split */
+    margin-top: calc(60vh + 1rem); /* Position right below the headline at the split point */
     max-width: 600px; /* Narrower width for better readability */
     text-align: left; /* Left-align the text */
     margin-left: 0; /* Left-align with title and headline */
@@ -102,7 +104,7 @@
     padding-left: 0;
     padding-right: 0;
     color: #333333; /* Darker text for better contrast with light bottom background */
-    position: relative;
+    position: absolute; /* Position absolutely to place precisely */
     z-index: 3; /* Ensure it's above the background image */
   }
 }
@@ -163,10 +165,10 @@
 
 .history-headline {
   /* Fluid font size that scales with viewport width */
-  font-size: clamp(6rem, 15vw, 20rem);
+  font-size: clamp(6rem, 11vw, 20rem);
   font-family: $font-headline;
   font-weight: 700;
-  color: white; /* White text for better contrast */
+  color: #D9D9D9; /* D9D9D9 text for matching lower background-color */
   text-transform: uppercase;
   letter-spacing: -4px;
   line-height: 0.9;
