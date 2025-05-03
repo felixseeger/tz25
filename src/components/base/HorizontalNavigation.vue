@@ -98,11 +98,21 @@ export default {
   &.dark {
     .horizontal-nav__prev,
     .horizontal-nav__next {
-      border: 2px solid #333;
-      background-color: rgba(255, 255, 255, 0.2);
+      border: 2px solid $primary-color;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.3);
+        background-color: $primary-color;
+        border-color: $primary-color;
+
+        .horizontal-nav__arrow {
+          filter: brightness(0) invert(1); /* Make the SVG white on hover */
+        }
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.5);
       }
     }
 
