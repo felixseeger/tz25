@@ -19,7 +19,7 @@
         <div v-if="showTimeline" class="timeline-backdrop" @click="closeTimeline"></div>
       </transition>
 
-      <transition name="timeline">history-description
+      <transition name="timeline">
         <div v-if="showTimeline" class="timeline-sidebar">
           <button class="timeline-close" @click="closeTimeline" aria-label="Timeline schließen">
             <img src="../../assets/images/close.svg" alt="Schließen">
@@ -151,7 +151,6 @@ export default {
         const historyTitle = document.querySelector('.history-title');
         const historyHeadline = document.querySelector('.history-headline');
         const historyDescription = document.querySelector('.history-description');
-        const historyButton = document.querySelector('.history-button');
 
         // Create a timeline for the history section
         const tl = gsap.timeline({
@@ -159,13 +158,13 @@ export default {
         });
 
         // Check if elements exist before animating
-        if (!historyTitle || !historyHeadline || !historyDescription || !historyButton) {
+        if (!historyTitle || !historyHeadline || !historyDescription) {
           console.error('Some history section elements not found');
           return;
         }
 
         // Set initial state - all elements start below their final position and invisible
-        gsap.set([historyTitle, historyHeadline, historyDescription, historyButton], {
+        gsap.set([historyTitle, historyHeadline, historyDescription], {
           y: 50,
           opacity: 0
         });
@@ -185,16 +184,11 @@ export default {
           y: 0,
           opacity: 1,
           duration: 0.8
-        }, '-=0.5') // Start 0.5s before the previous animation ends
-        .to(historyButton, {
-          y: 0,
-          opacity: 1,
-          duration: 0.8
         }, '-=0.5'); // Start 0.5s before the previous animation ends
 
         // Add a fallback to ensure elements are visible even if animation fails
         setTimeout(() => {
-          [historyTitle, historyHeadline, historyDescription, historyButton].forEach(el => {
+          [historyTitle, historyHeadline, historyDescription].forEach(el => {
             if (el) {
               el.style.opacity = '1';
               el.style.transform = 'none';

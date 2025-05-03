@@ -117,34 +117,7 @@
   flex: 1;
 }
 
-.history-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 0 0 auto;
-  position: fixed; /* Change to fixed position */
-  right: 0; /* Align to the right edge of the viewport */
-  top: 50%; /* Position at the vertical center */
-  transform: translateY(-50%); /* Center it perfectly */
-  z-index: 50; /* Ensure it's above other elements */
-  visibility: visible; /* Ensure it's visible */
-  pointer-events: auto; /* Make sure it's clickable */
-
-  @media (max-width: $breakpoint-lg) {
-    right: 2rem;
-  }
-
-  @media (max-width: $breakpoint-md) {
-    position: relative;
-    right: auto;
-    top: auto;
-    transform: none;
-    margin-top: 2rem;
-    margin-left: 0;
-    align-self: center;
-    padding-right: 0;
-  }
-}
+/* Button container styles moved to FixedHistoryButton component */
 
 .history-title {
   font-size: 2rem;
@@ -217,41 +190,7 @@
   }
 }
 
-.history-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  position: relative;
-  transition: transform 0.3s ease;
-  will-change: transform, opacity; /* Optimize for animations */
-
-  &__image {
-    width: 256px;
-    height: auto;
-    display: block;
-    padding: 0; /* Remove padding-top */
-  }
-
-  &:hover {
-    transform: scale(1.05);
-  }
-
-  @media (max-width: $breakpoint-md) {
-    &__image {
-      width: 200px;
-    }
-  }
-
-  @media (max-width: $breakpoint-sm) {
-    &__image {
-      width: 180px;
-    }
-  }
-}
+/* History button styles moved to FixedHistoryButton component */
 
 // Responsive adjustments
 @media (max-width: $breakpoint-md) {
