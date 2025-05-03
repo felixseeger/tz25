@@ -1,0 +1,93 @@
+// Portfolio Section Filtered Styles
+
+.portfolio-section-filtered {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center horizontally */
+  padding: 6rem 0;
+  overflow: visible;
+  background-color: #f2f2f2;
+  width: 100%;
+  box-sizing: border-box; /* Include padding in width calculation */
+
+  .container {
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 3rem;
+  }
+
+  .portfolio-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    width: 100%;
+  }
+
+  .portfolio-title {
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: $font-headline;
+    color: #333;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    
+    @media (max-width: $breakpoint-md) {
+      font-size: 2.5rem;
+    }
+    
+    @media (max-width: $breakpoint-sm) {
+      font-size: 2rem;
+    }
+  }
+
+  .portfolio-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    font-family: $font-primary;
+    line-height: 1.5;
+    
+    @media (max-width: $breakpoint-md) {
+      font-size: 1.1rem;
+    }
+    
+    @media (max-width: $breakpoint-sm) {
+      font-size: 1rem;
+    }
+  }
+
+  .portfolio-showcase-container {
+    position: relative;
+    overflow: visible;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .client-logos-overlay {
+    /* This class is applied to the ClientLogoFilters component */
+    position: absolute;
+    top: 38.5%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 100;
+    pointer-events: auto;
+    
+    @media (max-width: $breakpoint-md) {
+      top: 35%;
+    }
+    
+    @media (max-width: $breakpoint-sm) {
+      top: 30%;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <section id="portfolio" class="portfolio-section">
+  <section id="portfolio" class="portfolio-section-filtered">
     <div class="container">
       <div class="portfolio-header">
         <h2 class="portfolio-title">Our Portfolio</h2>
@@ -70,59 +70,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.portfolio-section {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Center horizontally */
-  padding: 0rem 0;
-  overflow: visible;
-  background-color: #f2f2f2;
-  width: 100%;
-}
-
-.container {
-  max-width: 1920px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0;
-  position: relative;
-}
-
-.portfolio-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.portfolio-title {
-  font-size: 3rem;
-  font-weight: 700;
-
-}
-
-.portfolio-subtitle {
-  font-size: 1.2rem;
-  color: #666;
-}
-
-.portfolio-showcase-container {
-  position: relative;
-  overflow: visible;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.client-logos-overlay {
-  /* This class is applied to the ClientLogoFilters component */
-  position: absolute;
-  top: 38.5%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  z-index: 100;
-  pointer-events: auto;
-}
+/* Styles moved to _portfolio-section-filtered.scss */
 </style>
