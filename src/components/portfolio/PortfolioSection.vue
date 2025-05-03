@@ -15,47 +15,53 @@
       <div class="portfolio-showcase-container">
         <div class="portfolio-carousel" ref="portfolioCarousel">
           <div class="portfolio-carousel-track" ref="portfolioTrack" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
-            <!-- Slide 1 -->
-            <div class="portfolio-slide" :class="{ 'active': currentSlide === 0 }">
+            <!-- Portfolio items with filtering -->
+            <div
+              v-for="(slide, slideIndex) in filteredSlides"
+              :key="slideIndex"
+              class="portfolio-slide"
+              :class="{ 'active': currentSlide === slideIndex }"
+            >
               <!-- First row -->
               <div class="portfolio-row">
-
+                <div
+                  v-for="(item, itemIndex) in slide.items.slice(0, 2)"
+                  :key="`${slideIndex}-${itemIndex}`"
+                  class="portfolio-item"
+                >
                   <LazyImage
-                    src="../../assets/images/portfolio-item-placeholder.jpg"
-                    alt="Portfolio Showcase 1"
+                    :src="item.image"
+                    :alt="item.title"
                     class="portfolio-image"
                     aspect-ratio="16/9"
                     placeholder-color="#444444"
                   />
-
-                  <LazyImage
-                    src="../../assets/images/portfolio-item-placeholder.jpg"
-                    alt="Portfolio Showcase 2"
-                    class="portfolio-image"
-                    aspect-ratio="16/9"
-                    placeholder-color="#444444"
-                  />
-
+                  <div class="portfolio-item-overlay">
+                    <h3 class="portfolio-item-title">{{ item.title }}</h3>
+                    <p class="portfolio-item-category">{{ item.category }}</p>
+                  </div>
+                </div>
               </div>
+
               <!-- Second row -->
-              <div class="portfolio-row">
-
+              <div class="portfolio-row" v-if="slide.items.length > 2">
+                <div
+                  v-for="(item, itemIndex) in slide.items.slice(2, 4)"
+                  :key="`${slideIndex}-${itemIndex+2}`"
+                  class="portfolio-item"
+                >
                   <LazyImage
-                    src="../../assets/images/portfolio-item-placeholder.jpg"
-                    alt="Portfolio Showcase 3"
+                    :src="item.image"
+                    :alt="item.title"
                     class="portfolio-image"
                     aspect-ratio="16/9"
                     placeholder-color="#444444"
                   />
-
-                  <LazyImage
-                    src="../../assets/images/portfolio-item-placeholder.jpg"
-                    alt="Portfolio Showcase 4"
-                    class="portfolio-image"
-                    aspect-ratio="16/9"
-                    placeholder-color="#444444"
-                  />
-
+                  <div class="portfolio-item-overlay">
+                    <h3 class="portfolio-item-title">{{ item.title }}</h3>
+                    <p class="portfolio-item-category">{{ item.category }}</p>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -79,32 +85,56 @@
         </div>
       </div>
 
-      <!-- Full-width client logos carousel -->
-      <div class="client-logos-container">
-        <div class="client-logos" ref="clientLogosTrack">
-          <div class="client-logos-track" ref="logoTrack">
-            <!-- Original set of logos (will be cloned by JavaScript) -->
-            <div class="client-logo logo-item">
-              <LazyImage
-                src="../../assets/images/client-logos/bridgestone-logo.svg"
-                alt="Bridgestone"
-                width="100%"
-                height="100%"
-              />
-            </div>
-            <div class="client-logo logo-item">
-              <LazyImage
-                src="../../assets/images/client-logos/bridgestone-logo.svg"
-                alt="Bridgestone"
-                width="100%"
-                height="100%"
-              />
-            </div>
-            <div class="client-logo logo-item"><div class="placeholder-logo">Client 2</div></div>
-            <div class="client-logo logo-item"><div class="placeholder-logo">Client 3</div></div>
-            <div class="client-logo logo-item"><div class="placeholder-logo">Client 4</div></div>
-            <div class="client-logo logo-item"><div class="placeholder-logo">Client 5</div></div>
-          </div>
+      <!-- Filter buttons using client logos -->
+      <div class="portfolio-filter-container">
+        <div class="portfolio-filter">
+          <button
+            class="filter-button"
+            :class="{ 'active': activeFilter === 'all' }"
+            @click="setFilter('all')"
+          >
+            Alle
+          </button>
+          <button
+            class="filter-button"
+            :class="{ 'active': activeFilter === 'automotive' }"
+            @click="setFilter('automotive')"
+          >
+            <LazyImage
+              src="../../assets/images/client-logos/bridgestone-logo.svg"
+              alt="Automotive"
+              width="100%"
+              height="100%"
+            />
+          </button>
+          <button
+            class="filter-button"
+            :class="{ 'active': activeFilter === 'retail' }"
+            @click="setFilter('retail')"
+          >
+            <div class="placeholder-logo">Retail</div>
+          </button>
+          <button
+            class="filter-button"
+            :class="{ 'active': activeFilter === 'b2b' }"
+            @click="setFilter('b2b')"
+          >
+            <div class="placeholder-logo">B2B</div>
+          </button>
+          <button
+            class="filter-button"
+            :class="{ 'active': activeFilter === 'fmcg' }"
+            @click="setFilter('fmcg')"
+          >
+            <div class="placeholder-logo">FMCG</div>
+          </button>
+          <button
+            class="filter-button"
+            :class="{ 'active': activeFilter === 'other' }"
+            @click="setFilter('other')"
+          >
+            <div class="placeholder-logo">Other</div>
+          </button>
         </div>
       </div>
     </div>
@@ -112,7 +142,7 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { HorizontalNavigation } from './../base';
 import { LazyImage } from './../ui';
 
@@ -123,19 +153,10 @@ export default {
     LazyImage
   },
   setup() {
-    const clientLogosTrack = ref(null);
-    const logoTrack = ref(null);
     const portfolioCarousel = ref(null);
     const portfolioTrack = ref(null);
     const currentSlide = ref(0);
-    const totalSlides = ref(3);
-
-    let animationPaused = false;
-    let animationId = null;
-    let scrollPosition = 0;
-    let logoSetWidth = 0;
-    let scrollSpeed = 0.5; // Pixels to move per frame (reduced speed)
-    let resizeTimeout = null; // For debouncing resize events
+    const activeFilter = ref('all');
 
     // Portfolio carousel variables
     let isPortfolioDragging = false;
@@ -145,312 +166,151 @@ export default {
     let isTransitioning = false;
     const portfolioDragThreshold = 50; // Minimum drag distance to trigger slide change
 
-    // Variables for drag functionality
-    let isDragging = false;
-    let startX = 0;
-    let startScrollPosition = 0;
-    let dragVelocity = 0;
-    let lastDragTime = 0;
-    let lastDragX = 0;
-    let momentumAnimationId = null;
+    // Portfolio data with categories
+    const portfolioData = ref([
+      {
+        items: [
+          {
+            title: 'Automotive Project 1',
+            category: 'Automotive',
+            image: '../../assets/images/portfolio-item-placeholder.jpg',
+            filter: 'automotive'
+          },
+          {
+            title: 'Retail Campaign',
+            category: 'Retail',
+            image: '../../assets/images/portfolio-item-placeholder.jpg',
+            filter: 'retail'
+          },
+          {
+            title: 'B2B Solution',
+            category: 'Business',
+            image: '../../assets/images/portfolio-item-placeholder.jpg',
+            filter: 'b2b'
+          },
+          {
+            title: 'FMCG Packaging',
+            category: 'Consumer Goods',
+            image: '../../assets/images/portfolio-item-placeholder.jpg',
+            filter: 'fmcg'
+          }
+        ]
+      },
+      {
+        items: [
+          {
+            title: 'Automotive Project 2',
+            category: 'Automotive',
+            image: '../../assets/images/portfolio-item-placeholder.jpg',
+            filter: 'automotive'
+          },
+          {
+            title: 'Retail Store Design',
+            category: 'Retail',
+            image: '../../assets/images/portfolio-item-placeholder.jpg',
+            filter: 'retail'
+          },
+          {
+            title: 'B2B Platform',
+            category: 'Business',
+            image: '../../assets/images/portfolio-item-placeholder.jpg',
+            filter: 'b2b'
+          },
+          {
+            title: 'Other Project',
+            category: 'Miscellaneous',
+            image: '../../assets/images/portfolio-item-placeholder.jpg',
+            filter: 'other'
+          }
+        ]
+      },
+      {
+        items: [
+          {
+            title: 'Automotive Project 3',
+            category: 'Automotive',
+            image: '../../assets/images/portfolio-item-placeholder.jpg',
+            filter: 'automotive'
+          },
+          {
+            title: 'FMCG Campaign',
+            category: 'Consumer Goods',
+            image: '../../assets/images/portfolio-item-placeholder.jpg',
+            filter: 'fmcg'
+          },
+          {
+            title: 'B2B Marketing',
+            category: 'Business',
+            image: '../../assets/images/portfolio-item-placeholder.jpg',
+            filter: 'b2b'
+          },
+          {
+            title: 'Other Service',
+            category: 'Miscellaneous',
+            image: '../../assets/images/portfolio-item-placeholder.jpg',
+            filter: 'other'
+          }
+        ]
+      }
+    ]);
 
-    // Function to clone logos for endless loop
-    const setupEndlessLoop = () => {
-      if (!logoTrack.value) return;
+    // Filter functionality
+    const setFilter = (filter) => {
+      activeFilter.value = filter;
+      // Reset to first slide when filter changes
+      currentSlide.value = 0;
+      console.log(`Filter set to: ${filter}`);
+    };
 
-      // Reset scroll position
-      scrollPosition = 0;
-      if (logoTrack.value) {
-        logoTrack.value.style.transform = 'translateX(0)';
+    // Computed property for filtered slides
+    const filteredSlides = computed(() => {
+      if (activeFilter.value === 'all') {
+        return portfolioData.value;
       }
 
-      // Get all original logo items
-      const logoItems = logoTrack.value.querySelectorAll('.logo-item');
-      if (!logoItems.length) return;
+      // Create new slides with filtered items
+      return portfolioData.value.map(slide => {
+        // Filter items based on the active filter
+        const filteredItems = slide.items.filter(item => item.filter === activeFilter.value);
 
-      // Clear any existing clones
-      const existingClones = logoTrack.value.querySelectorAll('.logo-clone');
-      existingClones.forEach(clone => clone.remove());
+        // Return a new slide object with only the filtered items
+        return {
+          items: filteredItems
+        };
+      }).filter(slide => slide.items.length > 0); // Only include slides that have items after filtering
+    });
 
-      // Clone the logo items multiple times to ensure we have enough for any screen width
-      const numClones = Math.ceil(window.innerWidth / (logoItems.length * 200)) + 1;
+    // Computed property for total slides count
+    const totalSlides = computed(() => {
+      return filteredSlides.value.length;
+    });
 
-      for (let i = 0; i < numClones; i++) {
-        logoItems.forEach(item => {
-          const clone = item.cloneNode(true);
-          clone.classList.add('logo-clone');
-          logoTrack.value.appendChild(clone);
-        });
-      }
-
-      // Calculate the width of one complete set of logos
-      logoSetWidth = Array.from(logoItems).reduce((width, item) => {
-        const itemWidth = item.offsetWidth + parseInt(getComputedStyle(item).marginLeft) + parseInt(getComputedStyle(item).marginRight);
-        return width + itemWidth;
-      }, 0);
-
-      // Adjust the animation speed based on screen width
-      adjustScrollSpeed();
-
-      console.log(`Logo set width: ${logoSetWidth}px, Created ${numClones} clones, Speed: ${scrollSpeed}px/frame`);
-
-      // Start the animation
-      startAnimation();
-    };
-
-    // Animate the logos with requestAnimationFrame for smoother performance
-    const animate = () => {
-      if (!logoTrack.value || animationPaused) return;
-
-      // Increment scroll position
-      scrollPosition -= scrollSpeed; // Use the scrollSpeed variable
-
-      // Reset position when we've scrolled one full set width
-      if (Math.abs(scrollPosition) >= logoSetWidth) {
-        scrollPosition = 0;
-      }
-
-      // Apply the transform
-      logoTrack.value.style.transform = `translateX(${scrollPosition}px)`;
-
-      // Continue the animation
-      animationId = requestAnimationFrame(animate);
-    };
-
-    // Function to adjust animation speed based on screen width
-    const adjustScrollSpeed = () => {
-      // Adjust speed based on screen width (faster on larger screens)
-      // Reduced to 1/4 of the original speed
-      const baseSpeed = 0.25; // Further reduced from 0.5 to 0.25
-      const screenWidthFactor = Math.max(0.8, Math.min(1.5, window.innerWidth / 1200));
-      scrollSpeed = baseSpeed * screenWidthFactor;
-
-      console.log(`Adjusted scroll speed: ${scrollSpeed} pixels per frame`);
-    };
-
-    const startAnimation = () => {
-      if (animationId) cancelAnimationFrame(animationId);
-      animationId = requestAnimationFrame(animate);
-    };
-
-    const stopAnimation = () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-        animationId = null;
-      }
-    };
-
-    // Toggle animation on hover
-    const pauseAnimation = () => {
-      animationPaused = true;
-    };
-
-    const resumeAnimation = () => {
-      if (!isDragging) { // Only resume if not dragging
-        animationPaused = false;
-        if (!animationId) startAnimation();
-      }
-    };
-
-    // Drag functionality
-    const startDrag = (e) => {
-      // Get the appropriate client X position (touch or mouse)
-      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-
-      isDragging = true;
-      startX = clientX;
-      startScrollPosition = scrollPosition;
-      lastDragX = clientX;
-      lastDragTime = Date.now();
-      dragVelocity = 0;
-
-      // Pause the auto-scrolling animation
-      pauseAnimation();
-
-      // Stop any ongoing momentum animation
-      if (momentumAnimationId) {
-        cancelAnimationFrame(momentumAnimationId);
-        momentumAnimationId = null;
-      }
-
-      // Add event listeners for drag and end events
-      if (e.type === 'mousedown') {
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('mouseup', endDrag);
-      } else if (e.type === 'touchstart') {
-        document.addEventListener('touchmove', drag, { passive: false });
-        document.addEventListener('touchend', endDrag);
-      }
-    };
-
-    const drag = (e) => {
-      if (!isDragging || !logoTrack.value) return;
-
-      // Prevent default to avoid scrolling the page
-      if (e.cancelable) e.preventDefault();
-
-      // Get the appropriate client X position (touch or mouse)
-      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-      const deltaX = clientX - startX;
-
-      // Update scroll position based on drag
-      scrollPosition = startScrollPosition + deltaX;
-
-      // Apply the transform
-      logoTrack.value.style.transform = `translateX(${scrollPosition}px)`;
-
-      // Calculate velocity for momentum scrolling
-      const now = Date.now();
-      const elapsed = now - lastDragTime;
-
-      if (elapsed > 0) {
-        dragVelocity = (clientX - lastDragX) / elapsed;
-        lastDragX = clientX;
-        lastDragTime = now;
-      }
-    };
-
-    const endDrag = () => {
-      if (!isDragging) return;
-
-      isDragging = false;
-
-      // Remove event listeners
-      document.removeEventListener('mousemove', drag);
-      document.removeEventListener('mouseup', endDrag);
-      document.removeEventListener('touchmove', drag);
-      document.removeEventListener('touchend', endDrag);
-
-      // Apply momentum scrolling if velocity is significant
-      if (Math.abs(dragVelocity) > 0.1) {
-        applyMomentum();
-      } else {
-        // If no significant momentum, check if we need to reset position
-        checkAndResetPosition();
-
-        // Resume auto-scrolling after a short delay
-        setTimeout(resumeAnimation, 1000);
-      }
-    };
-
-    const applyMomentum = () => {
-      // Apply momentum with decay
-      const decayFactor = 0.95;
-
-      const animateMomentum = () => {
-        if (Math.abs(dragVelocity) < 0.05) {
-          // Stop momentum when velocity becomes very small
-          cancelAnimationFrame(momentumAnimationId);
-          momentumAnimationId = null;
-
-          // Check if we need to reset position
-          checkAndResetPosition();
-
-          // Resume auto-scrolling after momentum ends
-          setTimeout(resumeAnimation, 1000);
-          return;
-        }
-
-        // Update position based on velocity
-        scrollPosition += dragVelocity * 16; // Assuming ~60fps (16ms)
-
-        // Apply decay to velocity
-        dragVelocity *= decayFactor;
-
-        // Apply the transform
-        if (logoTrack.value) {
-          logoTrack.value.style.transform = `translateX(${scrollPosition}px)`;
-        }
-
-        // Continue momentum animation
-        momentumAnimationId = requestAnimationFrame(animateMomentum);
-      };
-
-      // Start momentum animation
-      momentumAnimationId = requestAnimationFrame(animateMomentum);
-    };
-
-    const checkAndResetPosition = () => {
-      if (!logoTrack.value || !logoSetWidth) return;
-
-      // If scrolled too far in either direction, reset to within bounds
-      if (scrollPosition > 0) {
-        // Scrolled too far right, reset to negative multiple of logoSetWidth
-        const offset = Math.ceil(Math.abs(scrollPosition) / logoSetWidth) * logoSetWidth;
-        scrollPosition = -offset;
-        logoTrack.value.style.transform = `translateX(${scrollPosition}px)`;
-      } else if (Math.abs(scrollPosition) > logoSetWidth * 2) {
-        // Scrolled too far left, reset to within one or two sets
-        const sets = Math.floor(Math.abs(scrollPosition) / logoSetWidth);
-        const newSets = sets % 2;
-        scrollPosition = -(newSets * logoSetWidth + (Math.abs(scrollPosition) % logoSetWidth));
-        logoTrack.value.style.transform = `translateX(${scrollPosition}px)`;
-      }
-    };
-
-    // Handle window resize
-    const handleResize = () => {
-      // Debounce the resize event
-      if (resizeTimeout) {
-        clearTimeout(resizeTimeout);
-      }
-
-      resizeTimeout = setTimeout(() => {
-        console.log('Window resized, reconfiguring carousel');
-        setupEndlessLoop();
-      }, 200);
-    };
-
+    // Initialize portfolio carousel
     onMounted(() => {
-      // Initialize after DOM is fully loaded
-      setTimeout(() => {
-        setupEndlessLoop();
+      // Add event listeners for portfolio carousel drag
+      if (portfolioCarousel.value) {
+        portfolioCarousel.value.addEventListener('mousedown', startPortfolioDrag);
+        portfolioCarousel.value.addEventListener('touchstart', startPortfolioDrag);
+      }
 
-        // Add event listeners for hover and drag
-        if (clientLogosTrack.value) {
-          // Hover events
-          clientLogosTrack.value.addEventListener('mouseenter', pauseAnimation);
-          clientLogosTrack.value.addEventListener('mouseleave', resumeAnimation);
+      // Set initial filter to 'all'
+      activeFilter.value = 'all';
 
-          // Drag events
-          clientLogosTrack.value.addEventListener('mousedown', startDrag);
-          clientLogosTrack.value.addEventListener('touchstart', startDrag, { passive: true });
-
-          // Add cursor styles
-          clientLogosTrack.value.style.cursor = 'grab';
-        }
-
-        // Handle window resize
-        window.addEventListener('resize', handleResize);
-      }, 100);
+      console.log('Portfolio section mounted, slides:', filteredSlides.value.length);
     });
 
     onUnmounted(() => {
-      // Clean up event listeners and animation
-      stopAnimation();
-
-      // Clean up any ongoing momentum animation
-      if (momentumAnimationId) {
-        cancelAnimationFrame(momentumAnimationId);
-      }
-
-      if (clientLogosTrack.value) {
-        // Remove hover events
-        clientLogosTrack.value.removeEventListener('mouseenter', pauseAnimation);
-        clientLogosTrack.value.removeEventListener('mouseleave', resumeAnimation);
-
-        // Remove drag events
-        clientLogosTrack.value.removeEventListener('mousedown', startDrag);
-        clientLogosTrack.value.removeEventListener('touchstart', startDrag);
+      // Remove portfolio carousel event listeners
+      if (portfolioCarousel.value) {
+        portfolioCarousel.value.removeEventListener('mousedown', startPortfolioDrag);
+        portfolioCarousel.value.removeEventListener('touchstart', startPortfolioDrag);
       }
 
       // Remove any lingering document events
-      document.removeEventListener('mousemove', drag);
-      document.removeEventListener('mouseup', endDrag);
-      document.removeEventListener('touchmove', drag);
-      document.removeEventListener('touchend', endDrag);
-
-      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousemove', portfolioDrag);
+      document.removeEventListener('mouseup', endPortfolioDrag);
+      document.removeEventListener('touchmove', portfolioDrag);
+      document.removeEventListener('touchend', endPortfolioDrag);
     });
 
     // Portfolio carousel methods
@@ -592,25 +452,16 @@ export default {
       }
     });
 
-    // Original portfolio navigation methods (for client logos)
-    const prevSlide = () => {
-      console.log('Previous slide');
-      // Implement previous slide functionality
-    };
-
-    const nextSlide = () => {
-      console.log('Next slide');
-      // Implement next slide functionality
-    };
+    // Portfolio is now fully implemented with filtering and navigation
 
     return {
-      clientLogosTrack,
-      logoTrack,
       portfolioCarousel,
       portfolioTrack,
       currentSlide,
-      prevSlide,
-      nextSlide,
+      activeFilter,
+      filteredSlides,
+      totalSlides,
+      setFilter,
       prevPortfolioSlide,
       nextPortfolioSlide,
       goToSlide
