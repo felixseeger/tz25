@@ -5,7 +5,7 @@
       <div class="history-content">
         <div class="history-text-content">
           <h2 class="history-title" >WIR SIND IHRE NEUE AGENTUR MIT</h2>
-          <!-- <h2 class="history-headline">LEIDENSCHAFT</h2> -->
+          <h2 class="history-headline">LEIDENSCHAFT</h2>
           <p class="history-description">
             Wir sind Kreativität, Hands-On Mentalität und Praxisorientierung für zugeschnit­tene Lösungen und das für jedes Budget.
           </p>
