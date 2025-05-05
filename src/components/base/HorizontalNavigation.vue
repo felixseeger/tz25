@@ -58,18 +58,18 @@ export default {
     }
 
     @media (max-width: $breakpoint-md) {
-      width: 40px;
-      height: 40px;
-      transform: scale(1.2); /* Scale up on medium screens */
+      width: 50px;
+      height: 50px;
+      transform: scale(1.5); /* Scale up more on medium screens */
     }
 
     @media (max-width: $breakpoint-sm) {
-      width: 35px;
-      height: 35px;
-      transform: scale(1.3); /* Scale up more on small screens */
+      width: 60px;
+      height: 60px;
+      transform: scale(1.8); /* Scale up significantly on small screens */
 
       &:hover {
-        transform: scale(1.4);
+        transform: scale(2);
       }
     }
   }
@@ -81,22 +81,22 @@ export default {
     transition: all 0.3s ease;
 
     @media (max-width: $breakpoint-md) {
-      width: 28px;
-      height: 28px;
+      width: 35px;
+      height: 35px;
     }
 
     @media (max-width: $breakpoint-sm) {
-      width: 25px;
-      height: 25px;
+      width: 40px;
+      height: 40px;
     }
   }
 
   @media (max-width: $breakpoint-md) {
-    gap: 2rem;
+    gap: 3rem;
   }
 
   @media (max-width: $breakpoint-sm) {
-    gap: 1.5rem;
+    gap: 4rem;
   }
 
   /* Dark theme variant */
@@ -118,17 +118,26 @@ export default {
         box-shadow: 0 0 0 3px rgba($primary-color, 0.5);
       }
 
+      @media (max-width: $breakpoint-md) {
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
       @media (max-width: $breakpoint-sm) {
-        background-color: transparent;
-        box-shadow: none;
+        background-color: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
       }
     }
 
     .horizontal-nav__arrow {
       filter: brightness(0); /* Make the SVG black */
 
+      @media (max-width: $breakpoint-md) {
+        filter: brightness(0); /* Keep the SVG black for better visibility */
+      }
+
       @media (max-width: $breakpoint-sm) {
-        filter: brightness(0) invert(1); /* Make the SVG white on mobile */
+        filter: brightness(0); /* Keep the SVG black for better visibility */
       }
     }
   }
