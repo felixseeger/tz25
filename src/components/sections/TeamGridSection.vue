@@ -10,59 +10,199 @@
       </div>
     </div>
 
-    <div class="team-grid">
-      <!-- Row 1 -->
-      <div class="team-grid-item team-grid-item--image">
-        <img src="../../assets/images/team-members/team-tobi.jpg" alt="Team Member" class="team-grid-image" />
-      </div>
-      <div class="team-grid-item team-grid-item--quote">
-        <div class="quote">
-          <span class="quote-mark">"</span>
-          <p class="quote-text">Utam acerios nobitae quatqui cuptius illatnibus dolet, odia dit etusandanto quo dolectem. Itatis et volupti</p>
+    <div class="team-slider" ref="teamSlider">
+      <div class="team-slider-track" ref="sliderTrack" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+        <!-- Slide 1: Two team members -->
+        <div class="team-slider-slide">
+          <div class="team-grid">
+            <div class="team-grid-item team-grid-item--image">
+              <img src="../../assets/images/team-members/team-tobi.jpg" alt="Team Member" class="team-grid-image" />
+            </div>
+            <div class="team-grid-item team-grid-item--quote">
+              <div class="quote">
+                <span class="quote-mark">"</span>
+                <p class="quote-text">Utam acerios nobitae quatqui cuptius illatnibus dolet, odia dit etusandanto quo dolectem. Itatis et volupti</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Two team members -->
+        <div class="team-slider-slide">
+          <div class="team-grid">
+            <div class="team-grid-item team-grid-item--image">
+              <img src="../../assets/images/team-members/team-kirsten.jpg" alt="Team Member" class="team-grid-image" />
+            </div>
+            <div class="team-grid-item team-grid-item--quote">
+              <div class="quote">
+                <span class="quote-mark">"</span>
+                <p class="quote-text">Utam acerios nobitae quatqui cuptius illatnibus dolet, odia dit etusandanto quo dolectem. Itatis et volupti</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Two team members -->
+        <div class="team-slider-slide">
+          <div class="team-grid">
+            <div class="team-grid-item team-grid-item--image">
+              <img src="../../assets/images/team-members/team-jan.jpg" alt="Team Member" class="team-grid-image" />
+            </div>
+            <div class="team-grid-item team-grid-item--quote">
+              <div class="quote">
+                <span class="quote-mark">"</span>
+                <p class="quote-text">Utam acerios nobitae quatqui cuptius illatnibus dolet, odia dit etusandanto quo dolectem. Itatis et volupti</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: Two team members -->
+        <div class="team-slider-slide">
+          <div class="team-grid">
+            <div class="team-grid-item team-grid-item--image">
+              <img src="../../assets/images/team-members/team-melissa.jpg" alt="Team Member" class="team-grid-image" />
+            </div>
+            <div class="team-grid-item team-grid-item--quote">
+              <div class="quote">
+                <span class="quote-mark">"</span>
+                <p class="quote-text">Utam acerios nobitae quatqui cuptius illatnibus dolet, odia dit etusandanto quo dolectem. Itatis et volupti</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Row 2 -->
-      <div class="team-grid-item team-grid-item--image">
-        <img src="../../assets/images/team-members/team-kirsten.jpg" alt="Team Member" class="team-grid-image" />
-      </div>
-      <div class="team-grid-item team-grid-item--quote">
-        <div class="quote">
-          <span class="quote-mark">"</span>
-          <p class="quote-text">Utam acerios nobitae quatqui cuptius illatnibus dolet, odia dit etusandanto quo dolectem. Itatis et volupti</p>
-        </div>
-      </div>
-
-      <!-- Row 3 -->
-      <div class="team-grid-item team-grid-item--image">
-        <img src="../../assets/images/team-members/team-jan.jpg" alt="Team Member" class="team-grid-image" />
-      </div>
-      <div class="team-grid-item team-grid-item--quote">
-        <div class="quote">
-          <span class="quote-mark">"</span>
-          <p class="quote-text">Utam acerios nobitae quatqui cuptius illatnibus dolet, odia dit etusandanto quo dolectem. Itatis et volupti</p>
-        </div>
-      </div>
-
-      <!-- Row 4 -->
-      <div class="team-grid-item team-grid-item--image">
-        <img src="../../assets/images/team-members/team-melissa.jpg" alt="Team Member" class="team-grid-image" />
+      <!-- Navigation Dots -->
+      <div class="team-slider-dots">
+        <button
+          v-for="(_, index) in 4"
+          :key="index"
+          class="team-slider-dot"
+          :class="{ 'active': currentSlide === index }"
+          @click="goToSlide(index)"
+          aria-label="Go to slide"
+        ></button>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import { ref, onMounted, onUnmounted } from 'vue';
+
 export default {
-  name: 'TeamGridSection'
+  name: 'TeamGridSection',
+  setup() {
+    const teamSlider = ref(null);
+    const sliderTrack = ref(null);
+    const currentSlide = ref(0);
+    const totalSlides = 4;
+    const touchStartX = ref(0);
+    const touchEndX = ref(0);
+    const autoplayInterval = ref(null);
+    const autoplayDelay = 5000; // 5 seconds
+
+    // Go to specific slide
+    const goToSlide = (index) => {
+      currentSlide.value = index;
+      resetAutoplay();
+    };
+
+    // Go to next slide
+    const nextSlide = () => {
+      currentSlide.value = (currentSlide.value + 1) % totalSlides;
+      resetAutoplay();
+    };
+
+    // Go to previous slide
+    const prevSlide = () => {
+      currentSlide.value = (currentSlide.value - 1 + totalSlides) % totalSlides;
+      resetAutoplay();
+    };
+
+    // Handle touch start
+    const handleTouchStart = (e) => {
+      touchStartX.value = e.touches[0].clientX;
+    };
+
+    // Handle touch end
+    const handleTouchEnd = (e) => {
+      touchEndX.value = e.changedTouches[0].clientX;
+      handleSwipe();
+    };
+
+    // Handle swipe
+    const handleSwipe = () => {
+      const swipeThreshold = 50; // Minimum distance to register as swipe
+      const swipeDistance = touchEndX.value - touchStartX.value;
+
+      if (swipeDistance > swipeThreshold) {
+        // Swiped right, go to previous slide
+        prevSlide();
+      } else if (swipeDistance < -swipeThreshold) {
+        // Swiped left, go to next slide
+        nextSlide();
+      }
+    };
+
+    // Start autoplay
+    const startAutoplay = () => {
+      autoplayInterval.value = setInterval(() => {
+        nextSlide();
+      }, autoplayDelay);
+    };
+
+    // Reset autoplay
+    const resetAutoplay = () => {
+      if (autoplayInterval.value) {
+        clearInterval(autoplayInterval.value);
+        startAutoplay();
+      }
+    };
+
+    // Set up event listeners and initialize
+    onMounted(() => {
+      if (teamSlider.value) {
+        teamSlider.value.addEventListener('touchstart', handleTouchStart, { passive: true });
+        teamSlider.value.addEventListener('touchend', handleTouchEnd, { passive: true });
+      }
+
+      // Start autoplay
+      startAutoplay();
+    });
+
+    // Clean up event listeners and intervals
+    onUnmounted(() => {
+      if (teamSlider.value) {
+        teamSlider.value.removeEventListener('touchstart', handleTouchStart);
+        teamSlider.value.removeEventListener('touchend', handleTouchEnd);
+      }
+
+      // Clear autoplay interval
+      if (autoplayInterval.value) {
+        clearInterval(autoplayInterval.value);
+      }
+    });
+
+    return {
+      teamSlider,
+      sliderTrack,
+      currentSlide,
+      goToSlide,
+      nextSlide,
+      prevSlide
+    };
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .team-grid-section {
   background-color: #D9D9D9;
-  padding: 3rem 0 0 0;
+  padding: 3rem 0 4rem 0;
   width: 100%;
+  position: relative;
 }
 
 .team-header {
@@ -92,6 +232,49 @@ export default {
   }
 }
 
+// Slider styles
+.team-slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  &-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+  }
+
+  &-slide {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  // Navigation dots
+  &-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 2rem 0 1rem;
+  }
+
+  &-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(77, 77, 77, 0.3);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &.active {
+      background-color: #4D4D4D;
+      transform: scale(1.2);
+    }
+  }
+}
+
+// Grid styles
 .team-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -185,6 +368,18 @@ export default {
         .quote-text {
           font-size: 0.8rem;
         }
+      }
+    }
+  }
+
+  .team-slider {
+    &-arrow {
+      width: 36px;
+      height: 36px;
+
+      img {
+        width: 20px;
+        height: 20px;
       }
     }
   }
