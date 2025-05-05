@@ -286,8 +286,8 @@ export default {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
+    width: 70px;
+    height: 70px;
     border: none;
     background-color: transparent;
     display: flex;
@@ -310,8 +310,8 @@ export default {
     }
 
     img {
-      width: 24px;
-      height: 24px;
+      width: 48px;
+      height: 48px;
       filter: brightness(0) invert(0.3);
     }
 
@@ -425,21 +425,21 @@ export default {
 
   .team-slider {
     &-arrow {
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
 
       img {
-        width: 35px;
-        height: 35px;
+        width: 70px;
+        height: 70px;
         filter: brightness(0) invert(0.7);
       }
 
       &--prev {
-        left: 0;
+        left: -10px;
       }
 
       &--next {
-        right: 0;
+        right: -10px;
       }
     }
 
