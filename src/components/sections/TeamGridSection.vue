@@ -289,19 +289,16 @@ export default {
     width: 44px;
     height: 44px;
     border: none;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 10;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
     &:hover {
       transform: translateY(-50%) scale(1.1);
-      background-color: rgba(255, 255, 255, 0.7);
     }
 
     &:active {
@@ -428,24 +425,21 @@ export default {
 
   .team-slider {
     &-arrow {
-      width: 40px;
-      height: 40px;
-      background-color: rgba(255, 255, 255, 0.7);
-      border-radius: 50%;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      width: 60px;
+      height: 60px;
 
       img {
-        width: 20px;
-        height: 20px;
-        filter: brightness(0) invert(0.3);
+        width: 35px;
+        height: 35px;
+        filter: brightness(0) invert(0.7);
       }
 
       &--prev {
-        left: 8px;
+        left: 0;
       }
 
       &--next {
-        right: 8px;
+        right: 0;
       }
     }
 
