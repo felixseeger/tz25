@@ -36,7 +36,7 @@ export default {
   &__next {
     width: 50px;
     height: 50px;
-    border: 2px solid white;
+    border: none; /* Removed border */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -51,7 +51,6 @@ export default {
 
     &:hover {
       transform: scale(1.1);
-      background-color: rgba(255, 255, 255, 0.2);
     }
 
     &:focus {
@@ -61,11 +60,17 @@ export default {
     @media (max-width: $breakpoint-md) {
       width: 40px;
       height: 40px;
+      transform: scale(1.2); /* Scale up on medium screens */
     }
 
     @media (max-width: $breakpoint-sm) {
       width: 35px;
       height: 35px;
+      transform: scale(1.3); /* Scale up more on small screens */
+
+      &:hover {
+        transform: scale(1.4);
+      }
     }
   }
 
@@ -76,13 +81,13 @@ export default {
     transition: all 0.3s ease;
 
     @media (max-width: $breakpoint-md) {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
     }
 
     @media (max-width: $breakpoint-sm) {
-      width: 20px;
-      height: 20px;
+      width: 25px;
+      height: 25px;
     }
   }
 
@@ -98,13 +103,11 @@ export default {
   &.dark {
     .horizontal-nav__prev,
     .horizontal-nav__next {
-      border: 2px solid $primary-color;
       background-color: rgba(255, 255, 255, 0.8);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
       &:hover {
         background-color: $primary-color;
-        border-color: $primary-color;
 
         .horizontal-nav__arrow {
           filter: brightness(0) invert(1); /* Make the SVG white on hover */
@@ -114,10 +117,19 @@ export default {
       &:focus {
         box-shadow: 0 0 0 3px rgba($primary-color, 0.5);
       }
+
+      @media (max-width: $breakpoint-sm) {
+        background-color: transparent;
+        box-shadow: none;
+      }
     }
 
     .horizontal-nav__arrow {
       filter: brightness(0); /* Make the SVG black */
+
+      @media (max-width: $breakpoint-sm) {
+        filter: brightness(0) invert(1); /* Make the SVG white on mobile */
+      }
     }
   }
 }
