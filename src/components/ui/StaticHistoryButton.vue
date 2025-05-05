@@ -10,7 +10,10 @@
       tabindex="0"
       role="button"
     >
-      <img src="../../assets/images/history-btn.svg" alt="Unsere Geschichte" class="static-history-button__image" :class="{ 'timeline-open': isTimelineOpen }" aria-hidden="true">
+      <div class="static-history-button__content">
+        <span class="static-history-button__arrow">←</span>
+        <span class="static-history-button__text">UNSERE<br>GESCHICHTE</span>
+      </div>
     </button>
   </div>
 </template>
@@ -127,12 +130,15 @@ export default {
 }
 
 .static-history-button {
-  background: none;
+  background-color: #3B80FF;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 1rem;
   transition: all 0.3s ease;
   outline: none; /* Remove default outline */
+  border-radius: 8px 0 0 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 160px;
 
   &:hover {
     transform: scale(1.05);
@@ -156,17 +162,24 @@ export default {
     pointer-events: none; /* Prevent interaction when hidden */
   }
 
-  &__image {
-    width: 200px;
-    height: auto;
-    display: block;
-    transition: all 0.5s ease;
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
+  &__content {
+    display: flex;
+    align-items: center;
+    color: white;
+  }
 
-    &.timeline-open {
-      transform: translateX(100px); /* Move to the right when timeline is open */
-      opacity: 0;
-    }
+  &__arrow {
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+  }
+
+  &__text {
+    font-family: 'Gotham Narrow', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: left;
+    line-height: 1.2;
+    text-transform: uppercase;
   }
 }
 
@@ -183,13 +196,15 @@ export default {
 @media (max-width: 768px) {
   .static-history-button-container {
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    top: auto;
+    bottom: 15%;
+    transform: none;
     z-index: 1100; /* Ensure it's above other mobile elements */
   }
 
-  .static-history-button__image {
-    width: 120px;
+  .static-history-button {
+    width: 140px;
+    padding: 0.75rem;
   }
 }
 
@@ -197,13 +212,22 @@ export default {
 @media (max-width: 576px) {
   .static-history-button-container {
     right: 0;
-    top: auto;
-    bottom: 20%;
+    bottom: 10%;
     transform: none;
   }
 
-  .static-history-button__image {
-    width: 100px;
+  .static-history-button {
+    width: 130px;
+    padding: 0.75rem;
+
+    &__arrow {
+      font-size: 1.25rem;
+      margin-right: 0.5rem;
+    }
+
+    &__text {
+      font-size: 0.9rem;
+    }
   }
 }
 </style>

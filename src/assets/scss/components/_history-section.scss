@@ -196,6 +196,12 @@
 // Responsive adjustments
 @media (max-width: $breakpoint-md) {
   .history-section {
+    background: linear-gradient(
+      to bottom,
+      #595959 50%,  /* Dark gray for top 50% */
+      #D9D9D9 50%   /* Light gray for bottom 50% */
+    );
+
     .container {
       padding: 2rem;
       height: auto;
@@ -224,21 +230,89 @@
       max-width: 100%;
       margin-left: auto;
       margin-right: auto;
+      position: relative;
+      top: auto;
+      bottom: auto;
+    }
+
+    .history-title {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      line-height: 1.4;
     }
 
     .history-headline {
       padding-top: 1rem;
       text-align: left; /* Left-align the text */
       width: 100%;
-      /* Font size is now handled by clamp() in the main class */
+      font-size: 4.5rem;
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-top: 1rem;
     }
 
     .history-description {
       margin-top: 3rem;
       max-width: 100%;
       text-align: left; /* Left-align the text */
-      margin-left: 1rem; /* Match the title alignment */
+      padding-left: 1rem; /* Match the title alignment */
+      padding-right: 1rem;
+      margin-left: 0;
       margin-right: auto;
+    }
+  }
+}
+
+// Small mobile devices
+@media (max-width: $breakpoint-sm) {
+  .history-section {
+    min-height: 100vh;
+    height: auto;
+    background: linear-gradient(
+      to bottom,
+      #595959 60%,  /* Dark gray for top 60% */
+      #D9D9D9 40%   /* Light gray for bottom 40% */
+    );
+  }
+
+  .history-content {
+    padding: 0;
+    height: auto;
+    min-height: 100vh;
+
+    .history-text-content {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      height: 100vh;
+    }
+
+    .history-title {
+      margin-top: 5rem;
+      font-size: 1rem;
+      line-height: 1.4;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .history-headline {
+      font-size: 5rem;
+      line-height: 1;
+      letter-spacing: -2px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .history-description {
+      margin-top: auto;
+      margin-bottom: 10rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #333;
     }
   }
 }
