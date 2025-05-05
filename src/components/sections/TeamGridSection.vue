@@ -84,6 +84,14 @@
           aria-label="Go to slide"
         ></button>
       </div>
+
+      <!-- Navigation Arrows -->
+      <button class="team-slider-arrow team-slider-arrow--prev" @click="prevSlide" aria-label="Previous slide">
+        <img src="../../assets/images/arrow_left.svg" alt="Previous" />
+      </button>
+      <button class="team-slider-arrow team-slider-arrow--next" @click="nextSlide" aria-label="Next slide">
+        <img src="../../assets/images/arrow_right.svg" alt="Next" />
+      </button>
     </div>
   </section>
 </template>
@@ -272,6 +280,52 @@ export default {
       transform: scale(1.2);
     }
   }
+
+  // Navigation arrows
+  &-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: translateY(-50%) scale(1.1);
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    &:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(0.3);
+    }
+
+    &--prev {
+      left: 10px;
+    }
+
+    &--next {
+      right: 10px;
+    }
+  }
 }
 
 // Grid styles
@@ -374,13 +428,29 @@ export default {
 
   .team-slider {
     &-arrow {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 
       img {
         width: 20px;
         height: 20px;
+        filter: brightness(0) invert(0.3);
       }
+
+      &--prev {
+        left: 8px;
+      }
+
+      &--next {
+        right: 8px;
+      }
+    }
+
+    &-dots {
+      margin-bottom: 2rem;
     }
   }
 }
