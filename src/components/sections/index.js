@@ -7,6 +7,7 @@ import HistorySection from './HistorySection.vue';
 import JourneySection from './JourneySection.vue';
 import ServicesSection from './ServicesSection.vue';
 import TeamSection from './TeamSection.vue';
+import TeamGridSection from './TeamGridSection.vue';
 import TestimonialsSection from './TestimonialsSection.vue';
 
 export {
@@ -18,5 +19,6 @@ export {
   JourneySection,
   ServicesSection,
   TeamSection,
+  TeamGridSection,
   TestimonialsSection
 };

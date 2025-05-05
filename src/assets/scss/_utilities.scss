@@ -35,6 +35,19 @@
   border: 0;
 }
 
+/* Responsive visibility classes */
+.desktop-only {
+  @media (max-width: $breakpoint-sm) {
+    display: none !important;
+  }
+}
+
+.mobile-only {
+  @media (min-width: $breakpoint-sm + 1) {
+    display: none !important;
+  }
+}
+
 /* Focus styles for keyboard navigation */
 .focus-visible,
 :focus-visible {

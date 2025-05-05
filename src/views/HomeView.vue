@@ -4,7 +4,10 @@
       <JourneySection id="journey" />
       <TestimonialsSection id="testimonials" />
       <HistorySection id="history" />
-      <TeamSection id="team" />
+      <div id="team">
+        <TeamSection class="desktop-only" />
+        <TeamGridSection class="mobile-only" />
+      </div>
       <ServicesSection id="services" />
       <BrandSection id="brand" />
       <PortfolioGridSection id="portfolio" />
@@ -21,6 +24,7 @@
     TestimonialsSection,
     ServicesSection,
     TeamSection,
+    TeamGridSection,
     BrandSection,
     ContactSection,
     FooterSection
@@ -35,6 +39,7 @@
       TestimonialsSection,
       HistorySection,
       TeamSection,
+      TeamGridSection,
       ServicesSection,
       BrandSection,
       PortfolioGridSection,
